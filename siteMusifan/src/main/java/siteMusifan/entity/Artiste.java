@@ -8,6 +8,8 @@ import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -21,6 +23,16 @@ import javax.persistence.Table;
 	@AttributeOverride(name = "prenom", column = @Column(name = "artiste_prenom")),
 	@AttributeOverride(name = "telephone", column = @Column(name = "artiste_telephone")),
 	@AttributeOverride(name = "photoProfil", column = @Column(name = "artiste_photoProfil")),
+})
+@NamedQueries({
+	@NamedQuery(name="Artiste.findByKeyWithUtilisateurs",
+			query=""),
+	@NamedQuery(name="Artiste.findByKeyWithAlbums",
+			query=""),
+	@NamedQuery(name="Artiste.findByKeyWithConcerts",
+			query=""),
+	@NamedQuery(name="Artiste.findByKeyWithPublications",
+			query="")
 })
 @Table(name="artiste")
 @SequenceGenerator(name="seqCompte", sequenceName = "seq_artiste", initialValue = 100, allocationSize = 1)
@@ -42,6 +54,9 @@ public class Artiste extends Compte {
 	
 	@OneToMany(mappedBy = "id.artiste")
 	private Set<LigneUtilisateur> lignesUtilisateurs = new HashSet<LigneUtilisateur>();
+	
+	@OneToMany(mappedBy = "id.artiste")
+	private Set<LigneConcert> ligneConcerts = new HashSet<LigneConcert>();
 	
 	public Artiste() {
 		
@@ -94,7 +109,13 @@ public class Artiste extends Compte {
 	public void setLignesUtilisateurs(Set<LigneUtilisateur> lignesUtilisateurs) {
 		this.lignesUtilisateurs = lignesUtilisateurs;
 	}
-	
-	
+
+	public Set<LigneConcert> getLigneConcerts() {
+		return ligneConcerts;
+	}
+
+	public void setLigneConcerts(Set<LigneConcert> ligneConcerts) {
+		this.ligneConcerts = ligneConcerts;
+	}
 	
 }

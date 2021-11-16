@@ -8,6 +8,8 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -21,6 +23,12 @@ import javax.persistence.Table;
 	@AttributeOverride(name = "prenom", column = @Column(name = "utilisateur_prenom")),
 	@AttributeOverride(name = "telephone", column = @Column(name = "utilisateur_telephone")),
 	@AttributeOverride(name = "photoProfil", column = @Column(name = "utilisateur_photoProfil")),
+})
+@NamedQueries({
+	@NamedQuery(name="Utilisateur.findByKeyWithArtistes",
+			query=""),
+	@NamedQuery(name="Utilisateur.findByKeyWithCommandes",
+			query="")
 })
 @Table(name="utilisateur")
 @SequenceGenerator(name = "seqCompte", sequenceName = "seq_utilisateur", initialValue = 100, allocationSize = 1)

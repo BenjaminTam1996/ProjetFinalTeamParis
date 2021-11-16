@@ -1,6 +1,7 @@
 package siteMusifan.entity;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -36,6 +37,8 @@ public class Concert {
 	@OneToMany(mappedBy = "id.concert")
 	private Set<LigneCommande> lignesCommandes;
 	
+	@OneToMany(mappedBy = "id.concert")
+	private Set<LigneConcert> ligneConcerts = new HashSet<LigneConcert>();
 	
 	public Concert() {
 
@@ -97,6 +100,16 @@ public class Concert {
 
 	public void setLignesCommandes(Set<LigneCommande> lignesCommandes) {
 		this.lignesCommandes = lignesCommandes;
+	}
+	
+
+	public Set<LigneConcert> getLigneConcerts() {
+		return ligneConcerts;
+	}
+
+
+	public void setLigneConcerts(Set<LigneConcert> ligneConcerts) {
+		this.ligneConcerts = ligneConcerts;
 	}
 
 

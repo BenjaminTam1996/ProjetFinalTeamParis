@@ -1,5 +1,6 @@
 package siteMusifan.entity;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -30,6 +31,9 @@ public class Publication {
 	@Column(name="publication_image")
 	@Lob
 	private byte[] image;
+	
+	@Column(name="publication_date")
+	private LocalDate date;
 	
 	@ManyToOne
 	@JoinColumn(name = "publication_artiste_id", foreignKey = @ForeignKey(name = "publication_artiste_id_fk"))
@@ -68,6 +72,14 @@ public class Publication {
 
 	public void setArtiste(Artiste artiste) {
 		this.artiste = artiste;
+	}
+	
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
+		this.date = date;
 	}
 
 	@Override
