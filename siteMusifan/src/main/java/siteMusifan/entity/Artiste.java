@@ -26,13 +26,13 @@ import javax.persistence.Table;
 })
 @NamedQueries({
 	@NamedQuery(name="Artiste.findByKeyWithUtilisateurs",
-			query=""),
+			query="select a from Artiste a left join fetch a.lignesUtilisateurs where a.id=:key"),
 	@NamedQuery(name="Artiste.findByKeyWithAlbums",
-			query=""),
+			query="select a from Artiste a left join fetch a.lignesAlbums where a.id=:key"),
 	@NamedQuery(name="Artiste.findByKeyWithConcerts",
-			query=""),
+			query="select a from Artiste a left join fetch a.ligneConcerts where a.id=:key"),
 	@NamedQuery(name="Artiste.findByKeyWithPublications",
-			query="")
+			query="select a from Artiste a left join fetch a.publications where a.id=:key")
 })
 @Table(name="artiste")
 @SequenceGenerator(name="seqCompte", sequenceName = "seq_artiste", initialValue = 100, allocationSize = 1)

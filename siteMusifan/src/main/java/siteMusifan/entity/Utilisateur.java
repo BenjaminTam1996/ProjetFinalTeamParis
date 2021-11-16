@@ -26,9 +26,9 @@ import javax.persistence.Table;
 })
 @NamedQueries({
 	@NamedQuery(name="Utilisateur.findByKeyWithArtistes",
-			query=""),
+			query="select u from Utilisateur u left join fetch u.lignesUtilisateurs where u.id=:key"),
 	@NamedQuery(name="Utilisateur.findByKeyWithCommandes",
-			query="")
+			query="select u from Utilisateur u left join fetch u.listeConcert where u.id=:key")
 })
 @Table(name="utilisateur")
 @SequenceGenerator(name = "seqCompte", sequenceName = "seq_utilisateur", initialValue = 100, allocationSize = 1)
