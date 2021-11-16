@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 public class LigneAlbumPK implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "ligne_album_album_id", foreignKey = @ForeignKey(name = "ligne_album_album_id_fk"))
-	private Commande commande;
+	private Album album;
 	@ManyToOne
 	@JoinColumn(name = "ligne_album_artiste_id", foreignKey = @ForeignKey(name = "ligne_album_artiste_id_fk"))
 	private Artiste artiste;
@@ -21,17 +21,17 @@ public class LigneAlbumPK implements Serializable {
 
 	}
 
-	public LigneAlbumPK(Commande commande, Artiste artiste) {
-		this.commande = commande;
+	public LigneAlbumPK(Album album, Artiste artiste) {
+		this.calbum = album;
 		this.artiste = artiste;
 	}
 
-	public Commande getCommande() {
-		return commande;
+	public Album getAlbum() {
+		return album;
 	}
 
-	public void setCommande(Commande commande) {
-		this.commande = commande;
+	public void setAlbum(Album album) {
+		this.album = album;
 	}
 
 	public Artiste getArtiste() {
@@ -44,7 +44,7 @@ public class LigneAlbumPK implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(artiste, commande);
+		return Objects.hash(artiste, album);
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class LigneAlbumPK implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		LigneAlbumPK other = (LigneAlbumPK) obj;
-		return Objects.equals(artiste, other.artiste) && Objects.equals(commande, other.commande);
+		return Objects.equals(artiste, other.artiste) && Objects.equals(album, other.album);
 	}
 
 }
