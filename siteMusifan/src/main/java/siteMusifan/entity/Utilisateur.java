@@ -20,6 +20,7 @@ import javax.persistence.Table;
 	@AttributeOverride(name = "telephone", column = @Column(name = "utilisateur_telephone")),
 	@AttributeOverride(name = "photoProfil", column = @Column(name = "utilisateur_photoProfil")),
 })
+@Table(name="utilisateur")
 @SequenceGenerator(name = "seqCompte", sequenceName = "seq_utilisateur", initialValue = 100, allocationSize = 1)
 public class Utilisateur extends Compte{
 	@Column(name="utilisateur_pseudo")
