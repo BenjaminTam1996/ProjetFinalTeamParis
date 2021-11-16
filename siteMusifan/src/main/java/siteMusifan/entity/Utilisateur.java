@@ -1,6 +1,8 @@
 package siteMusifan.entity;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -29,6 +31,9 @@ public class Utilisateur extends Compte{
 	@OneToMany
 	@Column(name="utilisateur_listeConcert")
 	private List<Commande> listeConcert;
+	
+	@OneToMany(mappedBy = "id.utilisateur")
+	private Set<LigneUtilisateur> lignesUtilisateurs = new HashSet<LigneUtilisateur>();
 
 	public Utilisateur() {
 		
@@ -49,6 +54,15 @@ public class Utilisateur extends Compte{
 	public void setListeConcert(List<Commande> listeConcert) {
 		this.listeConcert = listeConcert;
 	}
+
+	public Set<LigneUtilisateur> getLignesUtilisateurs() {
+		return lignesUtilisateurs;
+	}
+
+	public void setLignesUtilisateurs(Set<LigneUtilisateur> lignesUtilisateurs) {
+		this.lignesUtilisateurs = lignesUtilisateurs;
+	}
+	
 	
 	
 }

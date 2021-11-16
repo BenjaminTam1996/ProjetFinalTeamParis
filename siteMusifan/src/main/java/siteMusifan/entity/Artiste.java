@@ -1,5 +1,6 @@
 package siteMusifan.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.AttributeOverride;
@@ -36,6 +37,12 @@ public class Artiste extends Compte {
 	@OneToMany(mappedBy = "artiste", fetch = FetchType.LAZY)
 	private Set<Publication> publications;
 	
+	@OneToMany(mappedBy = "id.artiste")
+	private Set<LigneAlbum> lignesAlbums = new HashSet<LigneAlbum>();
+	
+	@OneToMany(mappedBy = "id.artiste")
+	private Set<LigneUtilisateur> lignesUtilisateurs = new HashSet<LigneUtilisateur>();
+	
 	public Artiste() {
 		
 	}
@@ -71,5 +78,23 @@ public class Artiste extends Compte {
 	public void setPublications(Set<Publication> publications) {
 		this.publications = publications;
 	}
+
+	public Set<LigneAlbum> getLignesAlbums() {
+		return lignesAlbums;
+	}
+
+	public void setLignesAlbums(Set<LigneAlbum> lignesAlbums) {
+		this.lignesAlbums = lignesAlbums;
+	}
+
+	public Set<LigneUtilisateur> getLignesUtilisateurs() {
+		return lignesUtilisateurs;
+	}
+
+	public void setLignesUtilisateurs(Set<LigneUtilisateur> lignesUtilisateurs) {
+		this.lignesUtilisateurs = lignesUtilisateurs;
+	}
+	
+	
 	
 }

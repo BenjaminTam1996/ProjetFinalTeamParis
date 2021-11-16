@@ -1,13 +1,13 @@
 package siteMusifan.entity;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,7 +17,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "album")
-@SequenceGenerator(name = "seqAlbum", sequenceName = "seq_album", allocationSize = 1)
+@SequenceGenerator(name = "seqAlbum", sequenceName = "seq_album", allocationSize = 1,initialValue = 100)
 public class Album {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqAlbum")
@@ -27,9 +27,12 @@ public class Album {
 	private LocalDate date = LocalDate.now();
 	@Column(name = "album_photo")
 	private Byte photo;
-	@OneToMany(mappedBy = "id.album")
-	private Set<LigneCommande> lignesCommandes;
 	
+	@OneToMany(mappedBy = "album", fetch = FetchType.LAZY)
+	private Set<Chansons> chansons;
+	
+	@OneToMany(mappedBy = "id.album")
+	private Set<LigneAlbum> lignesAlbums = new HashSet<LigneAlbum>();
 	
 	public Album() {
 
@@ -66,13 +69,24 @@ public class Album {
 	}
 
 
-	public Set<LigneCommande> getLignesCommandes() {
-		return lignesCommandes;
+	public Set<Chansons> getChansons() {
+		return chansons;
 	}
 
 
-	public void setLignesCommandes(Set<LigneCommande> lignesCommandes) {
-		this.lignesCommandes = lignesCommandes;
+	public void setChansons(Set<Chansons> chansons) {
+		this.chansons = chansons;
+	}
+
+	
+
+	public Set<LigneAlbum> getLignesAlbums() {
+		return lignesAlbums;
+	}
+
+
+	public void setLignesAlbums(Set<LigneAlbum> lignesAlbums) {
+		this.lignesAlbums = lignesAlbums;
 	}
 
 
