@@ -1,9 +1,13 @@
 package siteMusifan.entity;
 
+import java.util.Set;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 @Entity
@@ -26,6 +30,9 @@ public class Artiste extends Compte {
 	
 	@Column(name="artiste_description")
 	private String description;
+	
+	@OneToMany(mappedBy = "artiste", fetch = FetchType.LAZY)
+	private Set<Publication> publications;
 	
 	public Artiste() {
 		
@@ -54,7 +61,13 @@ public class Artiste extends Compte {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
+
+	public Set<Publication> getPublications() {
+		return publications;
+	}
+
+	public void setPublications(Set<Publication> publications) {
+		this.publications = publications;
+	}
 	
 }
