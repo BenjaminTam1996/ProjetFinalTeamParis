@@ -6,10 +6,12 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -24,7 +26,8 @@ public class Concert {
 	private Long id;
 	@Column(name = "concert_date")
 	private LocalDate date = LocalDate.now();
-	@Column(name = "concert_lieu")
+	@ManyToOne
+	@JoinColumn(name = "concert_lieu_id", foreignKey = @ForeignKey(name = "concert_lieu_id_fk"))
 	private Lieu lieu;
 	@Column(name = "concert_nbPlace")
 	private int nbPlace;

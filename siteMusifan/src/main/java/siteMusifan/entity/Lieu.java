@@ -1,6 +1,7 @@
 package siteMusifan.entity;
 
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,7 +43,7 @@ public class Lieu {
 	private String pays;
 	
 	@OneToMany(mappedBy = "lieu", fetch = FetchType.LAZY)
-	private set<Concert> listeConcerts;
+	private Set<Concert> listeConcerts;
 	
 	//Constructeurs
 	public Lieu() {
@@ -105,11 +106,11 @@ public class Lieu {
 		this.pays = pays;
 	}
 
-	public set<Concert> getListeConcerts() {
+	public Set<Concert> getListeConcerts() {
 		return listeConcerts;
 	}
 
-	public void setListeConcerts(set<Concert> listeConcerts) {
+	public void setListeConcerts(Set<Concert> listeConcerts) {
 		this.listeConcerts = listeConcerts;
 	}
 
