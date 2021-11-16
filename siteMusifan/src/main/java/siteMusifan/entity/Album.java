@@ -11,12 +11,18 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "album")
+@NamedQueries({
+	@NamedQuery(name="Artiste.findByKeyWithChansons",
+			query="select al from Album al left join fetch al.lignesAlbums where al.id=:key"),
+})
 @SequenceGenerator(name = "seqAlbum", sequenceName = "seq_album", allocationSize = 1,initialValue = 100)
 public class Album {
 	@Id
