@@ -6,7 +6,6 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
@@ -28,9 +27,7 @@ public class Utilisateur extends Compte{
 	@OneToMany
 	@Column(name="utilisateur_listeConcert")
 	private List<Commande> listeConcert;
-	
-	@ManyToOne
-	
+
 	public Utilisateur() {
 		
 	}
