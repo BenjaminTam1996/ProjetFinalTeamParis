@@ -3016,7 +3016,7 @@
 											"top": 548,
 											"width": 149.97607421875,
 											"height": 13,
-											"text": "+numRue: int",
+											"text": "+numRue: String",
 											"horizontalAlignment": 0
 										},
 										{
@@ -3033,7 +3033,7 @@
 											"top": 563,
 											"width": 149.97607421875,
 											"height": 13,
-											"text": "+rue: int",
+											"text": "+rue: String",
 											"horizontalAlignment": 0
 										},
 										{
@@ -3050,7 +3050,7 @@
 											"top": 578,
 											"width": 149.97607421875,
 											"height": 13,
-											"text": "+codePostal: int",
+											"text": "+codePostal: String",
 											"horizontalAlignment": 0
 										},
 										{
@@ -7143,7 +7143,7 @@
 								"$ref": "AAAAAAF9JGkK7Pvn7GE="
 							},
 							"name": "numRue",
-							"type": "int"
+							"type": "String"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -7152,7 +7152,7 @@
 								"$ref": "AAAAAAF9JGkK7Pvn7GE="
 							},
 							"name": "rue",
-							"type": "int"
+							"type": "String"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -7161,7 +7161,7 @@
 								"$ref": "AAAAAAF9JGkK7Pvn7GE="
 							},
 							"name": "codePostal",
-							"type": "int"
+							"type": "String"
 						},
 						{
 							"_type": "UMLAttribute",
