@@ -22,7 +22,7 @@ public class LigneAlbumPK implements Serializable {
 	}
 
 	public LigneAlbumPK(Album album, Artiste artiste) {
-		this.calbum = album;
+		this.album = album;
 		this.artiste = artiste;
 	}
 
