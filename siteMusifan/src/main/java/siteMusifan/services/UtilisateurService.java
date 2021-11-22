@@ -41,17 +41,23 @@ public class UtilisateurService {
 	
 	//Supprimer un utilisateur
 	public void delete(Utilisateur utilisateur) {
+		Utilisateur utilisateurEnBase = utilisateurRepository.findById(utilisateur.getId()).orElseThrow(UtilisateurException::new);
 		//Suppression des lignes utilisateur liees a l'utilisateur a supprimer
-		ligneUtilisateurRepository.deleteByUtilisateur(utilisateur);
+		ligneUtilisateurRepository.deleteByUtilisateur(utilisateurEnBase);
 		//Suppression de l'utilisateur
-		utilisateurRepository.delete(utilisateur);
+		utilisateurRepository.delete(utilisateurEnBase);
 	}
 	
 	//Obtenir le utilisateur complet avec : sa liste de concert et sa liste d'artiste
 	public Utilisateur byId(Long id) {
-		return utilisateurRepository.findByKeyWithCommandesAndArtistes(id).orElseThrow(UtilisateurException::new);
+		return utilisateurRepository.findById(id).orElseThrow(UtilisateurException::new);
 	}
 
+	public Utilisateur byKeyWithCommandesAndArtistes(Long id) {
+		return utilisateurRepository.findByKeyWithCommandesAndArtistes(id).orElseThrow(UtilisateurException::new);
+	}
+	
+	
 	public Utilisateur byKeyWithArtistes(Long id) {
 		return utilisateurRepository.byKeyWithArtistes(id).orElseThrow(UtilisateurException::new);
 	}

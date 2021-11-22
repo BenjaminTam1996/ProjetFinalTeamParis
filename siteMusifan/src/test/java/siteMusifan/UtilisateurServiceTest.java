@@ -1,24 +1,23 @@
 package siteMusifan;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import siteMusifan.config.AppConfig;
 import siteMusifan.entity.Utilisateur;
+import siteMusifan.exceptions.UtilisateurException;
 import siteMusifan.services.UtilisateurService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { AppConfig.class })
-@Transactional
-@Rollback(true)
+//@Transactional
+//@Rollback(true)
 public class UtilisateurServiceTest {
 
 	@Autowired
@@ -31,31 +30,52 @@ public class UtilisateurServiceTest {
 	}
 	
 	@Test
-	public void testSave() {
+	public void testCreation() {
 		Utilisateur utilisateur = getUtilisateur();
-		System.out.println(utilisateur.getNom() + utilisateur.getPrenom());
 		utilisateurService.save(utilisateur);
 		assertNotNull(utilisateurService.byId(utilisateur.getId()));
 	}
+	
+//	@Test
+//	public void testUpdate() {
+//		Utilisateur utilisateur = getUtilisateur();
+//		utilisateur.getLignesUtilisateurs().add(null);
+//		utilisateurService.save(utilisateur);
+//		assertNotNull(utilisateurService.byId(utilisateur.getId()));
+//	}
 
-	@Test
+	@Test(expected=UtilisateurException.class)
 	public void testDelete() {
-		fail("Not yet implemented");
+		Utilisateur utilisateur = getUtilisateur();
+		utilisateurService.save(utilisateur);
+		utilisateurService.delete(utilisateur);
+		assertNull(utilisateurService.byId(utilisateur.getId()));
 	}
 
 	@Test
 	public void testById() {
-		fail("Not yet implemented");
+		assertNotNull(utilisateurService.byId(104L));
 	}
 
+	@Test(expected = UtilisateurException.class)
+	public void testByIdFail() {
+		assertNotNull(utilisateurService.byId(99999999999999L));
+	}
+
+	
 	@Test
 	public void testByKeyWithArtistes() {
-		fail("Not yet implemented");
+
 	}
 
 	@Test
 	public void testByKeyWithCommandes() {
-		fail("Not yet implemented");
+		
+	}
+	
+	@Test
+	public void testByKeyWithCommandesAndArtistes() {
+		
 	}
 
 }
