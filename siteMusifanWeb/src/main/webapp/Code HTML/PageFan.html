@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+  <title>Musifan - Fan</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="./fichiercss2.css" />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Montserrat"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+  <style>
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: "Montserrat", sans-serif;
+    }
+    .w3-row-padding img {
+      margin-bottom: 12px;
+    }
+    /* Set the width of the sidebar to 120px */
+    .w3-sidebar {
+      width: 120px;
+      background: #222;
+    }
+    /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+    #main {
+      margin-left: 120px;
+    }
+    /* Remove margins from "page content" on small screens */
+    @media only screen and (max-width: 600px) {
+      #main {
+        margin-left: 0;
+      }
+    }
+  </style>
+  <body class="w3-black">
+    <!-- Icon Bar (Sidebar - hidden on small screens) -->
+    <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+      <!-- Avatar image in top left corner -->
+      <img
+        src="./Images/Logo-site-MusiFan.gif"
+        style="width: 60%; height: 8%"
+      />
+      <p class="w3-musifan-color"><b>Musifan</b></p>
+      <br />
+      <img src="./Images/Moi.png" class="w3-circle" alt="Moi" width="100" />
+      <p class="w3-musifan-color"><b>Benjamin</b></p>
+      <p class="w3-musifan-color">Fan</p>
+      <a href="#" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+        <i class="fa fa-user w3-xxlarge"></i>
+        <p class="w3-musifan-color">MES ARTISTES</p>
+      </a>
+      <a
+        href="#feed"
+        class="w3-bar-item w3-button w3-padding-large w3-hover-black"
+      >
+        <i class="fa fa-eye w3-xxlarge"></i>
+        <p class="w3-musifan-color">FEED</p>
+      </a>
+      <a
+        href="#concerts"
+        class="w3-bar-item w3-button w3-padding-large w3-hover-black"
+      >
+        <i class="fa fa-music w3-xxlarge"></i>
+        <p class="w3-musifan-color">CONCERTS</p>
+      </a>
+      <a
+        href="#contact"
+        class="w3-bar-item w3-button w3-padding-large w3-hover-black"
+      >
+        <i class="fa fa-headphones w3-xxlarge"></i>
+        <p class="w3-musifan-color">MUSIQUES</p>
+      </a>
+      <a
+        href="#contact"
+        class="w3-bar-item w3-button w3-padding-large w3-hover-black"
+      >
+        <i class="fa fa-sign-out w3-xxlarge"></i>
+        <p class="w3-musifan-color">Deconnexion</p>
+      </a>
+    </nav>
+
+    <!-- Navbar on small screens (Hidden on medium and large screens) -->
+    <div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
+      <div
+        class="
+          w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small
+        "
+      >
+        <a
+          href="#"
+          class="w3-bar-item w3-button w3-musifan-color"
+          style="width: 20% !important"
+          >MES ARTISTES</a
+        >
+        <a
+          href="#about"
+          class="w3-bar-item w3-button w3-musifan-color"
+          style="width: 20% !important"
+          >FEED</a
+        >
+        <a
+          href="#photos"
+          class="w3-bar-item w3-button w3-musifan-color"
+          style="width: 20% !important"
+          >CONCERTS</a
+        >
+        <a
+          href="#contact"
+          class="w3-bar-item w3-button w3-musifan-color"
+          style="width: 20% !important"
+          >MUSIQUES</a
+        >
+        <a
+          href="#contact"
+          class="w3-bar-item w3-button w3-musifan-color"
+          style="width: 20% !important"
+          >Déconnexion</a
+        >
+        <img src="./Images/Moi.png" class="w3-circle" alt="Moi" width="100" />
+      </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="w3-padding-large" id="main">
+      <!-- Header/Home -->
+      <!-- <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
+        <h1 class="w3-jumbo">
+          <span class="w3-hide-small">I'm</span> John Doe.
+        </h1>
+        <p>Photographer and Web Designer.</p>
+        <img
+          src="/w3images/man_smoke.jpg"
+          alt="boy"
+          class="w3-image"
+          width="992"
+          height="1108"
+        />
+      </header> -->
+
+      <!-- Mes artistes Section -->
+      <div
+        class="w3-content w3-justify w3-text-grey w3-padding-64"
+        id="mesArtistes"
+      >
+        <h2 class="w3-musifan-color">Mes artistes</h2>
+        <hr style="width: 200px" class="w3-opacity" />
+        <div class="w3-row-padding" style="margin: 0 -16px">
+          <div class="w3-quarter w3-center">
+            <img
+              src="./Images/Kygo2.jpg"
+              class="w3-circle"
+              width="150"
+              height="150"
+            />
+            <p class="w3-text-white"><b>Kygo</b></p>
+          </div>
+
+          <div class="w3-quarter w3-center">
+            <img
+              src="./Images/Riles1.jpg"
+              class="w3-circle"
+              width="150"
+              height="150"
+            />
+            <p class="w3-text-white"><b>Riles</b></p>
+          </div>
+
+          <div class="w3-quarter w3-center">
+            <img
+              src="./Images/doja1.jpg"
+              class="w3-circle"
+              width="150"
+              height="150"
+            />
+            <p class="w3-text-white"><b>Doja Cat</b></p>
+          </div>
+
+          <div class="w3-quarter w3-center">
+            <img
+              src="./Images/ed1.jpg"
+              class="w3-circle"
+              width="150"
+              height="150"
+            />
+            <p class="w3-text-white"><b>Ed Sheran</b></p>
+          </div>
+        </div>
+        <!-- End Mes artistes Section -->
+
+        <!-- Feed Section -->
+        <div class="w3-padding-64 w3-content" id="feed">
+          <h2 class="w3-musifan-color">Feed</h2>
+          <hr style="width: 200px" class="w3-opacity" />
+
+          <!-- Grid for photos -->
+          <div class="w3-row-padding" style="margin: 0 -16px">
+            <div class="w3-third">
+              <img src="./Images/Kygo1.jpg" style="width: 100%" />
+
+              <img src="./Images/Kygo3.jpg" style="width: 100%" />
+              <img src="./Images/Riles1.jpg" style="width: 100%" />
+              <img src="./Images/doja1.jpg" style="width: 100%" />
+            </div>
+
+            <div class="w3-third">
+              <img src="./Images/Kygo2.jpg" style="width: 100%" />
+              <img src="./Images/eminem1.jpg" style="width: 100%" />
+              <img src="./Images/wknd2.JPG" style="width: 100%" />
+              <img src="./Images/ed1.jpg" style="width: 100%" />
+            </div>
+
+            <div class="w3-third">
+              <img src="./Images/wknd1.jpg" style="width: 100%" />
+              <img src="./Images/dua1.jpeg" style="width: 100%" />
+              <img src="./Images/imaginedragons1.jpg" style="width: 100%" />
+              <img src="./Images/djsnake1.jpeg" style="width: 100%" />
+            </div>
+            <!-- End photo grid -->
+          </div>
+          <button background-color="w3-musifan-color">Charger plus</button>
+          <!-- End Feed Section -->
+        </div>
+
+        <!-- Liste des concerts -->
+        <div class="w3-padding-64 w3-content" id="concerts">
+          <h2 class="w3-musifan-color">Concerts</h2>
+          <hr style="width: 200px" class="w3-opacity" />
+          <div class="w3-row-padding" style="margin: 0 -16px">
+            <table class="w3-table w3-text-white">
+              <tbody>
+                <tr>
+                  <td><b>Ed Sheran Tour</b></td>
+                  <td><b>Accord Hotel Arena</b>, Paris, France</td>
+                  <td>27/07/2022</td>
+                  <td><button background-color="w3-musifan-color">Voir billet</button></td>
+                </tr>
+                <tr>
+                  <td><b>Pardon My French</b></td>
+                  <td><b>Hippodrome Longchamps</b>, Paris, France</td>
+                  <td>24/06/2022</td>
+                  <td><button background-color="w3-musifan-color">Voir billet</button></td>
+                </tr>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- Fin liste des concerts -->
+
+        <!-- Liste des musiques -->
+        <div class="w3-padding-64 w3-content" id="mesMusiques">
+          <h2 class="w3-musifan-color">Mes musiques</h2>
+          <hr style="width: 200px" class="w3-opacity" />
+          <div class="w3-row-padding" style="margin: 0 -16px">
+          
+          </div>
+        </div>
+        <!-- Fin liste des musiques -->
+
+        
+
+      <!-- END PAGE CONTENT -->
+    </div>
+  </body>
+</html>

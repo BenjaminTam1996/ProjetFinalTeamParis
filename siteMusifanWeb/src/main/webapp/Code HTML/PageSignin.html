@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <title>Musifan - Créer un compte</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="./fichiercss1.css" />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Raleway"
+  />
+  <style>
+    body,
+    h1 {
+      font-family: "Raleway", sans-serif;
+    }
+    body,
+    html {
+      width: 100%;
+      height: 100%;
+    }
+    .bgimg {
+      background-image: url("./Images/Acceuil2.jpg");
+      min-height: 100%;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+    .column {
+      float: left;
+      width: 50%;
+      padding: 10px;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+  </style>
+  <body>
+    <div
+      class="bgimg w3-display-container w3-animate-opacity w3-text-white row"
+    >
+      <div class="w3-display-topmiddle">
+        <img
+          src="./Images/Logo-site-MusiFan.gif"
+          title="Logo"
+          alt="c'est un logo"
+          height="100"
+          width="100"
+        />
+      </div>
+      <div class="w3-display-middle-5">
+        <h1 class="w3-jumbo w3-animate-top">Musifan</h1>
+      </div>
+      <div class="w3-display-middle">
+        <div class="w3-container">
+          <!-- zone de connexion -->
+          <form class="w3-form-2">
+            <h3>Création d'un compte</h3>
+            <!-- <span class="a">
+              <p>Vous êtes un :</p>
+              <div>
+                <input type="radio" name="fan" id="fan" value="fan" />
+                <label for="fan"> fan </label>
+              </div>
+              <div>
+                <input type="radio" name="optradio" />
+                <label type="label"> Artiste </label>
+              </div>
+            </span> -->
+            <div class="column">
+              <label for="prenom">Prénom</label>
+              <input type="text" placeholder="Prénom" id="prenom" />
+
+              <label for="nom">Nom</label>
+              <input type="text" placeholder="Nom" id="nom" />
+
+              <label for="telephone">Téléphone</label>
+              <input type="tel" placeholder="Téléphone" id="telephone" />
+            </div>
+            <div class="column">
+              <label for="mail">Email</label>
+              <input type="email" placeholder="Email" id="mail" />
+
+              <label for="password">Mot de passe</label>
+              <input type="password" placeholder="Password" id="password" />
+
+              <label for="password">Répéter mot de passe</label>
+              <input type="password" placeholder="Password" id="password" />
+            </div>
+            <button onclick="" background-color="w3-musifan-color">
+              <a href="PageSigninFanArtiste.html"> Créer un compte</a>
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="w3-display-bottomright w3-padding-large">
+        <p class="w3-musifan-color">
+          Powered by
+          <a
+            href="https://www.soprasteria.com/fr"
+            target="_blank"
+            class="w3-musifan-color"
+            >Sopra Steria</a
+          >
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
