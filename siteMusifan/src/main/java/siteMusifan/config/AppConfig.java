@@ -60,7 +60,7 @@ public class AppConfig {
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		
 		emf.setDataSource(dataSource);
-		emf.setPackagesToScan("commandesJPA.entity");
+		emf.setPackagesToScan("siteMusifan.entity");
 		emf.setJpaVendorAdapter(vendorAdapter);
 		emf.setJpaProperties(this.hibernateProperties());
 		return emf;

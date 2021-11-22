@@ -13,9 +13,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import siteMusifan.entity.Album;
+import siteMusifan.entity.LigneAlbum;
 import siteMusifan.exceptions.AlbumException;
 import siteMusifan.repositories.AlbumRepository;
 import siteMusifan.repositories.ChansonsRepository;
+import siteMusifan.repositories.LigneAlbumRepository;
 
 
 
@@ -25,6 +27,8 @@ public class AlbumService {
 	@Autowired
 	private ChansonsRepository chansonsRepository;
 
+	@Autowired
+	private LigneAlbumRepository ligneAlbumRepository;
 	public void save(Album album) {
 		Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 		Set<ConstraintViolation<Album>> violations = validator.validate(album);
@@ -46,7 +50,8 @@ public class AlbumService {
 
 	public void delete(Album album) {
 		Album albumEnBase = albumRepository.findById(album.getId()).orElseThrow(AlbumException::new);
-		chansonsRepository.removeAlbumFromChansonsByAlbum(albumEnBase);
+		chansonsRepository.deleteByAlbum(albumEnBase);
+		ligneAlbumRepository.deleteByAlbum(albumEnBase);
 		albumRepository.delete(albumEnBase);
 	}
 
@@ -67,7 +72,7 @@ public class AlbumService {
 		return albumRepository.findAll(page.previousOrFirstPageable());
 	}
 
-	public Album byId(Long id) {
-		return albumRepository.findByIdWithCommandes(id).orElseThrow(AlbumException::new);
-	}
+	//public Album byId(Long id) {
+	//	return albumRepository.findByIdWithCommandes(id).orElseThrow(AlbumException::new);
+	//}
 }

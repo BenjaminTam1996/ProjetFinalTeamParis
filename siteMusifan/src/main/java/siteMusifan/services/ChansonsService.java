@@ -44,11 +44,11 @@ public class ChansonsService {
 //		clientRepository.delete(clientEnBase);
 //	}
 
-	public void delete(Chansons chansons) {
-		Chansons chansonsEnBase = chansonsRepository.findById(chansons.getId()).orElseThrow(ChansonsException::new);
-		albumRepository.removeChansonsFromAlbumByChansons(chansonsEnBase);
-		chansonsRepository.delete(chansonsEnBase);
-	}
+//	public void delete(Chansons chansons) {
+//		Chansons chansonsEnBase = chansonsRepository.findById(chansons.getId()).orElseThrow(ChansonsException::new);
+//		albumRepository.removeChansonsFromAlbumByChansons(chansonsEnBase);
+//		chansonsRepository.delete(chansonsEnBase);
+//	}
 
 	public List<Chansons> allChansons() {
 		return chansonsRepository.findAll();
@@ -67,7 +67,7 @@ public class ChansonsService {
 		return chansonsRepository.findAll(page.previousOrFirstPageable());
 	}
 
-	public Chansons byId(Long id) {
-		return chansonsRepository.findByIdWithCommandes(id).orElseThrow(ChansonsException::new);
-	}
+//	public Chansons byId(Long id) {
+//		return chansonsRepository.findByIdWithCommandes(id).orElseThrow(ChansonsException::new);
+//	}
 }

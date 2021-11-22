@@ -17,16 +17,16 @@ import siteMusifan.entity.LigneAlbumPK;
 public interface LigneAlbumRepository extends JpaRepository<LigneAlbum, LigneAlbumPK>{
 	@Modifying
 	@Transactional
-	@Query("delete from LigneAlbum lc where lc.id.commande=:commande")
+	@Query("delete from LigneAlbum la where la.id.album=:album")
 	void deleteByAlbum(@Param("album") Album album);
 
-	@Modifying
-	@Transactional
-	@Query("delete from LigneAlbum lc where lc.id.chansons=:chansons")
-	void deleteByAlbum(@Param("chansons") Chansons chansons);
+//	@Modifying
+//	@Transactional
+//	@Query("delete from LigneAlbum lc where lc.id.chansons=:chansons")
+//	void deleteByAlbum(@Param("chansons") Chansons chansons);
 
-	@Modifying
-	@Transactional
-	@Query("delete from LigneAlbum lc where lc.id.chansons=:chansons and lc.id.album=:album")
-	void deleteByAlbumAndChansons(@Param("album") Album album, @Param("chansons") Chansons chansons);
+//	@Modifying
+//	@Transactional
+//	@Query("delete from LigneAlbum lc where lc.id.chansons=:chansons and lc.id.album=:album")
+//	void deleteByAlbumAndChansons(@Param("album") Album album, @Param("chansons") Chansons chansons);
 }

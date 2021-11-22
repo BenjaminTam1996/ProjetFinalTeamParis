@@ -10,10 +10,6 @@ import javax.persistence.Table;
 
 
 @Entity
-@NamedQueries({
-	@NamedQuery(name="LigneAlbum.findByCommande",
-			query="select la from LigneAlbum la left join fetch la.id.commande left join fetch la.id.concert where la.commande=:commande")
-})
 @Table(name = "ligne_album")
 public class LigneAlbum {
 	@EmbeddedId
