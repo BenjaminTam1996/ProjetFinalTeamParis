@@ -8,6 +8,7 @@ import siteMusifan.entity.Lieu;
 
 public interface LieuRepository extends JpaRepository<Lieu, Long>{
 	
+	
 	List<Lieu> findByNomIgnoreCase(String nom);		//Recherche par nom
 	
 	 

@@ -8,9 +8,9 @@ import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import commandesJPA.entity.Produit;
-import commandesJPA.exceptions.ProduitException;
 import siteMusifan.entity.Lieu;
+import siteMusifan.exceptions.LieuException;
+import siteMusifan.repositories.ConcertRepository;
 import siteMusifan.repositories.LieuRepository;
 
 public class LieuService {
@@ -19,6 +19,9 @@ public class LieuService {
 	
 	@Autowired
 	private Validator validator;
+	
+	@Autowired
+	private ConcertRepository concertRepository;
 	
 	
 	public void save(Lieu lieu) {
@@ -30,22 +33,54 @@ public class LieuService {
 		}	
 	}	
 	
-	public void delete(Produit produit) {
-		produit = byId(produit.getId());	//On va cherche le produit en base de donnée
-		Produit produitEnBase=produitRepository.findById(produit.getId()).orElseThrow(ProduitException::new);
-		lignecommandeRepository.deleteByProduit(produitEnBase);
-		produitRepository.delete(produitEnBase);
+	public void delete(Lieu lieu) {
+		lieu = byId(lieu.getId());	//On va cherche le produit en base de donnée
+		Lieu lieuEnBase=lieuRepository.findById(lieu.getId()).orElseThrow(LieuException::new);
+		concertRepository.removeLieuFromConcertByLieu(lieuEnBase);
+		lieuRepository.delete(lieuEnBase);
 	}
 	
-	public List<Produit> allProduit(){
-		return produitRepository.findAll();
+	public List<Lieu> allLieu(){
+		return lieuRepository.findAll();
 	}
 	
-	public Produit byId(Long id) {
-		return produitRepository.findById(id).orElseThrow(ProduitException::new);
+	public Lieu byId(Long id) {
+		return lieuRepository.findById(id).orElseThrow(LieuException::new);
 	}
 	
-	public List<Produit> byName(String nom) {
-		return produitRepository.findByName(nom);
+	public List<Lieu> ByNomIgnoreCase(String nom) {
+		return lieuRepository.findByNomIgnoreCase(nom);
+	}
+	
+	public List<Lieu> ByNomLikeIgnoreCase(String nom) {
+		return lieuRepository.findByNomIgnoreCase(nom);
+	}
+	
+	public List<Lieu> ByNomContainingIgnoreCase(String nom) {
+		return lieuRepository.findByNomIgnoreCase(nom);
+	}
+	
+	public List<Lieu> ByVilleIgnoreCase(String ville) {
+		return lieuRepository.findByPaysIgnoreCase(ville);
+	}
+	
+	public List<Lieu> ByVilleLikeIgnoreCase(String ville) {
+		return lieuRepository.findByPaysLikeIgnoreCase(ville);
+	}
+	
+	public List<Lieu> ByPaysContainingIgnoreCase(String ville) {
+		return lieuRepository.findByPaysContainingIgnoreCase(ville);
+	}
+	
+	public List<Lieu> ByPaysIgnoreCase(String pays) {
+		return lieuRepository.findByPaysIgnoreCase(pays);
+	}
+	
+	public List<Lieu> ByPaysLikeIgnoreCase(String pays) {
+		return lieuRepository.findByPaysLikeIgnoreCase(pays);
+	}
+	
+	public List<Lieu> ByVilleContainingIgnoreCase(String pays) {
+		return lieuRepository.findByPaysContainingIgnoreCase(pays);
 	}
 }

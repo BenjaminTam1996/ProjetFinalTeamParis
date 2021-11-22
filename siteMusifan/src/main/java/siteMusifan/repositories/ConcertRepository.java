@@ -4,8 +4,13 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import siteMusifan.entity.Concert;
+import siteMusifan.entity.Lieu;
 
 public interface ConcertRepository extends JpaRepository<Concert, Long> {
 	
@@ -21,5 +26,8 @@ public interface ConcertRepository extends JpaRepository<Concert, Long> {
 	
 	List<Concert> findByDate(LocalDate date);		//Recherche par date
 	
-
+	@Transactional
+	@Modifying
+	@Query("update Concert c set c.lieut=null where c.lieu=:lieu")
+	void removeLieuFromConcertByLieu(@Param("lieu") Lieu lieu);
 }
