@@ -55,14 +55,6 @@ public class CommandeServiceTest {
 		commandeService.delete(commande);
 		assertNull(commandeService.byId(commande.getNumero()));
 	}
-	
-//	@Test(expected = LieuException.class)
-//	public void testDelete() {
-//		Lieu lieu = getLieu();
-//		lieuService.save(lieu);
-//		lieuService.delete(lieu);
-//		assertNull(lieuService.byId(lieu.getId()));
-//	}
 
 	@Test
 	public void testAllCommande() {
