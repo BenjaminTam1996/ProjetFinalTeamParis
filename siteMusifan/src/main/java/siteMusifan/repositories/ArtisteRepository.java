@@ -24,8 +24,8 @@ public interface ArtisteRepository extends JpaRepository<Artiste, Long>{
 	Optional<Artiste> byKeyWithPublications(@Param("key") Long key);
 	
 	//Remonter un artiste complet, c'est-a-dire avec ses albums, ses concerts, ses publications et ses utilisateurs
-	@Query("select a from Artiste a left join fetch a.lignesAlbums left join fetch a.lignesConcerts left join fetch a.publications left join fetch a.lignesUtilisateurs where a.id=:key")
-	Optional<Artiste> findByKeyWithAlbumsAndConcertsAndPublicationsAndUtilisateurs(@Param("key") Long key);
+//	@Query("select a from Artiste a left join fetch a.lignesAlbums left join fetch a.lignesConcerts left join fetch a.publications left join fetch a.lignesUtilisateurs where a.id=:key")
+//	Optional<Artiste> findByKeyWithAlbumsAndConcertsAndPublicationsAndUtilisateurs(@Param("key") Long key);
 
 	//Trouver un artiste par son nom
 	List<Artiste> findByNomArtisteContainingIgnoreCase(String nom);

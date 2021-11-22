@@ -8,11 +8,13 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import siteMusifan.entity.Publication;
 import siteMusifan.exceptions.PublicationException;
 import siteMusifan.repositories.PublicationRepository;
 
+@Service
 public class PublicationService {
 	@Autowired
 	private PublicationRepository publicationRepository;

@@ -17,7 +17,7 @@ import siteMusifan.entity.Commande;
 import siteMusifan.exceptions.CommandeException;
 import siteMusifan.repositories.CommandeRepository;
 
-
+@Service
 public class CommandeService {
 	@Autowired
 	private CommandeRepository commandeRepository;

@@ -8,6 +8,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import siteMusifan.entity.Concert;
 import siteMusifan.exceptions.ConcertException;
@@ -15,6 +16,7 @@ import siteMusifan.exceptions.LieuException;
 import siteMusifan.repositories.ConcertRepository;
 import siteMusifan.repositories.LigneConcertRepository;
 
+@Service
 public class ConcertService {
 	@Autowired
 	private ConcertRepository concertRepository;

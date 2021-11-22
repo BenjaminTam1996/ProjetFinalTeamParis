@@ -7,12 +7,14 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import siteMusifan.entity.Lieu;
 import siteMusifan.exceptions.LieuException;
 import siteMusifan.repositories.ConcertRepository;
 import siteMusifan.repositories.LieuRepository;
 
+@Service
 public class LieuService {
 	@Autowired
 	private LieuRepository lieuRepository;
@@ -34,7 +36,7 @@ public class LieuService {
 	}	
 	
 	public void delete(Lieu lieu) {
-		lieu = byId(lieu.getId());	//On va cherche le produit en base de donnée
+		//lieu = byId(lieu.getId());	//On va cherche le produit en base de donnée
 		Lieu lieuEnBase=lieuRepository.findById(lieu.getId()).orElseThrow(LieuException::new);
 		concertRepository.removeLieuFromConcertByLieu(lieuEnBase);
 		lieuRepository.delete(lieuEnBase);
