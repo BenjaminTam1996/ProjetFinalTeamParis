@@ -25,6 +25,8 @@ public class Concert {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqConcert")
 	@Column(name = "concert_id")
 	private Long id;
+	@Column(name = "concert_nom")
+	private String nom;
 	@Column(name = "concert_date")
 	private LocalDate date = LocalDate.now();
 	@ManyToOne
@@ -52,7 +54,19 @@ public class Concert {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	
 		
+	public String getNom() {
+		return nom;
+	}
+
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+
 	public LocalDate getDate() {
 		return date;
 	}
