@@ -25,9 +25,9 @@ import javax.persistence.Table;
 	@AttributeOverride(name = "photoProfil", column = @Column(name = "utilisateur_photoProfil")),
 })
 @NamedQueries({
-	@NamedQuery(name="Utilisateur.findByKeyWithArtistes",
+	@NamedQuery(name="Utilisateur.byKeyWithArtistes",
 			query="select u from Utilisateur u left join fetch u.lignesUtilisateurs where u.id=:key"),
-	@NamedQuery(name="Utilisateur.findByKeyWithCommandes",
+	@NamedQuery(name="Utilisateur.byKeyWithCommandes",
 			query="select u from Utilisateur u left join fetch u.listeConcert where u.id=:key")
 })
 @Table(name="utilisateur")

@@ -33,4 +33,5 @@ public interface LieuRepository extends JpaRepository<Lieu, Long>{
 	
 	
 	List<Lieu> findByPaysContainingIgnoreCase(String pays);		//Recherche contenant "lettre recherchées" pays
+	
 }

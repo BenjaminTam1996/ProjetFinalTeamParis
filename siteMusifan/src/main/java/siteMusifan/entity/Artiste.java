@@ -25,13 +25,13 @@ import javax.persistence.Table;
 	@AttributeOverride(name = "photoProfil", column = @Column(name = "artiste_photoProfil")),
 })
 @NamedQueries({
-	@NamedQuery(name="Artiste.findByKeyWithUtilisateurs",
+	@NamedQuery(name="Artiste.byKeyWithUtilisateurs",
 			query="select a from Artiste a left join fetch a.lignesUtilisateurs where a.id=:key"),
-	@NamedQuery(name="Artiste.findByKeyWithAlbums",
+	@NamedQuery(name="Artiste.byKeyWithAlbums",
 			query="select a from Artiste a left join fetch a.lignesAlbums where a.id=:key"),
-	@NamedQuery(name="Artiste.findByKeyWithConcerts",
+	@NamedQuery(name="Artiste.byKeyWithConcerts",
 			query="select a from Artiste a left join fetch a.ligneConcerts where a.id=:key"),
-	@NamedQuery(name="Artiste.findByKeyWithPublications",
+	@NamedQuery(name="Artiste.byKeyWithPublications",
 			query="select a from Artiste a left join fetch a.publications where a.id=:key")
 })
 @Table(name="artiste")

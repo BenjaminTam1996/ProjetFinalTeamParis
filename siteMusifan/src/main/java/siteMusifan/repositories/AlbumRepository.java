@@ -10,18 +10,17 @@ import org.springframework.data.repository.query.Param;
 import siteMusifan.entity.Album;
 
 public interface AlbumRepository extends JpaRepository<Album, Long>{
-	List<Album> findByAlbum(String album);
+	List<Album> findByTitre(String titre);
 
-	List<Album> findByAlbumLike(String album);
+	List<Album> findByTitreLikeIgnoreCase(String titre);  
 
-	List<Album> findByAlbumContaining(String album);
-
-	List<Album> findByAlbumContainingIgnoreCase(String album);
+	List<Album> findByTitreContainingIgnoreCase(String titre);
 
 
-	@Query("select c from Album c left join fetch c.commandes where c.id=:id")
-	Optional<Album> findByIdWithCommandes(@Param("id") Long id);
+
+//	@Query("select c from Album c left join fetch c.commandes where c.id=:id")
+//	Optional<Album> findByIdWithCommandes(@Param("id") Long id);
 
 	// @Query("select c from Album c left join fetch c.commandes")
-	List<Album> findAllWithCommandes();
+//	List<Album> findAllWithCommandes();
 }

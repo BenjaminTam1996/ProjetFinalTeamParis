@@ -21,9 +21,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "concert")
-@NamedQueries({ @NamedQuery(name = "Concert.findByVille", query = "select c from Concert c join left fetch c.lieu l where l.ville="),
-	@NamedQuery(name = "Concert.findByPays", query = "select c from Concert c join left fetch c.lieu l where l.pays=")
-})
 @SequenceGenerator(name = "seqConcert", sequenceName = "seq_concert", allocationSize = 1, initialValue = 100)
 public class Concert {
 	@Id

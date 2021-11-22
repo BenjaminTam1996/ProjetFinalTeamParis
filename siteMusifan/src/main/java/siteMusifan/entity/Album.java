@@ -29,6 +29,8 @@ public class Album {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqAlbum")
 	@Column(name = "album_id")
 	private Long id;
+	@Column(name = "album_titre")
+	private String titre;
 	@Column(name = "album_date")
 	private LocalDate date = LocalDate.now();
 	@Column(name = "album_photo")
@@ -52,6 +54,17 @@ public class Album {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	
+
+	public String getTitre() {
+		return titre;
+	}
+
+
+	public void setTitre(String titre) {
+		this.titre = titre;
 	}
 
 
