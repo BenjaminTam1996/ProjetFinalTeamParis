@@ -22,8 +22,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "commande")
 @NamedQueries({
-		@NamedQuery(name = "Commande.findByKeyWithConcerts", query = "select distinct c from Commande c left join fetch c.lignesCommandes where c.numero=:numero"),
-		@NamedQuery(name = "Commande.findAllWithConcerts", query = "select distinct c from Commande c left join fetch c.lignesCommandes ") })
+		@NamedQuery(name = "Commande.byKeyWithConcerts", query = "select distinct c from Commande c left join fetch c.lignesCommandes where c.numero=:numero"),
+		@NamedQuery(name = "Commande.allWithConcerts", query = "select distinct c from Commande c left join fetch c.lignesCommandes ") })
 @SequenceGenerator(name = "seqCommande", sequenceName = "seq_commande", allocationSize = 1,initialValue = 100)
 public class Commande {
 	@Id
