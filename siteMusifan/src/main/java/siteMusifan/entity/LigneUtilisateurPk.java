@@ -22,6 +22,11 @@ public class LigneUtilisateurPk implements Serializable {
 	
 	}
 
+	public LigneUtilisateurPk(Utilisateur utilisateur, Artiste artiste) {
+		this.utilisateur = utilisateur;
+		this.artiste = artiste;
+	}
+
 	public Utilisateur getUtilisateur() {
 		return utilisateur;
 	}

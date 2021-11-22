@@ -16,6 +16,10 @@ public class LigneUtilisateur {
 		
 	}
 
+	public LigneUtilisateur(LigneUtilisateurPk id) {
+		this.id = id;
+	}
+
 	public LigneUtilisateurPk getId() {
 		return id;
 	}

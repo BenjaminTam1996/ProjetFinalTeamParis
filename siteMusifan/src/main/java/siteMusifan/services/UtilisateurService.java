@@ -30,10 +30,7 @@ public class UtilisateurService {
 		Set<ConstraintViolation<Utilisateur>> violations = validator.validate(utilisateur);
 		if(violations.isEmpty()) {
 			utilisateurRepository.save(utilisateur);
-			
-			if (utilisateur.getLignesUtilisateurs() != null) {
-				ligneUtilisateurRepository.saveAll(utilisateur.getLignesUtilisateurs());				
-			}
+			ligneUtilisateurRepository.saveAll(utilisateur.getLignesUtilisateurs());				
 		} else {
 			throw new UtilisateurException();
 		}

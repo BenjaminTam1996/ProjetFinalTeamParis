@@ -22,7 +22,7 @@ import javax.persistence.Table;
 	@AttributeOverride(name = "nom", column = @Column(name = "artiste_nom")),
 	@AttributeOverride(name = "prenom", column = @Column(name = "artiste_prenom")),
 	@AttributeOverride(name = "telephone", column = @Column(name = "artiste_telephone")),
-	@AttributeOverride(name = "photoProfil", column = @Column(name = "artiste_photoProfil")),
+	@AttributeOverride(name = "photoProfil", column = @Column(name = "artiste_photo_profil")),
 })
 @NamedQueries({
 	@NamedQuery(name="Artiste.byKeyWithUtilisateurs",
@@ -37,10 +37,10 @@ import javax.persistence.Table;
 @Table(name="artiste")
 @SequenceGenerator(name="seqCompte", sequenceName = "seq_artiste", initialValue = 100, allocationSize = 1)
 public class Artiste extends Compte {
-	@Column(name="artiste_nomArtiste")
+	@Column(name="artiste_nom_atiste")
 	private String nomArtiste;
 	
-	@Column(name="artiste_photoBanniere")
+	@Column(name="artiste_photo_banniere")
 	private Byte[] photoBanniere;
 	
 	@Column(name="artiste_description")
@@ -60,6 +60,14 @@ public class Artiste extends Compte {
 	
 	public Artiste() {
 		
+	}
+
+	public Artiste(String nom, String prenom) {
+		super(nom, prenom);
+	}
+
+	public Artiste(String nomArtiste) {
+		this.nomArtiste = nomArtiste;
 	}
 
 	public String getNomArtiste() {

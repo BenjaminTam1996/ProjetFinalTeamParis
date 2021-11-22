@@ -1,6 +1,5 @@
 package siteMusifan.services;
 
-import java.util.List;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -12,20 +11,16 @@ import org.springframework.stereotype.Service;
 import siteMusifan.entity.Artiste;
 import siteMusifan.exceptions.ArtisteException;
 import siteMusifan.repositories.ArtisteRepository;
-import siteMusifan.repositories.LigneAlbumRepository;
-import siteMusifan.repositories.LigneConcertRepository;
-import siteMusifan.repositories.LigneUtilisateurRepository;
-import siteMusifan.repositories.PublicationRepository;
 
 @Service
 public class ArtisteService {
-//
-//	@Autowired
-//	private ArtisteRepository artisteRepository;
-//	
-//	@Autowired
-//	private Validator validator;
-//	
+
+	@Autowired
+	private ArtisteRepository artisteRepository;
+	
+	@Autowired
+	private Validator validator;
+	
 //	@Autowired
 //	private PublicationRepository publicationRepository;
 //	
@@ -38,18 +33,18 @@ public class ArtisteService {
 //	@Autowired
 //	private LigneUtilisateurRepository ligneUtilisateurRepository;
 //	
-//	public void save(Artiste artiste) {
-//		Set<ConstraintViolation<Artiste>> violations = validator.validate(artiste);
-//		if (violations.isEmpty()) {
-//			artisteRepository.save(artiste);
-//			
-//			//Voir comment faire update artise !!
-//			
-//		} else {
-//			throw new ArtisteException();
-//		}
-//		
-//	}
+	public void save(Artiste artiste) {
+		Set<ConstraintViolation<Artiste>> violations = validator.validate(artiste);
+		if (violations.isEmpty()) {
+			artisteRepository.save(artiste);
+			
+			//Voir comment faire update artise !!
+			
+		} else {
+			throw new ArtisteException();
+		}
+		
+	}
 //	
 //	public void delete(Artiste artiste) {
 //		ligneUtilisateurRepository.deleteByArtiste(artiste);
@@ -59,8 +54,12 @@ public class ArtisteService {
 //		artisteRepository.delete(artiste);
 //	}
 	
+	public Artiste byId(Long id) {
+		return artisteRepository.findById(id).orElseThrow(ArtisteException::new);
+	}
+	
 	//Remonter un artiste complet avec : ses albums, ses concerts, ses publications et ses utilisateurs
-//	public Artiste byId(Long id) {
+//	public Artiste byKeyWithAlbumsAndConcertsAndPublicationsAndUtilisateurs(Long id) {
 //		return artisteRepository.findByKeyWithAlbumsAndConcertsAndPublicationsAndUtilisateurs(id).orElseThrow(ArtisteException::new);
 //	}
 //	

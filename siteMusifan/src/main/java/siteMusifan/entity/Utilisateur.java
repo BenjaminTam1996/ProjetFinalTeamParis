@@ -22,7 +22,7 @@ import javax.persistence.Table;
 	@AttributeOverride(name = "nom", column = @Column(name = "utilisateur_nom")),
 	@AttributeOverride(name = "prenom", column = @Column(name = "utilisateur_prenom")),
 	@AttributeOverride(name = "telephone", column = @Column(name = "utilisateur_telephone")),
-	@AttributeOverride(name = "photoProfil", column = @Column(name = "utilisateur_photoProfil")),
+	@AttributeOverride(name = "photoProfil", column = @Column(name = "utilisateur_photo_profil")),
 })
 @NamedQueries({
 	@NamedQuery(name="Utilisateur.byKeyWithArtistes",
@@ -37,7 +37,7 @@ public class Utilisateur extends Compte{
 	private String pseudo;
 	
 	@OneToMany
-	@Column(name="utilisateur_listeConcert")
+	@Column(name="utilisateur_liste_concert")
 	private List<Commande> listeConcert;
 	
 	@OneToMany(mappedBy = "id.utilisateur")
@@ -49,6 +49,10 @@ public class Utilisateur extends Compte{
 
 	public Utilisateur(String nom, String prenom) {
 		super(nom, prenom);
+	}
+
+	public Utilisateur(String pseudo) {
+		this.pseudo = pseudo;
 	}
 
 	public String getPseudo() {
@@ -75,6 +79,9 @@ public class Utilisateur extends Compte{
 		this.lignesUtilisateurs = lignesUtilisateurs;
 	}
 	
-	
+	//Ajouter un artiste a la liste d'artise like par un utilisateur
+	public void addArtiste(Artiste artiste) {
+		lignesUtilisateurs.add(new LigneUtilisateur(new LigneUtilisateurPk(this, artiste)));
+	}
 	
 }
