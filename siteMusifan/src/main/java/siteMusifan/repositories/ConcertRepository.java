@@ -28,6 +28,6 @@ public interface ConcertRepository extends JpaRepository<Concert, Long> {
 	
 	@Transactional
 	@Modifying
-	@Query("update Concert c set c.lieut=null where c.lieu=:lieu")
+	@Query("update Concert c set c.lieu=null where c.lieu=:lieu")
 	void removeLieuFromConcertByLieu(@Param("lieu") Lieu lieu);
 }
