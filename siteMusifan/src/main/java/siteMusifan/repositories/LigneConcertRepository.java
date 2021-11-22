@@ -19,8 +19,8 @@ public interface LigneConcertRepository extends JpaRepository<LigneConcert, Lign
 	
 	@Transactional
 	@Modifying
-	@Query("delete from LigneConcert lc where lc.id.concert =:concert ")
-	void deleteByConcert(@Param("concert ") Concert  concert );
+	@Query("delete from LigneConcert lc where lc.id.concert =:concert")
+	void deleteByConcert(@Param("concert") Concert  concert );
 	
 
 }

@@ -26,6 +26,8 @@ public interface ConcertRepository extends JpaRepository<Concert, Long> {
 	
 	List<Concert> findByDate(LocalDate date);		//Recherche par date
 	
+	List<Concert> findByLieu(Lieu lieu);
+	
 	@Transactional
 	@Modifying
 	@Query("update Concert c set c.lieu=null where c.lieu=:lieu")

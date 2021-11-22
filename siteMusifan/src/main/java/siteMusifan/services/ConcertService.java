@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import siteMusifan.entity.Concert;
+import siteMusifan.entity.Lieu;
 import siteMusifan.exceptions.ConcertException;
 import siteMusifan.exceptions.LieuException;
 import siteMusifan.repositories.ConcertRepository;
@@ -31,14 +32,14 @@ public class ConcertService {
 		Set<ConstraintViolation<Concert>> violations = validator.validate(concert);
 		if(violations.isEmpty()) {
 			concertRepository.save(concert);
+			ligneconcertRepository.saveAll(concert.getLigneConcerts());
 		}else {
 			throw new ConcertException();
 		}	
 	}	
 	
 	public void delete(Concert concert) {
-		concert = byId(concert.getId());	//On va cherche le produit en base de donnée
-		Concert concertEnBase=concertRepository.findById(concert.getId()).orElseThrow(LieuException::new);
+		Concert concertEnBase=concertRepository.findById(concert.getId()).orElseThrow(ConcertException::new);
 		ligneconcertRepository.deleteByConcert(concertEnBase);
 		concertRepository.delete(concertEnBase);
 	}
@@ -51,8 +52,12 @@ public class ConcertService {
 		return concertRepository.findByDate(date);
 	}
 	
+	public List<Concert> allByLieu(Lieu lieu){
+		return concertRepository.findByLieu(lieu);
+	}
+	
 	public Concert byId(Long id) {
-		return concertRepository.findById(id).orElseThrow(LieuException::new);
+		return concertRepository.findById(id).orElseThrow(ConcertException::new);
 	}
 	
 	public List<Concert> ByNomIgnoreCase(String nom) {

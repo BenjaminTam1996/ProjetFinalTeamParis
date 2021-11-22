@@ -45,6 +45,8 @@ public class Commande {
 	public Commande(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
 	}
+	
+
 
 	public Long getNumero() {
 		return numero;
