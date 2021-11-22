@@ -47,6 +47,10 @@ public class Utilisateur extends Compte{
 		
 	}
 
+	public Utilisateur(String nom, String prenom) {
+		super(nom, prenom);
+	}
+
 	public String getPseudo() {
 		return pseudo;
 	}

@@ -33,6 +33,11 @@ public class Compte {
 		
 	}
 
+	public Compte(String nom, String prenom) {
+		this.nom = nom;
+		this.prenom = prenom;
+	}
+
 	public Long getId() {
 		return id;
 	}
