@@ -9,8 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import siteMusifan.entity.Artiste;
 import siteMusifan.entity.Concert;
 import siteMusifan.entity.LigneConcert;
+import siteMusifan.entity.LigneConcertPK;
 
-public interface LigneConcertRepository extends JpaRepository<LigneConcert, Long>{
+public interface LigneConcertRepository extends JpaRepository<LigneConcert, LigneConcertPK>{
 	@Transactional
 	@Modifying
 	@Query("delete from LigneConcert lc where lc.id.artiste =:artiste")

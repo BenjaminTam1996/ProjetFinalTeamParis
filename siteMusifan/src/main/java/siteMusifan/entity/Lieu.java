@@ -48,6 +48,15 @@ public class Lieu {
 	//Constructeurs
 	public Lieu() {
 	}
+	
+	public Lieu(String nom, String numRue, String rue, String codePostal, String ville, String pays) {
+		this.nom = nom;
+		this.numRue = numRue;
+		this.rue = rue;
+		this.codePostal = codePostal;
+		this.ville = ville;
+		this.pays = pays;
+	}
 
 	//Getter et Setter
 	public Long getId() {
