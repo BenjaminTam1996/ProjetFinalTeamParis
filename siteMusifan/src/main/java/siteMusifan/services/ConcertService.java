@@ -32,6 +32,7 @@ public class ConcertService {
 		Set<ConstraintViolation<Concert>> violations = validator.validate(concert);
 		if(violations.isEmpty()) {
 			concertRepository.save(concert);
+			ligneconcertRepository.saveAll(concert.getLigneConcerts());
 		}else {
 			throw new ConcertException();
 		}	

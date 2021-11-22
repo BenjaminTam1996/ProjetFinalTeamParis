@@ -11,23 +11,23 @@ import java.util.ArrayList;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import siteMusifan.config.AppConfig;
 import siteMusifan.entity.Concert;
 import siteMusifan.entity.Lieu;
+import siteMusifan.entity.LigneConcert;
+import siteMusifan.entity.LigneConcertPK;
 import siteMusifan.exceptions.ConcertException;
-import siteMusifan.exceptions.LieuException;
+import siteMusifan.services.ArtisteService;
 import siteMusifan.services.ConcertService;
 import siteMusifan.services.LieuService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { AppConfig.class })
-@Transactional
-@Rollback(true)
+//@Transactional
+//@Rollback(true)
 public class ConcertServiceTest {
 	
 	@Autowired
@@ -35,6 +35,10 @@ public class ConcertServiceTest {
 	
 	@Autowired
 	private LieuService lieuService;
+	
+	@Autowired
+	private ArtisteService artisteService;
+	
 	
 	private Concert getConcert() {
 		Concert concert = new Concert("Pardon My French",LocalDate.of(2022, Month.JULY, 21),lieuService.byId(116L),10000,50);
@@ -44,6 +48,8 @@ public class ConcertServiceTest {
 	@Test
 	public void testSave() {
 		Concert concert = getConcert();
+//		LigneConcertPK lcpk = new LigneConcertPK(concert, artisteService.);
+//		LigneConcert lc = new LigneConcert(lcpk);
 		concertService.save(concert);
 		assertNotNull(concertService.byId(concert.getId()));
 	}
