@@ -13,13 +13,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "concert")
-@SequenceGenerator(name = "seqConcert", sequenceName = "seq_concert", allocationSize = 1,initialValue = 100)
+@NamedQueries({ @NamedQuery(name = "Concert.findByVille", query = "select c from Concert c join left fetch c.lieu l where l.ville="),
+})
+@SequenceGenerator(name = "seqConcert", sequenceName = "seq_concert", allocationSize = 1, initialValue = 100)
 public class Concert {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqConcert")
@@ -38,14 +42,13 @@ public class Concert {
 	private int prix;
 	@OneToMany(mappedBy = "id.concert")
 	private Set<LigneCommande> lignesCommandes;
-	
+
 	@OneToMany(mappedBy = "id.concert")
 	private Set<LigneConcert> ligneConcerts = new HashSet<LigneConcert>();
-	
+
 	public Concert() {
 
 	}
-
 
 	public Long getId() {
 		return id;
@@ -54,84 +57,67 @@ public class Concert {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	
-		
+
 	public String getNom() {
 		return nom;
 	}
-
 
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 
-
 	public LocalDate getDate() {
 		return date;
 	}
-
 
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
-
 	public Lieu getLieu() {
 		return lieu;
 	}
-
 
 	public void setLieu(Lieu lieu) {
 		this.lieu = lieu;
 	}
 
-
 	public int getNbPlace() {
 		return nbPlace;
 	}
-
 
 	public void setNbPlace(int nbPlace) {
 		this.nbPlace = nbPlace;
 	}
 
-
 	public int getPrix() {
 		return prix;
 	}
-
 
 	public void setPrix(int prix) {
 		this.prix = prix;
 	}
 
-
 	public Set<LigneCommande> getLignesCommandes() {
 		return lignesCommandes;
 	}
 
-
 	public void setLignesCommandes(Set<LigneCommande> lignesCommandes) {
 		this.lignesCommandes = lignesCommandes;
 	}
-	
 
 	public Set<LigneConcert> getLigneConcerts() {
 		return ligneConcerts;
 	}
 
-
 	public void setLigneConcerts(Set<LigneConcert> ligneConcerts) {
 		this.ligneConcerts = ligneConcerts;
 	}
-
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -144,8 +130,5 @@ public class Concert {
 		Concert other = (Concert) obj;
 		return Objects.equals(id, other.id);
 	}
-
-
-	
 
 }
