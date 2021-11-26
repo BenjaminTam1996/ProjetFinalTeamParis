@@ -33,7 +33,7 @@ public class LieuService {
 		}else {
 			throw new LieuException();
 		}	
-	}	
+	}	 
 	
 	public void delete(Lieu lieu) {
 		//lieu = byId(lieu.getId());	//On va cherche le produit en base de donnée

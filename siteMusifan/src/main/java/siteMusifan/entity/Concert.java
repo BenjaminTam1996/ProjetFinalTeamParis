@@ -13,11 +13,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name = "concert")
@@ -26,17 +26,22 @@ public class Concert {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqConcert")
 	@Column(name = "concert_id")
-	private Long id;
+	@JsonView({JsonViews.Common.class,})
+	private Long id; 
 	@Column(name = "concert_nom")
+	@JsonView({JsonViews.Common.class,})
 	private String nom;
 	@Column(name = "concert_date")
+	@JsonView({JsonViews.Common.class,})
 	private LocalDate date = LocalDate.now();
 	@ManyToOne
 	@JoinColumn(name = "concert_lieu_id", foreignKey = @ForeignKey(name = "concert_lieu_id_fk"))
 	private Lieu lieu;
 	@Column(name = "concert_nbPlace")
+	@JsonView({JsonViews.Common.class,})
 	private int nbPlace;
 	@Column(name = "concert_prix")
+	@JsonView({JsonViews.Common.class,})
 	private int prix;
 	@OneToMany(mappedBy = "id.concert")
 	private Set<LigneCommande> lignesCommandes;
@@ -122,6 +127,11 @@ public class Concert {
 
 	public void setLigneConcerts(Set<LigneConcert> ligneConcerts) {
 		this.ligneConcerts = ligneConcerts;
+	}
+	
+	//Ajouter un concert a la liste de concert d'un artiste
+	public void addArtiste(Artiste artiste) {
+		ligneConcerts.add(new LigneConcert(new LigneConcertPK(this, artiste)));
 	}
 
 	@Override

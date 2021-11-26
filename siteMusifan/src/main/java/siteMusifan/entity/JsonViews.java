@@ -15,6 +15,6 @@ public class JsonViews {
 	
 	public static class CommandeAvecigneCommande extends CommandeAvecClient{
 		
-	}
+	} 
 }
 

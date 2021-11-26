@@ -17,7 +17,7 @@ import siteMusifan.exceptions.LieuException;
 import siteMusifan.repositories.ConcertRepository;
 import siteMusifan.repositories.LigneConcertRepository;
 
-@Service
+@Service 
 public class ConcertService {
 	@Autowired
 	private ConcertRepository concertRepository;
@@ -40,8 +40,8 @@ public class ConcertService {
 	
 	public void delete(Concert concert) {
 		Concert concertEnBase=concertRepository.findById(concert.getId()).orElseThrow(ConcertException::new);
-		ligneconcertRepository.deleteByConcert(concertEnBase);
-		concertRepository.delete(concertEnBase);
+		ligneconcertRepository.deleteByConcert(concertEnBase); 
+		concertRepository.delete(concertEnBase); 
 	}
 	
 	public List<Concert> allConcert(){

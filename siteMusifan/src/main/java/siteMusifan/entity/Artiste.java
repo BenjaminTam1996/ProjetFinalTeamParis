@@ -125,11 +125,6 @@ public class Artiste extends Compte {
 	public void setLigneConcerts(Set<LigneConcert> ligneConcerts) {
 		this.ligneConcerts = ligneConcerts;
 	}
-
-	//Ajouter un concert a la liste de concert d'un artiste
-	public void addConcert(Concert concert) {
-		ligneConcerts.add(new LigneConcert(new LigneConcertPK(concert, this)));
-	}
 	
 	//Ajouter un album a la liste d'album d'un artiste
 	public void addAlbum(Album album) {

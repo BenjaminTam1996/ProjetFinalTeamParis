@@ -42,7 +42,7 @@ public class ArtisteService {
 		if (violations.isEmpty()) {
 			artisteRepository.save(artiste);
 			
-			ligneConcertRepository.saveAll(artiste.getLigneConcerts());
+			
 			ligneAlbumRepository.saveAll(artiste.getLignesAlbums());
 			publicationRepository.saveAll(artiste.getPublications());
 			
