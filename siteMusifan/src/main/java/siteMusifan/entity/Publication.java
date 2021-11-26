@@ -33,13 +33,19 @@ public class Publication {
 	private byte[] image;
 	
 	@Column(name="publication_date")
-	private LocalDate date;
+	private LocalDate date = LocalDate.now();
 	
 	@ManyToOne
 	@JoinColumn(name = "publication_artiste_id", foreignKey = @ForeignKey(name = "publication_artiste_id_fk"))
 	private Artiste artiste;
 
 	public Publication() {
+	}
+
+	public Publication(String desciption, Artiste artiste) {
+		super();
+		this.desciption = desciption;
+		this.artiste = artiste;
 	}
 
 	public Long getId() {

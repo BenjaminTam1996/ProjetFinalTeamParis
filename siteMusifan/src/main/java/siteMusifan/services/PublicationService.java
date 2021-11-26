@@ -10,7 +10,9 @@ import javax.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import siteMusifan.entity.Commande;
 import siteMusifan.entity.Publication;
+import siteMusifan.exceptions.CommandeException;
 import siteMusifan.exceptions.PublicationException;
 import siteMusifan.repositories.PublicationRepository;
 
@@ -37,6 +39,10 @@ public class PublicationService {
 
 	public List<Publication> allPublication() {
 		return publicationRepository.findAll();
+	}
+	
+	public Publication byId(Long id) {
+		return publicationRepository.findById(id).orElseThrow(CommandeException::new);
 	}
 
 

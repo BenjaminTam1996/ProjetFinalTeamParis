@@ -4,6 +4,10 @@ import static org.junit.Assert.*;
 
 import java.time.LocalDateTime;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,19 +18,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import siteMusifan.config.AppConfig;
 import siteMusifan.entity.Commande;
-import siteMusifan.entity.Lieu;
 import siteMusifan.entity.Utilisateur;
 import siteMusifan.exceptions.CommandeException;
-import siteMusifan.exceptions.LieuException;
 import siteMusifan.services.CommandeService;
-import siteMusifan.services.LieuService;
 import siteMusifan.services.UtilisateurService;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { AppConfig.class })
-//@Transactional
-//@Rollback(true)
+@Transactional
+@Rollback(true)
 public class CommandeServiceTest {
 	
 	@Autowired
@@ -46,19 +47,24 @@ public class CommandeServiceTest {
 		Commande commande = getCommande();
 		commandeService.save(commande);
 		assertNotNull(commandeService.byId(commande.getNumero()));
-	}
+		Commande commandeEnBase = commandeService.byId(commande.getNumero());
+		assertSame( commande.getLignesCommandes(), commandeEnBase.getLignesCommandes());
 
-	@Test(expected = CommandeException.class)
-	public void testDelete() {
-		Commande commande = getCommande();
-		commandeService.save(commande);
-		commandeService.delete(commande);
-		assertNull(commandeService.byId(commande.getNumero()));
 	}
+	
+
+//	@Test(expected = CommandeException.class)
+//	public void testDelete() {
+//		Commande commande = getCommande();
+//		commandeService.save(commande);
+//		commandeService.delete(commande);
+//		assertNull(commandeService.byId(commande.getNumero()));
+//	}
 
 	@Test
 	public void testAllCommande() {
-		//fail("Not yet implemented");
+		assertNotNull(commandeService.allCommande());
+		assertEquals(commandeService.allCommande().size(), 3);
 	}
 
 	@Test
