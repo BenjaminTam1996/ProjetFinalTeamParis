@@ -15,9 +15,13 @@ import org.springframework.stereotype.Service;
 
 import siteMusifan.entity.Commande;
 import siteMusifan.entity.Lieu;
+import siteMusifan.entity.Utilisateur;
 import siteMusifan.exceptions.CommandeException;
 import siteMusifan.exceptions.LieuException;
+import siteMusifan.exceptions.UtilisateurException;
 import siteMusifan.repositories.CommandeRepository;
+import siteMusifan.repositories.LigneCommandeRepository;
+import siteMusifan.repositories.LigneUtilisateurRepository;
 
 @Service
 public class CommandeService {
@@ -27,10 +31,14 @@ public class CommandeService {
 	@Autowired
 	private Validator validator;
 	
+	@Autowired
+	private LigneCommandeRepository ligneCommandeRepository;
+	
 	public void save(Commande commande) {
 		Set<ConstraintViolation<Commande>> violations = validator.validate(commande);
 		if (violations.isEmpty()) {
 			commandeRepository.save(commande);
+			ligneCommandeRepository.saveAll(commande.getLignesCommandes());
 		} else {
 			throw new CommandeException();
 		}
@@ -43,6 +51,7 @@ public class CommandeService {
 
 	public void delete(Commande commande) {
 		Commande commandeEnBase = commandeRepository.findById(commande.getNumero()).orElseThrow(CommandeException::new);
+		ligneCommandeRepository.deleteByCommande(commandeEnBase);
 		commandeRepository.delete(commandeEnBase);
 	}
 
