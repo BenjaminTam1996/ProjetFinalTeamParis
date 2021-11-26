@@ -11,6 +11,10 @@ import org.springframework.stereotype.Service;
 import siteMusifan.entity.Artiste;
 import siteMusifan.exceptions.ArtisteException;
 import siteMusifan.repositories.ArtisteRepository;
+import siteMusifan.repositories.LigneAlbumRepository;
+import siteMusifan.repositories.LigneConcertRepository;
+import siteMusifan.repositories.LigneUtilisateurRepository;
+import siteMusifan.repositories.PublicationRepository;
 
 @Service
 public class ArtisteService {
@@ -21,38 +25,40 @@ public class ArtisteService {
 	@Autowired
 	private Validator validator;
 	
-//	@Autowired
-//	private PublicationRepository publicationRepository;
-//	
-//	@Autowired
-//	private LigneConcertRepository ligneConcertRepository;
-//	
-//	@Autowired
-//	private LigneAlbumRepository ligneAlbumRepository;
-//	
-//	@Autowired
-//	private LigneUtilisateurRepository ligneUtilisateurRepository;
-//	
+	@Autowired
+	private PublicationRepository publicationRepository;
+	
+	@Autowired
+	private LigneConcertRepository ligneConcertRepository;
+	
+	@Autowired
+	private LigneAlbumRepository ligneAlbumRepository;
+
+	@Autowired
+	private LigneUtilisateurRepository ligneUtilisateurRepository;
+	
 	public void save(Artiste artiste) {
 		Set<ConstraintViolation<Artiste>> violations = validator.validate(artiste);
 		if (violations.isEmpty()) {
 			artisteRepository.save(artiste);
 			
-			//Voir comment faire update artise !!
+			ligneConcertRepository.saveAll(artiste.getLigneConcerts());
+			ligneAlbumRepository.saveAll(artiste.getLignesAlbums());
+			publicationRepository.saveAll(artiste.getPublications());
 			
 		} else {
 			throw new ArtisteException();
 		}
 		
 	}
-//	
-//	public void delete(Artiste artiste) {
-//		ligneUtilisateurRepository.deleteByArtiste(artiste);
-//		//ligneAlbumRepository.deleteByArtiste(artiste);
+	
+	public void delete(Artiste artiste) {
+		ligneUtilisateurRepository.deleteByArtiste(artiste);
+		//ligneAlbumRepository.deleteByArtiste(artiste);
 //		ligneConcertRepository.deleteByArtiste(artiste);
-//		//publicationRepository.deleteByArtiste(artiste);
-//		artisteRepository.delete(artiste);
-//	}
+		//publicationRepository.deleteByArtiste(artiste);
+		artisteRepository.delete(artiste);
+	}
 	
 	public Artiste byId(Long id) {
 		return artisteRepository.findById(id).orElseThrow(ArtisteException::new);
@@ -66,14 +72,14 @@ public class ArtisteService {
 //	public Artiste byKeyWithUtilisateur(Long key) {
 //		return artisteRepository.byKeyWithUtilisateurs(key).orElseThrow(ArtisteException::new);
 //	}
-//	
-//	public Artiste byKeyWithAlbums(Long key) {
-//		return artisteRepository.byKeyWithAlbums(key).orElseThrow(ArtisteException::new);
-//	}
-//	
-//	public Artiste byKeyWithConcerts(Long key) {
-//		return artisteRepository.byKeyWithConcerts(key).orElseThrow(ArtisteException::new);
-//	}
+	
+	public Artiste byKeyWithAlbums(Long key) {
+		return artisteRepository.byKeyWithAlbums(key).orElseThrow(ArtisteException::new);
+	}
+	
+	public Artiste byKeyWithConcerts(Long key) {
+		return artisteRepository.byKeyWithConcerts(key).orElseThrow(ArtisteException::new);
+	}
 //	
 //	public Artiste byKeyWithPublications(Long key) {
 //		return artisteRepository.byKeyWithPublications(key).orElseThrow(ArtisteException::new);

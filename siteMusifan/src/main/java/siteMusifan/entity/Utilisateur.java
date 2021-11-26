@@ -36,9 +36,8 @@ public class Utilisateur extends Compte{
 	@Column(name="utilisateur_pseudo")
 	private String pseudo;
 	
-	@OneToMany
-	@Column(name="utilisateur_liste_concert")
-	private List<Commande> listeConcert;
+	@OneToMany(mappedBy = "utilisateur")
+	private Set<Commande> listeConcert = new HashSet<Commande>();
 	
 	@OneToMany(mappedBy = "id.utilisateur")
 	private Set<LigneUtilisateur> lignesUtilisateurs = new HashSet<LigneUtilisateur>();
@@ -63,11 +62,11 @@ public class Utilisateur extends Compte{
 		this.pseudo = pseudo;
 	}
 
-	public List<Commande> getListeConcert() {
+	public Set<Commande> getListeConcert() {
 		return listeConcert;
 	}
 
-	public void setListeConcert(List<Commande> listeConcert) {
+	public void setListeConcert(Set<Commande> listeConcert) {
 		this.listeConcert = listeConcert;
 	}
 
@@ -82,6 +81,11 @@ public class Utilisateur extends Compte{
 	//Ajouter un artiste a la liste d'artise like par un utilisateur
 	public void addArtiste(Artiste artiste) {
 		lignesUtilisateurs.add(new LigneUtilisateur(new LigneUtilisateurPk(this, artiste)));
+	}
+
+	//Ajouter une a la liste de commande d'un utilisateur
+	public void addCommande(Commande commande) {
+		listeConcert.add(new Commande(this));
 	}
 	
 }

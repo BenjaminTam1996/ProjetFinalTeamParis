@@ -1,8 +1,10 @@
 package siteMusifan;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,9 +16,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import siteMusifan.config.AppConfig;
 import siteMusifan.entity.Artiste;
+import siteMusifan.entity.Commande;
+import siteMusifan.entity.Concert;
 import siteMusifan.entity.Utilisateur;
 import siteMusifan.exceptions.UtilisateurException;
 import siteMusifan.services.ArtisteService;
+import siteMusifan.services.CommandeService;
+import siteMusifan.services.ConcertService;
 import siteMusifan.services.UtilisateurService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -30,6 +36,12 @@ public class UtilisateurServiceTest {
 	
 	@Autowired
 	private ArtisteService artisteService;
+	
+	@Autowired
+	private ConcertService concertService;
+	
+	@Autowired
+	private CommandeService commandeService;
 	
 	private Utilisateur getUtilisateur() {
 		Utilisateur utilisateur = new Utilisateur("nomTest","prenomTest");
@@ -52,15 +64,6 @@ public class UtilisateurServiceTest {
 		assertNotNull(utilisateurService.byId(utilisateur.getId()));
 	}
 	
-	@Test
-	public void testUpdate() {
-		Utilisateur utilisateur = getUtilisateurWithArtiste();
-		utilisateurService.save(utilisateur);
-		assertNotNull(utilisateurService.byId(utilisateur.getId()).getLignesUtilisateurs());
-		Utilisateur utilisateurEnBase = utilisateurService.byId(utilisateur.getId());
-		assertSame( utilisateur.getLignesUtilisateurs(), utilisateurEnBase.getLignesUtilisateurs());
-	}
-
 	@Test(expected=UtilisateurException.class)
 	public void testDelete() {
 		Utilisateur utilisateur = getUtilisateur();
@@ -84,19 +87,69 @@ public class UtilisateurServiceTest {
 	public void testByKeyWithArtistes() {
 		Utilisateur utilisateur = getUtilisateurWithArtiste();
 		utilisateurService.save(utilisateur);
-		assertNotNull(utilisateurService.byKeyWithArtistes(utilisateur.getId()));
 		Utilisateur utilisateurEnBase = utilisateurService.byKeyWithArtistes(utilisateur.getId());
+		assertNotNull(utilisateurEnBase);
 		assertSame( utilisateur.getLignesUtilisateurs(), utilisateurEnBase.getLignesUtilisateurs());
+		assertFalse(utilisateurEnBase.getLignesUtilisateurs().isEmpty());
 	}
 
+	
+	
+	@Test
+	public void testByKeyWithArtistesFail() {
+		Utilisateur utilisateur = getUtilisateur();
+		utilisateurService.save(utilisateur);
+		Utilisateur utilisateurEnBase = utilisateurService.byKeyWithArtistes(utilisateur.getId());
+		assertTrue(utilisateurEnBase.getLignesUtilisateurs().isEmpty());
+	}
+	
 	@Test
 	public void testByKeyWithCommandes() {
+		Utilisateur utilisateur = getUtilisateur();
+		Commande commande = new Commande(utilisateur);
+		Concert concert = new Concert();
+		concertService.save(concert);
+		commande.addProduit(concert, 2);
+		utilisateur.addCommande(commande);
+		utilisateurService.save(utilisateur);
+		commandeService.save(commande);
+
 		
+		Utilisateur utilisateurEnBase = utilisateurService.byKeyWithCommandes(utilisateur.getId());
+//		Utilisateur utilisateurEnBase = utilisateurService.byKeyWithCommandes(100L);
+		assertFalse(utilisateurEnBase.getListeConcert().isEmpty());
+		assertSame(utilisateur.getListeConcert(), utilisateurEnBase.getListeConcert());
+	}
+	
+	@Test
+	public void testByKeyWithCommandesFail() {
+		Utilisateur utilisateur = getUtilisateur();
+		utilisateurService.save(utilisateur);
+		Utilisateur utilisateurEnBase = utilisateurService.byKeyWithCommandes(utilisateur.getId());
+		assertTrue(utilisateurEnBase.getListeConcert().isEmpty());
 	}
 	
 	@Test
 	public void testByKeyWithCommandesAndArtistes() {
-		
+		Utilisateur utilisateur = getUtilisateur();
+		Commande commande = new Commande(utilisateur);
+		Artiste artiste = new Artiste("artisteAvecUnNom", "artisteAvecUnPrenom");
+		artisteService.save(artiste);
+		utilisateur.addCommande(commande);
+		utilisateur.addArtiste(artiste);
+		utilisateurService.save(utilisateur);
+		commandeService.save(commande);
+
+		Utilisateur utilisateurEnBase = utilisateurService.byKeyWithCommandesAndArtistes(utilisateur.getId());
+//		Utilisateur utilisateurEnBase = utilisateurService.byKeyWithCommandesAndArtistes(100L);
+		assertFalse(utilisateurEnBase.getLignesUtilisateurs().isEmpty() && utilisateurEnBase.getListeConcert().isEmpty());		
 	}
 
+	@Test
+	public void testByKeyWithCommandesAndArtistesFail() {
+		Utilisateur utilisateur = getUtilisateur();
+		utilisateurService.save(utilisateur);
+		Utilisateur utilisateurEnBase = utilisateurService.byKeyWithCommandesAndArtistes(utilisateur.getId());
+		assertTrue(utilisateurEnBase.getListeConcert().isEmpty() && utilisateurEnBase.getLignesUtilisateurs().isEmpty());
+	}
 }

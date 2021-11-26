@@ -47,7 +47,7 @@ public class Artiste extends Compte {
 	private String description;
 	
 	@OneToMany(mappedBy = "artiste", fetch = FetchType.LAZY)
-	private Set<Publication> publications;
+	private Set<Publication> publications = new HashSet<Publication>();
 	
 	@OneToMany(mappedBy = "id.artiste")
 	private Set<LigneAlbum> lignesAlbums = new HashSet<LigneAlbum>();
@@ -125,5 +125,19 @@ public class Artiste extends Compte {
 	public void setLigneConcerts(Set<LigneConcert> ligneConcerts) {
 		this.ligneConcerts = ligneConcerts;
 	}
+
+	//Ajouter un concert a la liste de concert d'un artiste
+	public void addConcert(Concert concert) {
+		ligneConcerts.add(new LigneConcert(new LigneConcertPK(concert, this)));
+	}
 	
+	//Ajouter un album a la liste d'album d'un artiste
+	public void addAlbum(Album album) {
+		lignesAlbums.add(new LigneAlbum(new LigneAlbumPK(album, this)));
+	}
+	
+	//Ajouter une publication a la liste de publication d'un artiste
+//	public void addPublication(Publication publication) {
+//		publications.add(new Publication());
+//	}
 }
