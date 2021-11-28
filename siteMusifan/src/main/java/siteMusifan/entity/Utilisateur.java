@@ -1,7 +1,6 @@
 package siteMusifan.entity;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.AttributeOverride;
@@ -14,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @AttributeOverrides({
 	@AttributeOverride(name = "id", column = @Column(name="utilisateur_id")),
@@ -23,6 +24,9 @@ import javax.persistence.Table;
 	@AttributeOverride(name = "prenom", column = @Column(name = "utilisateur_prenom")),
 	@AttributeOverride(name = "telephone", column = @Column(name = "utilisateur_telephone")),
 	@AttributeOverride(name = "photoProfil", column = @Column(name = "utilisateur_photo_profil")),
+	//////////////////////////////
+	@AttributeOverride(name = "version", column = @Column(name = "utilisateur_version")),
+	//////////////////////////////
 })
 @NamedQueries({
 	@NamedQuery(name="Utilisateur.byKeyWithArtistes",
@@ -34,12 +38,15 @@ import javax.persistence.Table;
 @SequenceGenerator(name = "seqCompte", sequenceName = "seq_utilisateur", initialValue = 100, allocationSize = 1)
 public class Utilisateur extends Compte{
 	@Column(name="utilisateur_pseudo")
+	@JsonView({JsonViews.Common.class,})
 	private String pseudo;
 	
 	@OneToMany(mappedBy = "utilisateur")
+	@JsonView({JsonViews.UtilisateurAvecCommandes.class,})
 	private Set<Commande> listeConcert = new HashSet<Commande>();
 	
 	@OneToMany(mappedBy = "id.utilisateur")
+	@JsonView({JsonViews.UtilisateurAvecArtiste.class,})
 	private Set<LigneUtilisateur> lignesUtilisateurs = new HashSet<LigneUtilisateur>();
 
 	public Utilisateur() {

@@ -6,11 +6,14 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 
 @Entity
 @Table(name = "ligne_concert")
 public class LigneConcert {
 		@EmbeddedId
+		@JsonView(JsonViews.ArtisteComplet.class)
 		private LigneConcertPK id;
 		
 		public LigneConcert() {

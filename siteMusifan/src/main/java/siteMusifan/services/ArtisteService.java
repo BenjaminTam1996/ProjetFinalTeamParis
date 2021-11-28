@@ -1,5 +1,6 @@
 package siteMusifan.services;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -37,14 +38,12 @@ public class ArtisteService {
 	@Autowired
 	private LigneUtilisateurRepository ligneUtilisateurRepository;
 	
-	public void save(Artiste artiste) {
+	public Artiste save(Artiste artiste) {
 		Set<ConstraintViolation<Artiste>> violations = validator.validate(artiste);
 		if (violations.isEmpty()) {
-			artisteRepository.save(artiste);
-			
-			
-			ligneAlbumRepository.saveAll(artiste.getLignesAlbums());
-			publicationRepository.saveAll(artiste.getPublications());
+			return artisteRepository.save(artiste);
+//			ligneAlbumRepository.saveAll(artiste.getLignesAlbums());
+//			publicationRepository.saveAll(artiste.getPublications());
 			
 		} else {
 			throw new ArtisteException();
@@ -60,18 +59,23 @@ public class ArtisteService {
 		artisteRepository.delete(artiste);
 	}
 	
+	public void delete(Long id) {
+		delete(artisteRepository.findById(id).orElseThrow(ArtisteException::new));
+	}
+	
 	public Artiste byId(Long id) {
 		return artisteRepository.findById(id).orElseThrow(ArtisteException::new);
 	}
 	
+	public List<Artiste> allArtiste() {
+		return artisteRepository.findAll();
+	}
+	
 	//Remonter un artiste complet avec : ses albums, ses concerts, ses publications et ses utilisateurs
-//	public Artiste byKeyWithAlbumsAndConcertsAndPublicationsAndUtilisateurs(Long id) {
-//		return artisteRepository.findByKeyWithAlbumsAndConcertsAndPublicationsAndUtilisateurs(id).orElseThrow(ArtisteException::new);
-//	}
-//	
-//	public Artiste byKeyWithUtilisateur(Long key) {
-//		return artisteRepository.byKeyWithUtilisateurs(key).orElseThrow(ArtisteException::new);
-//	}
+	public Artiste byKeyWithArtisteComplet(Long id) {
+		return artisteRepository.findByKeyWithArtisteComplet(id).orElseThrow(ArtisteException::new);
+	}
+	
 	
 	public Artiste byKeyWithAlbums(Long key) {
 		return artisteRepository.byKeyWithAlbums(key).orElseThrow(ArtisteException::new);
@@ -80,13 +84,21 @@ public class ArtisteService {
 	public Artiste byKeyWithConcerts(Long key) {
 		return artisteRepository.byKeyWithConcerts(key).orElseThrow(ArtisteException::new);
 	}
-//	
-//	public Artiste byKeyWithPublications(Long key) {
-//		return artisteRepository.byKeyWithPublications(key).orElseThrow(ArtisteException::new);
-//	}
-//	
-//	public List<Artiste> byNomArtisteContainingIgnoreCase(String nom) {
-//		return artisteRepository.findByNomArtisteContainingIgnoreCase(nom);
-//	}
+	
+	public Artiste byKeyWithPublications(Long key) {
+		return artisteRepository.byKeyWithPublications(key).orElseThrow(ArtisteException::new);
+	}
+	
+	public List<Artiste> byNomArtisteContainingIgnoreCase(String nom) {
+		return artisteRepository.findByNomArtisteContainingIgnoreCase(nom);
+	}
+
+	public List<Artiste> byNomArtisteIgnoreCase(String nom){
+		return artisteRepository.findByNomArtisteIgnoreCase(nom);
+	}
+	
+	public List<Artiste> byNomArtisteLikeIgnoreCase(String nom){
+		return artisteRepository.findByNomArtisteLikeIgnoreCase(nom);
+	}
 	
 }

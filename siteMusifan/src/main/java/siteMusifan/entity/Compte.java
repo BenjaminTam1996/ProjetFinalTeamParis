@@ -6,28 +6,43 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Version;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
+
+import com.fasterxml.jackson.annotation.JsonView;
 
 @MappedSuperclass
 public class Compte {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqCompte")
+	@JsonView({JsonViews.Common.class,})
 	private Long id;
 	
 	@Email
+	@JsonView({JsonViews.Common.class,})
 	private String mail;
 	
+	@JsonView({JsonViews.Common.class,})
 	private String password;
 	
+	@JsonView({JsonViews.Common.class,})
 	private String nom;
 	
+	@JsonView({JsonViews.Common.class,})
 	private String prenom;
 	
 	@Pattern(regexp = "^(0|\\+33 )[1-9]([-. ]?[0-9]{2} ){3}([-. ]?[0-9]{2})$")
+	@JsonView({JsonViews.Common.class,})
 	private String telephone;
 	
+	@JsonView({JsonViews.Common.class,})
 	private Byte[] photoProfil;
+	
+	//////////////////////////////
+	@Version
+	private int version;
+	//////////////////////////////
 	
 	public Compte() {
 		

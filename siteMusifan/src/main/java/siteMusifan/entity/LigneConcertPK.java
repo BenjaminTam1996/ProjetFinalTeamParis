@@ -8,11 +8,14 @@ import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 
 @Embeddable
 public class LigneConcertPK implements Serializable{
 		@ManyToOne
 		@JoinColumn(name = "ligne_concert_concert_id", foreignKey = @ForeignKey(name = "ligne_concert_concert_id_fk"))
+		@JsonView(JsonViews.ArtisteComplet.class)
 		private Concert concert;
 		@ManyToOne
 		@JoinColumn(name = "ligne_concert_artiste_id", foreignKey = @ForeignKey(name = "ligne_concert_artiste_id_fk"))

@@ -8,6 +8,8 @@ import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Embeddable
 public class LigneUtilisateurPk implements Serializable {
 	@ManyToOne
@@ -16,6 +18,7 @@ public class LigneUtilisateurPk implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="ligne_utilisateur_artiste_id", foreignKey = @ForeignKey(name="ligne_utilisateur_artiste_id_fk"))
+	@JsonView({JsonViews.UtilisateurAvecArtiste.class,})
 	private Artiste artiste;
 	
 	public LigneUtilisateurPk() {

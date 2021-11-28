@@ -8,11 +8,14 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 
 @Entity
 @Table(name = "ligne_album")
 public class LigneAlbum {
 	@EmbeddedId
+	@JsonView(JsonViews.ArtisteComplet.class)
 	private LigneAlbumPK id;
 	
 	public LigneAlbum() {

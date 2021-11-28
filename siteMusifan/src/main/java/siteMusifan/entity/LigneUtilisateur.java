@@ -6,10 +6,13 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name="ligne_utilisateur")
 public class LigneUtilisateur {
 	@EmbeddedId
+	@JsonView({JsonViews.UtilisateurAvecArtiste.class,})
 	private LigneUtilisateurPk id;
 	
 	public LigneUtilisateur() {

@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @AttributeOverrides({
 	@AttributeOverride(name = "id", column = @Column(name="artiste_id")),
@@ -23,6 +25,9 @@ import javax.persistence.Table;
 	@AttributeOverride(name = "prenom", column = @Column(name = "artiste_prenom")),
 	@AttributeOverride(name = "telephone", column = @Column(name = "artiste_telephone")),
 	@AttributeOverride(name = "photoProfil", column = @Column(name = "artiste_photo_profil")),
+	//////////////////////////////
+	@AttributeOverride(name = "version", column = @Column(name = "artiste_version")),
+	//////////////////////////////
 })
 @NamedQueries({
 	@NamedQuery(name="Artiste.byKeyWithUtilisateurs",
@@ -38,26 +43,32 @@ import javax.persistence.Table;
 @SequenceGenerator(name="seqCompte", sequenceName = "seq_artiste", initialValue = 100, allocationSize = 1)
 public class Artiste extends Compte {
 	@Column(name="artiste_nom_atiste")
+	@JsonView({JsonViews.Common.class,})
 	private String nomArtiste;
 	
 	@Column(name="artiste_photo_banniere")
+	@JsonView({JsonViews.Common.class,})
 	private Byte[] photoBanniere;
 	
 	@Column(name="artiste_description")
+	@JsonView({JsonViews.Common.class,})
 	private String description;
 	
 	@OneToMany(mappedBy = "artiste", fetch = FetchType.LAZY)
+//	@JsonView({JsonViews.UtilisateurAvecPublicationsArtiste.class, JsonViews.ArtisteComplet.class})	
 	private Set<Publication> publications = new HashSet<Publication>();
 	
 	@OneToMany(mappedBy = "id.artiste")
+	@JsonView(JsonViews.ArtisteComplet.class)
 	private Set<LigneAlbum> lignesAlbums = new HashSet<LigneAlbum>();
 	
 	@OneToMany(mappedBy = "id.artiste")
 	private Set<LigneUtilisateur> lignesUtilisateurs = new HashSet<LigneUtilisateur>();
 	
 	@OneToMany(mappedBy = "id.artiste")
+//	@JsonView(JsonViews.ArtisteComplet.class)
 	private Set<LigneConcert> ligneConcerts = new HashSet<LigneConcert>();
-	
+		
 	public Artiste() {
 		
 	}
@@ -132,7 +143,7 @@ public class Artiste extends Compte {
 	}
 	
 	//Ajouter une publication a la liste de publication d'un artiste
-//	public void addPublication(Publication publication) {
-//		publications.add(new Publication());
-//	}
+	public void addPublication(Publication publication) {
+		publications.add(new Publication("une publication", this));
+	}
 }

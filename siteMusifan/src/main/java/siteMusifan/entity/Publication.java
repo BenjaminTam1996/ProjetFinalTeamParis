@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name="publication")
 @SequenceGenerator(name ="seqPublication",sequenceName ="seq_publication",allocationSize = 1,initialValue =100)
@@ -22,17 +24,21 @@ public class Publication {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "seqPublication")	
 	@Column(name="publication_id")
+	@JsonView({JsonViews.Common.class,})
 	private Long id;
 	
 	@Column(name="publication_description")
 	@Lob
+	@JsonView({JsonViews.Common.class,})
 	private String desciption;
 	
 	@Column(name="publication_image")
 	@Lob
+	@JsonView({JsonViews.Common.class,})
 	private byte[] image;
 	
 	@Column(name="publication_date")
+	@JsonView({JsonViews.Common.class,})
 	private LocalDate date = LocalDate.now();
 	
 	@ManyToOne

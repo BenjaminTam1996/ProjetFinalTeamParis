@@ -8,6 +8,7 @@ import javax.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import siteMusifan.entity.Artiste;
 import siteMusifan.entity.Utilisateur;
 import siteMusifan.exceptions.UtilisateurException;
 import siteMusifan.repositories.LigneUtilisateurRepository;
@@ -26,12 +27,14 @@ public class UtilisateurService {
 	private LigneUtilisateurRepository ligneUtilisateurRepository;
 	
 	//Creation et edition d'un utilisateur
-	public void save(Utilisateur utilisateur) {
+	public Utilisateur save(Utilisateur utilisateur) {
 		Set<ConstraintViolation<Utilisateur>> violations = validator.validate(utilisateur);
 		if(violations.isEmpty()) {
 			utilisateurRepository.save(utilisateur);
-			ligneUtilisateurRepository.saveAll(utilisateur.getLignesUtilisateurs());				
+			ligneUtilisateurRepository.saveAll(utilisateur.getLignesUtilisateurs());
+			return utilisateur;
 		} else {
+			System.out.println(violations);
 			throw new UtilisateurException();
 		}
 	}
@@ -43,6 +46,14 @@ public class UtilisateurService {
 		ligneUtilisateurRepository.deleteByUtilisateur(utilisateurEnBase);
 		//Suppression de l'utilisateur
 		utilisateurRepository.delete(utilisateurEnBase);
+	}
+	
+	public void delete(Long id) {
+		delete(utilisateurRepository.findById(id).orElseThrow(UtilisateurException::new));
+	}
+	
+	public void deleteLigneUtilisateurByUtilisateur(Utilisateur utilisateur, Artiste artiste) {
+		ligneUtilisateurRepository.deleteByArtisteAndUtilisateur(artiste, utilisateur);
 	}
 	
 	//Obtenir le utilisateur complet avec : sa liste de concert et sa liste d'artiste

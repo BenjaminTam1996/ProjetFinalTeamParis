@@ -13,5 +13,21 @@ public class JsonViews {
 		
 	}
 	
+	public static class UtilisateurAvecArtiste extends Common {
+		
+	}
+	
+	public static class UtilisateurAvecPublicationsArtiste extends UtilisateurAvecArtiste {
+		
+	}
+	
+	public static class UtilisateurAvecCommandes extends Common {
+		
+	}
+	
+	public static class ArtisteComplet extends Common {
+		
+	}
+	
 }
 

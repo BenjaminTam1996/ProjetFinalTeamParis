@@ -18,6 +18,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 
 @Entity
 @Table(name = "commande")
@@ -29,8 +31,10 @@ public class Commande {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqCommande")
 	@Column(name = "commande_numero")
+	@JsonView({JsonViews.Common.class,})
 	private Long numero;
 	@Column(name = "commande_date")
+	@JsonView({JsonViews.Common.class,})
 	private LocalDate date = LocalDate.now();
 	@ManyToOne
 	@JoinColumn(name = "commande_utilisateur_id", foreignKey = @ForeignKey(name = "commande_utilisateur_id_fk"))

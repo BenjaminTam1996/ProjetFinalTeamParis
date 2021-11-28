@@ -17,6 +17,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "album")
 @NamedQueries({
@@ -28,12 +30,16 @@ public class Album {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqAlbum")
 	@Column(name = "album_id")
+	@JsonView(JsonViews.Common.class)
 	private Long id;
 	@Column(name = "album_titre")
+	@JsonView(JsonViews.Common.class)
 	private String titre;
 	@Column(name = "album_date")
+	@JsonView(JsonViews.Common.class)
 	private LocalDate date = LocalDate.now();
 	@Column(name = "album_photo")
+	@JsonView(JsonViews.Common.class)
 	private Byte photo;
 	
 	@OneToMany(mappedBy = "album", fetch = FetchType.LAZY)
