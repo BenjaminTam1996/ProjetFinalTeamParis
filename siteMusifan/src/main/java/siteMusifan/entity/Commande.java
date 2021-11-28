@@ -40,6 +40,7 @@ public class Commande {
 	@JoinColumn(name = "commande_utilisateur_id", foreignKey = @ForeignKey(name = "commande_utilisateur_id_fk"))
 	private Utilisateur utilisateur;
 	@OneToMany(mappedBy = "id.commande")
+	@JsonView({JsonViews.UtilisateurAvecCommandes.class,})
 	private Set<LigneCommande> lignesCommandes = new HashSet<LigneCommande>();
 
 	public Commande() {

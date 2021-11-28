@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import siteMusifan.entity.Commande;
 import siteMusifan.entity.JsonViews;
 import siteMusifan.entity.Utilisateur;
 import siteMusifan.services.CommandeService;
@@ -66,7 +67,8 @@ public class UtilisateurRestController {
 ////		Utilisateur utilisateurEnBase = utilisateurService.byKeyWithCommandes(id);
 ////		utilisateurEnBase.getListeConcert().forEach(lc -> {
 ////			lc.getLignesCommandes().forEach(c -> {
-////				Commande commandeEnBase = commandeService.byKeyWithConcerts(c.getId().getCommande().getNumero());
+////				Commande commande = commandeService.byKeyWithConcerts(c.getId().getCommande().getNumero());
+////				utilisateurEnBase.addCommande(commande);
 ////			});
 ////		});
 ////		return utilisateurEnBase;

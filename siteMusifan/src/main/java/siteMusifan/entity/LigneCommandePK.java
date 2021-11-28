@@ -7,6 +7,8 @@ import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 
 @Embeddable
 public class LigneCommandePK implements Serializable {
@@ -15,6 +17,7 @@ public class LigneCommandePK implements Serializable {
 	private Commande commande;
 	@ManyToOne
 	@JoinColumn(name = "ligne_commande_concert_id", foreignKey = @ForeignKey(name = "ligne_concert_produit_id_fk"))
+	@JsonView({JsonViews.UtilisateurAvecCommandes.class,})
 	private Concert concert;
 
 	public LigneCommandePK() {

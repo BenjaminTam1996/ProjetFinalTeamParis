@@ -5,12 +5,15 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 
 
 @Entity
 @Table(name = "ligne_commande")
 public class LigneCommande {
 	@EmbeddedId
+	@JsonView({JsonViews.UtilisateurAvecCommandes.class,})
 	private LigneCommandePK id;
 	@Column(name = "ligne_commande_quantite", nullable = false)
 	private int quantite;
