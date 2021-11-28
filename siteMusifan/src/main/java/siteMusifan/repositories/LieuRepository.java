@@ -1,8 +1,11 @@
 package siteMusifan.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import siteMusifan.entity.Lieu;
 
@@ -34,5 +37,8 @@ public interface LieuRepository extends JpaRepository<Lieu, Long>{
 	
 	
 	List<Lieu> findByPaysContainingIgnoreCase(String pays);		//Recherche contenant "lettre recherchées" pays
+	
+	@Query("select l from Lieu l left join fetch l.listeConcerts where l.id =:id")
+	Optional<Lieu> findByIdWithConcert(@Param("id") Long Id);
 	
 }

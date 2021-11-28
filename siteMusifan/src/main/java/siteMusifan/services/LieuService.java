@@ -47,7 +47,7 @@ public class LieuService {
 	}
 	
 	public Lieu byId(Long id) {
-		return lieuRepository.findById(id).orElseThrow(LieuException::new);
+		return lieuRepository.findByIdWithConcert(id).orElseThrow(LieuException::new);
 	}
 	
 	public List<Lieu> ByNomIgnoreCase(String nom) {

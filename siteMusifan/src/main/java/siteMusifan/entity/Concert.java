@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -36,6 +37,7 @@ public class Concert {
 	private LocalDate date = LocalDate.now();
 	@ManyToOne
 	@JoinColumn(name = "concert_lieu_id", foreignKey = @ForeignKey(name = "concert_lieu_id_fk"))
+	@JsonView({JsonViews.ConcertAvecLieu.class,})
 	private Lieu lieu;
 	@Column(name = "concert_nbPlace")
 	@JsonView({JsonViews.Common.class,})
@@ -43,6 +45,11 @@ public class Concert {
 	@Column(name = "concert_prix")
 	@JsonView({JsonViews.Common.class,})
 	private int prix;
+	
+	@Version
+	@Column(name="concert_version")
+	private int version;
+	
 	@OneToMany(mappedBy = "id.concert")
 	private Set<LigneCommande> lignesCommandes;
 
@@ -53,8 +60,6 @@ public class Concert {
 
 	}
 	
-	
-
 	public Concert(String nom, LocalDate date, Lieu lieu, int nbPlace, int prix) {
 		this.nom = nom;
 		this.date = date;
@@ -63,7 +68,12 @@ public class Concert {
 		this.prix = prix;
 	}
 
-
+	public Concert(String nom, LocalDate date, int nbPlace, int prix) {
+		this.nom = nom;
+		this.date = date;
+		this.nbPlace = nbPlace;
+		this.prix = prix;
+	}
 
 	public Long getId() {
 		return id;
@@ -111,6 +121,14 @@ public class Concert {
 
 	public void setPrix(int prix) {
 		this.prix = prix;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
 	}
 
 	public Set<LigneCommande> getLignesCommandes() {

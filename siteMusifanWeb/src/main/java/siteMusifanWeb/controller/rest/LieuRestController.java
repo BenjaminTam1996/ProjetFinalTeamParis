@@ -21,52 +21,40 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import siteMusifan.entity.Concert;
 import siteMusifan.entity.JsonViews;
-import siteMusifan.services.ConcertService;
+import siteMusifan.entity.Lieu;
+import siteMusifan.services.LieuService;
 
 @RestController
-@RequestMapping("/api/concert")
-public class ConcertRestController {
+@RequestMapping("/api/lieu")
+public class LieuRestController {
 
 	@Autowired
-	private ConcertService concertService;
+	private LieuService lieuService;
 	
 	@GetMapping("")	
-	@JsonView({JsonViews.ConcertAvecLieu.class,})
-	public List<Concert> all(){
-		return concertService.allConcert();
+	@JsonView({JsonViews.Common.class,})
+	public List<Lieu> all(){
+		return lieuService.allLieu();
 	}
 	
 	@GetMapping("/{id}")
-	@JsonView({JsonViews.ConcertAvecLieu.class,})
-	public Concert byId(@PathVariable("id") Long id) {
-		return concertService.byId(id);
+	@JsonView(JsonViews.LieuAvecConcert.class)
+	public Lieu byId(@PathVariable("id") Long id) {
+		return lieuService.byId(id);
 	}
 	
 	@PostMapping("")
 	@ResponseStatus(code = HttpStatus.CREATED)
-	@JsonView({JsonViews.ConcertAvecLieu.class,})
-	public Concert create(@Valid @RequestBody Concert concert,BindingResult br) {
-		concertService.save(concert);
-		return concert;
-	}
-	
-	@PutMapping("/{id}")
-	@JsonView({JsonViews.ConcertAvecLieu.class,})
-	public Concert update(@PathVariable("id") Long id,@Valid @RequestBody Concert concert,BindingResult br) {
-		//On remonte le client en bdd pour récuperer sa bonne version
-		Concert concertEnBase = concertService.byId(id);
-		concertEnBase.setDate(concert.getDate());
-		concertEnBase.setLieu(concert.getLieu());
-		concertEnBase.setNbPlace(concert.getNbPlace());
-		concertEnBase.setNom(concert.getNom());
-		concertEnBase.setPrix(concert.getPrix());
-		concertService.save(concert);
-		return concert;
+	@JsonView(JsonViews.Common.class)
+	public Lieu create(@Valid @RequestBody Lieu lieu,BindingResult br) {
+		lieuService.save(lieu);
+		return lieu;
 	}
 	
 	@DeleteMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable("id") Long id) {
-		concertService.delete(concertService.byId(id));
+		lieuService.delete(lieuService.byId(id));
 	}
+	
 }

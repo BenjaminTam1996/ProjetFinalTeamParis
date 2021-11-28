@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 
 import org.junit.Test;
@@ -15,8 +17,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import siteMusifan.config.AppConfig;
+import siteMusifan.entity.Concert;
 import siteMusifan.entity.Lieu;
 import siteMusifan.exceptions.LieuException;
+import siteMusifan.services.ConcertService;
 import siteMusifan.services.LieuService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -28,13 +32,17 @@ public class LieuServiceTest {
 	@Autowired
 	private LieuService lieuService;
 	
+	@Autowired
+	private ConcertService concertService;
+	
 	private Lieu getLieu() {
 		Lieu lieu = new Lieu("AccorHotels Arena","8","Boulevard de Bercy","75012","Paris","France");
 		return lieu;
 	}
 	
-	private Lieu getLieu2(String nom,String numeroRue,String rue,String codePostal,String ville,String pays) {
-		return new Lieu(nom, numeroRue, rue, codePostal, ville, pays);
+	private Concert getConcert() {
+		Concert concert = new Concert("Pardon My French",LocalDate.of(2022, Month.JULY, 21),10000,50);
+		return concert; 
 	}
 	
 	@Test
@@ -48,19 +56,27 @@ public class LieuServiceTest {
 	public void testDelete() {
 		Lieu lieu = getLieu();
 		lieuService.save(lieu);
+		Concert concert = getConcert();
+		concert.setLieu(lieu);
+		concertService.save(concert);
 		lieuService.delete(lieu);
 		assertNull(lieuService.byId(lieu.getId()));
+		assertEquals(concertService.byId(concert.getId()).getLieu(), null);
 	}
 
 	@Test
 	public void testAllLieu() {
+		Lieu lieu = getLieu();
+		lieuService.save(lieu);
 		assertNotNull(lieuService.allLieu());
-		assertEquals(lieuService.allLieu().size(), 3);
+		assertEquals(lieuService.allLieu().size(), 1);
 	}
 
 	@Test
 	public void testById() {
-		assertNotNull(lieuService.byId(116L));
+		Lieu lieu = getLieu();
+		lieuService.save(lieu);
+		assertNotNull(lieuService.byId(lieu.getId()));
 	}
 	
 	@Test(expected = LieuException.class)

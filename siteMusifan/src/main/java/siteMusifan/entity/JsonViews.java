@@ -5,16 +5,13 @@ public class JsonViews {
 		
 	}
 	
-	public static class ProduitAvecLigneCommande extends Common{
+	public static class LieuAvecConcert extends Common{
 		
 	}
 	
-	public static class CommandeAvecClient extends Common{
+	public static class ConcertAvecLieu extends Common{
 		
 	}
 	
-	public static class CommandeAvecigneCommande extends CommandeAvecClient{
-		
-	} 
 }
 

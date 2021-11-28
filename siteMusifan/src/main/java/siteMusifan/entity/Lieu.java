@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name="lieu")
 @SequenceGenerator(name ="seqLieu",sequenceName ="seq_lieu",allocationSize = 1,initialValue =100)
@@ -22,27 +24,35 @@ public class Lieu {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "seqLieu")	
 	@Column(name="lieu_id")
+	@JsonView({JsonViews.Common.class,})
 	private Long id;
 	
 	@Column(name="lieu_nom",nullable = false)
+	@JsonView({JsonViews.Common.class,})
 	private String nom;
 	
 	@Column(name="lieu_numero_rue", length = 6)
+	@JsonView({JsonViews.Common.class,})
 	private String numRue;
 	
 	@Column(name="lieu_nom_rue", length = 150)
+	@JsonView({JsonViews.Common.class,})
 	private String rue;
 	
 	@Column(name="lieu_code_postal", length = 10)
+	@JsonView({JsonViews.Common.class,})
 	private String codePostal;
 	
 	@Column(name="lieu_ville", length = 100)
+	@JsonView({JsonViews.Common.class,})
 	private String ville;
 	
 	@Column(name="lieu_pays", length = 100)
+	@JsonView({JsonViews.Common.class,})
 	private String pays;
 	
 	@OneToMany(mappedBy = "lieu", fetch = FetchType.LAZY)
+	@JsonView(JsonViews.LieuAvecConcert.class)
 	private Set<Concert> listeConcerts;
 	
 	//Constructeurs
