@@ -29,7 +29,7 @@ public interface ConcertRepository extends JpaRepository<Concert, Long> {
 	
 	List<Concert> findByLieu(Lieu lieu);
 	
-	Optional<Concert> byKeyWithArtiste(@Param("key") Long key);
+	Optional<Concert> byKeyWithArtistes(@Param("key") Long key);
 	
 	@Transactional
 	@Modifying

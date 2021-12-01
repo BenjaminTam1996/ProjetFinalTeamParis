@@ -3,29 +3,29 @@ server:
   error:
     include-message: always
   servlet:
-   context-path: /eshop
+   context-path: /musifan
    
 spring:
 #configuration datasource
   datasource:
     driver-class-name: org.postgresql.Driver
     password: postgres
-    url: jdbc:postgresql://localhost:5434/commandes
+    url: jdbc:postgresql://localhost:5432/site_musifan
     username: postgres
 ##jpa
   jpa:
     hibernate:
-     ddl-auto: update
+     ddl-auto: validate
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL10Dialect
         format_sql: true
         show_sql: false
   ##viewResolver
-  mvc:
-    view:
-      prefix: /WEB-INF/views/
-      suffix: .jsp
+#  mvc:
+#    view:
+#      prefix: /WEB-INF/views/
+#      suffix: .jsp
 
 #logging:
 #  level:

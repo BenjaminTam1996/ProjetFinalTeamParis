@@ -61,7 +61,7 @@ public class ConcertService {
 	}
 	
 	public Concert byKeyWithArtiste(Long id) {
-		return concertRepository.byKeyWithArtiste(id).orElseThrow(ArtisteException::new);
+		return concertRepository.byKeyWithArtistes(id).orElseThrow(ArtisteException::new);
 	}
 	
 	public List<Concert> ByNomIgnoreCase(String nom) {

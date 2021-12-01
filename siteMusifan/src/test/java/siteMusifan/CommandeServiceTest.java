@@ -53,8 +53,6 @@ public class CommandeServiceTest {
 	}
 	
 
-	
-
 	@Test(expected = CommandeException.class)
 	public void testDelete() {
 		Commande commande = getCommande();
