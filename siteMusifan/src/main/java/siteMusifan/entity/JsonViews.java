@@ -29,5 +29,9 @@ public class JsonViews {
 		
 	}
 	
+	public static class CommandeAvecConsert extends Common {
+		
+	}
+	
 }
 
