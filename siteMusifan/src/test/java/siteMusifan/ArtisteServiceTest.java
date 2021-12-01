@@ -1,6 +1,8 @@
 package siteMusifan;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -20,8 +22,11 @@ import org.springframework.transaction.annotation.Transactional;
 import siteMusifan.config.AppConfig;
 import siteMusifan.entity.Album;
 import siteMusifan.entity.Artiste;
+import siteMusifan.entity.Chansons;
 import siteMusifan.entity.Concert;
 import siteMusifan.entity.Lieu;
+import siteMusifan.entity.LigneAlbum;
+import siteMusifan.entity.LigneAlbumPK;
 import siteMusifan.entity.Publication;
 import siteMusifan.exceptions.ArtisteException;
 import siteMusifan.services.AlbumService;
@@ -52,9 +57,25 @@ public class ArtisteServiceTest {
 	private PublicationService publicationService;
 
 	private Artiste getArtiste() {
-		Artiste artiste = new Artiste("nomArtisteTest", "prenomArtisteTest");
-
-		return artiste;
+		Album album = new Album("After Hours",LocalDate.of(2020, Month.MARCH, 20));
+		Artiste artiste = new Artiste("The Weeknd");
+		artisteService.save(artiste);
+		album.addArtiste(artiste);
+		album.addChansons(new Chansons("Alone Again","4:10",album));
+		album.addChansons(new Chansons("Too Late","3:59",album));
+		artiste.addAlbum(album);
+		albumService.save(album);
+		Publication publication = new Publication("publication test", artiste);
+		artiste.addPublication(publication);
+		artisteService.save(artiste);
+		publicationService.save(publication);
+		Lieu lieu = new Lieu("nomTest", "20", "rueTest", "00000", "villeTest", "paysTest");
+		lieuService.save(lieu);
+		Concert concert = new Concert("Pardon My French", LocalDate.of(2022, Month.JULY, 21), lieu, 10000, 50);
+		artiste.addConcert(concert);
+		concert.addArtiste(artiste);
+		concertService.save(concert);
+		return artiste; 
 	}
 
 	@Test
@@ -70,11 +91,16 @@ public class ArtisteServiceTest {
 		artisteService.save(artiste);
 		artisteService.delete(artiste);
 		assertNull(artisteService.byId(artiste.getId()));
+//		assertEquals(albumService.byTitreLikeIgnoreCase("After Hours"), null);
+//		assertEquals(publicationService.allPublication().size(), 0);
+//		assertEquals(concertService.allConcert().size(), 0);
 	}
 
 	@Test
 	public void testById() {
-		assertNotNull(artisteService.byId(100L));
+		Artiste artiste = getArtiste();
+		artisteService.save(artiste);
+		assertNotNull(artisteService.byId(artiste.getId()));
 	}
 
 	@Test(expected = ArtisteException.class)
@@ -84,104 +110,48 @@ public class ArtisteServiceTest {
 
 	@Test
 	public void testByKeyWithAlbums() {
-		///////// A mettre si besoin de reconstruire base de donnees avant mise en commun de
-		///////// tous les tests !!!
-//		Album album = new Album();
-//		albumService.save(album);
-//		Artiste artiste = getArtiste();
-//		artiste.addAlbum(album);
-//		artisteService.save(artiste);
 
-		///////// A utiliser quand mise en commun de tous les tests !!!
-//		Artiste artiste = getArtiste();
-//		Album album = new Album();
-//		album.addArtiste(artiste);
-//		artisteService.save(artiste);
-//		albumService.save(album);
 
-		///////// A modifier quand mise en commun de tous les tests !!! mettre artiste.getId() au lieu de 182L !!!
-		Artiste artisteEnBase = artisteService.byKeyWithAlbums(117L);
+		Artiste artiste = getArtiste();
+		artisteService.save(artiste);
+
+		Artiste artisteEnBase = artisteService.byKeyWithAlbums(artiste.getId());
 		assertNotNull(artisteEnBase);
-//		assertSame(album.getLigneConcerts(), artisteEnBase.getLigneConcerts());
-
-//		System.out.println("---------------------------");
-//		System.out.println("ligneAlbum : " + artisteEnBase.getLignesAlbums());
-//		artisteEnBase.getLignesAlbums().forEach( la -> {
-//			System.out.println(la.getId().getAlbum().getId());
-//		});
-//		System.out.println("ligneAlbum : " + album.getLignesAlbums());
-//		album.getLignesAlbums().forEach( la -> {
-//			System.out.println(la.getId().getAlbum().getId());
-//		});
-		assertFalse(artisteEnBase.getLignesAlbums().isEmpty());
+		assertNotEquals(artisteEnBase.getLignesAlbums().size(), 0);
 	}
 
 
 	@Test
-	@Transactional(propagation = Propagation.NEVER)
 	public void testByKeyWithConcerts() {
-		Lieu lieu = new Lieu("nomTest", "20", "rueTest", "00000", "villeTest", "paysTest");
-		lieuService.save(lieu);
 		Artiste artiste = getArtiste();
-		Concert concert = new Concert("Pardon My French", LocalDate.of(2022, Month.JULY, 21), lieu, 10000, 50);
-		concert.addArtiste(artiste);
 		artisteService.save(artiste);
-		concertService.save(concert);
 
 		Artiste artisteEnBase = artisteService.byKeyWithConcerts(artiste.getId());
 		assertNotNull(artisteEnBase);
-//		System.out.println("ligneConcerts : " + concert.getLigneConcerts());
-//		concert.getLigneConcerts().forEach( lc -> {
-//			System.out.println(lc.getId().getConcert().getId() + " " + lc.getId().getArtiste().getId());
-//		});
-//		System.out.println("-----------------");
-//		System.out.println("ligneConcerts : " + artisteEnBase.getLigneConcerts());
-//		artisteEnBase.getLigneConcerts().forEach( lc -> {
-//			System.out.println(lc.getId().getConcert().getId() + " " + lc.getId().getArtiste().getId());
-//		});
-//		assertSame(concert.getLigneConcerts(), artisteEnBase.getLigneConcerts());
+
 		assertFalse(artisteEnBase.getLigneConcerts().isEmpty());
-//		lieuService.delete(lieu);
-//		artisteService.delete(artisteEnBase);
-//		concertService.delete(concert);
+
 		
 	}
 
 	@Test
 	public void testByKeyWithPublications() {
-//		Artiste artiste = getArtiste();
-//		Publication publication  = new Publication("", artiste);
-//		artiste.addPublication(publication);
-//		artisteService.save(artiste);
-//		publicationService.save(publication);
+		Artiste artiste = getArtiste();
+		artisteService.save(artiste);
 		
-		//////Probleme lob lors de la remonte des publications
-//		Artiste artiseEnBase = artisteService.byKeyWithPublications(artiste.getId());
-////		assertSame(artiseEnBase.getPublications(), publication.getPublications());
-//		assertFalse(artiseEnBase.getPublications().isEmpty());
+		Artiste artiseEnBase = artisteService.byKeyWithPublications(artiste.getId());
+		assertFalse(artiseEnBase.getPublications().isEmpty());
 		
 	}
 
 	@Test
 	public void testByKeyWithAlbumsAndConcertsAndPublicationsAndUtilisateurs() {
-		Lieu lieu = new Lieu("nomTestArtisteComplet", "20", "rueTestArtisteComplet", "00000", "villeTestArtisteComplet", "paysTestArtisteComplet");
-		lieuService.save(lieu);
+
 		Artiste artiste = getArtiste();
-		Concert concert = new Concert("concertTestArtisteComplet", LocalDate.of(2022, Month.JULY, 21), lieu, 10000, 50);
-		concert.addArtiste(artiste);
-		Album album = new Album();
-		artiste.addAlbum(album);
-//		album.addArtiste(artiste);
-		albumService.save(album);
-		Publication publication  = new Publication("publication test artiste complet", artiste);
-		artiste.addPublication(publication);
 		artisteService.save(artiste);
-		publicationService.save(publication);
-		concertService.save(concert);
 		
-		//////Impossible a teste du au probleme lob lors de la remonte des publications
-//		Artiste artisteEnBase = artisteService.byKeyWithArtisteComplet(artiste.getId());
-//		assertFalse(artisteEnBase.getLigneConcerts().isEmpty() && artisteEnBase.getLignesAlbums().isEmpty() && artisteEnBase.getPublications().isEmpty());		
+		Artiste artisteEnBase = artisteService.byKeyWithArtisteComplet(artiste.getId());
+		assertFalse(artisteEnBase.getLigneConcerts().isEmpty() && artisteEnBase.getLignesAlbums().isEmpty() && artisteEnBase.getPublications().isEmpty());		
 	}
 
 	@Test

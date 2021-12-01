@@ -25,6 +25,5 @@ public interface ChansonsRepository extends JpaRepository<Chansons, Long>{
 	@Transactional
 	@Query("delete from Chansons c where c.album=:album")
 	void deleteByAlbum(@Param("album") Album album);
-	
-	
+		
 }

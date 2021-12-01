@@ -1,6 +1,8 @@
 package siteMusifan.entity;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.AttributeOverride;
@@ -56,7 +58,7 @@ public class Artiste extends Compte {
 	
 	@OneToMany(mappedBy = "artiste", fetch = FetchType.LAZY)
 //	@JsonView({JsonViews.UtilisateurAvecPublicationsArtiste.class, JsonViews.ArtisteComplet.class})	
-	private Set<Publication> publications = new HashSet<Publication>();
+	private List<Publication> publications = new ArrayList<Publication>();
 	
 	@OneToMany(mappedBy = "id.artiste")
 	@JsonView(JsonViews.ArtisteComplet.class)
@@ -105,11 +107,11 @@ public class Artiste extends Compte {
 		this.description = description;
 	}
 
-	public Set<Publication> getPublications() {
+	public List<Publication> getPublications() {
 		return publications;
 	}
 
-	public void setPublications(Set<Publication> publications) {
+	public void setPublications(List<Publication> publications) {
 		this.publications = publications;
 	}
 
@@ -142,8 +144,12 @@ public class Artiste extends Compte {
 		lignesAlbums.add(new LigneAlbum(new LigneAlbumPK(album, this)));
 	}
 	
+	public void addConcert(Concert concert) {
+		ligneConcerts.add(new LigneConcert(new LigneConcertPK(concert, this)));
+	}
+	
 	//Ajouter une publication a la liste de publication d'un artiste
 	public void addPublication(Publication publication) {
-		publications.add(new Publication("une publication", this));
+		publications.add(new Publication(publication.getDesciption(), publication.getArtiste()));
 	}
 }

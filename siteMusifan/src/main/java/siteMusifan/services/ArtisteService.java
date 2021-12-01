@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import siteMusifan.entity.Artiste;
+import siteMusifan.entity.Publication;
 import siteMusifan.exceptions.ArtisteException;
 import siteMusifan.repositories.ArtisteRepository;
 import siteMusifan.repositories.LigneAlbumRepository;
@@ -42,9 +43,6 @@ public class ArtisteService {
 		Set<ConstraintViolation<Artiste>> violations = validator.validate(artiste);
 		if (violations.isEmpty()) {
 			return artisteRepository.save(artiste);
-//			ligneAlbumRepository.saveAll(artiste.getLignesAlbums());
-//			publicationRepository.saveAll(artiste.getPublications());
-			
 		} else {
 			throw new ArtisteException();
 		}
@@ -53,9 +51,9 @@ public class ArtisteService {
 	
 	public void delete(Artiste artiste) {
 		ligneUtilisateurRepository.deleteByArtiste(artiste);
-		//ligneAlbumRepository.deleteByArtiste(artiste);
-//		ligneConcertRepository.deleteByArtiste(artiste);
-		//publicationRepository.deleteByArtiste(artiste);
+		ligneAlbumRepository.deleteByArtiste(artiste);
+		ligneConcertRepository.deleteByArtiste(artiste);
+		publicationRepository.deleteByArtiste(artiste);
 		artisteRepository.delete(artiste);
 	}
 	
