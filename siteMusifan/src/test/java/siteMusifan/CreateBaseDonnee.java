@@ -2,10 +2,6 @@ package siteMusifan;
 
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,8 +11,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import siteMusifan.config.AppConfig;
 import siteMusifan.entity.Album;
+import siteMusifan.entity.Artiste;
 import siteMusifan.entity.Chansons;
 import siteMusifan.services.AlbumService;
+import siteMusifan.services.ArtisteService;
 import siteMusifan.services.ConcertService;
 import siteMusifan.services.LieuService;
 
@@ -32,6 +30,9 @@ public class CreateBaseDonnee {
 
 	@Autowired
 	private AlbumService albumService;
+	
+	@Autowired
+	private ArtisteService artisteService;
 	
 //	@Test
 //	public void createLieuAndConcert() {
@@ -94,11 +95,17 @@ public class CreateBaseDonnee {
 	
 	@Test
 	public void createAlbumAndChansons() {
-		Album album = new Album("After Hours",LocalDate.of(2020, Month.MARCH, 20),null);
+		Album album = new Album("After Hours",LocalDate.of(2020, Month.MARCH, 20));
+		Artiste artiste = new Artiste("The Weeknd");
+		artisteService.save(artiste);
+		album.addArtiste(artiste);
 		album.addChansons(new Chansons("Alone Again","4:10",album));
 		album.addChansons(new Chansons("Too Late","3:59",album));
 		albumService.save(album);
-		album = new Album("Presence",LocalDate.of(2017, Month.NOVEMBER, 10),null);
+		album = new Album("Presence",LocalDate.of(2017, Month.NOVEMBER, 10));
+		artiste = new Artiste("Petit Biscuit");
+		artisteService.save(artiste);
+		album.addArtiste(artiste);
 		album.addChansons(new Chansons("Creation Comes Alive","3:18",album));
 		album.addChansons(new Chansons("Follow Me","4:41",album));
 		albumService.save(album);

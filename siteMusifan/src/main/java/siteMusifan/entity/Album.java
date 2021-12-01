@@ -59,11 +59,11 @@ public class Album {
 	}
 
 
-	public Album(String titre, LocalDate date, Set<LigneAlbum> lignesAlbums) {
+	public Album(String titre, LocalDate date) {
 		this.titre = titre;
 		this.date = date;
-		this.lignesAlbums = lignesAlbums;
 	}
+
 
 
 	public Long getId() {
@@ -127,9 +127,13 @@ public class Album {
 		this.lignesAlbums = lignesAlbums;
 	}
 
-	//Ajouter une publication a la liste de publication d'un artiste
+
 	public void addChansons(Chansons chansons) {
 		this.chansons.add(new Chansons(chansons.getTitre(),chansons.getDuree(),chansons.getAlbum()));
+	}
+	
+	public void addArtiste(Artiste artiste) {
+		this.lignesAlbums.add(new LigneAlbum(new LigneAlbumPK(this,artiste)));
 	}
 
 	@Override

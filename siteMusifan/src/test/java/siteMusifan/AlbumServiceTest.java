@@ -17,10 +17,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import siteMusifan.config.AppConfig;
 import siteMusifan.entity.Album;
+import siteMusifan.entity.Artiste;
 import siteMusifan.entity.Chansons;
-import siteMusifan.entity.Lieu;
 import siteMusifan.exceptions.AlbumException;
 import siteMusifan.services.AlbumService;
+import siteMusifan.services.ArtisteService;
 import siteMusifan.services.ChansonsService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -35,21 +36,28 @@ public class AlbumServiceTest {
 	@Autowired
 	private AlbumService albumService;
 	
+	@Autowired
+	private ArtisteService artisteService;
+	
 	//Méthodes réation album
 	//-------------------------------------------------------------------------------------------------------
 	private Album getAlbum1() {
-		Album album = new Album("After Hours",LocalDate.of(2020, Month.MARCH, 20),null);
+		Album album = new Album("After Hours",LocalDate.of(2020, Month.MARCH, 20));
+		Artiste artiste = new Artiste("The Weeknd");
+		artisteService.save(artiste);
+		album.addArtiste(artiste);
 		album.addChansons(new Chansons("Alone Again","4:10",album));
 		album.addChansons(new Chansons("Too Late","3:59",album));
 		return album;
 	}
 	
 	private Album getAlbum2() {
-		Album album = new Album("Presence",LocalDate.of(2017, Month.NOVEMBER, 10),null);
+		Album album = new Album("Presence",LocalDate.of(2017, Month.NOVEMBER, 10));
 		album.addChansons(new Chansons("Creation Comes Alive","3:18",album));
 		album.addChansons(new Chansons("Follow Me","4:41",album));
 		return album;
 	}
+	
 	
 	//Test save et delete
 	//-------------------------------------------------------------------------------------------------------
@@ -90,11 +98,16 @@ public class AlbumServiceTest {
 
 	@Test
 	public void testByIdWithArtistes() {
+		Album album = getAlbum1();
+		albumService.save(album);
+		assertNotNull(albumService.byIdWithArtistes(album.getId()));
 	}
 
 	@Test
 	public void testByIdWithChansonsAndArtistes() {
-		
+		Album album = getAlbum1();
+		albumService.save(album);
+		assertNotNull(albumService.byIdWithChansonsAndArtistes(album.getId()));
 	}
 
 	@Test

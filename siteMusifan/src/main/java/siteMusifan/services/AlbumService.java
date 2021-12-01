@@ -38,6 +38,7 @@ public class AlbumService {
 		Set<ConstraintViolation<Album>> violations = validator.validate(album);
 		if (violations.isEmpty()) {
 			albumRepository.save(album);
+			ligneAlbumRepository.saveAll(album.getLignesAlbums());
 			List<Chansons> chansons = album.getChansons();
 			for(Chansons c : chansons) {
 				chansonsService.save(c);
