@@ -2,6 +2,7 @@ package siteMusifan.entity;
 
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -41,6 +42,7 @@ public class Compte {
 	
 	//////////////////////////////
 	@Version
+	@Column(name="compte_version")
 	private int version;
 	//////////////////////////////
 	
@@ -107,6 +109,15 @@ public class Compte {
 
 	public void setPhotoProfil(Byte[] photoProfil) {
 		this.photoProfil = photoProfil;
+	}
+
+	
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
 	}
 
 	@Override

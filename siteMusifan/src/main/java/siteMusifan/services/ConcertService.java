@@ -10,8 +10,10 @@ import javax.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import siteMusifan.entity.Artiste;
 import siteMusifan.entity.Concert;
 import siteMusifan.entity.Lieu;
+import siteMusifan.exceptions.ArtisteException;
 import siteMusifan.exceptions.ConcertException;
 import siteMusifan.exceptions.LieuException;
 import siteMusifan.repositories.ConcertRepository;
@@ -20,7 +22,7 @@ import siteMusifan.repositories.LigneConcertRepository;
 @Service 
 public class ConcertService {
 	@Autowired
-	private ConcertRepository concertRepository;
+	private ConcertRepository concertRepository; 
 	
 	@Autowired
 	private LigneConcertRepository ligneconcertRepository;
@@ -58,6 +60,10 @@ public class ConcertService {
 	
 	public Concert byId(Long id) {
 		return concertRepository.findById(id).orElseThrow(ConcertException::new);
+	}
+	
+	public Concert byKeyWithArtiste(Long id) {
+		return concertRepository.byKeyWithArtiste(id).orElseThrow(ArtisteException::new);
 	}
 	
 	public List<Concert> ByNomIgnoreCase(String nom) {

@@ -13,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -22,6 +24,10 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name = "concert")
+@NamedQueries({
+	@NamedQuery(name="Concert.byKeyWithArtistes",
+			query="select c from Concert c left join fetch c.ligneConcerts where c.id=:key")
+})
 @SequenceGenerator(name = "seqConcert", sequenceName = "seq_concert", allocationSize = 1, initialValue = 100)
 public class Concert {
 	@Id

@@ -18,6 +18,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -53,6 +54,10 @@ public class Album {
 	
 	@OneToMany(mappedBy = "id.album")
 	private Set<LigneAlbum> lignesAlbums = new HashSet<LigneAlbum>();
+	
+	@Version
+	@Column(name="album_version")
+	private int version;
 	
 	public Album() {
 
@@ -125,6 +130,16 @@ public class Album {
 
 	public void setLignesAlbums(Set<LigneAlbum> lignesAlbums) {
 		this.lignesAlbums = lignesAlbums;
+	}
+	
+
+	public int getVersion() {
+		return version;
+	}
+
+
+	public void setVersion(int version) {
+		this.version = version;
 	}
 
 

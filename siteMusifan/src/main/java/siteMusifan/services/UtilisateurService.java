@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import siteMusifan.entity.Artiste;
 import siteMusifan.entity.Utilisateur;
 import siteMusifan.exceptions.UtilisateurException;
+import siteMusifan.repositories.CommandeRepository;
 import siteMusifan.repositories.LigneUtilisateurRepository;
 import siteMusifan.repositories.UtilisateurRepository;
 
@@ -21,12 +22,15 @@ public class UtilisateurService {
 	private UtilisateurRepository utilisateurRepository;
 	
 	@Autowired
+	private CommandeRepository commandeRepository;
+	
+	@Autowired
 	private Validator validator;
 	
 	@Autowired
 	private LigneUtilisateurRepository ligneUtilisateurRepository;
 	
-	//Creation et edition d'un utilisateur
+	//Creation et edition d'un utilisateur 
 	public Utilisateur save(Utilisateur utilisateur) {
 		Set<ConstraintViolation<Utilisateur>> violations = validator.validate(utilisateur);
 		if(violations.isEmpty()) {
@@ -44,6 +48,7 @@ public class UtilisateurService {
 		Utilisateur utilisateurEnBase = utilisateurRepository.findById(utilisateur.getId()).orElseThrow(UtilisateurException::new);
 		//Suppression des lignes utilisateur liees a l'utilisateur a supprimer
 		ligneUtilisateurRepository.deleteByUtilisateur(utilisateurEnBase);
+		commandeRepository.deleteByUtilisateur(utilisateurEnBase);
 		//Suppression de l'utilisateur
 		utilisateurRepository.delete(utilisateurEnBase);
 	}
