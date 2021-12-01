@@ -48,8 +48,8 @@ public class PublicationService {
 		return publicationRepository.findById(id).orElseThrow(PublicationException::new);
 	}
 	
-	public Publication byArtiste(Artiste artiste ) {
-		return publicationRepository.findByArtiste(artiste.getId()).orElseThrow(PublicationException::new);
+	public List<Publication> byArtiste(Artiste artiste ) {
+		return publicationRepository.findByArtiste(artiste.getId());
 	}
 
 

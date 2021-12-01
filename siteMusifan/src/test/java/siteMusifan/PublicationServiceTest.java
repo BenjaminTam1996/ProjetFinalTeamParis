@@ -27,8 +27,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { AppConfig.class })
-//@Transactional
-//@Rollback(true)
+@Transactional
+@Rollback(true)
 public class PublicationServiceTest {
 	
 	@Autowired
@@ -62,9 +62,9 @@ public class PublicationServiceTest {
 	public void testDelete() {
 		Publication publication = getPublication();
 		publicationService.save(publication);
-		System.out.println(publicationService.byId(publication.getId()));
+		//System.out.println(publicationService.byId(publication.getId()));
 		publicationService.delete(publication);
-		System.out.println(publicationService.byId(publication.getId()));
+		//System.out.println(publicationService.byId(publication.getId()));
 		assertNull(publicationService.byId(publication.getId()));
 	}
 
@@ -77,6 +77,9 @@ public class PublicationServiceTest {
 //	public void testByArtiste() {
 //		Publication publication = getPublication();
 //		publicationService.save(publication);
+//		System.out.println("-------------");
+//		System.out.println(publication.getArtiste());
+//		System.out.println(publicationService.byArtiste(publication.getArtiste()));
 //		assertNotNull(publicationService.byArtiste(publication.getArtiste()));
 //	}
 }

@@ -1,5 +1,6 @@
 package siteMusifan.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,6 +12,6 @@ import siteMusifan.entity.Publication;
 
 public interface PublicationRepository extends JpaRepository<Publication, Long> {
 
-	Optional<Publication> findByArtiste(Long id);
+	List<Publication> findByArtiste(Long id);
 	
 }
