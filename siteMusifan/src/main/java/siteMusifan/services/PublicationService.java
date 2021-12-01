@@ -10,10 +10,13 @@ import javax.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import siteMusifan.entity.Artiste;
 import siteMusifan.entity.Commande;
 import siteMusifan.entity.Publication;
+import siteMusifan.entity.Utilisateur;
 import siteMusifan.exceptions.CommandeException;
 import siteMusifan.exceptions.PublicationException;
+import siteMusifan.exceptions.UtilisateurException;
 import siteMusifan.repositories.PublicationRepository;
 
 @Service
@@ -33,8 +36,8 @@ public class PublicationService {
 
 
 	public void delete(Publication publication) {
-		Publication commandeEnBase = publicationRepository.findById(publication.getId()).orElseThrow(PublicationException::new);
-		publicationRepository.delete(commandeEnBase);
+		Publication publicationEnBase = publicationRepository.findById(publication.getId()).orElseThrow(PublicationException::new);
+		publicationRepository.delete(publicationEnBase);
 	}
 
 	public List<Publication> allPublication() {
@@ -42,7 +45,11 @@ public class PublicationService {
 	}
 	
 	public Publication byId(Long id) {
-		return publicationRepository.findById(id).orElseThrow(CommandeException::new);
+		return publicationRepository.findById(id).orElseThrow(PublicationException::new);
+	}
+	
+	public Publication byArtiste(Artiste artiste ) {
+		return publicationRepository.findByArtiste(artiste.getId()).orElseThrow(PublicationException::new);
 	}
 
 

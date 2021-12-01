@@ -44,6 +44,8 @@ public class CommandeService {
 		}
 	}
 
+
+
 	public Commande byId(Long numero) {
 		return commandeRepository.findById(numero).orElseThrow(CommandeException::new);
 	}
