@@ -15,11 +15,10 @@ import siteMusifan.entity.Chansons;
 
 public interface ChansonsRepository extends JpaRepository<Chansons, Long>{
 	
-	List<Album> findByTitreIgnoreCase(String titre);
+	List<Chansons> findByTitreIgnoreCase(String titre);
 
-	List<Album> findByTitreLikeIgnoreCase(String titre);
+	List<Chansons> findByTitreLikeIgnoreCase(String titre);
 	
-	@Transactional
 	List<Chansons> findByTitreContainingIgnoreCase(String titre);
 	
 	@Modifying

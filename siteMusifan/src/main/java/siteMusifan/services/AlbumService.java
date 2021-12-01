@@ -14,7 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import siteMusifan.entity.Album;
-import siteMusifan.entity.LigneAlbum;
+import siteMusifan.entity.Chansons;
 import siteMusifan.exceptions.AlbumException;
 import siteMusifan.repositories.AlbumRepository;
 import siteMusifan.repositories.ChansonsRepository;
@@ -27,27 +27,25 @@ public class AlbumService {
 	private AlbumRepository albumRepository;
 	@Autowired
 	private ChansonsRepository chansonsRepository;
-
+	@Autowired
+	private ChansonsService chansonsService;
 	@Autowired
 	private LigneAlbumRepository ligneAlbumRepository;
+
+
 	public void save(Album album) {
 		Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 		Set<ConstraintViolation<Album>> violations = validator.validate(album);
 		if (violations.isEmpty()) {
 			albumRepository.save(album);
+			List<Chansons> chansons = album.getChansons();
+			for(Chansons c : chansons) {
+				chansonsService.save(c);
+			}
 		} else {
 			throw new AlbumException();
 		}
 	}
-
-//	public void delete(Client client) {
-//		Client clientEnBase = clientRepository.findByIdWithCommandes(client.getId()).orElseThrow(ClientException::new);
-//		clientEnBase.getCommandes().forEach(commande -> {
-//			commande.setClient(null);
-//			commandeRepository.save(commande);
-//		});
-//		clientRepository.delete(clientEnBase);
-//	}
 
 	public void delete(Album album) {
 		Album albumEnBase = albumRepository.findById(album.getId()).orElseThrow(AlbumException::new);
@@ -73,7 +71,27 @@ public class AlbumService {
 		return albumRepository.findAll(page.previousOrFirstPageable());
 	}
 
-	//public Album byId(Long id) {
-	//	return albumRepository.findByIdWithCommandes(id).orElseThrow(AlbumException::new);
-	//}
+	public Album byIdWithChansons(Long id) {
+		return albumRepository.byKeyWithChansons(id).orElseThrow(AlbumException::new);
+	}
+	
+	public Album byIdWithArtistes(Long id) {
+		return albumRepository.byKeyWithArtistes(id).orElseThrow(AlbumException::new);
+	}
+	
+	public Album byIdWithChansonsAndArtistes(Long id) {
+		return albumRepository.byKeyWithChansonsAndArtistes(id).orElseThrow(AlbumException::new);
+	}
+	
+	public List<Album> byTitreIgnoreCase(String nom) {
+		return albumRepository.findByTitreIgnoreCase(nom);
+	}
+	
+	public List<Album> byTitreLikeIgnoreCase(String nom) {
+		return albumRepository.findByTitreIgnoreCase(nom);
+	}
+	
+	public List<Album> byTitreContainingIgnoreCase(String nom) {
+		return albumRepository.findByTitreIgnoreCase(nom);
+	}
 }

@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "chansons")
@@ -26,9 +28,13 @@ public class Chansons {
 	@Column(name = "chansons_id")
 	private Long id;
 	@Column(name = "chansons_titre")
+//	@NotBlank
+//	@NotEmpty
 	private String titre;
 	@Column(name = "chansons_duree")
-	private int duree;
+//	@NotBlank
+//	@NotEmpty
+	private String duree;
 	@ManyToOne
 	@JoinColumn(name = "chanson_album_id", foreignKey = @ForeignKey(name = "chanson_album_id_fk"))
 	private Album album;
@@ -36,6 +42,19 @@ public class Chansons {
 	
 	public Chansons() {
 
+	}
+	
+
+	public Chansons(String titre, String duree) {
+		this.titre = titre;
+		this.duree = duree;
+	}
+
+
+	public Chansons( String titre,String duree, Album album) {
+		this.titre = titre;
+		this.duree = duree;
+		this.album = album;
 	}
 
 
@@ -59,12 +78,12 @@ public class Chansons {
 	}
 
 
-	public int getDuree() {
+	public String getDuree() {
 		return duree;
 	}
 
 
-	public void setDuree(int duree) {
+	public void setDuree(String duree) {
 		this.duree = duree;
 	}
 

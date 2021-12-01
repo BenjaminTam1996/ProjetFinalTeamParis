@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import siteMusifan.entity.Chansons;
+import siteMusifan.entity.Concert;
 import siteMusifan.exceptions.ChansonsException;
 import siteMusifan.repositories.AlbumRepository;
 import siteMusifan.repositories.ChansonsRepository;
@@ -36,21 +37,6 @@ public class ChansonsService {
 		}
 	}
 
-//	public void delete(Client client) {
-//		Client clientEnBase = clientRepository.findByIdWithCommandes(client.getId()).orElseThrow(ClientException::new);
-//		clientEnBase.getCommandes().forEach(commande -> {
-//			commande.setClient(null);
-//			commandeRepository.save(commande);
-//		});
-//		clientRepository.delete(clientEnBase);
-//	}
-
-//	public void delete(Chansons chansons) {
-//		Chansons chansonsEnBase = chansonsRepository.findById(chansons.getId()).orElseThrow(ChansonsException::new);
-//		albumRepository.removeChansonsFromAlbumByChansons(chansonsEnBase);
-//		chansonsRepository.delete(chansonsEnBase);
-//	}
-
 	public List<Chansons> allChansons() {
 		return chansonsRepository.findAll();
 	}
@@ -68,7 +54,15 @@ public class ChansonsService {
 		return chansonsRepository.findAll(page.previousOrFirstPageable());
 	}
 
-//	public Chansons byId(Long id) {
-//		return chansonsRepository.findByIdWithCommandes(id).orElseThrow(ChansonsException::new);
-//	}
+	public List<Chansons> byTitreIgnoreCase(String nom) {
+		return chansonsRepository.findByTitreIgnoreCase(nom);
+	}
+	
+	public List<Chansons> byTitreLikeIgnoreCase(String nom) {
+		return chansonsRepository.findByTitreIgnoreCase(nom);
+	}
+	
+	public List<Chansons> byTitreContainingIgnoreCase(String nom) {
+		return chansonsRepository.findByTitreIgnoreCase(nom);
+	}
 }

@@ -1,7 +1,9 @@
 package siteMusifan.entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -22,8 +24,12 @@ import com.fasterxml.jackson.annotation.JsonView;
 @Entity
 @Table(name = "album")
 @NamedQueries({
-	@NamedQuery(name="Artiste.findByKeyWithChansons",
+	@NamedQuery(name="Album.byKeyWithChansons",
+			query="select al from Album al left join fetch al.chansons where al.id=:key"),
+	@NamedQuery(name="Album.byKeyWithArtistes",
 			query="select al from Album al left join fetch al.lignesAlbums where al.id=:key"),
+	@NamedQuery(name="Album.byKeyWithChansonsAndArtistes",
+	query="select al from Album al left join fetch al.chansons left join fetch al.lignesAlbums where al.id=:key")
 })
 @SequenceGenerator(name = "seqAlbum", sequenceName = "seq_album", allocationSize = 1,initialValue = 100)
 public class Album {
@@ -43,13 +49,20 @@ public class Album {
 	private Byte photo;
 	
 	@OneToMany(mappedBy = "album", fetch = FetchType.LAZY)
-	private Set<Chansons> chansons;
+	private List<Chansons> chansons = new ArrayList<Chansons>();
 	
 	@OneToMany(mappedBy = "id.album")
 	private Set<LigneAlbum> lignesAlbums = new HashSet<LigneAlbum>();
 	
 	public Album() {
 
+	}
+
+
+	public Album(String titre, LocalDate date, Set<LigneAlbum> lignesAlbums) {
+		this.titre = titre;
+		this.date = date;
+		this.lignesAlbums = lignesAlbums;
 	}
 
 
@@ -94,12 +107,12 @@ public class Album {
 	}
 
 
-	public Set<Chansons> getChansons() {
+	public List<Chansons> getChansons() {
 		return chansons;
 	}
 
 
-	public void setChansons(Set<Chansons> chansons) {
+	public void setChansons(List<Chansons> chansons) {
 		this.chansons = chansons;
 	}
 
@@ -114,6 +127,10 @@ public class Album {
 		this.lignesAlbums = lignesAlbums;
 	}
 
+	//Ajouter une publication a la liste de publication d'un artiste
+	public void addChansons(Chansons chansons) {
+		this.chansons.add(new Chansons(chansons.getTitre(),chansons.getDuree(),chansons.getAlbum()));
+	}
 
 	@Override
 	public int hashCode() {
