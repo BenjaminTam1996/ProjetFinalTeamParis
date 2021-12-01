@@ -113,4 +113,6 @@ public class Commande {
 	public void addProduit(Concert concert, int quantite) {
 		lignesCommandes.add(new LigneCommande(new LigneCommandePK(this, concert), quantite));
 	}
+	
+	
 }

@@ -2,11 +2,8 @@ package siteMusifan;
 
 import static org.junit.Assert.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,10 +14,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import siteMusifan.config.AppConfig;
+import siteMusifan.entity.Artiste;
 import siteMusifan.entity.Commande;
+import siteMusifan.entity.Concert;
 import siteMusifan.entity.Utilisateur;
 import siteMusifan.exceptions.CommandeException;
 import siteMusifan.services.CommandeService;
+import siteMusifan.services.ConcertService;
 import siteMusifan.services.UtilisateurService;
 
 
@@ -34,6 +34,9 @@ public class CommandeServiceTest {
 	private CommandeService commandeService;
 	@Autowired
 	private UtilisateurService utilisateurService;
+	
+	@Autowired
+	private ConcertService concertService;
 
 	private Commande getCommande() {
 		Utilisateur user=new Utilisateur("Moindrot", "berenice");
@@ -43,23 +46,22 @@ public class CommandeServiceTest {
 	}
 
 	@Test
-	public void testSave() {
+	public void testSaveCreation() {
 		Commande commande = getCommande();
 		commandeService.save(commande);
 		assertNotNull(commandeService.byId(commande.getNumero()));
-		Commande commandeEnBase = commandeService.byId(commande.getNumero());
-		assertSame( commande.getLignesCommandes(), commandeEnBase.getLignesCommandes());
-
 	}
 	
 
-//	@Test(expected = CommandeException.class)
-//	public void testDelete() {
-//		Commande commande = getCommande();
-//		commandeService.save(commande);
-//		commandeService.delete(commande);
-//		assertNull(commandeService.byId(commande.getNumero()));
-//	}
+	
+
+	@Test(expected = CommandeException.class)
+	public void testDelete() {
+		Commande commande = getCommande();
+		commandeService.save(commande);
+		commandeService.delete(commande);
+		assertNull(commandeService.byId(commande.getNumero()));
+	}
 
 	@Test
 	public void testAllCommande() {
@@ -67,14 +69,18 @@ public class CommandeServiceTest {
 		assertEquals(commandeService.allCommande().size(), 3);
 	}
 
-	@Test
-	public void testAllWithConcerts() {
-		//fail("Not yet implemented");
-	}
 
 	@Test
 	public void testByKeyWithConcerts() {
-		//fail("Not yet implemented");
+		Commande commande = getCommande();
+		Concert concert = new Concert("nom", LocalDate.now(), 5, 5);
+		concertService.save(concert);
+		commande.addProduit(concert,5);
+		commandeService.save(commande);
+
+		Commande commandeEnBase = commandeService.byKeyWithConcerts(commande.getNumero());
+		assertFalse(commandeEnBase.getLignesCommandes().isEmpty());		
 	}
+	
 
 }
