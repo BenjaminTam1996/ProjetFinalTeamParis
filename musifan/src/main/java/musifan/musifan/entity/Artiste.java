@@ -68,7 +68,7 @@ public class Artiste extends Compte {
 	private Set<LigneUtilisateur> lignesUtilisateurs = new HashSet<LigneUtilisateur>();
 	
 	@OneToMany(mappedBy = "id.artiste")
-//	@JsonView(JsonViews.ArtisteComplet.class)
+	@JsonView({JsonViews.ArtisteComplet.class,})
 	private Set<LigneConcert> ligneConcerts = new HashSet<LigneConcert>();
 		
 	public Artiste() {

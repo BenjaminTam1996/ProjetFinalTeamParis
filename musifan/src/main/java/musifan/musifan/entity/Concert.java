@@ -60,6 +60,7 @@ public class Concert {
 	private Set<LigneCommande> lignesCommandes;
 
 	@OneToMany(mappedBy = "id.concert")
+	@JsonView({JsonViews.ConcertComplet.class,})
 	private Set<LigneConcert> ligneConcerts = new HashSet<LigneConcert>();
 
 	public Concert() {

@@ -13,6 +13,10 @@ public class JsonViews {
 		
 	}
 	
+	public static class ConcertComplet extends ConcertAvecLieu {
+		
+	}
+	
 	public static class UtilisateurAvecArtiste extends Common {
 		
 	}
@@ -32,6 +36,8 @@ public class JsonViews {
 	public static class CommandeAvecConsert extends Common {
 		
 	}
+	
+
 	
 }
 

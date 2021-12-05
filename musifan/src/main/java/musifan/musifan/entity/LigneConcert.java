@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 @Table(name = "ligne_concert")
 public class LigneConcert {
 		@EmbeddedId
-		@JsonView(JsonViews.ArtisteComplet.class)
+		@JsonView({JsonViews.ArtisteComplet.class,JsonViews.ConcertComplet.class})
 		private LigneConcertPK id;
 		
 		public LigneConcert() {

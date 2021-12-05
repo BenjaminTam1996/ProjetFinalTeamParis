@@ -37,7 +37,7 @@ public class ConcertRestController {
 	}
 	
 	@GetMapping("/{id}")
-	@JsonView({JsonViews.ConcertAvecLieu.class,})
+	@JsonView({JsonViews.ConcertComplet.class,})
 	public Concert byId(@PathVariable("id") Long id) {
 		return concertService.byId(id);
 	}
@@ -65,6 +65,7 @@ public class ConcertRestController {
 	}
 	
 	@DeleteMapping("/{id}")
+	@JsonView({JsonViews.ConcertComplet.class,})
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable("id") Long id) {
 		concertService.delete(concertService.byId(id));

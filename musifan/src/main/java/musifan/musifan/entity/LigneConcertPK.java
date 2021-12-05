@@ -19,6 +19,7 @@ public class LigneConcertPK implements Serializable{
 		private Concert concert;
 		@ManyToOne
 		@JoinColumn(name = "ligne_concert_artiste_id", foreignKey = @ForeignKey(name = "ligne_concert_artiste_id_fk"))
+		@JsonView(JsonViews.ConcertComplet.class)
 		private Artiste artiste;
 
 		public LigneConcertPK() {
