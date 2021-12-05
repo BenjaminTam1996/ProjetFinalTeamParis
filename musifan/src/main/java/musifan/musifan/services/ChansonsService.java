@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import musifan.musifan.entity.Chansons;
 import musifan.musifan.exceptions.ChansonsException;
+import musifan.musifan.exceptions.ConcertException;
 import musifan.musifan.repositories.AlbumRepository;
 import musifan.musifan.repositories.ChansonsRepository;
 
@@ -38,6 +39,10 @@ public class ChansonsService {
 
 	public List<Chansons> allChansons() {
 		return chansonsRepository.findAll();
+	}
+	
+	public Chansons byId(Long id) {
+		return chansonsRepository.findById(id).orElseThrow(ChansonsException::new);
 	}
 
 	public Page<Chansons> chansonsFirstPage(int size) {

@@ -39,5 +39,13 @@ public class JsonViews {
 	
 
 	
+	public static class AlbumAvecArtistes extends Common{
+		
+	}
+	
+
+	public static class AlbumComplet extends AlbumAvecArtistes {
+		
+	}
 }
 

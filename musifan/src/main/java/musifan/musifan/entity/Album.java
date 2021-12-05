@@ -50,9 +50,11 @@ public class Album {
 	private Byte photo;
 	
 	@OneToMany(mappedBy = "album", fetch = FetchType.LAZY)
+	@JsonView({JsonViews.AlbumComplet.class,})
 	private List<Chansons> chansons = new ArrayList<Chansons>();
 	
 	@OneToMany(mappedBy = "id.album")
+	@JsonView({JsonViews.AlbumAvecArtistes.class,})
 	private Set<LigneAlbum> lignesAlbums = new HashSet<LigneAlbum>();
 	
 	@Version

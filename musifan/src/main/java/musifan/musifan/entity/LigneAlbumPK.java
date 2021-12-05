@@ -18,6 +18,7 @@ public class LigneAlbumPK implements Serializable {
 	private Album album;
 	@ManyToOne
 	@JoinColumn(name = "ligne_album_artiste_id", foreignKey = @ForeignKey(name = "ligne_album_artiste_id_fk"))
+	@JsonView({JsonViews.AlbumAvecArtistes.class,})
 	private Artiste artiste;
 
 	public LigneAlbumPK() {

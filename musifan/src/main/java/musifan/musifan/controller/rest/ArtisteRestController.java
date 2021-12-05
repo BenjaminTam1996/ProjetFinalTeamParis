@@ -43,13 +43,13 @@ public class ArtisteRestController {
 	//// Mais test fait sur album et concert => fonctionner
 	// Remonter un artiste complet : avec ses albums, ses publications et ses
 	// concerts, par rapport a son id.
-//	@GetMapping("/{id}")
-//	@JsonView(JsonViews.ArtisteComplet.class)
-////	@JsonView(JsonViews.Common.class)
-//	public Artiste byId(@PathVariable("id") Long id) {
-//		return artisteService.byKeyWithArtisteComplet(id);
-////		return artisteService.byId(id);
-//	}
+	@GetMapping("/{id}")
+	@JsonView(JsonViews.ArtisteComplet.class)
+//	@JsonView(JsonViews.Common.class)
+	public Artiste byId(@PathVariable("id") Long id) {
+		return artisteService.byKeyWithArtisteComplet(id);
+//		return artisteService.byId(id);
+	}
 
 	// Creer un artiste
 	@PostMapping("")
