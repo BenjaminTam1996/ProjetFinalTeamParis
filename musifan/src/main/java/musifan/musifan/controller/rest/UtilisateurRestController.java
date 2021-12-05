@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import musifan.musifan.entity.JsonViews;
 import musifan.musifan.entity.Utilisateur;
+import musifan.musifan.services.ArtisteService;
 import musifan.musifan.services.CommandeService;
 import musifan.musifan.services.UtilisateurService;
 
@@ -30,7 +31,7 @@ public class UtilisateurRestController {
 	private UtilisateurService utilisateurService;
 
 	@Autowired
-	private CommandeService commandeService;
+	private ArtisteService artisteService;
 
 	// Remonter un utilisateur par rapport a son id
 	@GetMapping("/{id}")
@@ -40,47 +41,37 @@ public class UtilisateurRestController {
 	}
 
 	// Remonter un utilisateur, par rapport a son id, avec sa liste d'artiste
-//	@GetMapping("/{id}")
-//	@JsonView(JsonViews.UtilisateurAvecArtiste.class)
-//	public Utilisateur byIdWithArtiste(@PathVariable("id") Long id) {
-//		return utilisateurService.byKeyWithArtistes(id);
-//	}
+	@GetMapping("/artistes/{id}")
+	@JsonView(JsonViews.UtilisateurAvecArtiste.class)
+	public Utilisateur byIdWithArtiste(@PathVariable("id") Long id) {
+		return utilisateurService.byKeyWithArtistes(id);
+	}
 
 	//// TODO : Ne fonctionne pas car lazy initialize du a la remonter des
 	//// publications de l'artiste
 	// Remonte un utilisateur, par rapport a son id, avec sa liste d'artiste ainsi
 	// que les publications liees aux artistes
-//	@GetMapping("/{id}")
-//	@JsonView(JsonViews.UtilisateurAvecPublicationsArtiste.class)
-//	public Utilisateur byIdWithPublicationArtiste(@PathVariable("id") Long id) {
-//		return utilisateurService.byKeyWithArtistes(id);
-//	}
+	@GetMapping("/publications/{id}")
+	@JsonView(JsonViews.UtilisateurAvecPublicationsArtiste.class)
+	public Utilisateur byIdWithPublicationArtiste(@PathVariable("id") Long id) {
+		return utilisateurService.byKeyWithArtistes(id);
+	}
 
-	//// TODO : Manque le traitement des concerts car lazy initialize du a la
-	//// collection dans commande : ligneCommande pour trouver le concert
 	// Remonter un utilisateur, par rapport a son id, avec sa liste de commande
 	// ainsi que les concerts lies a la commande
-//	@GetMapping("/{id}")
-//	@JsonView(JsonViews.UtilisateurAvecCommandes.class)
-//	public Utilisateur byIdWithCommande(@PathVariable("id") Long id) {
-////		Utilisateur utilisateurEnBase = utilisateurService.byKeyWithCommandes(id);
-////		utilisateurEnBase.getListeConcert().forEach(lc -> {
-////			lc.getLignesCommandes().forEach(c -> {
-////				Commande commande = commandeService.byKeyWithConcerts(c.getId().getCommande().getNumero());
-////				utilisateurEnBase.addCommande(commande);
-////			});
-////		});
-////		return utilisateurEnBase;
-//		return utilisateurService.byKeyWithCommandes(id);
-//	}
+	@GetMapping("/commandes/{id}")
+	@JsonView(JsonViews.UtilisateurAvecCommandes.class)
+	public Utilisateur byIdWithCommande(@PathVariable("id") Long id) {
+		return utilisateurService.byKeyWithCommandes(id);
+	}
 
-	//// TODO : Pas teste car devrait avoir lazy initialze du a la collection
-	//// ligneAlbum dans Artiste
-//	@GetMapping("/{id}")
-//	@JsonView(JsonViews.UtilisateurAvecAlbumsArtiste.class)
-//	public Utilisateur byIdWithAlbumArtiste(@PathVariable("id") Long id) {
-//		return utilisateurService.byKeyWithArtistes(id);
-//	}
+	// Remonte un utilisateur, par rapport a son id, avec les albums de ses artistes
+	// likes
+	@GetMapping("/albums/{id}")
+	@JsonView(JsonViews.UtilisateurAvecAlbumsArtiste.class)
+	public Utilisateur byIdWithAlbumArtiste(@PathVariable("id") Long id) {
+		return utilisateurService.byKeyWithArtistes(id);
+	}
 
 	// Creer un utilisateur
 	@PostMapping("")
@@ -107,8 +98,26 @@ public class UtilisateurRestController {
 
 	}
 
-	// TODO : Faire deleteLigneUtilisateurByUtilisateur pour mettre a jour la liste
-	// des artistes d'un utilisateur !!
+	// Ajoute un artiste a la liste d'artiste d'un utilisateur, par rapport a son id
+	@PutMapping("artistes/{id}")
+	@JsonView(JsonViews.UtilisateurAvecArtiste.class)
+	public Utilisateur updateArtiste(@PathVariable("id") Long id, @Valid @RequestBody Utilisateur utilisateur) {
+		Utilisateur utilisateurEnBase = utilisateurService.byKeyWithArtistes(id);
+		utilisateurEnBase.setLignesUtilisateurs(utilisateur.getLignesUtilisateurs());
+		utilisateurEnBase.getLignesUtilisateurs().forEach(lu -> {
+			lu.getId().setUtilisateur(utilisateurEnBase);
+		});
+		return utilisateurService.addLigneUtilisateur(utilisateurEnBase);
+	}
+
+	// Supprimer un artiste de la liste des artistes d'un utilisateur
+	@DeleteMapping("{idUtilisateur}/artiste/{idArtiste}")
+	@ResponseStatus(code = HttpStatus.NO_CONTENT)
+	public void deleteArtiste(@PathVariable("idUtilisateur") Long idUtilisateur,
+			@PathVariable("idArtiste") Long idArtiste) {
+		utilisateurService.deleteLigneUtilisateurByUtilisateur(utilisateurService.byId(idUtilisateur),
+				artisteService.byId(idArtiste));
+	}
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)

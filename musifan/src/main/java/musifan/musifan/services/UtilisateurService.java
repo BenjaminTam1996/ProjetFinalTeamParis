@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import musifan.musifan.entity.Artiste;
+import musifan.musifan.entity.Commande;
 import musifan.musifan.entity.Utilisateur;
 import musifan.musifan.exceptions.UtilisateurException;
 import musifan.musifan.repositories.CommandeRepository;
+import musifan.musifan.repositories.LigneCommandeRepository;
 import musifan.musifan.repositories.LigneUtilisateurRepository;
 import musifan.musifan.repositories.UtilisateurRepository;
 
@@ -30,17 +32,25 @@ public class UtilisateurService {
 	@Autowired
 	private LigneUtilisateurRepository ligneUtilisateurRepository;
 	
+	@Autowired
+	private LigneCommandeRepository ligneCommandeRepository;
+	
 	//Creation et edition d'un utilisateur 
 	public Utilisateur save(Utilisateur utilisateur) {
 		Set<ConstraintViolation<Utilisateur>> violations = validator.validate(utilisateur);
 		if(violations.isEmpty()) {
 			utilisateurRepository.save(utilisateur);
-			ligneUtilisateurRepository.saveAll(utilisateur.getLignesUtilisateurs());
+			ligneUtilisateurRepository.saveAll(utilisateur.getLignesUtilisateurs());		
 			return utilisateur;
 		} else {
-			System.out.println(violations);
 			throw new UtilisateurException();
 		}
+	}
+	
+	//Ajouter un artiste dans la liste des artistes d'un utilisateur
+	public Utilisateur addLigneUtilisateur(Utilisateur utilisateur) {		
+			ligneUtilisateurRepository.saveAll(utilisateur.getLignesUtilisateurs());		
+			return utilisateur;
 	}
 	
 	//Supprimer un utilisateur
@@ -48,6 +58,12 @@ public class UtilisateurService {
 		Utilisateur utilisateurEnBase = utilisateurRepository.findById(utilisateur.getId()).orElseThrow(UtilisateurException::new);
 		//Suppression des lignes utilisateur liees a l'utilisateur a supprimer
 		ligneUtilisateurRepository.deleteByUtilisateur(utilisateurEnBase);
+		//Suppression des lignes de commandes liees a la commande de l'utilisateur a suppromer
+		for(Commande c : utilisateur.getListeConcert()) {
+			ligneCommandeRepository.deleteByCommande(c);
+			
+		}
+		//Suppression des commandes liees a l'utilisateur a supprimer 
 		commandeRepository.deleteByUtilisateur(utilisateurEnBase);
 		//Suppression de l'utilisateur
 		utilisateurRepository.delete(utilisateurEnBase);

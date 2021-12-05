@@ -40,16 +40,23 @@ public class Compte {
 	@JsonView({JsonViews.Common.class,})
 	private Byte[] photoProfil;
 	
-	//////////////////////////////
 	@Version
 	@Column(name="compte_version")
 	private int version;
-	//////////////////////////////
 	
 	public Compte() {
 		
 	}
 
+	public Compte(String mail, String password, String nom, String prenom, String telephone, Byte[] photoProfil) {
+		this.mail = mail;
+		this.password = password;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.telephone = telephone;
+		this.photoProfil = photoProfil;
+	}
+	
 	public Compte(String nom, String prenom) {
 		this.nom = nom;
 		this.prenom = prenom;

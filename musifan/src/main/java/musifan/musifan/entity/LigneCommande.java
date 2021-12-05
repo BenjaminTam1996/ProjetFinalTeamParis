@@ -16,6 +16,7 @@ public class LigneCommande {
 	@JsonView({JsonViews.UtilisateurAvecCommandes.class,})
 	private LigneCommandePK id;
 	@Column(name = "ligne_commande_quantite", nullable = false)
+	@JsonView(JsonViews.Common.class)
 	private int quantite;
 
 	public LigneCommande() {

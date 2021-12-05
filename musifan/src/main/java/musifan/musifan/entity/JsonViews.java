@@ -25,6 +25,10 @@ public class JsonViews {
 		
 	}
 	
+	public static class UtilisateurAvecAlbumsArtiste extends UtilisateurAvecArtiste {
+		
+	}
+	
 	public static class UtilisateurAvecCommandes extends Common {
 		
 	}
@@ -37,7 +41,6 @@ public class JsonViews {
 		
 	}
 	
-
 	
 	public static class AlbumAvecArtistes extends Common{
 		

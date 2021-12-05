@@ -1,6 +1,8 @@
 package musifan.musifan.entity;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.AttributeOverride;
@@ -24,9 +26,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 	@AttributeOverride(name = "prenom", column = @Column(name = "utilisateur_prenom")),
 	@AttributeOverride(name = "telephone", column = @Column(name = "utilisateur_telephone")),
 	@AttributeOverride(name = "photoProfil", column = @Column(name = "utilisateur_photo_profil")),
-	//////////////////////////////
 	@AttributeOverride(name = "version", column = @Column(name = "utilisateur_version")),
-	//////////////////////////////
 })
 @NamedQueries({
 	@NamedQuery(name="Utilisateur.byKeyWithArtistes",
@@ -43,7 +43,7 @@ public class Utilisateur extends Compte{
 	
 	@OneToMany(mappedBy = "utilisateur")
 	@JsonView({JsonViews.UtilisateurAvecCommandes.class,})
-	private Set<Commande> listeConcert = new HashSet<Commande>();
+	private List<Commande> listeConcert = new ArrayList<Commande>();
 	
 	@OneToMany(mappedBy = "id.utilisateur")
 	@JsonView({JsonViews.UtilisateurAvecArtiste.class,})
@@ -57,6 +57,16 @@ public class Utilisateur extends Compte{
 		super(nom, prenom);
 	}
 
+	public Utilisateur(String nom, String prenom, String pseudo) {
+		super(nom, prenom);
+		this.pseudo = pseudo;
+	}
+
+	public Utilisateur(String mail, String password, String nom, String prenom, String telephone, Byte[] photoProfil, String pseudo) {
+		super(mail, password, nom, prenom, telephone, photoProfil);
+		this.pseudo = pseudo;
+	}
+	
 	public Utilisateur(String pseudo) {
 		this.pseudo = pseudo;
 	}
@@ -69,11 +79,11 @@ public class Utilisateur extends Compte{
 		this.pseudo = pseudo;
 	}
 
-	public Set<Commande> getListeConcert() {
+	public List<Commande> getListeConcert() {
 		return listeConcert;
 	}
 
-	public void setListeConcert(Set<Commande> listeConcert) {
+	public void setListeConcert(List<Commande> listeConcert) {
 		this.listeConcert = listeConcert;
 	}
 

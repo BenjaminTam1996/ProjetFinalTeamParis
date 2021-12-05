@@ -27,9 +27,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 	@AttributeOverride(name = "prenom", column = @Column(name = "artiste_prenom")),
 	@AttributeOverride(name = "telephone", column = @Column(name = "artiste_telephone")),
 	@AttributeOverride(name = "photoProfil", column = @Column(name = "artiste_photo_profil")),
-	//////////////////////////////
 	@AttributeOverride(name = "version", column = @Column(name = "artiste_version")),
-	//////////////////////////////
 })
 @NamedQueries({
 	@NamedQuery(name="Artiste.byKeyWithUtilisateurs",
@@ -57,11 +55,11 @@ public class Artiste extends Compte {
 	private String description;
 	
 	@OneToMany(mappedBy = "artiste", fetch = FetchType.LAZY)
-//	@JsonView({JsonViews.UtilisateurAvecPublicationsArtiste.class, JsonViews.ArtisteComplet.class})	
+	@JsonView({JsonViews.UtilisateurAvecPublicationsArtiste.class, JsonViews.ArtisteComplet.class})	
 	private List<Publication> publications = new ArrayList<Publication>();
 	
 	@OneToMany(mappedBy = "id.artiste")
-	@JsonView(JsonViews.ArtisteComplet.class)
+	@JsonView({JsonViews.ArtisteComplet.class, JsonViews.UtilisateurAvecAlbumsArtiste.class})
 	private Set<LigneAlbum> lignesAlbums = new HashSet<LigneAlbum>();
 	
 	@OneToMany(mappedBy = "id.artiste")
@@ -79,6 +77,13 @@ public class Artiste extends Compte {
 		super(nom, prenom);
 	}
 
+	public Artiste(String mail, String password, String nom, String prenom, String telephone, Byte[] photoProfil, String nomArtiste, String description, Byte[] photoBanniere) {
+		super(mail, password, nom, prenom, telephone, photoProfil);
+		this.description = description;
+		this.nomArtiste = nomArtiste;
+		this.photoBanniere = photoBanniere;
+	}
+	
 	public Artiste(String nomArtiste) {
 		this.nomArtiste = nomArtiste;
 	}

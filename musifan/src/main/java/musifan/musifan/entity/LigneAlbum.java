@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 @Table(name = "ligne_album")
 public class LigneAlbum {
 	@EmbeddedId
-	@JsonView({JsonViews.ArtisteComplet.class,JsonViews.AlbumAvecArtistes.class,})
+	@JsonView({JsonViews.ArtisteComplet.class,JsonViews.AlbumAvecArtistes.class, JsonViews.UtilisateurAvecAlbumsArtiste.class})
 	private LigneAlbumPK id;
 	
 	public LigneAlbum() {
