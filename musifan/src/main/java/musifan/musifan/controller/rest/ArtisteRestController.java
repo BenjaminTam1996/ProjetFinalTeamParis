@@ -32,7 +32,7 @@ public class ArtisteRestController {
 	private ArtisteService artisteService;
 
 	// Remonter tout les artistes
-	@GetMapping("")
+	@GetMapping("") 
 	@JsonView(JsonViews.Common.class)
 	public List<Artiste> all() {
 		return artisteService.allArtiste();
