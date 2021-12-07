@@ -38,9 +38,16 @@ public class ArtisteService {
 	@Autowired
 	private LigneUtilisateurRepository ligneUtilisateurRepository;
 	
+//	@Autowired
+//	private PasswordEncoder passwordEncoder;
+	
 	public Artiste save(Artiste artiste) {
 		Set<ConstraintViolation<Artiste>> violations = validator.validate(artiste);
 		if (violations.isEmpty()) {
+			//// TODO : A ajouter lorsque la securite sera mise 
+//			artiste.setPassword(passwordEncoder.encode(artiste.getPassword()));
+//			artiste.setRoles(Arrays.asList(Role.ROLE_ARTISTE));
+//			artiste.setEnable(true);
 			return artisteRepository.save(artiste);
 		} else {
 			throw new ArtisteException();
