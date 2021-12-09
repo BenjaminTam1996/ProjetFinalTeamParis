@@ -19,6 +19,7 @@ public interface LigneUtilisateurRepository extends JpaRepository<LigneUtilisate
 	@Query("delete from LigneUtilisateur lu where lu.id.artiste = :artiste")
 	void deleteByArtiste(@Param("artiste") Artiste artiste);
 	
+
 	
 	//Supprimer un utilisateur
 	@Transactional

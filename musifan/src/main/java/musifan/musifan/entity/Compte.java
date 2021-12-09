@@ -6,11 +6,10 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -38,6 +37,7 @@ public class Compte {
 	@JsonView({JsonViews.Common.class,})
 	private String telephone;
 	
+	@Lob
 	@JsonView({JsonViews.Common.class,})
 	private Byte[] photoProfil;
 	

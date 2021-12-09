@@ -13,6 +13,8 @@ spring:
 #    url: jdbc:postgresql://localhost:5432/site_musifan
     url: jdbc:postgresql://localhost:5434/site_musifan
     username: postgres
+    hikari:      auto-commit: false
+    
 ##jpa
   jpa:
     hibernate:
@@ -22,6 +24,7 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQL10Dialect
         format_sql: true
         show_sql: false
+
   ##viewResolver
 #  mvc:
 #    view:

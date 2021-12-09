@@ -1,8 +1,6 @@
 package musifan.musifan.entity;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.AttributeOverride;
@@ -10,13 +8,12 @@ import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -48,6 +45,7 @@ public class Artiste extends Compte {
 	@JsonView({JsonViews.Common.class,})
 	private String nomArtiste;
 	
+	@Lob
 	@Column(name="artiste_photo_banniere")
 	@JsonView({JsonViews.Common.class,})
 	private Byte[] photoBanniere;

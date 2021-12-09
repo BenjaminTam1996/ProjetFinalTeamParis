@@ -47,7 +47,7 @@ public class UtilisateurService {
 //			utilisateur.setRoles(Arrays.asList(Role.ROLE_USER));
 //			utilisateur.setEnable(true);
 			utilisateurRepository.save(utilisateur);
-			ligneUtilisateurRepository.saveAll(utilisateur.getLignesUtilisateurs());
+//			ligneUtilisateurRepository.saveAll(utilisateur.getLignesUtilisateurs());
 			return utilisateur;
 		} else {
 			throw new UtilisateurException();

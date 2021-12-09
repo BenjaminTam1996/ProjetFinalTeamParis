@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Utilisateur } from './../models/utilisateur';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -11,37 +11,54 @@ export class UtilisateurService {
 
   constructor(private http: HttpClient) {}
 
+  private get httpHeaders(): HttpHeaders {
+    return new HttpHeaders({
+      Authorization: 'Basic ' + sessionStorage.getItem('token'),
+      'Content-Type': 'application/json',
+    });
+  }
+
   public byId(id: number): Observable<Utilisateur> {
-    return this.http.get<Utilisateur>(`${UtilisateurService.url}/${id}`);
+    return this.http.get<Utilisateur>(`${UtilisateurService.url}/${id}`, {
+      headers: this.httpHeaders,
+    });
   }
 
   /* Remonte un utilisateur, par rapport a son id, avec sa liste d'artiste */
   public byIdWithArtiste(id: number): Observable<Utilisateur> {
     return this.http.get<Utilisateur>(
-      UtilisateurService.url + '/artistes/' + id
+      UtilisateurService.url + '/artistes/' + id,
+      { headers: this.httpHeaders }
     );
   }
 
   /* Remonte un utilisateur, par rapport a son id, avec les publications de ses artistes */
   public byIdWithPublicationArtiste(id: number): Observable<Utilisateur> {
     return this.http.get<Utilisateur>(
-      UtilisateurService.url + '/publications/' + id
+      UtilisateurService.url + '/publications/' + id,
+      { headers: this.httpHeaders }
     );
   }
 
   /* Remonte un utilisateur, par rapport a son id, avec ses commandes */
   public byIdWithCommande(id: number): Observable<Utilisateur> {
     return this.http.get<Utilisateur>(
-      UtilisateurService.url + '/commandes/' + id
+      UtilisateurService.url + '/commandes/' + id,
+      { headers: this.httpHeaders }
     );
   }
 
   public byIdWithAlbums(id: number): Observable<Utilisateur> {
-    return this.http.get<Utilisateur>(UtilisateurService.url + '/albums/' + id);
+    return this.http.get<Utilisateur>(
+      UtilisateurService.url + '/albums/' + id,
+      { headers: this.httpHeaders }
+    );
   }
 
   public delete(id: number): Observable<any> {
-    return this.http.delete(`${UtilisateurService.url}/${id}`);
+    return this.http.delete(`${UtilisateurService.url}/${id}`, {
+      headers: this.httpHeaders,
+    });
   }
 
   public insert(
@@ -54,16 +71,19 @@ export class UtilisateurService {
       prenom: utilisateur.prenom,
       pseudo: utilisateur.pseudo,
       telephone: utilisateur.telephone,
-      ligneConcerts: {},
+      ligneConcerts: [],
       photoProfil: utilisateur.photoProfil,
     };
-    return this.http.post<Utilisateur>(UtilisateurService.url, o);
+    return this.http.post<Utilisateur>(UtilisateurService.url, o, {
+      headers: this.httpHeaders,
+    });
   }
 
   public update(utilisateur: Utilisateur): Observable<Utilisateur> {
     return this.http.put<Utilisateur>(
       `${UtilisateurService.url}/${utilisateur.id}`,
-      utilisateur
+      utilisateur,
+      { headers: this.httpHeaders }
     );
   }
 
@@ -72,17 +92,20 @@ export class UtilisateurService {
     idArtiste: number
   ): Observable<Utilisateur> {
     const o = {
-      ligneUtilisateur: {
-        id: {
-          artiste: {
-            id: idArtiste,
+      ligneUtilisateur: [
+        {
+          id: {
+            artiste: {
+              id: idArtiste,
+            },
           },
         },
-      },
+      ],
     };
     return this.http.put<Utilisateur>(
       UtilisateurService.url + '/artistes/' + idUtilisateur,
-      o
+      o,
+      { headers: this.httpHeaders }
     );
   }
 }
