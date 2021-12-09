@@ -4,7 +4,7 @@ export class Commande {
         private _id?: number | undefined,
         private _date?: Date | undefined,
         private _utilisateur?: utilisateur | undefined,
-        private _ligneUtilisateur: concert[] = [];
+        private _concert: concert[] = [];
 
       ) {}
 
@@ -24,11 +24,11 @@ export class Commande {
         this._id = value;
       }
 
-    public get ligneUtilisateur(): concert[] {
-        return this._ligneUtilisateur;
+    public get concert(): concert[] {
+        return this._concert;
     }
-    public set ligneUtilisateur(value: concert[]) {
-        this._ligneUtilisateur = value;
+    public set concert(value: concert[]) {
+        this._concert = value;
     }
     public get utilisateur(): utilisateur | undefined {
         return this._utilisateur;
