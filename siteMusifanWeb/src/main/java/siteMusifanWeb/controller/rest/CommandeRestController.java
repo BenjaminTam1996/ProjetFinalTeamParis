@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -44,5 +45,11 @@ public class CommandeRestController {
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable("id") Long id) {
 		commandeService.delete(commandeService.byId(id));
+	}
+	
+	@GetMapping("/{id}")
+	@JsonView({JsonViews.CommandeAvecConsert.class,})
+	public Commande byId(@PathVariable("id") Long id) {
+		return commandeService.byId(id);
 	}
 }
