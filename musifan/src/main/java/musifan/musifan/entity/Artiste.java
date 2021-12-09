@@ -58,7 +58,7 @@ public class Artiste extends Compte {
 	
 	@OneToMany(mappedBy = "artiste", fetch = FetchType.LAZY)
 	@JsonView({JsonViews.UtilisateurAvecPublicationsArtiste.class, JsonViews.ArtisteComplet.class})	
-	private List<Publication> publications = new ArrayList<Publication>();
+	private Set<Publication> publications = new HashSet<Publication>();
 	
 	@OneToMany(mappedBy = "id.artiste")
 	@JsonView({JsonViews.ArtisteComplet.class, JsonViews.UtilisateurAvecAlbumsArtiste.class})
@@ -114,11 +114,11 @@ public class Artiste extends Compte {
 		this.description = description;
 	}
 
-	public List<Publication> getPublications() {
+	public Set<Publication> getPublications() {
 		return publications;
 	}
 
-	public void setPublications(List<Publication> publications) {
+	public void setPublications(Set<Publication> publications) {
 		this.publications = publications;
 	}
 

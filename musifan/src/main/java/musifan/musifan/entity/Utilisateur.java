@@ -45,7 +45,7 @@ public class Utilisateur extends Compte{
 	
 	@OneToMany(mappedBy = "utilisateur")
 	@JsonView({JsonViews.UtilisateurAvecCommandes.class,})
-	private List<Commande> listeConcert = new ArrayList<Commande>();
+	private Set<Commande> listeConcert = new HashSet<Commande>();
 	
 	@OneToMany(mappedBy = "id.utilisateur")
 	@JsonView({JsonViews.UtilisateurAvecArtiste.class,})
@@ -81,11 +81,11 @@ public class Utilisateur extends Compte{
 		this.pseudo = pseudo;
 	}
 
-	public List<Commande> getListeConcert() {
+	public Set<Commande> getListeConcert() {
 		return listeConcert;
 	}
 
-	public void setListeConcert(List<Commande> listeConcert) {
+	public void setListeConcert(Set<Commande> listeConcert) {
 		this.listeConcert = listeConcert;
 	}
 

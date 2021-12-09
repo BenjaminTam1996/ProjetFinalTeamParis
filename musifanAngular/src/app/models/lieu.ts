@@ -16,7 +16,7 @@ export class Lieu {
    * Getter id
    * @return {number }
    */
-  public get id(): number {
+  public get id(): number | undefined {
     return this._id;
   }
 
@@ -24,7 +24,7 @@ export class Lieu {
    * Setter id
    * @param {number } value
    */
-  public set id(value: number) {
+  public set id(value: number | undefined) {
     this._id = value;
   }
 
@@ -32,7 +32,7 @@ export class Lieu {
    * Getter nom
    * @return {string }
    */
-  public get nom(): string {
+  public get nom(): string | undefined {
     return this._nom;
   }
 
@@ -40,7 +40,7 @@ export class Lieu {
    * Setter nom
    * @param {string } value
    */
-  public set nom(value: string) {
+  public set nom(value: string | undefined) {
     this._nom = value;
   }
 
@@ -48,7 +48,7 @@ export class Lieu {
    * Getter numRue
    * @return {string }
    */
-  public get numRue(): string {
+  public get numRue(): string | undefined {
     return this._numRue;
   }
 
@@ -56,7 +56,7 @@ export class Lieu {
    * Setter numRue
    * @param {string } value
    */
-  public set numRue(value: string) {
+  public set numRue(value: string | undefined) {
     this._numRue = value;
   }
 
@@ -64,7 +64,7 @@ export class Lieu {
    * Getter rue
    * @return {string }
    */
-  public get rue(): string {
+  public get rue(): string | undefined {
     return this._rue;
   }
 
@@ -72,7 +72,7 @@ export class Lieu {
    * Setter rue
    * @param {string } value
    */
-  public set rue(value: string) {
+  public set rue(value: string | undefined) {
     this._rue = value;
   }
 
@@ -80,7 +80,7 @@ export class Lieu {
    * Getter codePostal
    * @return {string }
    */
-  public get codePostal(): string {
+  public get codePostal(): string | undefined {
     return this._codePostal;
   }
 
@@ -88,7 +88,7 @@ export class Lieu {
    * Setter codePostal
    * @param {string } value
    */
-  public set codePostal(value: string) {
+  public set codePostal(value: string | undefined) {
     this._codePostal = value;
   }
 
@@ -96,7 +96,7 @@ export class Lieu {
    * Getter ville
    * @return {string }
    */
-  public get ville(): string {
+  public get ville(): string | undefined {
     return this._ville;
   }
 
@@ -104,7 +104,7 @@ export class Lieu {
    * Setter ville
    * @param {string } value
    */
-  public set ville(value: string) {
+  public set ville(value: string | undefined) {
     this._ville = value;
   }
 
@@ -112,7 +112,7 @@ export class Lieu {
    * Getter pays
    * @return {string }
    */
-  public get pays(): string {
+  public get pays(): string | undefined {
     return this._pays;
   }
 
@@ -120,7 +120,7 @@ export class Lieu {
    * Setter pays
    * @param {string } value
    */
-  public set pays(value: string) {
+  public set pays(value: string | undefined) {
     this._pays = value;
   }
 
@@ -128,7 +128,7 @@ export class Lieu {
    * Getter concerts
    * @return {Concert[] }
    */
-  public get concerts(): Concert[] {
+  public get concerts(): Concert[] | undefined {
     return this._concerts;
   }
 
@@ -136,7 +136,7 @@ export class Lieu {
    * Setter concerts
    * @param {Concert[] } value
    */
-  public set concerts(value: Concert[]) {
+  public set concerts(value: Concert[] | undefined) {
     this._concerts = value;
   }
 }

@@ -39,7 +39,7 @@ public class AlbumService {
 		if (violations.isEmpty()) {
 			albumRepository.save(album);
 			ligneAlbumRepository.saveAll(album.getLignesAlbums());
-			List<Chansons> chansons = album.getChansons();
+			Set<Chansons> chansons = album.getChansons();
 			for(Chansons c : chansons) {
 				chansonsService.save(c);
 			}

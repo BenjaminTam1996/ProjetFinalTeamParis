@@ -26,11 +26,11 @@ import com.fasterxml.jackson.annotation.JsonView;
 @Table(name = "album")
 @NamedQueries({
 	@NamedQuery(name="Album.byKeyWithChansons",
-			query="select al from Album al left join fetch al.chansons where al.id=:key"),
+			query="select distinct al from Album al left join fetch al.chansons where al.id=:key"),
 	@NamedQuery(name="Album.byKeyWithArtistes",
-			query="select al from Album al left join fetch al.lignesAlbums where al.id=:key"),
+			query="select distinct al from Album al left join fetch al.lignesAlbums where al.id=:key"),
 	@NamedQuery(name="Album.byKeyWithChansonsAndArtistes",
-	query="select al from Album al left join fetch al.chansons left join fetch al.lignesAlbums where al.id=:key")
+	query="select distinct al from Album al left join fetch al.chansons left join fetch al.lignesAlbums where al.id=:key")
 })
 @SequenceGenerator(name = "seqAlbum", sequenceName = "seq_album", allocationSize = 1,initialValue = 100)
 public class Album {
@@ -51,7 +51,7 @@ public class Album {
 	
 	@OneToMany(mappedBy = "album", fetch = FetchType.LAZY)
 	@JsonView({JsonViews.AlbumComplet.class,})
-	private List<Chansons> chansons = new ArrayList<Chansons>();
+	private Set<Chansons> chansons = new HashSet<Chansons>();
 	
 	@OneToMany(mappedBy = "id.album")
 	@JsonView({JsonViews.AlbumAvecArtistes.class,})
@@ -114,12 +114,12 @@ public class Album {
 	}
 
 
-	public List<Chansons> getChansons() {
+	public Set<Chansons> getChansons() {
 		return chansons;
 	}
 
 
-	public void setChansons(List<Chansons> chansons) {
+	public void setChansons(Set<Chansons> chansons) {
 		this.chansons = chansons;
 	}
 

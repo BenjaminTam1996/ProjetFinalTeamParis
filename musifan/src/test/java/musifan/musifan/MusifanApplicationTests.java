@@ -2,6 +2,9 @@ package musifan.musifan;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,7 @@ import musifan.musifan.entity.Concert;
 import musifan.musifan.entity.Lieu;
 import musifan.musifan.entity.Publication;
 import musifan.musifan.entity.Utilisateur;
+import musifan.musifan.repositories.ChansonsRepository;
 import musifan.musifan.services.AlbumService;
 import musifan.musifan.services.ArtisteService;
 import musifan.musifan.services.CommandeService;
@@ -47,6 +51,9 @@ class MusifanApplicationTests {
 	@Autowired
 	private CommandeService commandeService;
 	
+	@Autowired
+	private ChansonsRepository chansonRepository;
+	
 	@Test
 	void contextLoads() {
 		
@@ -57,22 +64,25 @@ class MusifanApplicationTests {
 		artisteService.save(theWeeknd);
 		Album album = new Album("After Hours",LocalDate.of(2020, Month.MARCH, 20));
 		album.addArtiste(theWeeknd);
-		album.addChansons(new Chansons("Alone Again","4:10",album));
-		album.addChansons(new Chansons("Too Late","3:59",album));
-		album.addChansons(new Chansons("Hardest to Love","3:31",album));
-		album.addChansons(new Chansons("Scared to Live","3:11",album));
-		album.addChansons(new Chansons("Snowchild","4:07",album));
-		album.addChansons(new Chansons("Escape from LA","5:55",album));
-		album.addChansons(new Chansons("Heartless","3:18",album));
-		album.addChansons(new Chansons("Faith","4:43",album));
-		album.addChansons(new Chansons("Blinding Lights","3:20",album));
-		album.addChansons(new Chansons("In Your Eyes","3:57",album));
-		album.addChansons(new Chansons("Save Your Tears","3:35",album));
-		album.addChansons(new Chansons("Repeat After Me","3:15",album));
-		album.addChansons(new Chansons("Faith","4:43",album));
-		album.addChansons(new Chansons("After Hours","6:01",album));
-		album.addChansons(new Chansons("Until I Bleed Out","3:10",album));
 		albumService.save(album);
+		List<Chansons> chansons = new ArrayList<Chansons>();
+		chansons.add(new Chansons("Alone Again","4:10",album));
+		chansons.add(new Chansons("Too Late","3:59",album));
+		chansons.add(new Chansons("Hardest to Love","3:31",album));
+		chansons.add(new Chansons("Scared to Live","3:11",album));
+		chansons.add(new Chansons("Snowchild","4:07",album));
+		chansons.add(new Chansons("Escape from LA","5:55",album));
+		chansons.add(new Chansons("Heartless","3:18",album));
+		chansons.add(new Chansons("Faith","4:43",album));
+		chansons.add(new Chansons("Blinding Lights","3:20",album));
+		chansons.add(new Chansons("In Your Eyes","3:57",album));
+		chansons.add(new Chansons("Save Your Tears","3:35",album));
+		chansons.add(new Chansons("Repeat After Me","3:15",album));
+		chansons.add(new Chansons("Faith","4:43",album));
+		chansons.add(new Chansons("After Hours","6:01",album));
+		chansons.add(new Chansons("Until I Bleed Out","3:10",album));
+		chansonRepository.saveAll(chansons);
+		
 		
 		Publication publication = new Publication("Mon tout nouveau album ", theWeeknd);
 		theWeeknd.addPublication(publication);
@@ -89,39 +99,42 @@ class MusifanApplicationTests {
 		artisteService.save(kygo);
 		album = new Album("Cloud Nine",LocalDate.of(2016, Month.MAY, 13));
 		album.addArtiste(kygo);
-		album.addChansons(new Chansons("Intro","2:08",album));
-		album.addChansons(new Chansons("Stole The Show","3:42",album));
-		album.addChansons(new Chansons("Fiction","4:03",album));
-		album.addChansons(new Chansons("Raging","3:44",album));
-		album.addChansons(new Chansons("Firestone","4:33",album));
-		album.addChansons(new Chansons("Happy Birthday","4:10",album));
-		album.addChansons(new Chansons("I'm In Love","3:32",album));
-		album.addChansons(new Chansons("Oasis ","3:25",album));
-		album.addChansons(new Chansons("Not Alone","3:25",album));
-		album.addChansons(new Chansons("Serious","3:54",album));
-		album.addChansons(new Chansons("Stay","3:59",album));
-		album.addChansons(new Chansons("Nothing Left","3:56",album));
-		album.addChansons(new Chansons("Fragile","3:50",album));
-		album.addChansons(new Chansons("Carry Me","3:53",album));
-		album.addChansons(new Chansons("For What It's Worth","3:03",album));
 		albumService.save(album);
+		chansons = new ArrayList<Chansons>();
+		chansons.add(new Chansons("Intro","2:08",album));
+		chansons.add(new Chansons("Stole The Show","3:42",album));
+		chansons.add(new Chansons("Fiction","4:03",album));
+		chansons.add(new Chansons("Raging","3:44",album));
+		chansons.add(new Chansons("Firestone","4:33",album));
+		chansons.add(new Chansons("Happy Birthday","4:10",album));
+		chansons.add(new Chansons("I'm In Love","3:32",album));
+		chansons.add(new Chansons("Oasis ","3:25",album));
+		chansons.add(new Chansons("Not Alone","3:25",album));
+		chansons.add(new Chansons("Serious","3:54",album));
+		chansons.add(new Chansons("Stay","3:59",album));
+		chansons.add(new Chansons("Nothing Left","3:56",album));
+		chansons.add(new Chansons("Fragile","3:50",album));
+		chansons.add(new Chansons("Carry Me","3:53",album));
+		chansons.add(new Chansons("For What It's Worth","3:03",album));
+		chansonRepository.saveAll(chansons);
 		
 		//DJ Snake + Bipolar Sunshine
 		//------------------------------------------------------------------------------------------------------------------------------------------		
 		Artiste snake = new Artiste("DJ Snake");
 		artisteService.save(snake);
 		album = new Album("Middle",LocalDate.of(2015, Month.OCTOBER, 16));
-		album.addChansons(new Chansons("Middle","3:40",album));
 		album.addArtiste(snake);
 		Artiste sunshine = new Artiste("Bipolar Sunshine");
 		artisteService.save(sunshine);
 		album.addArtiste(sunshine);
 		albumService.save(album);
+		chansons = new ArrayList<Chansons>();
+		chansons.add(new Chansons("Middle","3:40",album));
+		chansonRepository.saveAll(chansons);
 		
 		//Tchami + Malaa
 		//------------------------------------------------------------------------------------------------------------------------------------------		
 		album = new Album("Made In France",LocalDate.of(2019, Month.JULY, 26));
-		album.addChansons(new Chansons("Made In France","4:11",album));
 		album.addArtiste(artisteService.byNomArtisteLikeIgnoreCase("DJ Snake").get(0));
 		Artiste tchami = new Artiste("Tchami");
 		artisteService.save(tchami);
@@ -130,16 +143,21 @@ class MusifanApplicationTests {
 		artisteService.save(malaa);
 		album.addArtiste(malaa);
 		albumService.save(album);
+		chansons = new ArrayList<Chansons>();
+		chansons.add(new Chansons("Made In France","4:11",album));
+		chansonRepository.saveAll(chansons);
 		
 		// Petit Biscuit
 		//------------------------------------------------------------------------------------------------------------------------------------------		
 		album = new Album("Presence",LocalDate.of(2017, Month.NOVEMBER, 10));
 		Artiste petitBiscuit = new Artiste("Petit Biscuit");
 		artisteService.save(petitBiscuit);
-		album.addArtiste(petitBiscuit);
-		album.addChansons(new Chansons("Creation Comes Alive","3:18",album));
-		album.addChansons(new Chansons("Follow Me","4:41",album));
 		albumService.save(album);
+		album.addArtiste(petitBiscuit);
+		chansons = new ArrayList<Chansons>();
+		chansons.add(new Chansons("Creation Comes Alive","3:18",album));
+		chansons.add(new Chansons("Follow Me","4:41",album));
+		chansonRepository.saveAll(chansons);
 		
 		// Petit Biscuit
 		//------------------------------------------------------------------------------------------------------------------------------------------		
@@ -147,11 +165,14 @@ class MusifanApplicationTests {
 		artisteService.save(sheeran);
 		album = new Album("Divide", LocalDate.of(2017, Month.MARCH, 3));
 		album.addArtiste(sheeran);
-		album.addChansons(new Chansons("Perfect", "4:39", album));
-		album.addChansons(new Chansons("Shape of You", "3:53", album));
-		album.addChansons(new Chansons("Happier", "4:21", album));
-		album.addChansons(new Chansons("Castle on the Hill", "3:39", album));
 		albumService.save(album);
+		chansons = new ArrayList<Chansons>();
+		chansons.add(new Chansons("Perfect", "4:39", album));
+		chansons.add(new Chansons("Shape of You", "3:53", album));
+		chansons.add(new Chansons("Happier", "4:21", album));
+		chansons.add(new Chansons("Castle on the Hill", "3:39", album));
+		chansonRepository.saveAll(chansons);
+		
 		
 		publication = new Publication("Sortie de mon prochaine album prevue prochainement", sheeran);
 		sheeran.addPublication(publication);

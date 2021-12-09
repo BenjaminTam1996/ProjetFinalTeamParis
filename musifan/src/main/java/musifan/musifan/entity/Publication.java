@@ -33,7 +33,7 @@ public class Publication {
 	private String desciption;
 	
 	@Column(name="publication_image")
-	@Lob
+	@Lob 
 	@JsonView({JsonViews.Common.class,})
 	private byte[] image;
 	

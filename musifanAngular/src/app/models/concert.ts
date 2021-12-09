@@ -1,3 +1,5 @@
+import { Lieu } from './lieu';
+
 export class Concert {
   public constructor(
     private _id?: number | undefined,
@@ -13,7 +15,7 @@ export class Concert {
    * Getter id
    * @return {number }
    */
-  public get id(): number {
+  public get id(): number | undefined {
     return this._id;
   }
 
@@ -21,7 +23,7 @@ export class Concert {
    * Setter id
    * @param {number } value
    */
-  public set id(value: number) {
+  public set id(value: number | undefined) {
     this._id = value;
   }
 
@@ -29,7 +31,7 @@ export class Concert {
    * Getter nom
    * @return {string }
    */
-  public get nom(): string {
+  public get nom(): string | undefined {
     return this._nom;
   }
 
@@ -37,7 +39,7 @@ export class Concert {
    * Setter nom
    * @param {string } value
    */
-  public set nom(value: string) {
+  public set nom(value: string | undefined) {
     this._nom = value;
   }
 
@@ -45,7 +47,7 @@ export class Concert {
    * Getter date
    * @return {Date }
    */
-  public get date(): Date {
+  public get date(): Date | undefined {
     return this._date;
   }
 
@@ -53,7 +55,7 @@ export class Concert {
    * Setter date
    * @param {Date } value
    */
-  public set date(value: Date) {
+  public set date(value: Date | undefined) {
     this._date = value;
   }
 
@@ -61,7 +63,7 @@ export class Concert {
    * Getter nbPlace
    * @return {number }
    */
-  public get nbPlace(): number {
+  public get nbPlace(): number | undefined {
     return this._nbPlace;
   }
 
@@ -69,7 +71,7 @@ export class Concert {
    * Setter nbPlace
    * @param {number } value
    */
-  public set nbPlace(value: number) {
+  public set nbPlace(value: number | undefined) {
     this._nbPlace = value;
   }
 
@@ -77,7 +79,7 @@ export class Concert {
    * Getter prix
    * @return {number }
    */
-  public get prix(): number {
+  public get prix(): number | undefined {
     return this._prix;
   }
 
@@ -85,7 +87,7 @@ export class Concert {
    * Setter prix
    * @param {number } value
    */
-  public set prix(value: number) {
+  public set prix(value: number | undefined) {
     this._prix = value;
   }
 
@@ -93,7 +95,7 @@ export class Concert {
    * Getter lieu
    * @return {Lieu }
    */
-  public get lieu(): Lieu {
+  public get lieu(): Lieu | undefined {
     return this._lieu;
   }
 
@@ -101,7 +103,7 @@ export class Concert {
    * Setter lieu
    * @param {Lieu } value
    */
-  public set lieu(value: Lieu) {
+  public set lieu(value: Lieu | undefined) {
     this._lieu = value;
   }
 
@@ -109,7 +111,7 @@ export class Concert {
    * Getter artistes
    * @return {Artiste[] }
    */
-  public get artistes(): Artiste[] {
+  public get artistes(): Artiste[] | undefined {
     return this._artistes;
   }
 
@@ -117,7 +119,7 @@ export class Concert {
    * Setter artistes
    * @param {Artiste[] } value
    */
-  public set artistes(value: Artiste[]) {
+  public set artistes(value: Artiste[] | undefined) {
     this._artistes = value;
   }
 }

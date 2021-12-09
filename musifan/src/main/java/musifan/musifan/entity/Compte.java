@@ -26,7 +26,6 @@ public class Compte {
 	@JsonView({JsonViews.Common.class,})
 	private String mail;
 	
-	@JsonView({JsonViews.Common.class,})
 	private String password;
 	
 	@JsonView({JsonViews.Common.class,})
