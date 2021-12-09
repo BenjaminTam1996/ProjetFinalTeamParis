@@ -36,7 +36,7 @@ public class ConcertRestController {
 		return concertService.allConcert();
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/{id}") 
 	@JsonView({JsonViews.ConcertComplet.class,})
 	public Concert byId(@PathVariable("id") Long id) {
 		return concertService.byId(id);
@@ -44,23 +44,29 @@ public class ConcertRestController {
 	
 	@PostMapping("")
 	@ResponseStatus(code = HttpStatus.CREATED)
-	@JsonView({JsonViews.ConcertAvecLieu.class,})
+	@JsonView({JsonViews.ConcertComplet.class,})
 	public Concert create(@Valid @RequestBody Concert concert,BindingResult br) {
-		concertService.save(concert);
+		concert.getLigneConcerts().forEach(lc->{
+			lc.getId().setConcert(concert);
+		});
+		concertService.create(concert);
 		return concert;
 	}
 	
 	@PutMapping("/{id}")
-	@JsonView({JsonViews.ConcertAvecLieu.class,})
+	@JsonView({JsonViews.ConcertComplet.class,})
 	public Concert update(@PathVariable("id") Long id,@Valid @RequestBody Concert concert,BindingResult br) {
 		//On remonte le client en bdd pour récuperer sa bonne version
+		concert.getLigneConcerts().forEach(lc->{
+			lc.getId().setConcert(concert);
+		});
 		Concert concertEnBase = concertService.byId(id);
 		concertEnBase.setDate(concert.getDate());
 		concertEnBase.setLieu(concert.getLieu());
 		concertEnBase.setNbPlace(concert.getNbPlace());
 		concertEnBase.setNom(concert.getNom());
 		concertEnBase.setPrix(concert.getPrix());
-		concertService.save(concert);
+		concertService.update(concert);
 		return concert;
 	}
 	

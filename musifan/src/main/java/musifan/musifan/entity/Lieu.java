@@ -1,5 +1,6 @@
 package musifan.musifan.entity;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -53,7 +54,7 @@ public class Lieu {
 	
 	@OneToMany(mappedBy = "lieu", fetch = FetchType.LAZY)
 	@JsonView(JsonViews.LieuAvecConcert.class)
-	private Set<Concert> listeConcerts;
+	private Set<Concert> listeConcerts = new HashSet<Concert>();
 	
 	//Constructeurs
 	public Lieu() {

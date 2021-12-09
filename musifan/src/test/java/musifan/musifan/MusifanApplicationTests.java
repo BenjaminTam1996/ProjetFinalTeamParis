@@ -166,37 +166,37 @@ class MusifanApplicationTests {
 		concert.addArtiste(artisteService.byNomArtisteLikeIgnoreCase("DJ Snake").get(0));
 		concert.addArtiste(artisteService.byNomArtisteLikeIgnoreCase("Tchami").get(0));
 		concert.addArtiste(artisteService.byNomArtisteLikeIgnoreCase("Malaa").get(0));
-		concertService.save(concert);
+		concertService.create(concert);
 		concert = new Concert("Kygo French Tour",LocalDate.of(2022, Month.MAY, 10),lieu,6000,45);
 		concert.addArtiste(artisteService.byNomArtisteLikeIgnoreCase("Kygo").get(0));
-		concertService.save(concert);
+		concertService.create(concert);
 		Concert afterHours = new Concert("The After Hours Tour", LocalDate.of(2022, Month.JULY, 21), lieu, 10000, 50);
 		afterHours.addArtiste(theWeeknd);
-		concertService.save(afterHours);
+		concertService.create(afterHours);
 
 
 		lieu =new Lieu("La Cigale","120","Boulevard de Rochechouart","75018","Paris","France");
 		lieuService.save(lieu);
 		Concert problems = new Concert("Problems by Petit Biscuit",LocalDate.of(2022, Month.MARCH, 16),lieu,2000,30);
 		problems.addArtiste(petitBiscuit);
-		concertService.save(problems);
+		concertService.create(problems);
 
 		
 		lieu =new Lieu("L'Olympia","28","Boulevard des Capucine","75009","Paris","France");
 		lieuService.save(lieu);
 		concert = new Concert("Toca by Timmy Trumpet",LocalDate.of(2022, Month.APRIL, 07),lieu,2200,45);
-		concertService.save(concert);
+		concertService.create(concert);
 		
 		lieu =new Lieu("Le Zénith","211","Boulevard Jean-Jaurès Parc de La Villette","75019","Paris","France");
 		lieuService.save(lieu);
 		concert = new Concert("Thanks God",LocalDate.of(2022, Month.SEPTEMBER, 04),lieu,1500,30);
-		concertService.save(concert);
+		concertService.create(concert);
 		
 		lieu =new Lieu("La Défense Arena","8","Rue des Sorins","92000","Nanterre","France");
 		lieuService.save(lieu);
 		Concert edSheeranTour = new Concert("= Ed Sheran Tour",LocalDate.of(2022, Month.JULY, 26),lieu,25000,70);
 		edSheeranTour.addArtiste(sheeran);
-		concertService.save(edSheeranTour);
+		concertService.create(edSheeranTour);
 		
 		
 		lieu =new Lieu("Stade Pierre Mauroy","261","Boulevard de Tournais","59650","Villeneuve-d'Ascq","France");
@@ -205,7 +205,7 @@ class MusifanApplicationTests {
 		lieu =new Lieu("Halle Tony Garnier","20","Place Docteurs Charles et Christophe Mérieux","69007","Lyon","France");
 		lieuService.save(lieu);
 		concert = new Concert("Chainsmockers Europe Tour",LocalDate.of(2022, Month.JULY, 20),lieu,15000,80);
-		concertService.save(concert);
+		concertService.create(concert);
 		
 		lieu =new Lieu("Sud de France Arena",null,"Route de la Foire","34470","Pérols","France");
 		lieuService.save(lieu);
@@ -220,14 +220,14 @@ class MusifanApplicationTests {
 		lieu =new Lieu("Palau Sant Jordi","5","Passeig Olímpic","08038","Barcelone","Espagne");
 		lieuService.save(lieu);
 		concert = new Concert("Chainsmockers Europe Tour",LocalDate.of(2022, Month.JULY, 27),lieu,17000,80);
-		concertService.save(concert);
+		concertService.create(concert);
 		
 		lieu =new Lieu("Manchester Arena",null,"Victoria Station Approach",null,"Manchester","Royaume-Uni");
 		lieuService.save(lieu);
 		concert = new Concert("Live Aid 2022",LocalDate.of(2022, Month.AUGUST, 12),lieu,21000,100);
 		concert.addArtiste(artisteService.byNomArtisteLikeIgnoreCase("The Weeknd").get(0));
 
-		concertService.save(concert);
+		concertService.create(concert);
 		
 		
 		////Creation Utilisateurs

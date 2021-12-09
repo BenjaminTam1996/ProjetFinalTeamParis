@@ -46,6 +46,9 @@ public class AlbumRestController {
 	@ResponseStatus(code = HttpStatus.CREATED)
 	@JsonView({JsonViews.AlbumComplet.class,})
 	public Album create(@Valid @RequestBody Album album,BindingResult br) {
+		album.getLignesAlbums().forEach(la->{
+			la.getId().setAlbum(album);
+		});
 		albumService.save(album);
 		return album;
 	}

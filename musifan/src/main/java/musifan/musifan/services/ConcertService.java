@@ -15,6 +15,7 @@ import musifan.musifan.entity.Lieu;
 import musifan.musifan.exceptions.ArtisteException;
 import musifan.musifan.exceptions.ConcertException;
 import musifan.musifan.repositories.ConcertRepository;
+import musifan.musifan.repositories.LieuRepository;
 import musifan.musifan.repositories.LigneConcertRepository;
 
 @Service 
@@ -26,13 +27,30 @@ public class ConcertService {
 	private LigneConcertRepository ligneconcertRepository;
 	
 	@Autowired
+	private LieuRepository lieuRepository;
+	
+	@Autowired
 	private Validator validator;
 	
-	public void save(Concert concert) {
+	public void create(Concert concert) {
 		Set<ConstraintViolation<Concert>> violations = validator.validate(concert);
 		if(violations.isEmpty()) {
 			concertRepository.save(concert);
+			concert.getLieu().getListeConcerts().add(concert);
 			ligneconcertRepository.saveAll(concert.getLigneConcerts());
+
+		}else {
+			throw new ConcertException();
+		}	
+	}	
+	
+	public void update(Concert concert) {
+		Set<ConstraintViolation<Concert>> violations = validator.validate(concert);
+		if(violations.isEmpty()) {
+			concert.getLieu().getListeConcerts().add(concert);
+			ligneconcertRepository.saveAll(concert.getLigneConcerts());
+			concertRepository.save(concert);
+
 		}else {
 			throw new ConcertException();
 		}	

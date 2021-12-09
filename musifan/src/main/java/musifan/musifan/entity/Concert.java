@@ -81,6 +81,17 @@ public class Concert {
 		this.nbPlace = nbPlace;
 		this.prix = prix;
 	}
+	
+	
+
+	public Concert(String nom, LocalDate date, Lieu lieu, int nbPlace, int prix, Set<LigneConcert> ligneConcerts) {
+		this.nom = nom;
+		this.date = date;
+		this.lieu = lieu;
+		this.nbPlace = nbPlace;
+		this.prix = prix;
+		this.ligneConcerts = ligneConcerts;
+	}
 
 	public Long getId() {
 		return id;
