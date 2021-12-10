@@ -30,7 +30,11 @@ export class ConcertComponent implements OnInit {
 
     this.dateControl = this.fb.control('', [Validators.required]);
 
-    this.placesControl = this.fb.control('', [Validators.required]);
+    this.placesControl = this.fb.control('', [
+      Validators.required,
+      Validators.pattern(/^\d+$/),
+      Validators.min(0),
+    ]);
 
     this.prixControl = this.fb.control('', [Validators.required]);
 
