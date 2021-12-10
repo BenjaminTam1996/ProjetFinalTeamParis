@@ -9,11 +9,39 @@ public class Chanson {
 	private String duree;
 	private Album album;
 	
-	public Chanson(Chansons chanson) {
-		this.id = chanson.getId();
-		this.titre = chanson.getTitre();
-		this.duree = chanson.getDuree();
-		this.album = new Album(chanson.getAlbum());
+	public Chanson() {
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getTitre() {
+		return titre;
+	}
+
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
+
+	public String getDuree() {
+		return duree;
+	}
+
+	public void setDuree(String duree) {
+		this.duree = duree;
+	}
+
+	public Album getAlbum() {
+		return album;
+	}
+
+	public void setAlbum(Album album) {
+		this.album = album;
 	}
 	
 	
