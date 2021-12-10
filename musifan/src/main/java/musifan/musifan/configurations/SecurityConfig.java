@@ -34,8 +34,30 @@
 //					.antMatchers("/api/auth").authenticated()
 //					.antMatchers(HttpMethod.POST, "/api/utilisateur").permitAll()
 //					.antMatchers(HttpMethod.POST, "/api/artiste").permitAll()
-//					.antMatchers("/api/**").hasRole("USER")
-//				.and()
+//					.antMatchers("/api/utilsateur/**").hasRole("UILISATEUR")
+//					.antMatchers("/api/artiste/**").hasRole("ARTISTE")
+//					//Auth lieu
+//					.antMatchers(HttpMethod.POST,"/api/lieu/**").hasRole("ARTISTE")
+//					.antMatchers(HttpMethod.GET, "/api/lieu:**").hasAnyRole("ARTISTE","UILISATEUR")
+//					//Auth concert
+//					.antMatchers(HttpMethod.POST,"/api/concert/**").hasRole("ARTISTE")
+//					.antMatchers(HttpMethod.PUT,"/api/concert/**").hasRole("ARTISTE")
+//					.antMatchers(HttpMethod.DELETE,"/api/concert/**").hasRole("ARTISTE")
+//					.antMatchers(HttpMethod.GET, "/api/concert/**").hasAnyRole("ARTISTE","UILISATEUR")
+//					//Auth album
+//					.antMatchers(HttpMethod.POST,"/api/album/**").hasRole("ARTISTE")
+//					.antMatchers(HttpMethod.DELETE,"/api/album/**").hasRole("ARTISTE")
+//					.antMatchers(HttpMethod.GET, "/api/album/**").hasAnyRole("ARTISTE","UILISATEUR")
+//					//Auth chansons
+//					.antMatchers(HttpMethod.GET, "/api/chansons/**").hasAnyRole("ARTISTE","UILISATEUR")
+//					//Auth publications
+//					.antMatchers(HttpMethod.POST,"/api/publication/**").hasRole("ARTISTE")
+//					.antMatchers(HttpMethod.DELETE,"/api/publication/**").hasRole("ARTISTE")
+//					.antMatchers(HttpMethod.GET, "/api/publication/**").hasAnyRole("ARTISTE","UILISATEUR")
+//					//Auth commandes
+//					.antMatchers(HttpMethod.POST,"/api/commande/**").hasRole("UILISATEUR")
+//					.antMatchers(HttpMethod.DELETE,"/api/commande/**").hasRole("UILISATEUR")
+//				.and()	
 //				.httpBasic();
 //		//@formatter:on
 //	}
