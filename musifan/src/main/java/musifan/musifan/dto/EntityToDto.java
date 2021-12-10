@@ -7,6 +7,8 @@ public class EntityToDto {
 		albumDto.setTitre(album.getTitre());
 		albumDto.setId(album.getId());
 		albumDto.setPhoto(album.getPhoto());
+		albumDto.setChansons());
+		
 		return null;
 	}
 
