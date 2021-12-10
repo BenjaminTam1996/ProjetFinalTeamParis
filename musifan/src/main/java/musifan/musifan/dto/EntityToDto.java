@@ -5,6 +5,7 @@ import java.util.Set;
 
 import musifan.musifan.entity.Chansons;
 import musifan.musifan.entity.LigneAlbum;
+import musifan.musifan.entity.LigneConcert;
 
 public class EntityToDto {
 	
@@ -71,8 +72,28 @@ public class EntityToDto {
 	public static Concert ConcertToConcertDto(musifan.musifan.entity.Concert concert) {
 		//Conversion d'un album entity en album dto
 		Concert concertDto = new Concert();
-		albumDto.setTitre(album.getTitre());
-		albumDto.setId(album.getId());
-		albumDto.setPhoto(album.getPhoto());
+		concertDto.setId(concert.getId());
+		concertDto.setNom(concert.getNom());
+		concertDto.setDate(concert.getDate());
+		concertDto.setLieu(LieuToLieuDto(concert.getLieu()));
+		concertDto.setNbPlace(concert.getNbPlace());
+		concertDto.setPrix(concert.getPrix());
+		
+		for (LigneConcert lc : concert.getLigneConcerts()){
+			Artiste artisteDto = new Artiste();
+			artisteDto.setId(lc.getId().getArtiste().getId());
+			artisteDto.setMail(lc.getId().getArtiste().getMail());
+			artisteDto.setPassword(lc.getId().getArtiste().getPassword());
+			artisteDto.setNom(lc.getId().getArtiste().getNom());
+			artisteDto.setPrenom(lc.getId().getArtiste().getPrenom());
+			artisteDto.setTelephone(lc.getId().getArtiste().getTelephone());
+			artisteDto.setPhotoProfil(lc.getId().getArtiste().getPhotoProfil());
+			artisteDto.setPhotoBanniere(lc.getId().getArtiste().getPhotoBanniere());
+			artisteDto.setNomArtiste(lc.getId().getArtiste().getNomArtiste());
+			artisteDto.setDescription(lc.getId().getArtiste().getDescription());
+			concertDto.getArtistes().add(artisteDto);
+		}
+		
+		return concertDto;
 	}
 }

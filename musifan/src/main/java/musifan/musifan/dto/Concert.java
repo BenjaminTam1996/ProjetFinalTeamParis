@@ -25,7 +25,7 @@ public class Concert {
 	private int nbPlace;	
 	private int prix;
 	
-	private Set<LigneConcert> ligneConcerts = new HashSet<LigneConcert>();
+	private Set<Artiste> artistes = new HashSet<Artiste>();
 	
 	public Long getId() {
 		return id;
@@ -64,11 +64,11 @@ public class Concert {
 		this.prix = prix;
 	}
 	
-	public Set<LigneConcert> getLigneConcerts() {
-		return ligneConcerts;
+	public Set<Artiste> getArtistes() {
+		return artistes;
 	}
-	public void setLigneConcerts(Set<LigneConcert> ligneConcerts) {
-		this.ligneConcerts = ligneConcerts;
+	public void setArtistes(Set<Artiste> ligneConcerts) {
+		this.artistes = ligneConcerts;
 	}
 
 	
