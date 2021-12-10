@@ -64,7 +64,7 @@ class MusifanApplicationTests {
 		artisteService.save(theWeeknd);
 		Album album = new Album("After Hours",LocalDate.of(2020, Month.MARCH, 20));
 		album.addArtiste(theWeeknd);
-		albumService.save(album);
+		albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
 		List<Chansons> chansons = new ArrayList<Chansons>();
 		chansons.add(new Chansons("Alone Again","4:10",album));
 		chansons.add(new Chansons("Too Late","3:59",album));
@@ -99,7 +99,7 @@ class MusifanApplicationTests {
 		artisteService.save(kygo);
 		album = new Album("Cloud Nine",LocalDate.of(2016, Month.MAY, 13));
 		album.addArtiste(kygo);
-		albumService.save(album);
+		albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
 		chansons = new ArrayList<Chansons>();
 		chansons.add(new Chansons("Intro","2:08",album));
 		chansons.add(new Chansons("Stole The Show","3:42",album));
@@ -127,7 +127,7 @@ class MusifanApplicationTests {
 		Artiste sunshine = new Artiste("Bipolar Sunshine");
 		artisteService.save(sunshine);
 		album.addArtiste(sunshine);
-		albumService.save(album);
+		albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
 		chansons = new ArrayList<Chansons>();
 		chansons.add(new Chansons("Middle","3:40",album));
 		chansonRepository.saveAll(chansons);
@@ -142,7 +142,7 @@ class MusifanApplicationTests {
 		Artiste malaa = new Artiste("Malaa");
 		artisteService.save(malaa);
 		album.addArtiste(malaa);
-		albumService.save(album);
+		albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
 		chansons = new ArrayList<Chansons>();
 		chansons.add(new Chansons("Made In France","4:11",album));
 		chansonRepository.saveAll(chansons);
@@ -152,7 +152,7 @@ class MusifanApplicationTests {
 		album = new Album("Presence",LocalDate.of(2017, Month.NOVEMBER, 10));
 		Artiste petitBiscuit = new Artiste("Petit Biscuit");
 		artisteService.save(petitBiscuit);
-		albumService.save(album);
+		albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
 		album.addArtiste(petitBiscuit);
 		chansons = new ArrayList<Chansons>();
 		chansons.add(new Chansons("Creation Comes Alive","3:18",album));
@@ -165,7 +165,7 @@ class MusifanApplicationTests {
 		artisteService.save(sheeran);
 		album = new Album("Divide", LocalDate.of(2017, Month.MARCH, 3));
 		album.addArtiste(sheeran);
-		albumService.save(album);
+		albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
 		chansons = new ArrayList<Chansons>();
 		chansons.add(new Chansons("Perfect", "4:39", album));
 		chansons.add(new Chansons("Shape of You", "3:53", album));
@@ -187,37 +187,37 @@ class MusifanApplicationTests {
 		concert.addArtiste(artisteService.byNomArtisteLikeIgnoreCase("DJ Snake").get(0));
 		concert.addArtiste(artisteService.byNomArtisteLikeIgnoreCase("Tchami").get(0));
 		concert.addArtiste(artisteService.byNomArtisteLikeIgnoreCase("Malaa").get(0));
-		concertService.create(concert);
+		concertService.create(musifan.musifan.dto.EntityToDto.ConcertToConcertDto(concert));
 		concert = new Concert("Kygo French Tour",LocalDate.of(2022, Month.MAY, 10),lieu,6000,45);
 		concert.addArtiste(artisteService.byNomArtisteLikeIgnoreCase("Kygo").get(0));
-		concertService.create(concert);
+		concertService.create(musifan.musifan.dto.EntityToDto.ConcertToConcertDto(concert));
 		Concert afterHours = new Concert("The After Hours Tour", LocalDate.of(2022, Month.JULY, 21), lieu, 10000, 50);
 		afterHours.addArtiste(theWeeknd);
-		concertService.create(afterHours);
+		concertService.create(musifan.musifan.dto.EntityToDto.ConcertToConcertDto(afterHours));
 
 
 		lieu =new Lieu("La Cigale","120","Boulevard de Rochechouart","75018","Paris","France");
 		lieuService.save(lieu);
 		Concert problems = new Concert("Problems by Petit Biscuit",LocalDate.of(2022, Month.MARCH, 16),lieu,2000,30);
 		problems.addArtiste(petitBiscuit);
-		concertService.create(problems);
+		concertService.create(musifan.musifan.dto.EntityToDto.ConcertToConcertDto(problems));
 
 		
 		lieu =new Lieu("L'Olympia","28","Boulevard des Capucine","75009","Paris","France");
 		lieuService.save(lieu);
 		concert = new Concert("Toca by Timmy Trumpet",LocalDate.of(2022, Month.APRIL, 07),lieu,2200,45);
-		concertService.create(concert);
+		concertService.create(musifan.musifan.dto.EntityToDto.ConcertToConcertDto(concert));
 		
 		lieu =new Lieu("Le Zénith","211","Boulevard Jean-Jaurès Parc de La Villette","75019","Paris","France");
 		lieuService.save(lieu);
 		concert = new Concert("Thanks God",LocalDate.of(2022, Month.SEPTEMBER, 04),lieu,1500,30);
-		concertService.create(concert);
+		concertService.create(musifan.musifan.dto.EntityToDto.ConcertToConcertDto(concert));
 		
 		lieu =new Lieu("La Défense Arena","8","Rue des Sorins","92000","Nanterre","France");
 		lieuService.save(lieu);
 		Concert edSheeranTour = new Concert("= Ed Sheran Tour",LocalDate.of(2022, Month.JULY, 26),lieu,25000,70);
 		edSheeranTour.addArtiste(sheeran);
-		concertService.create(edSheeranTour);
+		concertService.create(musifan.musifan.dto.EntityToDto.ConcertToConcertDto(edSheeranTour));
 		
 		
 		lieu =new Lieu("Stade Pierre Mauroy","261","Boulevard de Tournais","59650","Villeneuve-d'Ascq","France");
@@ -226,7 +226,7 @@ class MusifanApplicationTests {
 		lieu =new Lieu("Halle Tony Garnier","20","Place Docteurs Charles et Christophe Mérieux","69007","Lyon","France");
 		lieuService.save(lieu);
 		concert = new Concert("Chainsmockers Europe Tour",LocalDate.of(2022, Month.JULY, 20),lieu,15000,80);
-		concertService.create(concert);
+		concertService.create(musifan.musifan.dto.EntityToDto.ConcertToConcertDto(concert));
 		
 		lieu =new Lieu("Sud de France Arena",null,"Route de la Foire","34470","Pérols","France");
 		lieuService.save(lieu);
@@ -241,14 +241,14 @@ class MusifanApplicationTests {
 		lieu =new Lieu("Palau Sant Jordi","5","Passeig Olímpic","08038","Barcelone","Espagne");
 		lieuService.save(lieu);
 		concert = new Concert("Chainsmockers Europe Tour",LocalDate.of(2022, Month.JULY, 27),lieu,17000,80);
-		concertService.create(concert);
+		concertService.create(musifan.musifan.dto.EntityToDto.ConcertToConcertDto(concert));
 		
 		lieu =new Lieu("Manchester Arena",null,"Victoria Station Approach",null,"Manchester","Royaume-Uni");
 		lieuService.save(lieu);
 		concert = new Concert("Live Aid 2022",LocalDate.of(2022, Month.AUGUST, 12),lieu,21000,100);
 		concert.addArtiste(artisteService.byNomArtisteLikeIgnoreCase("The Weeknd").get(0));
 
-		concertService.create(concert);
+		concertService.create(musifan.musifan.dto.EntityToDto.ConcertToConcertDto(concert));
 		
 		
 		////Creation Utilisateurs
