@@ -22,21 +22,89 @@ public class Lieu {
 	private String pays;
 	private Set<Concert> listeConcerts = new HashSet<Concert>();
 	
-	
-	public static Lieu LieuToLieuDto(musifan.musifan.entity.Lieu lieu) {
-		Lieu lieuDto = new Lieu();
-		lieuDto.id=lieu.getId();
-		lieuDto.nom=(lieu.getNom());
-		lieuDto.numRue=lieu.getNumRue();
-		lieuDto.rue=lieu.getRue();
-		lieuDto.codePostal=lieu.getCodePostal();
-		lieuDto.ville=lieu.getVille();
-		lieuDto.pays=lieu.getPays();
-		
-		for (musifan.musifan.entity.Concert c : lieu.getListeConcerts()){
-			Concert concertDto = new Concert();
-			//concertDto.
-		}
-		return lieuDto;
+
+	public Lieu() {
 	}
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public String getNom() {
+		return nom;
+	}
+
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+
+	public String getNumRue() {
+		return numRue;
+	}
+
+
+	public void setNumRue(String numRue) {
+		this.numRue = numRue;
+	}
+
+
+	public String getRue() {
+		return rue;
+	}
+
+
+	public void setRue(String rue) {
+		this.rue = rue;
+	}
+
+
+	public String getCodePostal() {
+		return codePostal;
+	}
+
+
+	public void setCodePostal(String codePostal) {
+		this.codePostal = codePostal;
+	}
+
+
+	public String getVille() {
+		return ville;
+	}
+
+
+	public void setVille(String ville) {
+		this.ville = ville;
+	}
+
+
+	public String getPays() {
+		return pays;
+	}
+
+
+	public void setPays(String pays) {
+		this.pays = pays;
+	}
+
+
+	public Set<Concert> getListeConcerts() {
+		return listeConcerts;
+	}
+
+
+	public void setListeConcerts(Set<Concert> listeConcerts) {
+		this.listeConcerts = listeConcerts;
+	}
+	
+	
 }
