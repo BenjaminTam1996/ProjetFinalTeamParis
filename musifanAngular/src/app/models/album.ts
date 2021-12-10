@@ -1,3 +1,4 @@
+import { Artiste } from './artiste';
 import { Byte } from '@angular/compiler/src/util';
 import { Chanson } from './chanson';
 

@@ -1,3 +1,4 @@
+import { Artiste } from './artiste';
 import { Lieu } from './lieu';
 
 export class Concert {

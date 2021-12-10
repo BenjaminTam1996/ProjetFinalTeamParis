@@ -40,7 +40,7 @@ export class ConcertService {
       nbPlace: concert.nbPlace,
       prix: concert.prix,
       lieu: concert.lieu,
-      ligneConcerts: {},
+      artistes: concert.artistes,
     };
     // console.log(object);
     return this.http.post<Concert>(this.url, object, {
