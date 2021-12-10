@@ -1,8 +1,11 @@
+import { Artiste } from './artiste';
+import { Byte } from '@angular/compiler/src/util';
+
 export class Publication {
   public constructor(
     private _id?: number | undefined,
     private _description?: string | undefined,
-    private _photo?: Byte | undefined,
+    private _photo?: Byte[] | undefined,
     private _date?: Date | undefined,
     private _artiste?: Artiste | undefined
   ) {}
@@ -19,10 +22,10 @@ export class Publication {
   public set date(value: Date | undefined) {
     this._date = value;
   }
-  public get photo(): Byte | undefined {
+  public get photo(): Byte[] | undefined {
     return this._photo;
   }
-  public set photo(value: Byte | undefined) {
+  public set photo(value: Byte[] | undefined) {
     this._photo = value;
   }
   public get description(): string | undefined {

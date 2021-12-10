@@ -55,6 +55,7 @@ public class DtoToEntity {
 //			System.out.println(la.getId().getArtiste().getNomArtiste());
 //			System.out.println(la.getId().getAlbum().getTitre());
 //		}
+//		System.out.println(albumEntity.getLignesAlbums());
 
 		return albumEntity;
 	}
