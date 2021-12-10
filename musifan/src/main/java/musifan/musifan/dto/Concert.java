@@ -18,13 +18,19 @@ import musifan.musifan.entity.LigneCommande;
 import musifan.musifan.entity.LigneConcert;
 
 public class Concert {
+	@JsonView({JsonViews.Common.class,})
 	private Long id; 	
+	@JsonView({JsonViews.Common.class,})
 	private String nom;	
+	@JsonView({JsonViews.Common.class,})
 	private LocalDate date = LocalDate.now();	
+	@JsonView({JsonViews.ConcertAvecLieu.class,})
 	private Lieu lieu;	
+	@JsonView({JsonViews.Common.class,})
 	private int nbPlace;	
+	@JsonView({JsonViews.Common.class,})
 	private int prix;
-	
+	@JsonView({JsonViews.ConcertComplet.class,})
 	private Set<Artiste> artistes = new HashSet<Artiste>();
 	
 	public Long getId() {

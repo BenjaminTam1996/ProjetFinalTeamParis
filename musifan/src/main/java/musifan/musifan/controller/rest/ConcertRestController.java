@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import musifan.musifan.entity.Concert;
+import musifan.musifan.dto.Concert;
 import musifan.musifan.entity.JsonViews;
 import musifan.musifan.services.ConcertService;
 
@@ -46,8 +46,9 @@ public class ConcertRestController {
 	@ResponseStatus(code = HttpStatus.CREATED)
 	@JsonView({JsonViews.ConcertComplet.class,})
 	public Concert create(@Valid @RequestBody Concert concert,BindingResult br) {
-		concert.getLigneConcerts().forEach(lc->{
-			lc.getId().setConcert(concert);
+		musifan.musifan.entity.Concert concertEntity = musifan.musifan.dto.DtoToEntity.ConcertDtoToConcertEntity(concert);
+		concertEntity.getLigneConcerts().forEach(lc->{
+			lc.getId().setConcert(concertEntity);
 		});
 		concertService.create(concert);
 		return concert;
@@ -57,8 +58,9 @@ public class ConcertRestController {
 	@JsonView({JsonViews.ConcertComplet.class,})
 	public Concert update(@PathVariable("id") Long id,@Valid @RequestBody Concert concert,BindingResult br) {
 		//On remonte le client en bdd pour récuperer sa bonne version
-		concert.getLigneConcerts().forEach(lc->{
-			lc.getId().setConcert(concert);
+		musifan.musifan.entity.Concert concertEntity = musifan.musifan.dto.DtoToEntity.ConcertDtoToConcertEntity(concert);
+		concertEntity.getLigneConcerts().forEach(lc->{
+			lc.getId().setConcert(concertEntity);
 		});
 		Concert concertEnBase = concertService.byId(id);
 		concertEnBase.setDate(concert.getDate());

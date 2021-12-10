@@ -13,13 +13,21 @@ import musifan.musifan.dto.Concert;
 import musifan.musifan.entity.JsonViews;
 
 public class Lieu {
+	@JsonView({JsonViews.Common.class,})
 	private Long id;
+	@JsonView({JsonViews.Common.class,})
 	private String nom;
+	@JsonView({JsonViews.Common.class,})
 	private String numRue;
+	@JsonView({JsonViews.Common.class,})
 	private String rue;
+	@JsonView({JsonViews.Common.class,})
 	private String codePostal;
+	@JsonView({JsonViews.Common.class,})
 	private String ville;
+	@JsonView({JsonViews.Common.class,})
 	private String pays;
+	@JsonView(JsonViews.LieuAvecConcert.class)
 	private Set<Concert> listeConcerts = new HashSet<Concert>();
 	
 

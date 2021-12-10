@@ -1,6 +1,7 @@
 package musifan.musifan.services;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -10,6 +11,7 @@ import javax.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import musifan.musifan.entity.Album;
 import musifan.musifan.entity.Concert;
 import musifan.musifan.entity.Lieu;
 import musifan.musifan.exceptions.ArtisteException;
@@ -32,65 +34,91 @@ public class ConcertService {
 	@Autowired
 	private Validator validator;
 	
-	public void create(Concert concert) {
-		Set<ConstraintViolation<Concert>> violations = validator.validate(concert);
+	public void create(musifan.musifan.dto.Concert concert) {
+		musifan.musifan.entity.Concert concertEntity = musifan.musifan.dto.DtoToEntity.ConcertDtoToConcertEntity(concert);
+		Set<ConstraintViolation<Concert>> violations = validator.validate(concertEntity);
 		if(violations.isEmpty()) {
-			concertRepository.save(concert);
-			concert.getLieu().getListeConcerts().add(concert);
-			ligneconcertRepository.saveAll(concert.getLigneConcerts());
+			concertRepository.save(concertEntity);
+			concertEntity.getLieu().getListeConcerts().add(concertEntity);
+			ligneconcertRepository.saveAll(concertEntity.getLigneConcerts());
 
 		}else {
 			throw new ConcertException();
 		}	
 	}	
 	
-	public void update(Concert concert) {
-		Set<ConstraintViolation<Concert>> violations = validator.validate(concert);
+	public void update(musifan.musifan.dto.Concert concert) {
+		musifan.musifan.entity.Concert concertEntity = musifan.musifan.dto.DtoToEntity.ConcertDtoToConcertEntity(concert);
+		Set<ConstraintViolation<Concert>> violations = validator.validate(concertEntity);
 		if(violations.isEmpty()) {
-			concert.getLieu().getListeConcerts().add(concert);
-			ligneconcertRepository.saveAll(concert.getLigneConcerts());
-			concertRepository.save(concert);
+			concertEntity.getLieu().getListeConcerts().add(concertEntity);
+			ligneconcertRepository.saveAll(concertEntity.getLigneConcerts());
+			concertRepository.save(concertEntity);
 
 		}else {
 			throw new ConcertException();
 		}	
 	}	
 	
-	public void delete(Concert concert) {
-		Concert concertEnBase=concertRepository.findById(concert.getId()).orElseThrow(ConcertException::new);
+	public void delete(musifan.musifan.dto.Concert concert) {
+		Concert concertEnBase=concertRepository.findById(musifan.musifan.dto.DtoToEntity.ConcertDtoToConcertEntity(concert).getId()).orElseThrow(ConcertException::new);
 		ligneconcertRepository.deleteByConcert(concertEnBase); 
 		concertRepository.delete(concertEnBase); 
 	}
 	
-	public List<Concert> allConcert(){
-		return concertRepository.findAll();
+	public List<musifan.musifan.dto.Concert> allConcert(){
+		List<musifan.musifan.dto.Concert> listeConcertsDto = new ArrayList<musifan.musifan.dto.Concert>();
+		for(Concert concertEntity : concertRepository.findAll()) {
+			listeConcertsDto.add(musifan.musifan.dto.EntityToDto.ConcertToConcertDto(concertEntity));
+		}
+		return listeConcertsDto;
 	}
 	
-	public List<Concert> allByDate(LocalDate date){
-		return concertRepository.findByDate(date);
+	public List<musifan.musifan.dto.Concert> allByDate(LocalDate date){
+		List<musifan.musifan.dto.Concert> listeConcertsDto = new ArrayList<musifan.musifan.dto.Concert>();
+		for(Concert concertEntity : concertRepository.findByDate(date)) {
+			listeConcertsDto.add(musifan.musifan.dto.EntityToDto.ConcertToConcertDto(concertEntity));
+		}
+		return listeConcertsDto;
 	}
 	
-	public List<Concert> allByLieu(Lieu lieu){
-		return concertRepository.findByLieu(lieu);
+	public List<musifan.musifan.dto.Concert> allByLieu(Lieu lieu){
+		List<musifan.musifan.dto.Concert> listeConcertsDto = new ArrayList<musifan.musifan.dto.Concert>();
+		for(Concert concertEntity :concertRepository.findByLieu(lieu)) {
+			listeConcertsDto.add(musifan.musifan.dto.EntityToDto.ConcertToConcertDto(concertEntity));
+		}
+		return listeConcertsDto;
 	}
 	
-	public Concert byId(Long id) {
-		return concertRepository.findById(id).orElseThrow(ConcertException::new);
+	public musifan.musifan.dto.Concert byId(Long id) {
+		return musifan.musifan.dto.EntityToDto.ConcertToConcertDto(concertRepository.findById(id).orElseThrow(ConcertException::new));
 	}
 	
-	public Concert byKeyWithArtiste(Long id) {
-		return concertRepository.byKeyWithArtistes(id).orElseThrow(ArtisteException::new);
+	public musifan.musifan.dto.Concert byKeyWithArtiste(Long id) {
+		return musifan.musifan.dto.EntityToDto.ConcertToConcertDto(concertRepository.byKeyWithArtistes(id).orElseThrow(ArtisteException::new));
 	}
 	
-	public List<Concert> ByNomIgnoreCase(String nom) {
-		return concertRepository.findByNomIgnoreCase(nom);
+	public List<musifan.musifan.dto.Concert> ByNomIgnoreCase(String nom) {
+		List<musifan.musifan.dto.Concert> listeConcertsDto = new ArrayList<musifan.musifan.dto.Concert>();
+		for(Concert concertEntity :concertRepository.findByNomIgnoreCase(nom)) {
+			listeConcertsDto.add(musifan.musifan.dto.EntityToDto.ConcertToConcertDto(concertEntity));
+		}
+		return listeConcertsDto;
 	}
 	
-	public List<Concert> ByNomLikeIgnoreCase(String nom) {
-		return concertRepository.findByNomIgnoreCase(nom);
+	public List<musifan.musifan.dto.Concert> ByNomLikeIgnoreCase(String nom) {
+		List<musifan.musifan.dto.Concert> listeConcertsDto = new ArrayList<musifan.musifan.dto.Concert>();
+		for(Concert concertEntity :concertRepository.findByNomIgnoreCase(nom)) {
+			listeConcertsDto.add(musifan.musifan.dto.EntityToDto.ConcertToConcertDto(concertEntity));
+		}
+		return listeConcertsDto;
 	}
 	
-	public List<Concert> ByNomContainingIgnoreCase(String nom) {
-		return concertRepository.findByNomIgnoreCase(nom);
+	public List<musifan.musifan.dto.Concert> ByNomContainingIgnoreCase(String nom) {
+		List<musifan.musifan.dto.Concert> listeConcertsDto = new ArrayList<musifan.musifan.dto.Concert>();
+		for(Concert concertEntity :concertRepository.findByNomIgnoreCase(nom)) {
+			listeConcertsDto.add(musifan.musifan.dto.EntityToDto.ConcertToConcertDto(concertEntity));
+		}
+		return listeConcertsDto;
 	}
 }

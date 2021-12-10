@@ -56,8 +56,8 @@ public class AlbumService {
 		}
 	}
 
-	public void delete(Album album) {
-		Album albumEnBase = albumRepository.findById(album.getId()).orElseThrow(AlbumException::new);
+	public void delete(musifan.musifan.dto.Album album) {
+		Album albumEnBase = albumRepository.findById(musifan.musifan.dto.DtoToEntity.DtoAlbumToEntity(album).getId()).orElseThrow(AlbumException::new);
 		chansonsRepository.deleteByAlbum(albumEnBase);
 		ligneAlbumRepository.deleteByAlbum(albumEnBase);
 		albumRepository.delete(albumEnBase);
@@ -84,12 +84,12 @@ public class AlbumService {
 		return albumRepository.findAll(page.previousOrFirstPageable());
 	}
 
-	public Album byIdWithChansons(Long id) {
-		return albumRepository.byKeyWithChansons(id).orElseThrow(AlbumException::new);
+	public musifan.musifan.dto.Album byIdWithChansons(Long id) {
+		return musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(albumRepository.byKeyWithChansons(id).orElseThrow(AlbumException::new));
 	}
 	
-	public Album byIdWithArtistes(Long id) {
-		return albumRepository.byKeyWithArtistes(id).orElseThrow(AlbumException::new);
+	public musifan.musifan.dto.Album byIdWithArtistes(Long id) {
+		return musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(albumRepository.byKeyWithArtistes(id).orElseThrow(AlbumException::new));
 	}
 	
 	public musifan.musifan.dto.Album byIdWithChansonsAndArtistes(Long id) {
@@ -97,15 +97,27 @@ public class AlbumService {
 		return musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(albumRepository.byKeyWithChansonsAndArtistes(id).orElseThrow(AlbumException::new));
 	}
 	
-	public List<Album> byTitreIgnoreCase(String nom) {
-		return albumRepository.findByTitreIgnoreCase(nom);
+	public List<musifan.musifan.dto.Album> byTitreIgnoreCase(String nom) {
+		List<musifan.musifan.dto.Album> listeAlbumsDto = new ArrayList<musifan.musifan.dto.Album>();
+		for(Album albumEntity : albumRepository.findByTitreIgnoreCase(nom)) {
+			listeAlbumsDto.add(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(albumEntity));
+		}
+		return listeAlbumsDto;
 	}
 	
-	public List<Album> byTitreLikeIgnoreCase(String nom) {
-		return albumRepository.findByTitreIgnoreCase(nom);
+	public List<musifan.musifan.dto.Album> byTitreLikeIgnoreCase(String nom) {
+		List<musifan.musifan.dto.Album> listeAlbumsDto = new ArrayList<musifan.musifan.dto.Album>();
+		for(Album albumEntity : albumRepository.findByTitreIgnoreCase(nom)) {
+			listeAlbumsDto.add(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(albumEntity));
+		}
+		return listeAlbumsDto;
 	}
 	
-	public List<Album> byTitreContainingIgnoreCase(String nom) {
-		return albumRepository.findByTitreIgnoreCase(nom);
+	public List<musifan.musifan.dto.Album> byTitreContainingIgnoreCase(String nom) {
+		List<musifan.musifan.dto.Album> listeAlbumsDto = new ArrayList<musifan.musifan.dto.Album>();
+		for(Album albumEntity : albumRepository.findByTitreIgnoreCase(nom)) {
+			listeAlbumsDto.add(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(albumEntity));
+		}
+		return listeAlbumsDto;
 	}
 }
