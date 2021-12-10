@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import musifan.musifan.entity.Album;
+import musifan.musifan.dto.Album;
 import musifan.musifan.entity.JsonViews;
 import musifan.musifan.services.AlbumService;
 
@@ -39,6 +39,7 @@ public class AlbumRestController {
 	@GetMapping("/{id}")
 	@JsonView({JsonViews.AlbumComplet.class,})
 	public Album byId(@PathVariable("id") Long id) {
+		System.out.println(albumService.byIdWithChansonsAndArtistes(id));
 		return albumService.byIdWithChansonsAndArtistes(id);
 	}
 	
@@ -46,8 +47,9 @@ public class AlbumRestController {
 	@ResponseStatus(code = HttpStatus.CREATED)
 	@JsonView({JsonViews.AlbumComplet.class,})
 	public Album create(@Valid @RequestBody Album album,BindingResult br) {
-		album.getLignesAlbums().forEach(la->{
-			la.getId().setAlbum(album);
+		musifan.musifan.entity.Album albumEntity = musifan.musifan.dto.DtoToEntity.DtoAlbumToEntity(album);
+		albumEntity.getLignesAlbums().forEach(la->{
+			la.getId().setAlbum(albumEntity);
 		});
 		albumService.save(album);
 		return album;

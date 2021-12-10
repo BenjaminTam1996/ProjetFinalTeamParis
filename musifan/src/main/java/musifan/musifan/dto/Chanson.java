@@ -1,12 +1,18 @@
 package musifan.musifan.dto;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import musifan.musifan.entity.Chansons;
+import musifan.musifan.entity.JsonViews;
 
 public class Chanson {
-	
+	@JsonView({JsonViews.Common.class,})
 	private Long id;
+	@JsonView({JsonViews.Common.class,})
 	private String titre;
+	@JsonView({JsonViews.Common.class,})
 	private String duree;
+
 	private Album album;
 	
 	public Chanson() {

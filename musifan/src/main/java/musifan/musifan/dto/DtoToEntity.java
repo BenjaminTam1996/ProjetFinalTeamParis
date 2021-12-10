@@ -22,6 +22,7 @@ public class DtoToEntity {
 		albumEntity.setTitre(album.getTitre());
 		albumEntity.setId(album.getId());
 		albumEntity.setPhoto(album.getPhoto());
+		albumEntity.setDate(album.getDate());
 
 		for (musifan.musifan.dto.Chanson chansons : album.getChansons()) {
 			Chansons chansonEntity = new Chansons();
@@ -49,6 +50,11 @@ public class DtoToEntity {
 			LigneAlbum ligneAlbum = new LigneAlbum(new LigneAlbumPK(albumEntity, artisteEntity));
 			lignesAlbums.add(ligneAlbum);
 		}
+		albumEntity.setLignesAlbums(lignesAlbums);
+//		for(LigneAlbum la : lignesAlbums) {
+//			System.out.println(la.getId().getArtiste().getNomArtiste());
+//			System.out.println(la.getId().getAlbum().getTitre());
+//		}
 
 		return albumEntity;
 	}
@@ -92,6 +98,7 @@ public class DtoToEntity {
 			LigneConcert ligneConcert = new LigneConcert(new LigneConcertPK(concertEntity, artisteEntity));
 			lignesConcert.add(ligneConcert);
 		}
+		concertEntity.setLigneConcerts(lignesConcert);
 
 		return concertEntity;
 	}

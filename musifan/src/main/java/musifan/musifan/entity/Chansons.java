@@ -22,17 +22,17 @@ public class Chansons {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqChansons")
 	@Column(name = "chansons_id")
-	@JsonView({JsonViews.Common.class,})
+	
 	private Long id;
 	@Column(name = "chansons_titre")
 //	@NotBlank
 //	@NotEmpty
-	@JsonView({JsonViews.Common.class,})
+	
 	private String titre;
 	@Column(name = "chansons_duree")
 //	@NotBlank
 //	@NotEmpty
-	@JsonView({JsonViews.Common.class,})
+	
 	private String duree;
 	@ManyToOne
 	@JoinColumn(name = "chanson_album_id", foreignKey = @ForeignKey(name = "chanson_album_id_fk"))

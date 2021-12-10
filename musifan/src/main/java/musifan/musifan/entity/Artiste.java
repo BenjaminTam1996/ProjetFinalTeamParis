@@ -42,20 +42,17 @@ import com.fasterxml.jackson.annotation.JsonView;
 @SequenceGenerator(name="seqCompte", sequenceName = "seq_artiste", initialValue = 100, allocationSize = 1)
 public class Artiste extends Compte {
 	@Column(name="artiste_nom_atiste")
-	@JsonView({JsonViews.Common.class,})
 	private String nomArtiste;
 	
 	@Lob
 	@Column(name="artiste_photo_banniere")
-	@JsonView({JsonViews.Common.class,})
 	private Byte[] photoBanniere;
 	
 	@Column(name="artiste_description")
-	@JsonView({JsonViews.Common.class,})
 	private String description;
 	
 	@OneToMany(mappedBy = "artiste", fetch = FetchType.LAZY)
-	@JsonView({JsonViews.UtilisateurAvecPublicationsArtiste.class, JsonViews.ArtisteComplet.class})	
+	@JsonView({JsonViews.UtilisateurAvecPublicationsArtiste.class,})	
 	private Set<Publication> publications = new HashSet<Publication>();
 	
 	@OneToMany(mappedBy = "id.artiste")
@@ -66,7 +63,7 @@ public class Artiste extends Compte {
 	private Set<LigneUtilisateur> lignesUtilisateurs = new HashSet<LigneUtilisateur>();
 	
 	@OneToMany(mappedBy = "id.artiste")
-	@JsonView({JsonViews.ArtisteComplet.class,})
+
 	private Set<LigneConcert> ligneConcerts = new HashSet<LigneConcert>();
 		
 	public Artiste() {

@@ -3,18 +3,33 @@ package musifan.musifan.dto;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import musifan.musifan.entity.JsonViews;
+
 public class Artiste {
+	@JsonView({JsonViews.Common.class,})
 	private Long id;
+	@JsonView({JsonViews.Common.class,})
 	private String mail;
 	private String password;
+	@JsonView({JsonViews.Common.class,})
 	private String nom;
+	@JsonView({JsonViews.Common.class,})
 	private String prenom;
+	@JsonView({JsonViews.Common.class,})
 	private String telephone;
+	@JsonView({JsonViews.Common.class,})
 	private Byte[] photoProfil;
+	@JsonView({JsonViews.Common.class,})
 	private Byte[] photoBanniere;
+	@JsonView({JsonViews.Common.class,})
 	private String nomArtiste;
+	@JsonView({JsonViews.Common.class,})
 	private String description;
+	@JsonView({JsonViews.ArtisteComplet.class,})
 	private Set<Album> publications = new HashSet<Album>();
+	@JsonView({JsonViews.ArtisteComplet.class,})
 	private Set<Concert> concerts = new HashSet<Concert>();
 	
 	public Artiste() {

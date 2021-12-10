@@ -15,17 +15,20 @@ public class EntityToDto {
 		albumDto.setTitre(album.getTitre());
 		albumDto.setId(album.getId());
 		albumDto.setPhoto(album.getPhoto());
+		albumDto.setDate(album.getDate());
 		
-		Set<Chanson> chansonsDto = new HashSet<Chanson>();
 		for(Chansons chansons : album.getChansons()) {
 			Chanson chansonDto = new Chanson();
 			chansonDto.setId(chansons.getId());
 			chansonDto.setTitre(chansons.getTitre());
 			chansonDto.setDuree(chansons.getDuree());
 			chansonDto.setAlbum(albumDto);
-			chansonsDto.add(chansonDto);
+			albumDto.getChansons().add(chansonDto);
 		}
-		albumDto.setChansons(chansonsDto);
+//		for(Chanson c : albumDto.getChansons()) {
+//			System.out.println(c.getTitre());
+//		}
+
 		
 		for(LigneAlbum la : album.getLignesAlbums()) {
 			Artiste artisteDto = new Artiste();

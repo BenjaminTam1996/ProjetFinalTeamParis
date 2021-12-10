@@ -37,24 +37,22 @@ public class Album {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqAlbum")
 	@Column(name = "album_id")
-	@JsonView(JsonViews.Common.class)
 	private Long id;
 	@Column(name = "album_titre")
-	@JsonView(JsonViews.Common.class)
 	private String titre;
 	@Column(name = "album_date")
-	@JsonView(JsonViews.Common.class)
+	
 	private LocalDate date = LocalDate.now();
 	@Column(name = "album_photo")
-	@JsonView(JsonViews.Common.class)
+	
 	private Byte photo;
 	
 	@OneToMany(mappedBy = "album", fetch = FetchType.LAZY)
-	@JsonView({JsonViews.AlbumComplet.class,})
+	
 	private Set<Chansons> chansons = new HashSet<Chansons>();
 	
 	@OneToMany(mappedBy = "id.album")
-	@JsonView({JsonViews.AlbumAvecArtistes.class,})
+	
 	private Set<LigneAlbum> lignesAlbums = new HashSet<LigneAlbum>();
 	
 	@Version
