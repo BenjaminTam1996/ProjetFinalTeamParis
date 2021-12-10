@@ -1,8 +1,13 @@
 package musifan.musifan.entity;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,41 +17,50 @@ import javax.persistence.Version;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import com.fasterxml.jackson.annotation.JsonView;
 
 @MappedSuperclass
-public class Compte {
+public class Compte implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqCompte")
-	@JsonView({JsonViews.Common.class,})
+	@JsonView({ JsonViews.Common.class, })
 	private Long id;
-	
+
 	@Email
-	@JsonView({JsonViews.Common.class,})
+	@JsonView({ JsonViews.Common.class, })
 	private String mail;
-	
+
 	private String password;
-	
-	@JsonView({JsonViews.Common.class,})
+
+	@JsonView({ JsonViews.Common.class, })
 	private String nom;
-	
-	@JsonView({JsonViews.Common.class,})
+
+	@JsonView({ JsonViews.Common.class, })
 	private String prenom;
-	
+
 	@Pattern(regexp = "^(0|\\+33 )[1-9]([-. ]?[0-9]{2} ){3}([-. ]?[0-9]{2})$")
-	@JsonView({JsonViews.Common.class,})
+	@JsonView({ JsonViews.Common.class, })
 	private String telephone;
-	
+
+	private boolean enable;
+
+	@Enumerated(EnumType.STRING)
+	private Role role;
+
 	@Lob
-	@JsonView({JsonViews.Common.class,})
+	@JsonView({ JsonViews.Common.class, })
 	private Byte[] photoProfil;
-	
+
 	@Version
-	@Column(name="compte_version")
+	@Column(name = "compte_version")
 	private int version;
-	
+
 	public Compte() {
-		
+
 	}
 
 	public Compte(String mail, String password, String nom, String prenom, String telephone, Byte[] photoProfil) {
@@ -57,7 +71,7 @@ public class Compte {
 		this.telephone = telephone;
 		this.photoProfil = photoProfil;
 	}
-	
+
 	public Compte(String nom, String prenom) {
 		this.nom = nom;
 		this.prenom = prenom;
@@ -77,10 +91,6 @@ public class Compte {
 
 	public void setMail(String mail) {
 		this.mail = mail;
-	}
-
-	public String getPassword() {
-		return password;
 	}
 
 	public void setPassword(String password) {
@@ -119,7 +129,22 @@ public class Compte {
 		this.photoProfil = photoProfil;
 	}
 
-	
+	public boolean isEnable() {
+		return enable;
+	}
+
+	public void setEnable(boolean enable) {
+		this.enable = enable;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
 	public int getVersion() {
 		return version;
 	}
@@ -144,7 +169,47 @@ public class Compte {
 		Compte other = (Compte) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
+
+	// Methodes pour l'authentification
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		authorities.add(new SimpleGrantedAuthority(role.toString()));
+		return authorities;
+	}
+
+	@Override
+	public String getPassword() {
+		return password;
+	}
+
+	@Override
+	public String getUsername() {
+		return getMail();
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return isEnable();
+	}
+
+	public Compte getCompte() {
+		return this;
+	}
 	
 }

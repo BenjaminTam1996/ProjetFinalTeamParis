@@ -34,4 +34,6 @@ public interface ArtisteRepository extends JpaRepository<Artiste, Long>{
 	
 	List<Artiste> findByNomArtisteLikeIgnoreCase(String nom);
 	
+	Optional<Artiste> findByMail(@Param("mail") String mail);	
+	
 }

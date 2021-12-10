@@ -6,10 +6,12 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import musifan.musifan.entity.Artiste;
 import musifan.musifan.entity.Commande;
+import musifan.musifan.entity.Role;
 import musifan.musifan.entity.Utilisateur;
 import musifan.musifan.exceptions.UtilisateurException;
 import musifan.musifan.repositories.CommandeRepository;
@@ -35,17 +37,16 @@ public class UtilisateurService {
 	@Autowired
 	private LigneCommandeRepository ligneCommandeRepository;
 
-//	@Autowired
-//	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	// Creation et edition d'un utilisateur
 	public Utilisateur save(Utilisateur utilisateur) {
 		Set<ConstraintViolation<Utilisateur>> violations = validator.validate(utilisateur);
 		if (violations.isEmpty()) {
-			//// TODO : A ajouter lorsque la securite sera mise 
-//			utilisateur.setPassword(passwordEncoder.encode(utilisateur.getPassword()));
-//			utilisateur.setRoles(Arrays.asList(Role.ROLE_USER));
-//			utilisateur.setEnable(true);
+			utilisateur.setPassword(passwordEncoder.encode(utilisateur.getPassword()));
+			utilisateur.setRole(Role.ROLE_UTILISATEUR);
+			utilisateur.setEnable(true);
 			utilisateurRepository.save(utilisateur);
 //			ligneUtilisateurRepository.saveAll(utilisateur.getLignesUtilisateurs());
 			return utilisateur;

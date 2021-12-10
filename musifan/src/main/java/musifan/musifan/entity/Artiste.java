@@ -26,6 +26,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 	@AttributeOverride(name = "prenom", column = @Column(name = "artiste_prenom")),
 	@AttributeOverride(name = "telephone", column = @Column(name = "artiste_telephone")),
 	@AttributeOverride(name = "photoProfil", column = @Column(name = "artiste_photo_profil")),
+	@AttributeOverride(name = "enable", column = @Column(name = "artiste_enable")),
+	@AttributeOverride(name = "role", column = @Column(name = "artiste_role")),
 	@AttributeOverride(name = "version", column = @Column(name = "artiste_version")),
 })
 @NamedQueries({

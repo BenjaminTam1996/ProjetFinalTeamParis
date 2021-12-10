@@ -60,11 +60,15 @@ class MusifanApplicationTests {
 		////Creation artiste + albums
 		//The Weeknd
 		//------------------------------------------------------------------------------------------------------------------------------------------
-		Artiste theWeeknd = new Artiste("The Weeknd");
+		Artiste theWeeknd = new Artiste("week@mail.com", "theWeeknd3.0", null, null, null, null, "The Weeknd", null, null);
 		artisteService.save(theWeeknd);
 		Album album = new Album("After Hours",LocalDate.of(2020, Month.MARCH, 20));
 		album.addArtiste(theWeeknd);
 		albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
+		System.out.println("-----------------");
+		System.out.println("album : " + album.getTitre());
+		System.out.println("dto : "+ albumService.byIdWithChansons(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album).getId()).getTitre());
+		System.out.println("-----------------");
 		List<Chansons> chansons = new ArrayList<Chansons>();
 		chansons.add(new Chansons("Alone Again","4:10",album));
 		chansons.add(new Chansons("Too Late","3:59",album));
@@ -95,7 +99,7 @@ class MusifanApplicationTests {
 		
 		//Kygo
 		//------------------------------------------------------------------------------------------------------------------------------------------
-		Artiste kygo = new Artiste("Kygo");
+		Artiste kygo = new Artiste("kygo@gmail.fr", "Kygo", null, null, null, null, "Kygo", null, null);
 		artisteService.save(kygo);
 		album = new Album("Cloud Nine",LocalDate.of(2016, Month.MAY, 13));
 		album.addArtiste(kygo);
@@ -120,11 +124,11 @@ class MusifanApplicationTests {
 		
 		//DJ Snake + Bipolar Sunshine
 		//------------------------------------------------------------------------------------------------------------------------------------------		
-		Artiste snake = new Artiste("DJ Snake");
+		Artiste snake = new Artiste("Snake.dj@hotmail.com", "DJsnake", null, null, null, null, "DJ Snake", null, null);
 		artisteService.save(snake);
 		album = new Album("Middle",LocalDate.of(2015, Month.OCTOBER, 16));
 		album.addArtiste(snake);
-		Artiste sunshine = new Artiste("Bipolar Sunshine");
+		Artiste sunshine = new Artiste("Bipo.Sun@yahoo.com", "BiPoSun", null, null, null, null, "Bipolar Sunshine", null, null);
 		artisteService.save(sunshine);
 		album.addArtiste(sunshine);
 		albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
@@ -136,10 +140,10 @@ class MusifanApplicationTests {
 		//------------------------------------------------------------------------------------------------------------------------------------------		
 		album = new Album("Made In France",LocalDate.of(2019, Month.JULY, 26));
 		album.addArtiste(artisteService.byNomArtisteLikeIgnoreCase("DJ Snake").get(0));
-		Artiste tchami = new Artiste("Tchami");
+		Artiste tchami = new Artiste("tchami@hotmail.fr", "Tchami", null, null, null, null, "Tchami", null, null);
 		artisteService.save(tchami);
 		album.addArtiste(tchami);
-		Artiste malaa = new Artiste("Malaa");
+		Artiste malaa = new Artiste("malaa@yahoo.com", "Malaa", null, null, null, null, "Malaa", null, null);
 		artisteService.save(malaa);
 		album.addArtiste(malaa);
 		albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
@@ -150,7 +154,7 @@ class MusifanApplicationTests {
 		// Petit Biscuit
 		//------------------------------------------------------------------------------------------------------------------------------------------		
 		album = new Album("Presence",LocalDate.of(2017, Month.NOVEMBER, 10));
-		Artiste petitBiscuit = new Artiste("Petit Biscuit");
+		Artiste petitBiscuit = new Artiste("Petit.Biscuit@monMail.com", "MonBiscuit", null, null, null, null, "Petit Biscuit", null, null);
 		artisteService.save(petitBiscuit);
 		albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
 		album.addArtiste(petitBiscuit);
@@ -254,25 +258,27 @@ class MusifanApplicationTests {
 		////Creation Utilisateurs
 		//------------------------------------------------------------------------------------------------------------------------------------------
 		Utilisateur john = new Utilisateur("john@mail.com", "monAnniversaire", "Dupond", "John", "09 03 60 74 85", null, "johnyday");
+		utilisateurService.save(john);
 		john.addArtiste(theWeeknd);
 		john.addArtiste(petitBiscuit);
+		utilisateurService.addLigneUtilisateur(john);
 		Commande commande = new Commande(john);
 		commande.addProduit(afterHours, 4);
 		Commande commande2 = new Commande(john);
 		commande2.addProduit(problems, 1);
-		utilisateurService.save(john);
 		commandeService.save(commande);
 		commandeService.save(commande2);
 		
 		
 		Utilisateur marie = new Utilisateur("m.dolly@monMail.fr", "1234", "Dolly", "Marie", "07 25 14 96 87", null, "marie.dolly");
+		utilisateurService.save(marie);
 		marie.addArtiste(sheeran);
 		marie.addArtiste(petitBiscuit);
 		marie.addArtiste(kygo);
 		marie.addArtiste(theWeeknd);
+		utilisateurService.addLigneUtilisateur(marie);
 		commande = new Commande(marie);
 		commande.addProduit(edSheeranTour, 2);
-		utilisateurService.save(marie);
 		commandeService.save(commande);
 		
 		

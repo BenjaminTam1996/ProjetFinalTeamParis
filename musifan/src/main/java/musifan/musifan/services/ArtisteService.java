@@ -7,9 +7,11 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import musifan.musifan.entity.Artiste;
+import musifan.musifan.entity.Role;
 import musifan.musifan.exceptions.ArtisteException;
 import musifan.musifan.repositories.ArtisteRepository;
 import musifan.musifan.repositories.LigneAlbumRepository;
@@ -38,16 +40,15 @@ public class ArtisteService {
 	@Autowired
 	private LigneUtilisateurRepository ligneUtilisateurRepository;
 	
-//	@Autowired
-//	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	public Artiste save(Artiste artiste) {
 		Set<ConstraintViolation<Artiste>> violations = validator.validate(artiste);
 		if (violations.isEmpty()) {
-			//// TODO : A ajouter lorsque la securite sera mise 
-//			artiste.setPassword(passwordEncoder.encode(artiste.getPassword()));
-//			artiste.setRoles(Arrays.asList(Role.ROLE_ARTISTE));
-//			artiste.setEnable(true);
+			artiste.setPassword(passwordEncoder.encode(artiste.getPassword()));
+			artiste.setRole(Role.ROLE_ARTISTE);
+			artiste.setEnable(true);
 			return artisteRepository.save(artiste);
 		} else {
 			throw new ArtisteException();
