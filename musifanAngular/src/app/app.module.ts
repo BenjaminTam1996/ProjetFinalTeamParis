@@ -1,3 +1,4 @@
+import { routes } from './routes';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -9,9 +10,10 @@ import { AlbumComponent } from './formulaires/album/album.component';
 import { ConcertComponent } from './formulaires/concert/concert.component';
 import { PublicationComponent } from './formulaires/publication/publication.component';
 import { PhotosComponent } from './formulaires/photos/photos.component';
-import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { AccueilComponent } from './accueil/accueil.component';
 
 @NgModule({
   declarations: [
@@ -23,10 +25,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ConcertComponent,
     PublicationComponent,
     PhotosComponent,
+    AccueilComponent,
   ],
   imports: [
     BrowserModule,
-    // RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,

@@ -32,18 +32,23 @@ import com.fasterxml.jackson.annotation.JsonView;
 public class Concert {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqConcert")
+	@JsonView({JsonViews.Common.class,})
 	@Column(name = "concert_id")
 	private Long id; 
 	@Column(name = "concert_nom")
+	@JsonView({JsonViews.Common.class,})
 	private String nom;
 	@Column(name = "concert_date")
+	@JsonView({JsonViews.Common.class,})
 	private LocalDate date = LocalDate.now();
 	@ManyToOne
 	@JoinColumn(name = "concert_lieu_id", foreignKey = @ForeignKey(name = "concert_lieu_id_fk"))
 	private Lieu lieu;
 	@Column(name = "concert_nbPlace")
+	@JsonView({JsonViews.Common.class,})
 	private int nbPlace;
 	@Column(name = "concert_prix")
+	@JsonView({JsonViews.Common.class,})
 	private int prix;
 	
 	@Version

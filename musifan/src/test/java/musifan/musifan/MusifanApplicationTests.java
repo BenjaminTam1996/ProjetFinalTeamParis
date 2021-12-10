@@ -265,8 +265,8 @@ class MusifanApplicationTests {
 		commande.addProduit(afterHours, 4);
 		Commande commande2 = new Commande(john);
 		commande2.addProduit(problems, 1);
-		commandeService.save(commande);
-		commandeService.save(commande2);
+//		commandeService.save(commande);
+//		commandeService.save(commande2);
 		
 		
 		Utilisateur marie = new Utilisateur("m.dolly@monMail.fr", "1234", "Dolly", "Marie", "07 25 14 96 87", null, "marie.dolly");
@@ -278,7 +278,7 @@ class MusifanApplicationTests {
 		utilisateurService.addLigneUtilisateur(marie);
 		commande = new Commande(marie);
 		commande.addProduit(edSheeranTour, 2);
-		commandeService.save(commande);
+//		commandeService.save(commande);
 		
 		
 	}

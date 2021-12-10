@@ -30,13 +30,16 @@ import com.fasterxml.jackson.annotation.JsonView;
 public class Commande {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqCommande")
+	@JsonView({JsonViews.Common.class,})
 	@Column(name = "commande_numero")
 	private Long numero;
 	@Column(name = "commande_date")
+	@JsonView({JsonViews.Common.class,})
 	private LocalDate date = LocalDate.now();
 	@ManyToOne
 	private Utilisateur utilisateur;
 	@OneToMany(mappedBy = "id.commande")
+	@JsonView({JsonViews.UtilisateurAvecCommandes.class,})
 	private Set<LigneCommande> lignesCommandes = new HashSet<LigneCommande>();
 
 	public Commande() {
