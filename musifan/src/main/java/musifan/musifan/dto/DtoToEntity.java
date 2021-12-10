@@ -4,10 +4,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import musifan.musifan.entity.Chansons;
+import musifan.musifan.entity.Commande;
 import musifan.musifan.entity.Concert;
 import musifan.musifan.entity.Lieu;
 import musifan.musifan.entity.LigneAlbum;
 import musifan.musifan.entity.LigneAlbumPK;
+import musifan.musifan.entity.LigneCommande;
+import musifan.musifan.entity.LigneCommandePK;
 import musifan.musifan.entity.LigneConcert;
 import musifan.musifan.entity.LigneConcertPK;
 import musifan.musifan.entity.Album;
@@ -103,4 +106,42 @@ public class DtoToEntity {
 		return concertEntity;
 	}
 
+	
+	public static musifan.musifan.entity.Commande DtoCommandeToEntity(musifan.musifan.dto.Commande commande) {
+
+		// Conversion d'une commande dto en commande entity
+		musifan.musifan.entity.Commande commandeEntity = new Commande();
+		commandeEntity.setNumero(commande.getNumero());;
+		commandeEntity.setDate(commande.getDate());
+		commandeEntity.setClient(commande.getUtilisateur());
+		
+	
+
+		Set<LigneCommande> lignesCommandes = new HashSet<LigneCommande>();
+		for (musifan.musifan.dto.Concert c : commande.getConcert()) {
+			musifan.musifan.entity.Concert concertEntity = new Concert();
+			
+			concertEntity.setId(c.getId());
+			concertEntity.setNom(c.getNom());
+			concertEntity.setDate(c.getDate());
+			musifan.musifan.entity.Lieu lieuEntity = new Lieu();
+			lieuEntity.setId(c.getLieu().getId());
+			lieuEntity.setNom(c.getLieu().getNom());
+			lieuEntity.setNumRue(c.getLieu().getNumRue());
+			lieuEntity.setRue(c.getLieu().getRue());
+			lieuEntity.setCodePostal(c.getLieu().getCodePostal());
+			lieuEntity.setVille(c.getLieu().getVille());
+			lieuEntity.setPays(c.getLieu().getPays());
+			
+			
+			concertEntity.setLieu(lieuEntity);
+			concertEntity.setNbPlace(c.getNbPlace());
+			concertEntity.setPrix(c.getPrix());
+
+			LigneCommande ligneCommande = new LigneCommande(new LigneCommandePK(commandeEntity, concertEntity),commande.getQuantite());
+			lignesCommandes.add(ligneCommande);
+		}
+		commandeEntity.setLignesCommandes(lignesCommandes);
+		return commandeEntity;
+	}
 }

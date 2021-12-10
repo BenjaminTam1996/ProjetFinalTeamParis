@@ -31,16 +31,12 @@ public class Commande {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqCommande")
 	@Column(name = "commande_numero")
-	@JsonView({JsonViews.Common.class,})
 	private Long numero;
 	@Column(name = "commande_date")
-	@JsonView({JsonViews.Common.class,})
 	private LocalDate date = LocalDate.now();
 	@ManyToOne
-	@JoinColumn(name = "commande_utilisateur_id", foreignKey = @ForeignKey(name = "commande_utilisateur_id_fk"))
 	private Utilisateur utilisateur;
 	@OneToMany(mappedBy = "id.commande")
-	@JsonView({JsonViews.UtilisateurAvecCommandes.class,})
 	private Set<LigneCommande> lignesCommandes = new HashSet<LigneCommande>();
 
 	public Commande() {

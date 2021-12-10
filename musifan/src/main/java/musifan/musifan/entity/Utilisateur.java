@@ -38,15 +38,12 @@ import com.fasterxml.jackson.annotation.JsonView;
 @SequenceGenerator(name = "seqCompte", sequenceName = "seq_utilisateur", initialValue = 100, allocationSize = 1)
 public class Utilisateur extends Compte{
 	@Column(name="utilisateur_pseudo")
-	@JsonView({JsonViews.Common.class,})
 	private String pseudo;
 	
 	@OneToMany(mappedBy = "utilisateur")
-	@JsonView({JsonViews.UtilisateurAvecCommandes.class,})
 	private Set<Commande> listeConcert = new HashSet<Commande>();
 	
 	@OneToMany(mappedBy = "id.utilisateur")
-	@JsonView({JsonViews.UtilisateurAvecArtiste.class,})
 	private Set<LigneUtilisateur> lignesUtilisateurs = new HashSet<LigneUtilisateur>();
 
 	public Utilisateur() {

@@ -5,6 +5,7 @@ import java.util.Set;
 
 import musifan.musifan.entity.Chansons;
 import musifan.musifan.entity.LigneAlbum;
+import musifan.musifan.entity.LigneCommande;
 import musifan.musifan.entity.LigneConcert;
 
 public class EntityToDto {
@@ -98,5 +99,27 @@ public class EntityToDto {
 		}
 		
 		return concertDto;
+	}
+	
+	public static Commande CommandeToCommandeDto(musifan.musifan.entity.Commande commande) {
+		//Conversion d'un album entity en album dto
+		Commande commandeDto = new Commande();
+		commandeDto.setNumero(commande.getNumero());;
+		commandeDto.setDate(commande.getDate());
+		commandeDto.setUtilisateur(commande.getUtilisateur());
+		
+		for (LigneCommande lc : commande.getLignesCommandes()){
+			Concert concertDto = new Concert();
+			concertDto.setId(lc.getId().getProduit().getId());
+			concertDto.setNom(lc.getId().getProduit().getNom());
+			concertDto.setDate(lc.getId().getProduit().getDate());
+			concertDto.setLieu(LieuToLieuDto(lc.getId().getProduit().getLieu()));
+			concertDto.setNbPlace(lc.getId().getProduit().getNbPlace());
+			concertDto.setPrix(lc.getId().getProduit().getPrix());
+			commandeDto.setQuantite(lc.getQuantite());
+			commandeDto.getConcert().add(concertDto);
+		}
+		
+		return commandeDto;
 	}
 }

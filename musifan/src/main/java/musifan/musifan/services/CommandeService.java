@@ -25,11 +25,11 @@ public class CommandeService {
 	@Autowired
 	private LigneCommandeRepository ligneCommandeRepository;
 	
-	public void save(Commande commande) {
-		Set<ConstraintViolation<Commande>> violations = validator.validate(commande);
+	public void save(musifan.musifan.dto.Commande commande) {
+		Set<ConstraintViolation<Commande>> violations =  validator.validate(musifan.musifan.dto.DtoToEntity.DtoCommandeToEntity(commande));
 		if (violations.isEmpty()) {
-			commandeRepository.save(commande);
-			ligneCommandeRepository.saveAll(commande.getLignesCommandes());
+			commandeRepository.save(musifan.musifan.dto.DtoToEntity.DtoCommandeToEntity(commande));
+			ligneCommandeRepository.saveAll(musifan.musifan.dto.DtoToEntity.DtoCommandeToEntity(commande).getLignesCommandes());
 		} else {
 			throw new CommandeException();
 		}
@@ -42,8 +42,8 @@ public class CommandeService {
 	}
 	
 
-	public void delete(Commande commande) {
-		Commande commandeEnBase = commandeRepository.findById(commande.getNumero()).orElseThrow(CommandeException::new);
+	public void delete(musifan.musifan.dto.Commande commande) {
+		Commande commandeEnBase = commandeRepository.findById(musifan.musifan.dto.DtoToEntity.DtoCommandeToEntity(commande).getNumero()).orElseThrow(CommandeException::new);
 		ligneCommandeRepository.deleteByCommande(commandeEnBase);
 		commandeRepository.delete(commandeEnBase);
 	}
