@@ -3,7 +3,6 @@ package musifan.musifan;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -18,6 +17,7 @@ import musifan.musifan.entity.Concert;
 import musifan.musifan.entity.Lieu;
 import musifan.musifan.entity.Publication;
 import musifan.musifan.entity.Utilisateur;
+import musifan.musifan.repositories.AlbumRepository;
 import musifan.musifan.repositories.ChansonsRepository;
 import musifan.musifan.services.AlbumService;
 import musifan.musifan.services.ArtisteService;
@@ -53,6 +53,7 @@ class MusifanApplicationTests {
 	
 	@Autowired
 	private ChansonsRepository chansonRepository;
+
 	
 	@Test
 	void contextLoads() {
@@ -64,11 +65,9 @@ class MusifanApplicationTests {
 		artisteService.save(theWeeknd);
 		Album album = new Album("After Hours",LocalDate.of(2020, Month.MARCH, 20));
 		album.addArtiste(theWeeknd);
-		albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
-		System.out.println("-----------------");
-		System.out.println("album : " + album.getTitre());
-		System.out.println("dto : "+ albumService.byIdWithChansons(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album).getId()).getTitre());
-		System.out.println("-----------------");
+		album = albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
+		
+		
 		List<Chansons> chansons = new ArrayList<Chansons>();
 		chansons.add(new Chansons("Alone Again","4:10",album));
 		chansons.add(new Chansons("Too Late","3:59",album));
@@ -103,7 +102,7 @@ class MusifanApplicationTests {
 		artisteService.save(kygo);
 		album = new Album("Cloud Nine",LocalDate.of(2016, Month.MAY, 13));
 		album.addArtiste(kygo);
-		albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
+		album = albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
 		chansons = new ArrayList<Chansons>();
 		chansons.add(new Chansons("Intro","2:08",album));
 		chansons.add(new Chansons("Stole The Show","3:42",album));
@@ -131,7 +130,7 @@ class MusifanApplicationTests {
 		Artiste sunshine = new Artiste("Bipo.Sun@yahoo.com", "BiPoSun", null, null, null, null, "Bipolar Sunshine", null, null);
 		artisteService.save(sunshine);
 		album.addArtiste(sunshine);
-		albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
+		album = albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
 		chansons = new ArrayList<Chansons>();
 		chansons.add(new Chansons("Middle","3:40",album));
 		chansonRepository.saveAll(chansons);
@@ -146,7 +145,7 @@ class MusifanApplicationTests {
 		Artiste malaa = new Artiste("malaa@yahoo.com", "Malaa", null, null, null, null, "Malaa", null, null);
 		artisteService.save(malaa);
 		album.addArtiste(malaa);
-		albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
+		album = albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
 		chansons = new ArrayList<Chansons>();
 		chansons.add(new Chansons("Made In France","4:11",album));
 		chansonRepository.saveAll(chansons);
@@ -156,7 +155,7 @@ class MusifanApplicationTests {
 		album = new Album("Presence",LocalDate.of(2017, Month.NOVEMBER, 10));
 		Artiste petitBiscuit = new Artiste("Petit.Biscuit@monMail.com", "MonBiscuit", null, null, null, null, "Petit Biscuit", null, null);
 		artisteService.save(petitBiscuit);
-		albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
+		album = albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
 		album.addArtiste(petitBiscuit);
 		chansons = new ArrayList<Chansons>();
 		chansons.add(new Chansons("Creation Comes Alive","3:18",album));
@@ -169,7 +168,7 @@ class MusifanApplicationTests {
 		artisteService.save(sheeran);
 		album = new Album("Divide", LocalDate.of(2017, Month.MARCH, 3));
 		album.addArtiste(sheeran);
-		albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
+		album = albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
 		chansons = new ArrayList<Chansons>();
 		chansons.add(new Chansons("Perfect", "4:39", album));
 		chansons.add(new Chansons("Shape of You", "3:53", album));

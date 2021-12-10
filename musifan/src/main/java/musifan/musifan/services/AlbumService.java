@@ -35,22 +35,22 @@ public class AlbumService {
 	private LigneAlbumRepository ligneAlbumRepository;
 
 
-	public void save(musifan.musifan.dto.Album album) {
+	public Album save(musifan.musifan.dto.Album album) {
 		Album albumEntity = musifan.musifan.dto.DtoToEntity.DtoAlbumToEntity(album);
 		Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 		Set<ConstraintViolation<Album>> violations = validator.validate(albumEntity);
 		if (violations.isEmpty()) {
+
 			albumRepository.save(albumEntity);
 			ligneAlbumRepository.saveAll(albumEntity.getLignesAlbums());
-			System.out.println(album.getArtistes());
-			for(LigneAlbum la : albumEntity.getLignesAlbums()) {
-				System.out.println(la.getId().getArtiste().getNomArtiste());
-				System.out.println(la.getId().getAlbum().getTitre());
-			}
 			Set<Chansons> chansons = albumEntity.getChansons();
 			for(Chansons c : chansons) {
 				chansonsService.save(c);
 			}
+			System.out.println(albumEntity.getId());
+			album.setId(albumEntity.getId());
+			System.out.println(album.getId());
+			return albumEntity;
 		} else {
 			throw new AlbumException();
 		}
