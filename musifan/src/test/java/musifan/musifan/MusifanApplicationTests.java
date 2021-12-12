@@ -177,7 +177,7 @@ class MusifanApplicationTests {
 		chansonRepository.saveAll(chansons);
 		
 		
-		publication = new Publication("Sortie de mon prochaine album prevue prochainement", sheeran);
+		publication = new Publication("Sortie de mon prochain album prevue prochainement", sheeran);
 		sheeran.addPublication(publication);
 		publicationService.save(publication);
 		

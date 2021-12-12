@@ -11,14 +11,9 @@
   .w3-row-padding img {
     margin-bottom: 12px;
   }
-  /* Set the width of the sidebar to 120px */
-  .w3-sidebar {
-    width: 120px;
-    background: #222;
-  }
-  /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+  /* Add a left margin to the "page content" that matches the width of the sidebar (140px) */
   #main {
-    margin-left: 120px;
+    margin-left: 140px;
   }
   /* Remove margins from "page content" on small screens */
   @media only screen and (max-width: 600px) {
@@ -29,15 +24,31 @@
 </style>
 
 <body class="w3-black">
-  <div class="w3-padding-large">
-    <!-- Form Section -->
-    <div class="w3-padding-64 w3-content">
-      <h2 class="w3-text-light-grey">Ajout d'un concert</h2>
+  <app-artist-navbar></app-artist-navbar>
+  <div class="w3-padding-large w3-top" id="main">
+    <div class="w3-padding-64 w3-auto">
+      <h2 class="w3-text-musifan-color">Ajout d'un concert</h2>
       <hr style="width: 200px" class="w3-opacity" />
 
       <form (ngSubmit)="save()" [formGroup]="concertForm">
         <p class="form-group">
-          <label>Nom</label>
+          <label>Lieu</label>
+          <input
+            class="form-control w3-input w3-padding-16"
+            name="lieuControl"
+            [formControl]="lieuControl"
+          />
+        </p>
+        <p class="form-group">
+          <label>Artistes</label>
+          <input
+            class="form-control w3-input w3-padding-16"
+            name="artistesControl"
+            [formControl]="artistesControl"
+          />
+        </p>
+        <p class="form-group">
+          <label>Nom du concert</label>
           <input
             class="form-control w3-input w3-padding-16"
             name="nomControl"
@@ -61,14 +72,7 @@
             [formControl]="prixControl"
           />
         </p>
-        <p class="form-group">
-          <label>Lieu</label>
-          <input
-            class="form-control w3-input w3-padding-16"
-            name="lieuControl"
-            [formControl]="lieuControl"
-          />
-        </p>
+
         <p class="form-group">
           <label>Nombre de places</label>
           <input
@@ -77,14 +81,7 @@
             [formControl]="placesControl"
           />
         </p>
-        <p class="form-group">
-          <label>Artistes</label>
-          <input
-            class="form-control w3-input w3-padding-16"
-            name="artistesControl"
-            [formControl]="artistesControl"
-          />
-        </p>
+        <br />
         <p>
           <button
             type="submit"
@@ -97,11 +94,6 @@
           </button>
         </p>
       </form>
-      <!-- End Contact Section -->
     </div>
-
-    <!-- Footer -->
-
-    <!-- END PAGE CONTENT -->
   </div>
 </body>

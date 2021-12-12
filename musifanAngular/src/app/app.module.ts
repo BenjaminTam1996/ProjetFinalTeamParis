@@ -14,6 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AccueilComponent } from './accueil/accueil.component';
+import { ArtistNavbarComponent } from './navbars/artist-navbar/artist-navbar.component';
+import { FanNavbarComponent } from './navbars/fan-navbar/fan-navbar.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { AccueilComponent } from './accueil/accueil.component';
     PublicationComponent,
     PhotosComponent,
     AccueilComponent,
+    ArtistNavbarComponent,
+    FanNavbarComponent,
   ],
   imports: [
     BrowserModule,
