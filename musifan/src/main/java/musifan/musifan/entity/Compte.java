@@ -41,8 +41,9 @@ public class Compte implements UserDetails {
 
 	@JsonView({ JsonViews.Common.class, })
 	private String prenom;
-
-	@Pattern(regexp = "^(0|\\+33 )[1-9]([-. ]?[0-9]{2} ){3}([-. ]?[0-9]{2})$")
+	
+//	^(0|\\+33 )[1-9]([-. ]?[0-9]{2} ){3}([-. ]?[0-9]{2})$
+	@Pattern(regexp = "	^(?:0|\\(?\\+33\\)?\\s?|0033\\s?)[1-79](?:[\\.\\-\\s]?\\d\\d){4}$")
 	@JsonView({ JsonViews.Common.class, })
 	private String telephone;
 

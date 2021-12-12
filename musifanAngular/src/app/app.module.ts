@@ -14,6 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AccueilComponent } from './accueil/accueil.component';
+import { ArtisteComponent } from './artiste/artiste/artiste.component';
+import { UtilisateurComponent } from './utilisateur/utilisateur/utilisateur.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { AccueilComponent } from './accueil/accueil.component';
     PublicationComponent,
     PhotosComponent,
     AccueilComponent,
+    ArtisteComponent,
+    UtilisateurComponent,
   ],
   imports: [
     BrowserModule,

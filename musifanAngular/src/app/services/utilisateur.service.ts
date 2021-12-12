@@ -70,13 +70,11 @@ export class UtilisateurService {
       nom: utilisateur.nom,
       prenom: utilisateur.prenom,
       pseudo: utilisateur.pseudo,
+      password: password,
       telephone: utilisateur.telephone,
-      ligneConcerts: [],
       photoProfil: utilisateur.photoProfil,
     };
-    return this.http.post<Utilisateur>(UtilisateurService.url, o, {
-      headers: this.httpHeaders,
-    });
+    return this.http.post<Utilisateur>(UtilisateurService.url, o);
   }
 
   public update(utilisateur: Utilisateur): Observable<Utilisateur> {

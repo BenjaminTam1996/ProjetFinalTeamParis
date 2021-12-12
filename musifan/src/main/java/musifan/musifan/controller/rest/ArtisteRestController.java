@@ -40,8 +40,6 @@ public class ArtisteRestController {
 		return artisteService.allArtiste();
 	}
 
-	//// Ne fonctionne pas car lob dans publication 
-	//// Mais test fait sur album et concert => fonctionner
 	// Remonter un artiste complet : avec ses albums, ses publications et ses
 	// concerts, par rapport a son id.
 	@GetMapping("/{id}")

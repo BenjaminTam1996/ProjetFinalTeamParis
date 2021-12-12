@@ -42,17 +42,13 @@ export class ArtisteService {
       nom: artiste.nom,
       prenom: artiste.prenom,
       nomArtiste: artiste.nomArtiste,
+      password: password,
       telephone: artiste.telephone,
       description: artiste.description,
-      publications: [],
-      lignesAlbums: [],
-      ligneConcerts: [],
       photoProfil: artiste.photoProfil,
       photoBanniere: artiste.photoBanniere,
     };
-    return this.http.post<Artiste>(ArtisteService.url, o, {
-      headers: this.httpHeaders,
-    });
+    return this.http.post<Artiste>(ArtisteService.url, o);
   }
 
   public update(artiste: Artiste): Observable<Artiste> {
