@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import musifan.musifan.entity.Commande;
+import musifan.musifan.entity.Concert;
 import musifan.musifan.entity.LigneCommande;
 import musifan.musifan.entity.LigneCommandePK;
 
@@ -15,5 +16,10 @@ public interface LigneCommandeRepository extends JpaRepository<LigneCommande, Li
 	@Modifying
 	@Query("delete from LigneCommande lc where lc.id.commande=:commande")
 	void deleteByCommande(@Param("commande") Commande commande);
+	
+	@Transactional
+	@Modifying
+	@Query("delete from LigneCommande lc where lc.id.concert=:concert")
+	void deleteByConcert(@Param("concert") Concert concert);
 
 }

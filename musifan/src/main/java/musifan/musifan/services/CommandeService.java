@@ -12,7 +12,11 @@ import org.springframework.stereotype.Service;
 
 import musifan.musifan.entity.Album;
 import musifan.musifan.entity.Commande;
+import musifan.musifan.entity.Concert;
+import musifan.musifan.entity.LigneCommande;
+import musifan.musifan.entity.LigneCommandePK;
 import musifan.musifan.exceptions.CommandeException;
+import musifan.musifan.exceptions.ConcertException;
 import musifan.musifan.repositories.CommandeRepository;
 import musifan.musifan.repositories.LigneCommandeRepository;
 
@@ -25,20 +29,23 @@ public class CommandeService {
 	private Validator validator;
 	
 	@Autowired
-	private LigneCommandeRepository ligneCommandeRepository;
+	private LigneCommandeRepository lignecommandeRepository;
 	
 	public void save(musifan.musifan.dto.Commande commande) {
-		Set<ConstraintViolation<Commande>> violations =  validator.validate(musifan.musifan.dto.DtoToEntity.DtoCommandeToEntity(commande));
+		musifan.musifan.entity.Commande commandeEntity = musifan.musifan.dto.DtoToEntity.DtoCommandeToEntity(commande);
+		Set<ConstraintViolation<Commande>> violations =  validator.validate(commandeEntity);
 		if (violations.isEmpty()) {
-			commandeRepository.save(musifan.musifan.dto.DtoToEntity.DtoCommandeToEntity(commande));
-			System.out.println(musifan.musifan.dto.DtoToEntity.DtoCommandeToEntity(commande).getLignesCommandes());
-			ligneCommandeRepository.saveAll(musifan.musifan.dto.DtoToEntity.DtoCommandeToEntity(commande).getLignesCommandes());
+			commandeRepository.save(commandeEntity);
+			for (LigneCommande lc : commandeEntity.getLignesCommandes()) {
+				LigneCommande lignecommande = new LigneCommande(new LigneCommandePK(commandeEntity, lc.getId().getProduit()), lc.getQuantite());
+				lignecommandeRepository.save(lignecommande);
+			}
+			//lignecommandeRepository.saveAll(commandeEntity.getLignesCommandes());
 
 		} else {
 			throw new CommandeException();
 		}
-	}
-
+	}	
 
 
 	public musifan.musifan.dto.Commande byId(Long numero) {
@@ -48,7 +55,7 @@ public class CommandeService {
 
 	public void delete(musifan.musifan.dto.Commande commande) {
 		Commande commandeEnBase = commandeRepository.findById(musifan.musifan.dto.DtoToEntity.DtoCommandeToEntity(commande).getNumero()).orElseThrow(CommandeException::new);
-		ligneCommandeRepository.deleteByCommande(commandeEnBase);
+		lignecommandeRepository.deleteByCommande(commandeEnBase);
 		commandeRepository.delete(commandeEnBase);
 	}
 

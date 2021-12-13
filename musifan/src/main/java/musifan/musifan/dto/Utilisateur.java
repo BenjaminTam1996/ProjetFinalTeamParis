@@ -7,7 +7,7 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import musifan.musifan.entity.Commande;
+import musifan.musifan.dto.Commande;
 import musifan.musifan.entity.JsonViews;
 import musifan.musifan.entity.LigneUtilisateur;
 
@@ -28,7 +28,7 @@ public class Utilisateur {
 	@JsonView({JsonViews.Common.class,})
 	private String pseudo;
 	@JsonView({JsonViews.UtilisateurAvecCommandes.class,})
-	private Set<Concert> Concert = new HashSet<Concert>();
+	private Set<Commande> commande = new HashSet<Commande>();
 	@JsonView({JsonViews.UtilisateurAvecArtiste.class,})
 	private Set<Artiste> artistes = new HashSet<Artiste>();
 	
@@ -99,12 +99,12 @@ public class Utilisateur {
 		this.pseudo = pseudo;
 	}
 
-	public Set<Concert> getConcert() {
-		return Concert;
+	public Set<Commande> getCommande() {
+		return commande;
 	}
 
-	public void setConcert(Set<Concert> concert) {
-		Concert = concert;
+	public void setCommande(Set<Commande> commande) {
+		this.commande = commande;
 	}
 
 	public Set<Artiste> getArtistes() {

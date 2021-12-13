@@ -24,7 +24,7 @@ public class Commande {
 	@JsonView({JsonViews.Common.class,})
 	private Utilisateur utilisateur;
 	@JsonView({JsonViews.UtilisateurAvecCommandes.class,})
-	private Set<Concert> concert = new HashSet<Concert>();
+	private Concert concert ;
 	@JsonView({JsonViews.Common.class,})
 	private int quantite;
 	public Commande() {
@@ -48,10 +48,10 @@ public class Commande {
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
 	}
-	public Set<Concert> getConcert() {
+	public Concert getConcert() {
 		return concert;
 	}
-	public void setConcert(Set<Concert> concert) {
+	public void setConcert (Concert concert) {
 		this.concert = concert;
 	}
 	public int getQuantite() {

@@ -121,7 +121,7 @@ public class EntityToDto {
 			concertDto.setNbPlace(lc.getId().getProduit().getNbPlace());
 			concertDto.setPrix(lc.getId().getProduit().getPrix());
 			commandeDto.setQuantite(lc.getQuantite());
-			commandeDto.getConcert().add(concertDto);
+			commandeDto.setConcert(concertDto);
 		}
 		
 		return commandeDto;
@@ -141,21 +141,15 @@ public class EntityToDto {
 		
 		
 		
-	
-		//private Set<Concert> concert = new HashSet<Concert>();
-		//private Set<Artiste> artistes = new HashSet<Artiste>();
-		
-		
 		for(musifan.musifan.entity.Commande c : utilisateur.getListeConcert()) {
 			for ( LigneCommande lc    : c.getLignesCommandes()) {
-				Concert concertDto = new Concert();
-				concertDto.setId(lc.getId().getProduit().getId());
-				concertDto.setNom(lc.getId().getProduit().getNom());
-				concertDto.setDate(lc.getId().getProduit().getDate());
-				concertDto.setLieu(LieuToLieuDto(lc.getId().getProduit().getLieu()));
-				concertDto.setNbPlace(lc.getId().getProduit().getNbPlace());
-				concertDto.setPrix(lc.getId().getProduit().getPrix());
-				utilisateurDto.getConcert().add(concertDto);
+				Commande commandeDto = new Commande();
+				commandeDto.setNumero(lc.getId().getCommande().getNumero());
+				commandeDto.setDate(lc.getId().getCommande().getDate());
+				commandeDto.setUtilisateur(lc.getId().getCommande().getUtilisateur());
+				commandeDto.setQuantite(lc.getQuantite());
+				commandeDto.setConcert(ConcertToConcertDto(lc.getId().getProduit()));
+				utilisateurDto.getCommande().add(commandeDto);
 			}
 			
 		}

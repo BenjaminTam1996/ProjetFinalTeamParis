@@ -122,29 +122,27 @@ public class DtoToEntity {
 	
 
 		Set<LigneCommande> lignesCommandes = new HashSet<LigneCommande>();
-		for (musifan.musifan.dto.Concert c : commande.getConcert()) {
-			musifan.musifan.entity.Concert concertEntity = new Concert();
+		musifan.musifan.entity.Concert concertEntity = new Concert();
 			
-			concertEntity.setId(c.getId());
-			concertEntity.setNom(c.getNom());
-			concertEntity.setDate(c.getDate());
-			musifan.musifan.entity.Lieu lieuEntity = new Lieu();
-			lieuEntity.setId(c.getLieu().getId());
-			lieuEntity.setNom(c.getLieu().getNom());
-			lieuEntity.setNumRue(c.getLieu().getNumRue());
-			lieuEntity.setRue(c.getLieu().getRue());
-			lieuEntity.setCodePostal(c.getLieu().getCodePostal());
-			lieuEntity.setVille(c.getLieu().getVille());
-			lieuEntity.setPays(c.getLieu().getPays());
+		concertEntity.setId(commande.getConcert().getId());
+		concertEntity.setNom(commande.getConcert().getNom());
+		concertEntity.setDate(commande.getConcert().getDate());
+		musifan.musifan.entity.Lieu lieuEntity = new Lieu();
+		lieuEntity.setId(commande.getConcert().getLieu().getId());
+		lieuEntity.setNom(commande.getConcert().getLieu().getNom());
+		lieuEntity.setNumRue(commande.getConcert().getLieu().getNumRue());
+		lieuEntity.setRue(commande.getConcert().getLieu().getRue());
+		lieuEntity.setCodePostal(commande.getConcert().getLieu().getCodePostal());
+		lieuEntity.setVille(commande.getConcert().getLieu().getVille());
+		lieuEntity.setPays(commande.getConcert().getLieu().getPays());
 			
 			
-			concertEntity.setLieu(lieuEntity);
-			concertEntity.setNbPlace(c.getNbPlace());
-			concertEntity.setPrix(c.getPrix());
+		concertEntity.setLieu(lieuEntity);
+		concertEntity.setNbPlace(commande.getConcert().getNbPlace());
+		concertEntity.setPrix(commande.getConcert().getPrix());
 
-			LigneCommande ligneCommande = new LigneCommande(new LigneCommandePK(commandeEntity, concertEntity),commande.getQuantite());
-			lignesCommandes.add(ligneCommande);
-		}
+		LigneCommande ligneCommande = new LigneCommande(new LigneCommandePK(commandeEntity, concertEntity),commande.getQuantite());
+		lignesCommandes.add(ligneCommande);
 		commandeEntity.setLignesCommandes(lignesCommandes);
 		return commandeEntity;
 	}
@@ -162,14 +160,20 @@ public class DtoToEntity {
 		utilisateurEntity.setTelephone(utilisateur.getTelephone());
 		utilisateurEntity.setPseudo(utilisateur.getPseudo());
 
-		for (musifan.musifan.dto.Concert concert : utilisateur.getConcert()) {
+		Set<Commande> Commandes = new HashSet<Commande>();
+		Set<LigneCommande> lignesCommandes = new HashSet<LigneCommande>();
+		for (musifan.musifan.dto.Commande commande : utilisateur.getCommande()) {
 			Commande commandeEntity = new Commande();
-//			commandeEntity..setId(chansons.getId());
-//			chansonEntity.setTitre(chansons.getTitre());
-//			chansonEntity.setDuree(chansons.getDuree());
-//			chansonEntity.setAlbum(albumEntity);
-			utilisateurEntity.getListeConcert().add(commandeEntity);
+			commandeEntity.setNumero(commande.getNumero());
+			commandeEntity.setDate(commande.getDate());
+			commandeEntity.setClient(utilisateurEntity);
+			
+			LigneCommande ligneCommande = new LigneCommande(new LigneCommandePK(commandeEntity, ConcertDtoToConcertEntity(commande.getConcert())),commande.getQuantite());
+			commandeEntity.getLignesCommandes().add(ligneCommande);
+			Commandes.add(commandeEntity);
 		}
+
+		utilisateurEntity.setListeConcert(Commandes);
 
 		Set<LigneUtilisateur> lignesUtilisateurs = new HashSet<LigneUtilisateur>();
 		for (musifan.musifan.dto.Artiste a : utilisateur.getArtistes()) {

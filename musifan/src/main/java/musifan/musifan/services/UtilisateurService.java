@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import musifan.musifan.entity.Album;
 import musifan.musifan.entity.Artiste;
 import musifan.musifan.entity.Commande;
+import musifan.musifan.entity.LigneUtilisateur;
 import musifan.musifan.entity.Role;
 import musifan.musifan.entity.Utilisateur;
 import musifan.musifan.exceptions.UtilisateurException;
@@ -60,6 +61,10 @@ public class UtilisateurService {
 
 	// Ajouter un artiste dans la liste des artistes d'un utilisateur
 	public Utilisateur addLigneUtilisateur(Utilisateur utilisateur) {
+		for(LigneUtilisateur lu : utilisateur.getLignesUtilisateurs()) {
+			System.out.println(lu.getId().getUtilisateur());
+			System.out.println(lu.getId().getArtiste());
+		}
 		ligneUtilisateurRepository.saveAll(utilisateur.getLignesUtilisateurs());
 		return utilisateur;
 	}

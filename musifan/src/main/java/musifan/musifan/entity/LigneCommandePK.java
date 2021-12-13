@@ -14,9 +14,10 @@ import com.fasterxml.jackson.annotation.JsonView;
 public class LigneCommandePK implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "ligne_commande_commande_id", foreignKey = @ForeignKey(name = "ligne_commande_commande_id_fk"))
+	@JsonView({JsonViews.UtilisateurAvecCommandes.class,})
 	private Commande commande;
 	@ManyToOne
-	@JoinColumn(name = "ligne_commande_concert_id", foreignKey = @ForeignKey(name = "ligne_concert_produit_id_fk"))
+	@JoinColumn(name = "ligne_commande_concert_id", foreignKey = @ForeignKey(name = "ligne_commande_concert_id_fk"))
 	@JsonView({JsonViews.UtilisateurAvecCommandes.class,})
 	private Concert concert;
 
