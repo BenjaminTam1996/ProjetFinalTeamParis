@@ -181,6 +181,111 @@ class MusifanApplicationTests {
 		sheeran.addPublication(publication);
 		publicationService.save(publication);
 		
+		// Adele
+		//------------------------------------------------------------------------------------------------------------------------------------------		
+		Artiste adele = new Artiste("adele@mail.com", "$Adele30", null, "Adele Adkins", null, null, "Adele", null, null);
+		artisteService.save(adele);
+		album = new Album("30", LocalDate.of(2021, Month.NOVEMBER, 19));
+		album.addArtiste(adele);
+		album = albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
+		chansons = new ArrayList<Chansons>();
+		chansons.add(new Chansons("Strangers by Nature", "3:02", album));
+		chansons.add(new Chansons("Easy On Me", "3:44", album));
+		chansons.add(new Chansons("	My Little Love", "6:29", album));
+		chansons.add(new Chansons("Cry Your Heart Out", "4:15", album));
+		chansons.add(new Chansons("Oh My God", "3:45", album));
+		chansons.add(new Chansons("Can I Get It", "3:30", album));
+		chansons.add(new Chansons("	I Drink Wine", "6:16", album));
+		chansons.add(new Chansons("All Night Parking ", "2:41", album));
+		chansons.add(new Chansons("Woman like Me", "5:00", album));
+		chansons.add(new Chansons("Hold On", "6:06", album));
+		chansons.add(new Chansons("To Be Loved", "6:43", album));
+		chansons.add(new Chansons("Love Is a Game", "6:43", album));
+		chansonRepository.saveAll(chansons);
+		
+		
+		publication = new Publication("Voici mon dernier album 30", adele);
+		adele.addPublication(publication);
+		publicationService.save(publication);		
+		
+		// Taylor Swift
+		//------------------------------------------------------------------------------------------------------------------------------------------		
+		Artiste swift = new Artiste("swift@mail.com", "$Taylor1", null, "Taylor Swift", null, null, "Taylor Swift", null, null);
+		artisteService.save(swift);
+		album = new Album("Red", LocalDate.of(2021, Month.NOVEMBER, 12));
+		album.addArtiste(swift);
+		album = albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
+		chansons = new ArrayList<Chansons>();
+		chansons.add(new Chansons("State of Grace", "4:55", album));
+		chansons.add(new Chansons("Red", "3:43", album));
+		chansons.add(new Chansons("Treacherous", "4:02", album));
+		chansons.add(new Chansons("I Knew You Were Trouble", "3:39", album));
+		chansons.add(new Chansons("All Too Well", "5:29", album));
+		chansons.add(new Chansons("22", "3:50", album));
+		chansons.add(new Chansons("I Almost Do", "4:04", album));
+		chansons.add(new Chansons(	"We Are Never Ever Getting Back Together", "3:13", album));
+		chansons.add(new Chansons("Stay Stay Stay", "3:25", album));
+		chansons.add(new Chansons("The Last Time", "4:59", album));
+		chansons.add(new Chansons("Holy Ground", "3:22", album));
+		chansons.add(new Chansons("Sad Beautiful Tragic", "4:44", album));
+		chansonRepository.saveAll(chansons);
+		
+		
+		publication = new Publication("Voici la réedition de l'album Red", swift);
+		swift.addPublication(publication);
+		publicationService.save(publication);		// Doja Cat
+		//------------------------------------------------------------------------------------------------------------------------------------------		
+		Artiste doja = new Artiste("doja@mail.com", "$Doja1", null, "Doja Cat", null, null, "Doja Cat", null, null);
+		artisteService.save(doja);
+		album = new Album("Planet Her", LocalDate.of(2021, Month.JUNE, 25));
+		album.addArtiste(doja);
+		album = albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
+		chansons = new ArrayList<Chansons>();
+		chansons.add(new Chansons("Woman", "2:52", album));
+		chansons.add(new Chansons("Naked", "3:43", album));
+		chansons.add(new Chansons("Payday", "3:33", album));
+		chansons.add(new Chansons("Get Into It (Yuh)", "2:18", album));
+		chansons.add(new Chansons("	Need to Know", "3:30", album));
+		chansons.add(new Chansons("I Don’t Do Drugs", "3:08", album));
+		chansons.add(new Chansons("	Love To Dream", "3:36", album));
+		chansons.add(new Chansons("	You Right", "3:06", album));
+		chansons.add(new Chansons("	Been Like This", "2:57", album));
+		chansons.add(new Chansons("Options", "2:39", album));
+		chansons.add(new Chansons("	Ain’t Shit", "2:54", album));
+		chansons.add(new Chansons("Imagine", "2:28", album));
+		chansonRepository.saveAll(chansons);
+		
+		
+		publication = new Publication("Voici mon dernier album Planet Her", doja);
+		doja.addPublication(publication);
+		publicationService.save(publication);		
+		
+		// Ninho
+		//------------------------------------------------------------------------------------------------------------------------------------------		
+		Artiste ninho = new Artiste("ninho@mail.com", "$Ninho1", null, "Ninho", null, null, "Ninho", null, null);
+		artisteService.save(ninho);
+		album = new Album("Planet Her", LocalDate.of(2021, Month.DECEMBER, 3));
+		album.addArtiste(ninho);
+		album = albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
+		chansons = new ArrayList<Chansons>();
+		chansons.add(new Chansons("Jefe", "2:57", album));
+		chansons.add(new Chansons("VVS", "3:07", album));
+		chansons.add(new Chansons("Sky Priority", "2:49", album));
+		chansons.add(new Chansons("OG", "3:47", album));
+		chansons.add(new Chansons("	Arme de poing", "3:35", album));
+		chansons.add(new Chansons("Vérité", "3:19", album));
+		chansons.add(new Chansons("No Life", "3:57", album));
+		chansons.add(new Chansons("	YSL", "3:38", album));
+		chansons.add(new Chansons("	Aïcha", "3:39", album));
+		chansons.add(new Chansons("Mood", "2:53", album));
+		chansons.add(new Chansons("	Athéna", "3:16", album));
+		chansons.add(new Chansons("La maison que je voulais", "3:41", album));
+		chansonRepository.saveAll(chansons);
+		
+		
+		publication = new Publication("Voici mon dernier album Jefe", ninho);
+		ninho.addPublication(publication);
+		publicationService.save(publication);
 		
 		////Création lieu + concert
 		//------------------------------------------------------------------------------------------------------------------------------------------

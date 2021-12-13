@@ -1,48 +1,81 @@
-<div class="container">
-  <h3>Connection</h3>
-  <div *ngIf="showMessage" class="alert alert-danger">
-    {{ message }}
+<body class="w3-black bgimg">
+  <div class="w3-padding-large" id="main">
+    <div class="w3-padding-64 w3-auto w3-center w3-display-middle">
+      <div class="container">
+        <h1 class="w3-musifan-color">Connection</h1>
+        <div *ngIf="showMessage" class="alert alert-danger">
+          {{ message }}
+        </div>
+        <div><br /></div>
+        <form (ngSubmit)="check()" [formGroup]="form">
+          <div class="form-group">
+            <label>Email : </label>
+            <input
+              class="form-control"
+              placeholder="Email"
+              formControlName="email"
+            />
+            <div
+              *ngIf="
+                form.controls['email'].dirty && form.controls['email'].invalid
+              "
+              class="alert alert-danger"
+            >
+              {{ emailErrorMessage() }}
+            </div>
+          </div>
+          <div><br /></div>
+          <div class="form-group">
+            <label>Mot de passe : </label>
+            <input
+              type="password"
+              placeholder="Password"
+              formControlName="password"
+              class="form-control"
+            />
+            <div
+              *ngIf="
+                form.controls['password'].dirty &&
+                form.controls['password'].invalid
+              "
+              class="alert alert-danger"
+            >
+              {{ passwordErrorMessage() }}
+            </div>
+          </div>
+          <div><br /></div>
+          <div class="form-group">
+            <button
+              type="submit"
+              class="btn btn-outline-success"
+              [disabled]="form.invalid"
+            >
+              Connexion
+            </button>
+            <br />
+            <p>
+              Pas encore de compte ?
+              <a
+                routerLink="/signin"
+                routerLinkActive="active"
+                class="w3-musifan-color"
+                >Créer un compte</a
+              >
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
-  <form (ngSubmit)="check()" [formGroup]="form">
-    <div class="form-group">
-      <label>Email : </label>
-      <input class="form-control" placeholder="Email" formControlName="email" />
-      <div
-        *ngIf="form.controls['email'].dirty && form.controls['email'].invalid"
-        class="alert alert-danger"
+  <div class="w3-display-bottomright w3-padding-large">
+    <p class="w3-musifan-color">
+      Powered by
+      <a
+        href="https://www.soprasteria.com/fr"
+        target="_blank"
+        class="w3-musifan-color"
+        >Sopra Steria</a
       >
-        {{ emailErrorMessage() }}
-      </div>
-    </div>
-    <div class="form-group">
-      <label>Mot de passe : </label>
-      <input
-        type="password"
-        placeholder="Password"
-        formControlName="password"
-        class="form-control"
-      />
-      <div
-        *ngIf="
-          form.controls['password'].dirty && form.controls['password'].invalid
-        "
-        class="alert alert-danger"
-      >
-        {{ passwordErrorMessage() }}
-      </div>
-    </div>
-    <div class="form-group">
-      <button
-        type="submit"
-        class="btn btn-outline-success"
-        [disabled]="form.invalid"
-      >
-        Connexion
-      </button>
-      <p>
-        Pas encore de compte ?
-        <a routerLink="/signin" routerLinkActive="active">Créer un compte</a>
-      </p>
-    </div>
-  </form>
-</div>
+    </p>
+  </div>
+</body>
