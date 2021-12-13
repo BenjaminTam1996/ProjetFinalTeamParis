@@ -16,6 +16,8 @@ import { RouterModule } from '@angular/router';
 import { AccueilComponent } from './accueil/accueil.component';
 import { ArtisteComponent } from './artiste/artiste/artiste.component';
 import { UtilisateurComponent } from './utilisateur/utilisateur/utilisateur.component';
+import { ArtistNavbarComponent } from './navbars/artist-navbar/artist-navbar.component';
+import { FanNavbarComponent } from './navbars/fan-navbar/fan-navbar.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { UtilisateurComponent } from './utilisateur/utilisateur/utilisateur.comp
     AccueilComponent,
     ArtisteComponent,
     UtilisateurComponent,
+    ArtistNavbarComponent,
+    FanNavbarComponent,
   ],
   imports: [
     BrowserModule,

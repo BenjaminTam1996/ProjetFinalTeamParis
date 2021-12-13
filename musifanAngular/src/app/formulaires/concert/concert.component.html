@@ -1,52 +1,99 @@
-<h1>Concert formulaire</h1>
-<form (ngSubmit)="save()" [formGroup]="concertForm">
-  <div class="form-group">
-    <label>Id</label>
-    <input class="form-control" />
+<style>
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Montserrat", sans-serif;
+  }
+  .w3-row-padding img {
+    margin-bottom: 12px;
+  }
+  /* Add a left margin to the "page content" that matches the width of the sidebar (140px) */
+  #main {
+    margin-left: 140px;
+  }
+  /* Remove margins from "page content" on small screens */
+  @media only screen and (max-width: 600px) {
+    #main {
+      margin-left: 0;
+    }
+  }
+</style>
+
+<body class="w3-black">
+  <app-artist-navbar></app-artist-navbar>
+  <div class="w3-padding-large w3-top" id="main">
+    <div class="w3-padding-64 w3-auto">
+      <h2 class="w3-text-musifan-color">Ajout d'un concert</h2>
+      <hr style="width: 200px" class="w3-opacity" />
+
+      <form (ngSubmit)="save()" [formGroup]="concertForm">
+        <p class="form-group">
+          <label>Lieu</label>
+          <input
+            class="form-control w3-input w3-padding-16"
+            name="lieuControl"
+            [formControl]="lieuControl"
+          />
+        </p>
+        <p class="form-group">
+          <label>Artistes</label>
+          <input
+            class="form-control w3-input w3-padding-16"
+            name="artistesControl"
+            [formControl]="artistesControl"
+          />
+        </p>
+        <p class="form-group">
+          <label>Nom du concert</label>
+          <input
+            class="form-control w3-input w3-padding-16"
+            name="nomControl"
+            [formControl]="nomControl"
+          />
+        </p>
+        <p class="form-group">
+          <label>Date</label>
+          <input
+            class="form-control w3-input w3-padding-16"
+            name="nomControl"
+            type="date"
+            [formControl]="dateControl"
+          />
+        </p>
+        <p class="form-group">
+          <label>Prix</label>
+          <input
+            class="form-control w3-input w3-padding-16"
+            name="prixControl"
+            [formControl]="prixControl"
+          />
+        </p>
+
+        <p class="form-group">
+          <label>Nombre de places</label>
+          <input
+            class="form-control w3-input w3-padding-16"
+            name="placesControl"
+            [formControl]="placesControl"
+          />
+        </p>
+        <br />
+        <p>
+          <button
+            type="submit"
+            class="w3-button w3-light-grey w3-padding-large"
+            [disabled]="concertForm.invalid"
+            [routerLink]="['/concertform']"
+            routerLinkActive="active"
+          >
+            Valider l'ajout du concert
+          </button>
+        </p>
+      </form>
+    </div>
   </div>
-  <div class="form-group">
-    <label>Nom</label>
-    <input class="form-control" name="nomControl" [formControl]="nomControl" />
-  </div>
-  <div class="form-group">
-    <label>Date</label>
-    <input class="form-control" name="nomControl" [formControl]="dateControl" />
-  </div>
-  <div class="form-group">
-    <label>Nombre de places</label>
-    <input
-      class="form-control"
-      name="placesControl"
-      [formControl]="placesControl"
-    />
-  </div>
-  <div class="form-group">
-    <label>Prix</label>
-    <input
-      class="form-control"
-      name="prixControl"
-      [formControl]="prixControl"
-    />
-  </div>
-  <div class="form-group">
-    <label>Lieu</label>
-    <input
-      class="form-control"
-      name="lieuControl"
-      [formControl]="lieuControl"
-    />
-  </div>
-  <div class="form-group">
-    <label>Artistes</label>
-    <input
-      class="form-control"
-      name="artistesControl"
-      [formControl]="artistesControl"
-    />
-  </div>
-  <div>
-    <button type="submit" [disabled]="concertForm.invalid">
-      Valider l'ajout du concert
-    </button>
-  </div>
-</form>
+</body>

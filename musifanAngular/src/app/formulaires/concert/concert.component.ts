@@ -30,14 +30,23 @@ export class ConcertComponent implements OnInit {
 
     this.dateControl = this.fb.control('', [Validators.required]);
 
-    this.placesControl = this.fb.control('', [Validators.required]);
+    this.placesControl = this.fb.control('', [
+      Validators.required,
+      //pattern ne permet que nombre
+      Validators.pattern(/^[0-9]+$/),
+      Validators.min(0),
+    ]);
 
-    this.prixControl = this.fb.control('', [Validators.required]);
+    this.prixControl = this.fb.control('', [
+      Validators.required,
+      //pattern ne permet que nombre avec décimal
+      Validators.pattern(/^[1-9]\d*(\.\d+)?$/),
+    ]);
 
     //Ajouter vérification pas déjà concert même date
-    this.lieuControl = this.fb.control('', [Validators.required]);
+    this.lieuControl = this.fb.control('');
 
-    this.artistesControl = this.fb.control('', [Validators.required]);
+    this.artistesControl = this.fb.control('');
 
     this.concertForm = this.fb.group({
       nomControl: this.nomControl,
@@ -59,7 +68,9 @@ export class ConcertComponent implements OnInit {
           this.nomControl.value,
           this.dateControl.value,
           this.placesControl.value,
-          this.prixControl.value
+          this.prixControl.value,
+          undefined,
+          undefined
         )
       )
       .subscribe((result) => {});
