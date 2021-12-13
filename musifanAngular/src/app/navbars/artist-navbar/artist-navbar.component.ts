@@ -1,6 +1,7 @@
 import { ArtisteService } from './../../services/artiste.service';
 import { Artiste } from './../../models/artiste';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-artist-navbar',
@@ -10,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class ArtistNavbarComponent implements OnInit {
   artiste: Artiste = new Artiste();
 
-  constructor(private artisteService: ArtisteService) {}
+  constructor(private artisteService: ArtisteService, private router: Router) {}
 
   ngOnInit(): void {
     if (!!sessionStorage.getItem('id')) {
@@ -19,5 +20,10 @@ export class ArtistNavbarComponent implements OnInit {
         this.artiste = result;
       });
     }
+  }
+
+  logout() {
+    sessionStorage.clear();
+    this.router.navigate(['/accueil']);
   }
 }

@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { ArtisteService } from './../../services/artiste.service';
 import { Artiste } from './../../models/artiste';
 import { UtilisateurService } from './../../services/utilisateur.service';
@@ -26,6 +27,7 @@ export class SigninComponent implements OnInit {
   constructor(
     private utilisateurService: UtilisateurService,
     private artisteService: ArtisteService,
+    private authService: AuthService,
     private router: Router
   ) {
     this.form = new FormGroup({
@@ -164,6 +166,21 @@ export class SigninComponent implements OnInit {
           this.form.get('passwordGroup.password')!.value
         )
         .subscribe((utilisateur) => {
+          /* Authentification pour eviter la reconnexion de l'utilisateur */
+          sessionStorage.setItem('id', String(utilisateur['id']));
+          sessionStorage.setItem('role', 'utilisateur');
+
+          sessionStorage.setItem(
+            'token',
+            btoa(
+              this.form.controls['email'].value +
+                ':' +
+                this.form.get('passwordGroup.password')!.value
+            )
+          );
+          sessionStorage.setItem('email', this.form.controls['email'].value);
+
+          /* Renvoie vers la page utilisateur */
           this.router.navigate(['/utilisateur']);
         });
     } else if (this.form.controls['role'].value == 'ARTISTE') {
@@ -181,6 +198,23 @@ export class SigninComponent implements OnInit {
           this.form.get('passwordGroup.password')!.value
         )
         .subscribe((artiste) => {
+          console.log(artiste);
+          console.log(artiste['id']);
+          /* Authentification pour eviter la reconnexion de l'utilisateur  */
+          sessionStorage.setItem('id', String(artiste['id']));
+          sessionStorage.setItem('role', 'artiste');
+
+          sessionStorage.setItem(
+            'token',
+            btoa(
+              this.form.controls['email'].value +
+                ':' +
+                this.form.get('passwordGroup.password')!.value
+            )
+          );
+          sessionStorage.setItem('email', this.form.controls['email'].value);
+
+          /* Envoie vers la page artiste */
           this.router.navigate(['/artiste']);
         });
     }

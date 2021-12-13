@@ -37,27 +37,56 @@
     <b>{{ utilisateur.pseudo }}</b>
   </p>
   <p class="w3-musifan-color">Fan</p>
-  <a href="#" class="w3-button w3-padding-large w3-hover-black">
+  <a
+    href="#"
+    class="w3-button w3-padding-large w3-hover-black"
+    [routerLink]="['/utilisateur']"
+    routerLinkActive="active"
+  >
     <i class="fa fa-eye w3-xxlarge"></i>
     <p class="w3-musifan-color">FEED</p>
   </a>
-  <a href="#" class="w3-button w3-padding-large w3-hover-black">
+  <a
+    href="#"
+    class="w3-button w3-padding-large w3-hover-black"
+    [routerLink]="['/listeArtistes']"
+    routerLinkActive="active"
+  >
     <i class="fa fa-user w3-xxlarge"></i>
     <p class="w3-musifan-color">MES ARTISTES</p>
   </a>
-  <a href="#" class="w3-button w3-padding-large w3-hover-black">
+  <a
+    href="#"
+    class="w3-button w3-padding-large w3-hover-black"
+    [routerLink]="['/listeConcerts']"
+    routerLinkActive="active"
+  >
     <i class="fa fa-music w3-xxlarge"></i>
     <p class="w3-musifan-color">CONCERTS</p>
   </a>
-  <a href="#" class="w3-button w3-padding-large w3-hover-black">
+  <a
+    href="#"
+    class="w3-button w3-padding-large w3-hover-black"
+    [routerLink]="['/listeMusiques']"
+    routerLinkActive="active"
+  >
     <i class="fa fa-headphones w3-xxlarge"></i>
     <p class="w3-musifan-color">MUSIQUES</p>
   </a>
-  <a href="#" class="w3-button w3-padding-large w3-hover-black">
+  <a
+    href="#"
+    class="w3-button w3-padding-large w3-hover-black"
+    [routerLink]="['/parametres']"
+    routerLinkActive="active"
+  >
     <i class="fa fa-cog w3-xxlarge"></i>
     <p class="w3-musifan-color">PARAMETRES</p>
   </a>
-  <a href="#" class="w3-button w3-padding-large w3-hover-black">
+  <a
+    href="#"
+    class="w3-button w3-padding-large w3-hover-black"
+    (click)="logout()"
+  >
     <i class="fa fa-sign-out w3-xxlarge"></i>
     <p class="w3-musifan-color">Deconnexion</p>
   </a>
@@ -72,36 +101,47 @@
       href="#"
       class="w3-bar-item w3-button w3-musifan-color"
       style="width: 25% !important"
+      [routerLink]="['/utilisateur']"
+      routerLinkActive="active"
       >FEED</a
     >
     <a
       href="#"
       class="w3-bar-item w3-button w3-musifan-color"
       style="width: 25% !important"
+      [routerLink]="['/listeArtistes']"
+      routerLinkActive="active"
       >MES ARTISTES</a
     >
     <a
       href="#"
       class="w3-bar-item w3-button w3-musifan-color"
       style="width: 25% !important"
+      [routerLink]="['/listeConcerts']"
+      routerLinkActive="active"
       >CONCERTS</a
     >
     <a
       href="#"
       class="w3-bar-item w3-button w3-musifan-color"
       style="width: 25% !important"
+      [routerLink]="['/listeMusiques']"
+      routerLinkActive="active"
       >MUSIQUES</a
     >
     <a
       href="#"
       class="w3-bar-item w3-button w3-musifan-color"
       style="width: 25% !important"
+      [routerLink]="['/parametres']"
+      routerLinkActive="active"
       >PARAMETRES</a
     >
     <a
       href="#"
       class="w3-bar-item w3-button w3-musifan-color"
       style="width: 25% !important"
+      (click)="logout()"
       >Déconnexion</a
     >
   </div>

@@ -1,3 +1,8 @@
+import { AuthService } from './services/auth.service';
+import { ParametresComponent } from './formulaires/parametres/parametres.component';
+import { ListeMusiquesComponent } from './utilisateur/liste-musiques/liste-musiques.component';
+import { ListeConcertsComponent } from './utilisateur/liste-concerts/liste-concerts.component';
+import { ListeArtistesComponent } from './utilisateur/liste-artistes/liste-artistes.component';
 import { AuthUtilisateurService } from './services/auth-utilisateur.service';
 import { AccueilComponent } from './accueil/accueil.component';
 import { SigninComponent } from './formulaires/signin/signin.component';
@@ -18,9 +23,29 @@ export const routes: Routes = [
     canActivate: [AuthUtilisateurService],
   },
   {
+    path: 'listeArtistes',
+    component: ListeArtistesComponent,
+    canActivate: [AuthUtilisateurService],
+  },
+  {
+    path: 'listeConcerts',
+    component: ListeConcertsComponent,
+    canActivate: [AuthUtilisateurService],
+  },
+  {
+    path: 'listeMusiques',
+    component: ListeMusiquesComponent,
+    canActivate: [AuthUtilisateurService],
+  },
+  {
     path: 'artiste',
     component: ArtisteComponent,
     canActivate: [AuthArtisteService],
+  },
+  {
+    path: 'parametres',
+    component: ParametresComponent,
+    canActivate: [AuthService],
   },
   { path: 'concertform', component: ConcertComponent },
   { path: '', redirectTo: 'accueil', pathMatch: 'full' },
