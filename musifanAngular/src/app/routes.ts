@@ -43,6 +43,11 @@ export const routes: Routes = [
     canActivate: [AuthArtisteService],
   },
   {
+    path: 'artiste/:id',
+    component: ArtisteComponent,
+    canActivate: [AuthUtilisateurService],
+  },
+  {
     path: 'parametres',
     component: ParametresComponent,
     canActivate: [AuthService],

@@ -28,8 +28,24 @@
   <app-fan-navbar></app-fan-navbar>
   <div class="w3-padding-large" id="main">
     <div class="w3-padding-64 w3-auto">
-      <h2 class="w3-text-musifan-color">Ma liste de concerts</h2>
+      <h2 class="w3-text-musifan-color">Concerts</h2>
       <hr style="width: 200px" class="w3-opacity" />
+      <table class="w3-table">
+        <thead>
+          <tr>
+            <th>nom</th>
+            <th>date</th>
+            <th>prix</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of utilisateur.concerts">
+            <td>{{ c.nom }}</td>
+            <td>{{ c.date }}</td>
+            <td>{{ c.prix }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </body>
