@@ -362,7 +362,7 @@ class MusifanApplicationTests {
 		////Creation Utilisateurs
 		//------------------------------------------------------------------------------------------------------------------------------------------
 		Utilisateur john = new Utilisateur("john@mail.com", "monAnniversaire", "Dupond", "John", "09 03 60 74 85", null, "johnyday");
-		utilisateurService.save(john);
+		utilisateurService.save(musifan.musifan.dto.EntityToDto.UtilisateurToUtilisateurDto(john));
 		john.addArtiste(theWeeknd);
 		john.addArtiste(petitBiscuit);
 		utilisateurService.addLigneUtilisateur(john);
@@ -375,7 +375,7 @@ class MusifanApplicationTests {
 		
 		
 		Utilisateur marie = new Utilisateur("m.dolly@monMail.fr", "1234", "Dolly", "Marie", "07 25 14 96 87", null, "marie.dolly");
-		utilisateurService.save(marie);
+		utilisateurService.save(musifan.musifan.dto.EntityToDto.UtilisateurToUtilisateurDto(marie));
 		marie.addArtiste(sheeran);
 		marie.addArtiste(petitBiscuit);
 		marie.addArtiste(kygo);
