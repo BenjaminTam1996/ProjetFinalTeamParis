@@ -31,7 +31,9 @@ public class CommandeService {
 		Set<ConstraintViolation<Commande>> violations =  validator.validate(musifan.musifan.dto.DtoToEntity.DtoCommandeToEntity(commande));
 		if (violations.isEmpty()) {
 			commandeRepository.save(musifan.musifan.dto.DtoToEntity.DtoCommandeToEntity(commande));
+			System.out.println(musifan.musifan.dto.DtoToEntity.DtoCommandeToEntity(commande).getLignesCommandes());
 			ligneCommandeRepository.saveAll(musifan.musifan.dto.DtoToEntity.DtoCommandeToEntity(commande).getLignesCommandes());
+
 		} else {
 			throw new CommandeException();
 		}

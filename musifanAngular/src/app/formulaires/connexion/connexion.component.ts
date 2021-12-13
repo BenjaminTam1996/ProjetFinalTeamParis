@@ -90,6 +90,7 @@ export class ConnexionComponent implements OnInit {
             sessionStorage.setItem('role', 'artiste');
             this.router.navigate(['/artiste']);
           }
+          sessionStorage.setItem('id', ok['id']);
         },
         (error) => {
           this.message = 'Votre mail ou mot de passe est incorrect';

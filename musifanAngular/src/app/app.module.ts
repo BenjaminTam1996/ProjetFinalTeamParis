@@ -18,6 +18,9 @@ import { ArtisteComponent } from './artiste/artiste/artiste.component';
 import { UtilisateurComponent } from './utilisateur/utilisateur/utilisateur.component';
 import { ArtistNavbarComponent } from './navbars/artist-navbar/artist-navbar.component';
 import { FanNavbarComponent } from './navbars/fan-navbar/fan-navbar.component';
+import { ListeArtistesComponent } from './utilisateur/liste-artistes/liste-artistes.component';
+import { ListeConcertsComponent } from './utilisateur/liste-concerts/liste-concerts.component';
+import { ListeMusiquesComponent } from './utilisateur/liste-musiques/liste-musiques.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,9 @@ import { FanNavbarComponent } from './navbars/fan-navbar/fan-navbar.component';
     UtilisateurComponent,
     ArtistNavbarComponent,
     FanNavbarComponent,
+    ListeArtistesComponent,
+    ListeConcertsComponent,
+    ListeMusiquesComponent,
   ],
   imports: [
     BrowserModule,

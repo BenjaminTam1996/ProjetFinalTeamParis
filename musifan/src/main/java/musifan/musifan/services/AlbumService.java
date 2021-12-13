@@ -47,9 +47,9 @@ public class AlbumService {
 			for(Chansons c : chansons) {
 				chansonsService.save(c);
 			}
-			System.out.println(albumEntity.getId());
+			
 			album.setId(albumEntity.getId());
-			System.out.println(album.getId());
+		
 			return albumEntity;
 		} else {
 			throw new AlbumException();

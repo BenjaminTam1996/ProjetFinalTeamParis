@@ -52,6 +52,7 @@ public class Artiste extends Compte {
 	@JsonView({JsonViews.Common.class,})
 	private Byte[] photoBanniere;
 	
+	@Lob
 	@Column(name="artiste_description")
 	@JsonView({JsonViews.Common.class,})
 	private String description;

@@ -98,7 +98,7 @@ class MusifanApplicationTests {
 		
 		//Kygo
 		//------------------------------------------------------------------------------------------------------------------------------------------
-		Artiste kygo = new Artiste("kygo@gmail.fr", "Kygo", null, null, null, null, "Kygo", null, null);
+		Artiste kygo = new Artiste("kygo@gmail.fr", "Kygo", null, null, null, null, "Kygo", "Kygo , de son vrai nom Kyrre Gørvell-Dahll, né le 11 septembre 1991 à Singapour, est un DJ, musicien, auteur-compositeur et producteur norvégien. Il est connu pour ses compositions Firestone feat Conrad Sewell (2014) et Stole the Show feat. Parson James (2015). En 2015, il est classé 33e au DJ Mag Top 100 DJ4 puis 26e l'année suivante. ", null);
 		artisteService.save(kygo);
 		album = new Album("Cloud Nine",LocalDate.of(2016, Month.MAY, 13));
 		album.addArtiste(kygo);
@@ -210,7 +210,7 @@ class MusifanApplicationTests {
 		
 		// Taylor Swift
 		//------------------------------------------------------------------------------------------------------------------------------------------		
-		Artiste swift = new Artiste("swift@mail.com", "$Taylor1", null, "Taylor Swift", null, null, "Taylor Swift", null, null);
+		Artiste swift = new Artiste("swift@mail.com", "$Taylor1", null, "Taylor Swift", null, null, "Taylor Swift", "Taylor Alison Swift, née le 13 décembre 1989 à Reading, en Pennsylvanie, est une auteure-compositrice-interprète et actrice américaine. Son lyrisme narratif, qui s’inspire souvent de ses expériences personnelles, est largement salué par la critique et la couverture médiatique. ", null);
 		artisteService.save(swift);
 		album = new Album("Red", LocalDate.of(2021, Month.NOVEMBER, 12));
 		album.addArtiste(swift);
@@ -362,7 +362,7 @@ class MusifanApplicationTests {
 		////Creation Utilisateurs
 		//------------------------------------------------------------------------------------------------------------------------------------------
 		Utilisateur john = new Utilisateur("john@mail.com", "monAnniversaire", "Dupond", "John", "09 03 60 74 85", null, "johnyday");
-		utilisateurService.save(musifan.musifan.dto.EntityToDto.UtilisateurToUtilisateurDto(john));
+		john = utilisateurService.save(musifan.musifan.dto.EntityToDto.UtilisateurToUtilisateurDto(john));
 		john.addArtiste(theWeeknd);
 		john.addArtiste(petitBiscuit);
 		utilisateurService.addLigneUtilisateur(john);
@@ -370,12 +370,12 @@ class MusifanApplicationTests {
 		commande.addProduit(afterHours, 4);
 		Commande commande2 = new Commande(john);
 		commande2.addProduit(problems, 1);
-//		commandeService.save(commande);
-//		commandeService.save(commande2);
+		commandeService.save(musifan.musifan.dto.EntityToDto.CommandeToCommandeDto(commande));
+		commandeService.save(musifan.musifan.dto.EntityToDto.CommandeToCommandeDto(commande2));
 		
 		
 		Utilisateur marie = new Utilisateur("m.dolly@monMail.fr", "1234", "Dolly", "Marie", "07 25 14 96 87", null, "marie.dolly");
-		utilisateurService.save(musifan.musifan.dto.EntityToDto.UtilisateurToUtilisateurDto(marie));
+		marie = utilisateurService.save(musifan.musifan.dto.EntityToDto.UtilisateurToUtilisateurDto(marie));
 		marie.addArtiste(sheeran);
 		marie.addArtiste(petitBiscuit);
 		marie.addArtiste(kygo);
@@ -383,7 +383,7 @@ class MusifanApplicationTests {
 		utilisateurService.addLigneUtilisateur(marie);
 		commande = new Commande(marie);
 		commande.addProduit(edSheeranTour, 2);
-//		commandeService.save(commande);
+		commandeService.save(musifan.musifan.dto.EntityToDto.CommandeToCommandeDto(commande));
 		
 		
 	}
