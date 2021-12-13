@@ -1,5 +1,6 @@
 package musifan.musifan.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -9,6 +10,7 @@ import javax.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import musifan.musifan.entity.Album;
 import musifan.musifan.entity.Commande;
 import musifan.musifan.exceptions.CommandeException;
 import musifan.musifan.repositories.CommandeRepository;
@@ -37,8 +39,8 @@ public class CommandeService {
 
 
 
-	public Commande byId(Long numero) {
-		return commandeRepository.findById(numero).orElseThrow(CommandeException::new);
+	public musifan.musifan.dto.Commande byId(Long numero) {
+		return musifan.musifan.dto.EntityToDto.CommandeToCommandeDto(commandeRepository.findById(numero).orElseThrow(CommandeException::new));
 	}
 	
 
@@ -48,16 +50,24 @@ public class CommandeService {
 		commandeRepository.delete(commandeEnBase);
 	}
 
-	public List<Commande> allCommande() {
-		return commandeRepository.findAll();
+	public List<musifan.musifan.dto.Commande> allCommande() {
+		List<musifan.musifan.dto.Commande> listeCommandeDto = new ArrayList<musifan.musifan.dto.Commande>();
+		for(Commande commandeEntity : commandeRepository.findAll()) {
+			listeCommandeDto.add(musifan.musifan.dto.EntityToDto.CommandeToCommandeDto(commandeEntity));
+		}
+		return listeCommandeDto;
 	}
 
 
-	public List<Commande> allWithConcerts() {
-		return commandeRepository.allWithConcerts();
+	public List<musifan.musifan.dto.Commande> allWithConcerts() {	
+		List<musifan.musifan.dto.Commande> listeCommandeDto = new ArrayList<musifan.musifan.dto.Commande>();
+		for(Commande commandeEntity : commandeRepository.allWithConcerts()) {
+			listeCommandeDto.add(musifan.musifan.dto.EntityToDto.CommandeToCommandeDto(commandeEntity));
+		}
+		return listeCommandeDto;
 	}
 	
-	public Commande byKeyWithConcerts(Long numero) {
-		return commandeRepository.byKeyWithConcerts(numero);
+	public musifan.musifan.dto.Commande byKeyWithConcerts(Long numero) {
+		return musifan.musifan.dto.EntityToDto.CommandeToCommandeDto(commandeRepository.byKeyWithConcerts(numero));
 	}
 }

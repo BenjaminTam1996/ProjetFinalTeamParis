@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import musifan.musifan.entity.JsonViews;
-import musifan.musifan.entity.Utilisateur;
+import musifan.musifan.dto.Utilisateur;
 import musifan.musifan.services.ArtisteService;
 import musifan.musifan.services.CommandeService;
 import musifan.musifan.services.UtilisateurService;
@@ -80,7 +80,7 @@ public class UtilisateurRestController {
 	@JsonView(JsonViews.Common.class)
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public Utilisateur create(@Valid @RequestBody Utilisateur utilisateur, BindingResult br) {
-		return utilisateurService.save(utilisateur);
+		return musifan.musifan.dto.EntityToDto.UtilisateurToUtilisateurDto(utilisateurService.save(utilisateur));
 	}
 
 	// Mettre a jour un utilisateur par rapport a son id
@@ -96,7 +96,7 @@ public class UtilisateurRestController {
 		utilisateurEnBase.setPrenom(utilisateur.getPrenom());
 		utilisateurEnBase.setPseudo(utilisateur.getPseudo());
 		utilisateurEnBase.setTelephone(utilisateur.getTelephone());
-		return utilisateurService.save(utilisateurEnBase);
+		return musifan.musifan.dto.EntityToDto.UtilisateurToUtilisateurDto( utilisateurService.save(utilisateurEnBase));
 
 	}
 
@@ -104,12 +104,17 @@ public class UtilisateurRestController {
 	@PutMapping("artistes/{id}")
 	@JsonView(JsonViews.UtilisateurAvecArtiste.class)
 	public Utilisateur updateArtiste(@PathVariable("id") Long id, @Valid @RequestBody Utilisateur utilisateur) {
-		Utilisateur utilisateurEnBase = utilisateurService.byKeyWithArtistes(id);
-		utilisateurEnBase.setLignesUtilisateurs(utilisateur.getLignesUtilisateurs());
-		utilisateurEnBase.getLignesUtilisateurs().forEach(lu -> {
-			lu.getId().setUtilisateur(utilisateurEnBase);
+		musifan.musifan.entity.Utilisateur utilisateurEntity = musifan.musifan.dto.DtoToEntity.DtoUtilisateurToUtilisateur(utilisateur);
+		utilisateurEntity.getLignesUtilisateurs().forEach(lu->{
+			lu.getId().setUtilisateur(utilisateurEntity);
 		});
-		return utilisateurService.addLigneUtilisateur(utilisateurEnBase);
+		
+		Utilisateur utilisateurEnBase = utilisateurService.byKeyWithArtistes(id);
+		musifan.musifan.dto.DtoToEntity.DtoUtilisateurToUtilisateur(utilisateurEnBase).setLignesUtilisateurs(musifan.musifan.dto.DtoToEntity.DtoUtilisateurToUtilisateur(utilisateur).getLignesUtilisateurs());
+		musifan.musifan.dto.DtoToEntity.DtoUtilisateurToUtilisateur(utilisateurEnBase).getLignesUtilisateurs().forEach(lu -> {
+			lu.getId().setUtilisateur(musifan.musifan.dto.DtoToEntity.DtoUtilisateurToUtilisateur(utilisateurEnBase));
+		});
+		return musifan.musifan.dto.EntityToDto.UtilisateurToUtilisateurDto(utilisateurService.addLigneUtilisateur(musifan.musifan.dto.DtoToEntity.DtoUtilisateurToUtilisateur(utilisateurEnBase)));
 	}
 
 	// Supprimer un artiste de la liste des artistes d'un utilisateur
@@ -124,7 +129,7 @@ public class UtilisateurRestController {
 	@DeleteMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable("id") Long id) {
-		utilisateurService.delete(id);
+		utilisateurService.delete(utilisateurService.byId(id));
 	}
 
 }

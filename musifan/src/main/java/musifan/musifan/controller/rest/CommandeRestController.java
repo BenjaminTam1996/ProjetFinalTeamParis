@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import musifan.musifan.entity.Album;
-import musifan.musifan.entity.Commande;
+import musifan.musifan.dto.Commande;
 import musifan.musifan.entity.JsonViews;
 import musifan.musifan.services.CommandeService;
 

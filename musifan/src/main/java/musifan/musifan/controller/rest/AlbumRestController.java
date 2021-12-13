@@ -41,7 +41,7 @@ public class AlbumRestController {
 	@GetMapping("/{id}")
 	@JsonView({JsonViews.AlbumComplet.class,})
 	public Album byId(@PathVariable("id") Long id) {
-		System.out.println(albumService.byIdWithChansonsAndArtistes(id));
+		//System.out.println(albumService.byIdWithChansonsAndArtistes(id));
 		return albumService.byIdWithChansonsAndArtistes(id);
 	}
 	
