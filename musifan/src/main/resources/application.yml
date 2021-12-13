@@ -3,22 +3,23 @@ server:
   error:
     include-message: always
   servlet:
-   context-path: /musifan
-   
+    context-path: /musifan
+
 spring:
-#configuration datasource
+  #configuration datasource
   datasource:
     driver-class-name: org.postgresql.Driver
     password: postgres
     url: jdbc:postgresql://localhost:5432/site_musifan
-#    url: jdbc:postgresql://localhost:5434/site_musifan
+    #    url: jdbc:postgresql://localhost:5434/site_musifan
     username: postgres
-    hikari:      auto-commit: false
-    
-##jpa
+    hikari:
+      auto-commit: false
+
+  ##jpa
   jpa:
     hibernate:
-     ddl-auto: validate
+      ddl-auto: validate
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL10Dialect

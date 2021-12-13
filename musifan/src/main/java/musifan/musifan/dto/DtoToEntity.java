@@ -13,6 +13,9 @@ import musifan.musifan.entity.LigneCommande;
 import musifan.musifan.entity.LigneCommandePK;
 import musifan.musifan.entity.LigneConcert;
 import musifan.musifan.entity.LigneConcertPK;
+import musifan.musifan.entity.LigneUtilisateur;
+import musifan.musifan.entity.LigneUtilisateurPk;
+import musifan.musifan.entity.Utilisateur;
 import musifan.musifan.entity.Album;
 import musifan.musifan.entity.Artiste;
 
@@ -144,5 +147,50 @@ public class DtoToEntity {
 		}
 		commandeEntity.setLignesCommandes(lignesCommandes);
 		return commandeEntity;
+	}
+	
+	
+	public static musifan.musifan.entity.Utilisateur DtoUtilisateurToUtilisateur(musifan.musifan.dto.Utilisateur utilisateur) {
+
+		// Conversion d'un utilisateur dto en album entity
+		musifan.musifan.entity.Utilisateur utilisateurEntity = new Utilisateur();
+		utilisateurEntity.setId(utilisateur.getId());
+		utilisateurEntity.setMail(utilisateur.getMail());
+		utilisateurEntity.setPassword(utilisateur.getPassword());
+		utilisateurEntity.setNom(utilisateur.getNom());
+		utilisateurEntity.setPrenom(utilisateur.getPrenom());
+		utilisateurEntity.setTelephone(utilisateur.getTelephone());
+		utilisateurEntity.setPseudo(utilisateur.getPseudo());
+
+		for (musifan.musifan.dto.Concert concert : utilisateur.getConcert()) {
+			Commande commandeEntity = new Commande();
+//			commandeEntity..setId(chansons.getId());
+//			chansonEntity.setTitre(chansons.getTitre());
+//			chansonEntity.setDuree(chansons.getDuree());
+//			chansonEntity.setAlbum(albumEntity);
+			utilisateurEntity.getListeConcert().add(commandeEntity);
+		}
+
+		Set<LigneUtilisateur> lignesUtilisateurs = new HashSet<LigneUtilisateur>();
+		for (musifan.musifan.dto.Artiste a : utilisateur.getArtistes()) {
+			musifan.musifan.entity.Artiste artisteEntity = new Artiste();
+			artisteEntity.setId(a.getId());
+			artisteEntity.setMail(a.getMail());
+			artisteEntity.setPassword(a.getPassword());
+			artisteEntity.setNom(a.getNom());
+			artisteEntity.setPrenom(a.getPrenom());
+			artisteEntity.setTelephone(a.getTelephone());
+			artisteEntity.setPhotoProfil(a.getPhotoProfil());
+			artisteEntity.setPhotoBanniere(a.getPhotoBanniere());
+			artisteEntity.setNomArtiste(a.getNomArtiste());
+			artisteEntity.setDescription(a.getDescription());
+
+			LigneUtilisateur ligneUtilisateur = new LigneUtilisateur(new LigneUtilisateurPk(utilisateurEntity, artisteEntity));
+			lignesUtilisateurs.add(ligneUtilisateur);
+		}
+		utilisateurEntity.setLignesUtilisateurs(lignesUtilisateurs);
+//	
+
+		return utilisateurEntity;
 	}
 }

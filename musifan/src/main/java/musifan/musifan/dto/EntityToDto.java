@@ -3,10 +3,14 @@ package musifan.musifan.dto;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import musifan.musifan.entity.Chansons;
+import musifan.musifan.entity.JsonViews;
 import musifan.musifan.entity.LigneAlbum;
 import musifan.musifan.entity.LigneCommande;
 import musifan.musifan.entity.LigneConcert;
+import musifan.musifan.entity.LigneUtilisateur;
 
 public class EntityToDto {
 	
@@ -121,5 +125,57 @@ public class EntityToDto {
 		}
 		
 		return commandeDto;
+	}
+	
+	
+	public static Utilisateur UtilisateurToUtilisateurDto(musifan.musifan.entity.Utilisateur utilisateur) {
+		//Conversion d'un album entity en album dto
+		Utilisateur utilisateurDto = new Utilisateur();
+		utilisateurDto.setId(utilisateur.getId());
+		utilisateurDto.setMail(utilisateur.getMail());
+		utilisateurDto.setPassword(utilisateur.getPassword());
+		utilisateurDto.setNom(utilisateur.getNom());
+		utilisateurDto.setPrenom(utilisateur.getPrenom());
+		utilisateurDto.setTelephone(utilisateur.getTelephone());
+		utilisateurDto.setPseudo(utilisateur.getPseudo());
+		
+		
+		
+	
+		//private Set<Concert> concert = new HashSet<Concert>();
+		//private Set<Artiste> artistes = new HashSet<Artiste>();
+		
+		
+		for(musifan.musifan.entity.Commande c : utilisateur.getListeConcert()) {
+			for ( LigneCommande lc    : c.getLignesCommandes()) {
+				Concert concertDto = new Concert();
+				concertDto.setId(lc.getId().getProduit().getId());
+				concertDto.setNom(lc.getId().getProduit().getNom());
+				concertDto.setDate(lc.getId().getProduit().getDate());
+				concertDto.setLieu(LieuToLieuDto(lc.getId().getProduit().getLieu()));
+				concertDto.setNbPlace(lc.getId().getProduit().getNbPlace());
+				concertDto.setPrix(lc.getId().getProduit().getPrix());
+				utilisateurDto.getConcert().add(concertDto);
+			}
+			
+		}
+
+		
+		for(LigneUtilisateur lu : utilisateur.getLignesUtilisateurs()) {
+			Artiste artisteDto = new Artiste();
+			artisteDto.setId(lu.getId().getArtiste().getId());
+			artisteDto.setMail(lu.getId().getArtiste().getMail());
+			artisteDto.setPassword(lu.getId().getArtiste().getPassword());
+			artisteDto.setNom(lu.getId().getArtiste().getNom());
+			artisteDto.setPrenom(lu.getId().getArtiste().getPrenom());
+			artisteDto.setTelephone(lu.getId().getArtiste().getTelephone());
+			artisteDto.setPhotoProfil(lu.getId().getArtiste().getPhotoProfil());
+			artisteDto.setPhotoBanniere(lu.getId().getArtiste().getPhotoBanniere());
+			artisteDto.setNomArtiste(lu.getId().getArtiste().getNomArtiste());
+			artisteDto.setDescription(lu.getId().getArtiste().getDescription());
+			utilisateurDto.getArtistes().add(artisteDto);
+		}
+		
+		return utilisateurDto;
 	}
 }

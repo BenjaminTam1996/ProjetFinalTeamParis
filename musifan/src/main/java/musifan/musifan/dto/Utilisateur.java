@@ -11,7 +11,7 @@ import musifan.musifan.entity.Commande;
 import musifan.musifan.entity.JsonViews;
 import musifan.musifan.entity.LigneUtilisateur;
 
-public class Utilisteur {
+public class Utilisateur {
 	@JsonView({JsonViews.Common.class,})
 	private Long id;
 	@JsonView({JsonViews.Common.class,})
@@ -32,7 +32,7 @@ public class Utilisteur {
 	@JsonView({JsonViews.UtilisateurAvecArtiste.class,})
 	private Set<Artiste> artistes = new HashSet<Artiste>();
 	
-	public Utilisteur() {
+	public Utilisateur() {
 	}
 
 	public Long getId() {
