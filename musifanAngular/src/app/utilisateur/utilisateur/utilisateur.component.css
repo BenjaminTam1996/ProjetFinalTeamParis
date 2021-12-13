@@ -11,9 +11,9 @@ html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
-/* body {
+body {
   margin: 0;
-} */
+}
 article,
 aside,
 details,
@@ -177,7 +177,7 @@ textarea {
   font: inherit;
 }
 /* End extract */
-html,
+/* html,
 body {
   font-family: Verdana, sans-serif;
   font-size: 15px;
@@ -185,7 +185,7 @@ body {
 }
 html {
   overflow-x: hidden;
-}
+} */
 h1 {
   font-size: 36px;
 }
@@ -533,6 +533,7 @@ a {
 .w3-col,
 .w3-half,
 .w3-third,
+.w3-mythird,
 .w3-twothird,
 .w3-threequarter,
 .w3-quarter {
@@ -589,6 +590,9 @@ a {
   .w3-col.m4,
   .w3-third {
     width: 33.33333%;
+  }
+  .w3-mythird {
+    width: 31.5%;
   }
   .w3-col.m5 {
     width: 41.66666%;
@@ -888,6 +892,7 @@ a {
 .w3-row-padding,
 .w3-row-padding > .w3-half,
 .w3-row-padding > .w3-third,
+.w3-row-padding > .w3-mythird,
 .w3-row-padding > .w3-twothird,
 .w3-row-padding > .w3-threequarter,
 .w3-row-padding > .w3-quarter,
