@@ -14,6 +14,7 @@
   /* Add a left margin to the "page content" that matches the width of the sidebar (140px) */
   #main {
     margin-left: 140px;
+    width: 90%;
   }
   /* Remove margins from "page content" on small screens */
   @media only screen and (max-width: 600px) {
@@ -26,9 +27,37 @@
 <body class="w3-black">
   <app-fan-navbar></app-fan-navbar>
   <div class="w3-padding-large w3-top" id="main">
-    <div class="w3-padding-64 w3-auto">
+    <div class="w3-padding-64 w3-auto w3-border">
       <h2 class="w3-text-musifan-color">Feed</h2>
       <hr style="width: 200px" class="w3-opacity" />
+
+      <!-- Grid for photos -->
+      <div class="w3-row-padding" style="margin: 0 -16px">
+        <div class="w3-quarter">
+          <img src="/assets/images/Kygo1.jpg" style="width: 100%" />
+
+          <img src="/assets/images/Kygo3.jpg" style="width: 100%" />
+          <img src="/assets/images/Riles1.jpg" style="width: 100%" />
+          <img src="/assets/images/doja1.jpg" style="width: 100%" />
+        </div>
+
+        <div class="w3-quarter">
+          <img src="/assets/images/Kygo2.jpg" style="width: 100%" />
+          <img src="/assets/images/eminem1.jpg" style="width: 100%" />
+          <img src="/assets/images/wknd2.JPG" style="width: 100%" />
+          <img src="/assets/images/ed1.jpg" style="width: 100%" />
+        </div>
+
+        <div class="w3-quarter">
+          <img src="/assets/images/wknd1.jpg" style="width: 100%" />
+          <img src="/assets/images/dua1.jpeg" style="width: 100%" />
+          <img src="/assets/images/imaginedragons1.jpg" style="width: 100%" />
+          <img src="/assets/images/djsnake1.jpeg" style="width: 100%" />
+        </div>
+        <!-- End photo grid -->
+      </div>
+      <button background-color="w3-musifan-color">Charger plus</button>
+      <!-- End Feed Section -->
     </div>
   </div>
 </body>

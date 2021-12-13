@@ -1,1 +1,32 @@
-<p>artiste works!</p>
+<style>
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Montserrat", sans-serif;
+  }
+  .w3-row-padding img {
+    margin-bottom: 12px;
+  }
+  /* Add a left margin to the "page content" that matches the width of the sidebar (140px) */
+  #main {
+    margin-left: 140px;
+    width: 90%;
+  }
+  /* Remove margins from "page content" on small screens */
+  @media only screen and (max-width: 600px) {
+    #main {
+      margin-left: 0;
+    }
+  }
+</style>
+
+<body class="w3-black">
+  <app-artist-navbar></app-artist-navbar>
+  <div class="w3-padding-large w3-top w3-border" id="main">
+    <div class="w3-padding-64 w3-auto w3-border w3-center"></div>
+  </div>
+</body>
