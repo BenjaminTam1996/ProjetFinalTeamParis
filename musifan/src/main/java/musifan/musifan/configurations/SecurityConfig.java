@@ -36,29 +36,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 					.antMatchers("/api/auth").authenticated()
 					.antMatchers(HttpMethod.POST, "/api/utilisateur").permitAll()
 					.antMatchers(HttpMethod.POST, "/api/artiste").permitAll()
-					.antMatchers("/api/utilsateur/**").hasRole("UILISATEUR")
+					.antMatchers("/api/utilsateur/**").hasRole("UTILISATEUR")
 					.antMatchers("/api/artiste/**").hasRole("ARTISTE")
 					//Auth lieu
 					.antMatchers(HttpMethod.POST,"/api/lieu/**").hasRole("ARTISTE")
-					.antMatchers(HttpMethod.GET, "/api/lieu:**").hasAnyRole("ARTISTE","UILISATEUR")
+					.antMatchers(HttpMethod.GET, "/api/lieu/**").hasAnyRole("ARTISTE","UTILISATEUR")
 					//Auth concert
 					.antMatchers(HttpMethod.POST,"/api/concert/**").hasRole("ARTISTE")
 					.antMatchers(HttpMethod.PUT,"/api/concert/**").hasRole("ARTISTE")
 					.antMatchers(HttpMethod.DELETE,"/api/concert/**").hasRole("ARTISTE")
-					.antMatchers(HttpMethod.GET, "/api/concert/**").hasAnyRole("ARTISTE","UILISATEUR")
+					.antMatchers(HttpMethod.GET, "/api/concert/**").hasAnyRole("ARTISTE","UTILISATEUR")
 					//Auth album
 					.antMatchers(HttpMethod.POST,"/api/album/**").hasRole("ARTISTE")
 					.antMatchers(HttpMethod.DELETE,"/api/album/**").hasRole("ARTISTE")
-					.antMatchers(HttpMethod.GET, "/api/album/**").hasAnyRole("ARTISTE","UILISATEUR")
+					.antMatchers(HttpMethod.GET, "/api/album/**").hasAnyRole("ARTISTE","UTILISATEUR")
 					//Auth chansons
-					.antMatchers(HttpMethod.GET, "/api/chansons/**").hasAnyRole("ARTISTE","UILISATEUR")
+					.antMatchers(HttpMethod.GET, "/api/chansons/**").hasAnyRole("ARTISTE","UTILISATEUR")
 					//Auth publications
 					.antMatchers(HttpMethod.POST,"/api/publication/**").hasRole("ARTISTE")
 					.antMatchers(HttpMethod.DELETE,"/api/publication/**").hasRole("ARTISTE")
-					.antMatchers(HttpMethod.GET, "/api/publication/**").hasAnyRole("ARTISTE","UILISATEUR")
+					.antMatchers(HttpMethod.GET, "/api/publication/**").hasAnyRole("ARTISTE","UTILISATEUR")
 					//Auth commandes
-					.antMatchers(HttpMethod.POST,"/api/commande/**").hasRole("UILISATEUR")
-					.antMatchers(HttpMethod.DELETE,"/api/commande/**").hasRole("UILISATEUR")
+					.antMatchers(HttpMethod.POST,"/api/commande/**").hasRole("UTILISATEUR")
+					.antMatchers(HttpMethod.DELETE,"/api/commande/**").hasRole("UTILISATEUR")
 				.and()	
 				.httpBasic();
 		//@formatter:on

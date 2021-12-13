@@ -164,16 +164,6 @@ export class SigninComponent implements OnInit {
           this.form.get('passwordGroup.password')!.value
         )
         .subscribe((utilisateur) => {
-          sessionStorage.setItem(
-            'token',
-            btoa(
-              this.form.controls['email'].value +
-                ':' +
-                this.form.controls['passwordGroup.password'].value
-            )
-          );
-          sessionStorage.setItem('email', this.form.controls['email'].value);
-          sessionStorage.setItem('role', 'utilisateur');
           this.router.navigate(['/utilisateur']);
         });
     } else if (this.form.controls['role'].value == 'ARTISTE') {
@@ -191,16 +181,6 @@ export class SigninComponent implements OnInit {
           this.form.get('passwordGroup.password')!.value
         )
         .subscribe((artiste) => {
-          sessionStorage.setItem(
-            'token',
-            btoa(
-              this.form.controls['email'].value +
-                ':' +
-                this.form.controls['passwordGroup.password'].value
-            )
-          );
-          sessionStorage.setItem('email', this.form.controls['email'].value);
-          sessionStorage.setItem('role', 'artiste');
           this.router.navigate(['/artiste']);
         });
     }

@@ -162,7 +162,7 @@ class MusifanApplicationTests {
 		chansons.add(new Chansons("Follow Me","4:41",album));
 		chansonRepository.saveAll(chansons);
 		
-		// Petit Biscuit
+		// Ed Sheeran
 		//------------------------------------------------------------------------------------------------------------------------------------------		
 		Artiste sheeran = new Artiste("sheeran@mail.com", "sheeran", "Sheeran", "Edward Christopher", "06 20 84 99 24", null, "Ed Sheeran", "auteur-compositeur-interprete et guitariste", null);
 		artisteService.save(sheeran);
