@@ -47,6 +47,12 @@ public class ArtisteRestController {
 	public Artiste byId(@PathVariable("id") Long id) {
 		return artisteService.byKeyWithArtisteComplet(id);
 	}
+	
+	@GetMapping("/{search}")
+	@JsonView(JsonViews.ArtisteComplet.class)
+	public List<Artiste> byIdLike(@PathVariable("search") String search) {
+		return artisteService.byNomArtisteLikeIgnoreCase(search);
+	}
 
 	// Creer un artiste
 	@PostMapping("")
