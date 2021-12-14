@@ -212,7 +212,6 @@ public class DtoToEntity {
 		utilisateurEntity.setPseudo(utilisateur.getPseudo());
 
 		Set<Commande> Commandes = new HashSet<Commande>();
-		Set<LigneCommande> lignesCommandes = new HashSet<LigneCommande>();
 		for (musifan.musifan.dto.Commande commande : utilisateur.getCommande()) {
 			Commande commandeEntity = new Commande();
 			commandeEntity.setNumero(commande.getNumero());
@@ -228,17 +227,17 @@ public class DtoToEntity {
 
 		Set<LigneUtilisateur> lignesUtilisateurs = new HashSet<LigneUtilisateur>();
 		for (musifan.musifan.dto.Artiste a : utilisateur.getArtistes()) {
-			musifan.musifan.entity.Artiste artisteEntity = new Artiste();
-			artisteEntity.setId(a.getId());
-			artisteEntity.setMail(a.getMail());
-			artisteEntity.setPassword(a.getPassword());
-			artisteEntity.setNom(a.getNom());
-			artisteEntity.setPrenom(a.getPrenom());
-			artisteEntity.setTelephone(a.getTelephone());
-			artisteEntity.setPhotoProfil(a.getPhotoProfil());
-			artisteEntity.setPhotoBanniere(a.getPhotoBanniere());
-			artisteEntity.setNomArtiste(a.getNomArtiste());
-			artisteEntity.setDescription(a.getDescription());
+			musifan.musifan.entity.Artiste artisteEntity = DtoArtisteToEntity(a);
+//			artisteEntity.setId(a.getId());
+//			artisteEntity.setMail(a.getMail());
+//			artisteEntity.setPassword(a.getPassword());
+//			artisteEntity.setNom(a.getNom());
+//			artisteEntity.setPrenom(a.getPrenom());
+//			artisteEntity.setTelephone(a.getTelephone());
+//			artisteEntity.setPhotoProfil(a.getPhotoProfil());
+//			artisteEntity.setPhotoBanniere(a.getPhotoBanniere());
+//			artisteEntity.setNomArtiste(a.getNomArtiste());
+//			artisteEntity.setDescription(a.getDescription());
 
 			LigneUtilisateur ligneUtilisateur = new LigneUtilisateur(new LigneUtilisateurPk(utilisateurEntity, artisteEntity));
 			lignesUtilisateurs.add(ligneUtilisateur);

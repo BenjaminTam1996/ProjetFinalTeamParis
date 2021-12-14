@@ -367,11 +367,11 @@ class MusifanApplicationTests {
 		john.addArtiste(petitBiscuit);
 		utilisateurService.addLigneUtilisateur(john);
 		Commande commande = new Commande(john);
-		commande.addProduit(afterHours, 4);
+		commande.addProduit(musifan.musifan.dto.DtoToEntity.ConcertDtoToConcertEntity(concertService.ByNomIgnoreCase("The After Hours Tour").get(0)), 4);
 		Commande commande2 = new Commande(john);
-		commande2.addProduit(problems, 1);
-//		commandeService.save(musifan.musifan.dto.EntityToDto.CommandeToCommandeDto(commande));
-//		commandeService.save(musifan.musifan.dto.EntityToDto.CommandeToCommandeDto(commande2));
+		commande2.addProduit(musifan.musifan.dto.DtoToEntity.ConcertDtoToConcertEntity(concertService.ByNomIgnoreCase("Problems by Petit Biscuit").get(0)), 1);
+		commandeService.save(musifan.musifan.dto.EntityToDto.CommandeToCommandeDto(commande));
+		commandeService.save(musifan.musifan.dto.EntityToDto.CommandeToCommandeDto(commande2));
 		
 		
 		Utilisateur marie = new Utilisateur("m.dolly@monMail.fr", "1234", "Dolly", "Marie", "07 25 14 96 87", null, "marie.dolly");
@@ -382,8 +382,8 @@ class MusifanApplicationTests {
 		marie.addArtiste(theWeeknd);
 		utilisateurService.addLigneUtilisateur(marie);
 		commande = new Commande(marie);
-		commande.addProduit(edSheeranTour, 2);
-//		commandeService.save(musifan.musifan.dto.EntityToDto.CommandeToCommandeDto(commande));
+		commande.addProduit(musifan.musifan.dto.DtoToEntity.ConcertDtoToConcertEntity(concertService.ByNomIgnoreCase("Chainsmockers Europe Tour").get(0)), 2);
+		commandeService.save(musifan.musifan.dto.EntityToDto.CommandeToCommandeDto(commande));
 		
 		
 	}

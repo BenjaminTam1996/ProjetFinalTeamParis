@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import javax.transaction.Transactional;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import musifan.musifan.entity.Album;
 import musifan.musifan.entity.Concert;
 import musifan.musifan.entity.Lieu;
 import musifan.musifan.exceptions.ArtisteException;
@@ -97,7 +97,7 @@ public class ConcertService {
 	public musifan.musifan.dto.Concert byKeyWithArtiste(Long id) {
 		return musifan.musifan.dto.EntityToDto.ConcertToConcertDto(concertRepository.byKeyWithArtistes(id).orElseThrow(ArtisteException::new));
 	}
-	
+	@Transactional
 	public List<musifan.musifan.dto.Concert> ByNomIgnoreCase(String nom) {
 		List<musifan.musifan.dto.Concert> listeConcertsDto = new ArrayList<musifan.musifan.dto.Concert>();
 		for(Concert concertEntity :concertRepository.findByNomIgnoreCase(nom)) {

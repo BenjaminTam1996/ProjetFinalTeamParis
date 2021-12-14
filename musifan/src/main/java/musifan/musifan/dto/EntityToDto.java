@@ -195,17 +195,17 @@ public class EntityToDto {
 
 		
 		for(LigneUtilisateur lu : utilisateur.getLignesUtilisateurs()) {
-			Artiste artisteDto = new Artiste();
-			artisteDto.setId(lu.getId().getArtiste().getId());
-			artisteDto.setMail(lu.getId().getArtiste().getMail());
-			artisteDto.setPassword(lu.getId().getArtiste().getPassword());
-			artisteDto.setNom(lu.getId().getArtiste().getNom());
-			artisteDto.setPrenom(lu.getId().getArtiste().getPrenom());
-			artisteDto.setTelephone(lu.getId().getArtiste().getTelephone());
-			artisteDto.setPhotoProfil(lu.getId().getArtiste().getPhotoProfil());
-			artisteDto.setPhotoBanniere(lu.getId().getArtiste().getPhotoBanniere());
-			artisteDto.setNomArtiste(lu.getId().getArtiste().getNomArtiste());
-			artisteDto.setDescription(lu.getId().getArtiste().getDescription());
+			Artiste artisteDto = ArtisteToArtisteDto(lu.getId().getArtiste());
+//			artisteDto.setId(lu.getId().getArtiste().getId());
+//			artisteDto.setMail(lu.getId().getArtiste().getMail());
+//			artisteDto.setPassword(lu.getId().getArtiste().getPassword());
+//			artisteDto.setNom(lu.getId().getArtiste().getNom());
+//			artisteDto.setPrenom(lu.getId().getArtiste().getPrenom());
+//			artisteDto.setTelephone(lu.getId().getArtiste().getTelephone());
+//			artisteDto.setPhotoProfil(lu.getId().getArtiste().getPhotoProfil());
+//			artisteDto.setPhotoBanniere(lu.getId().getArtiste().getPhotoBanniere());
+//			artisteDto.setNomArtiste(lu.getId().getArtiste().getNomArtiste());
+//			artisteDto.setDescription(lu.getId().getArtiste().getDescription());
 			utilisateurDto.getArtistes().add(artisteDto);
 		}
 		
