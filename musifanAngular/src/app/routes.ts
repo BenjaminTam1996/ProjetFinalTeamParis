@@ -1,3 +1,6 @@
+import { DetailsPublicationComponent } from './publication/details-publication/details-publication.component';
+import { DetailsAlbumComponent } from './album/details-album/details-album.component';
+import { DetailsConcertComponent } from './concert/details-concert/details-concert.component';
 import { AuthService } from './services/auth.service';
 import { ParametresComponent } from './formulaires/parametres/parametres.component';
 import { ListeMusiquesComponent } from './utilisateur/liste-musiques/liste-musiques.component';
@@ -12,6 +15,7 @@ import { UtilisateurComponent } from './utilisateur/utilisateur/utilisateur.comp
 import { ArtisteComponent } from './artiste/artiste/artiste.component';
 import { AuthArtisteService } from './services/auth-artiste.service';
 import { ConcertComponent } from './formulaires/concert/concert.component';
+import { DetailsLieuComponent } from './lieu/details-lieu/details-lieu.component';
 
 export const routes: Routes = [
   { path: 'accueil', component: AccueilComponent },
@@ -46,6 +50,26 @@ export const routes: Routes = [
     path: 'artiste/:id',
     component: ArtisteComponent,
     canActivate: [AuthUtilisateurService],
+  },
+  {
+    path: 'concert/:id',
+    component: DetailsConcertComponent,
+    canActivate: [AuthService],
+  },
+  {
+    path: 'lieu/:id',
+    component: DetailsLieuComponent,
+    canActivate: [AuthService],
+  },
+  {
+    path: 'album/:id',
+    component: DetailsAlbumComponent,
+    canActivate: [AuthService],
+  },
+  {
+    path: 'publication/:id',
+    component: DetailsPublicationComponent,
+    canActivate: [AuthService],
   },
   {
     path: 'parametres',

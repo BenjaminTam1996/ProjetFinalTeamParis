@@ -1638,17 +1638,22 @@ a {
 .w3-hover-text-musifan-color:hover {
   color: #bf81f9 !important;
 }
+.w3-greypurple,
+.w3-hover-greypurple:hover {
+  color: #f1d1f3 !important;
+}
+
 .crop {
   width: 100%;
   height: 400px;
   overflow: hidden;
 }
 
-#nomArtiste,
-#Modif {
+#bloc1,
+#bloc2 {
   display: inline;
 }
 
-#Modif {
+#bloc2 {
   float: right;
 }

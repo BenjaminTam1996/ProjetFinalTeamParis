@@ -53,10 +53,10 @@
           <!-- Section description et nom de l'artiste -->
           <div class="w3-col.s7">
             <div>
-              <h1 class="w3-musifan-color" id="nomArtiste">
+              <h1 class="w3-musifan-color" id="bloc1">
                 {{ artiste.nomArtiste }}
               </h1>
-              <div *ngIf="navArtiste" id="Modif" class="w3-musifan-color">
+              <div *ngIf="navArtiste" id="bloc2" class="w3-greypurple">
                 <i class="fa fa-pencil-square w3-xxlarge"></i> Modifier le
                 profil
               </div>
@@ -70,14 +70,20 @@
 
         <!-- Section FEED -->
         <div>
-          <h2 class="w3-text-musifan-color">Feed</h2>
+          <h2 class="w3-text-musifan-color" id="bloc1">Feed</h2>
+          <div *ngIf="navArtiste" id="bloc2" class="w3-greypurple">
+            <i class="fa fa-plus-square w3-xxlarge"></i> Ajouter une publication
+          </div>
           <hr style="width: 200px" class="w3-opacity" />
         </div>
         <br /><br /><br />
 
         <!-- Section CONCERTS -->
         <div>
-          <h2 class="w3-text-musifan-color">Concerts</h2>
+          <h2 class="w3-text-musifan-color" id="bloc1">Concerts</h2>
+          <div *ngIf="navArtiste" id="bloc2" class="w3-greypurple">
+            <i class="fa fa-plus-square w3-xxlarge"></i> Ajouter un concert
+          </div>
           <hr style="width: 200px" class="w3-opacity" />
         </div>
         <table class="w3-table">
@@ -91,12 +97,16 @@
           </thead>
           <tbody>
             <tr *ngFor="let c of artiste.concerts">
-              <td>{{ c.nom }}</td>
+              <td>
+                <a [routerLink]="['/concert', c.id]">{{ c.nom }}</a>
+              </td>
               <td>{{ c.date }}</td>
               <td *ngIf="!!c.lieu">
-                {{ c.lieu.nom }}, {{ c.lieu.ville }}, {{ c.lieu.pays }}
+                <a [routerLink]="['/lieu', c.id]">{{ c.lieu.nom }}</a
+                >, {{ c.lieu.ville }}, {{ c.lieu.pays }}
               </td>
               <td>{{ c.prix }} €</td>
+              <td *ngIf="!navArtiste"><button>Acheter un billet</button></td>
             </tr>
           </tbody>
         </table>
@@ -104,9 +114,31 @@
 
         <!-- Section MUSIQUES -->
         <div>
-          <h2 class="w3-text-musifan-color">Musiques</h2>
+          <h2 class="w3-text-musifan-color" id="bloc1">Albums</h2>
+          <div *ngIf="navArtiste" id="bloc2" class="w3-greypurple">
+            <i class="fa fa-plus-square w3-xxlarge"></i> Ajouter un album
+          </div>
           <hr style="width: 200px" class="w3-opacity" />
         </div>
+        <table class="w3-table">
+          <thead>
+            <tr class="w3-musifan-color">
+              <th>Nom de l'album</th>
+              <th>Date de sortie</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let a of artiste.albums">
+              <td>
+                <a [routerLink]="['/album', a.id]">{{ a.titre }}</a>
+              </td>
+              <td>{{ a.date }}</td>
+              <td *ngIf="!navArtiste">
+                <button>Ajouter album aux favoris</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

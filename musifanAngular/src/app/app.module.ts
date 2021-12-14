@@ -21,6 +21,10 @@ import { FanNavbarComponent } from './navbars/fan-navbar/fan-navbar.component';
 import { ListeArtistesComponent } from './utilisateur/liste-artistes/liste-artistes.component';
 import { ListeConcertsComponent } from './utilisateur/liste-concerts/liste-concerts.component';
 import { ListeMusiquesComponent } from './utilisateur/liste-musiques/liste-musiques.component';
+import { DetailsAlbumComponent } from './album/details-album/details-album.component';
+import { DetailsLieuComponent } from './lieu/details-lieu/details-lieu.component';
+import { DetailsPublicationComponent } from './publication/details-publication/details-publication.component';
+import { DetailsConcertComponent } from './concert/details-concert/details-concert.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +44,10 @@ import { ListeMusiquesComponent } from './utilisateur/liste-musiques/liste-musiq
     ListeArtistesComponent,
     ListeConcertsComponent,
     ListeMusiquesComponent,
+    DetailsAlbumComponent,
+    DetailsLieuComponent,
+    DetailsPublicationComponent,
+    DetailsConcertComponent,
   ],
   imports: [
     BrowserModule,
