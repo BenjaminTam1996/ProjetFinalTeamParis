@@ -62,6 +62,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 					//Auth commandes
 					.antMatchers(HttpMethod.POST,"/api/commande/**").hasRole("UTILISATEUR")
 					.antMatchers(HttpMethod.DELETE,"/api/commande/**").hasRole("UTILISATEUR")
+					//Auth image
+					.antMatchers(HttpMethod.POST,"/api/image/**").hasRole("ARTISTE")
 				.and()	
 				.httpBasic();
 		//@formatter:on
