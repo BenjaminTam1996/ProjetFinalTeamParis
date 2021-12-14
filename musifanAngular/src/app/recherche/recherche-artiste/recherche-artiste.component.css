@@ -1657,15 +1657,3 @@ a {
 #bloc2 {
   float: right;
 }
-
-#bloc3,
-#bloc4 {
-  display: inline;
-}
-
-.grow {
-  transition: all 0.2s ease-in-out;
-}
-.grow:hover {
-  transform: scale(1.1);
-}

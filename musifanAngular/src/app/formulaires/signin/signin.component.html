@@ -128,6 +128,15 @@
               >
                 {{ emailErrorMessage() }}
               </div>
+              <!--               <div
+                *ngIf="
+                  form.get('email')!.hasError('checkLogin') &&
+                  form.get('email')!.dirty
+                "
+                class="alert alert-danger"
+              >
+                L'email existe déjà
+              </div> -->
             </div>
             <div><br /></div>
             <ng-container formGroupName="passwordGroup">
@@ -165,8 +174,8 @@
                   "
                   class="alert alert-danger"
                 >
-                  Le mot de passe de confirmation doit être le même que le mot
-                  de passe ci-dessus
+                  Le mot de passe de confirmation doit être le même que
+                  ci-dessus
                 </div>
               </div>
             </ng-container>
@@ -186,14 +195,29 @@
           <div><br /></div>
           <div class="form-group">
             <button
+              *ngIf="form.controls['role'].value == 'ARTISTE'"
               class="btn btn-outline-primary"
               [disabled]="
-                form.controls['email'].invalid &&
-                form.controls['passwordGroup'].invalid &&
-                form.controls['telephone'].invalid &&
-                form.controls['prenom'].invalid &&
-                form.controls['nom'].invalid &&
+                form.controls['email'].invalid ||
+                form.controls['passwordGroup'].invalid ||
+                form.controls['telephone'].invalid ||
+                form.controls['prenom'].invalid ||
+                form.controls['nom'].invalid ||
                 form.controls['nomArtiste'].invalid
+              "
+            >
+              Créer un compte
+            </button>
+            <button
+              *ngIf="form.controls['role'].value == 'UTILISATEUR'"
+              class="btn btn-outline-primary"
+              [disabled]="
+                form.controls['email'].invalid ||
+                form.controls['passwordGroup'].invalid ||
+                form.controls['telephone'].invalid ||
+                form.controls['prenom'].invalid ||
+                form.controls['nom'].invalid ||
+                form.controls['pseudo'].invalid
               "
             >
               Créer un compte

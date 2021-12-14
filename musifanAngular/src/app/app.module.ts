@@ -26,6 +26,8 @@ import { DetailsLieuComponent } from './lieu/details-lieu/details-lieu.component
 import { DetailsPublicationComponent } from './publication/details-publication/details-publication.component';
 import { DetailsConcertComponent } from './concert/details-concert/details-concert.component';
 import { FooterComponent } from './footer/footer/footer.component';
+import { RechercheArtisteComponent } from './recherche/recherche-artiste/recherche-artiste.component';
+import { RechercheConcertComponent } from './recherche/recherche-concert/recherche-concert.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,8 @@ import { FooterComponent } from './footer/footer/footer.component';
     DetailsPublicationComponent,
     DetailsConcertComponent,
     FooterComponent,
+    RechercheArtisteComponent,
+    RechercheConcertComponent,
   ],
   imports: [
     BrowserModule,

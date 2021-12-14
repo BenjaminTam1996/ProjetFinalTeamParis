@@ -18,8 +18,21 @@ export class ArtisteService {
     });
   }
 
+  /* Verification que le login n'est pas deja en base  */
+  public checkLogin(login: string): Observable<boolean> {
+    return this.http.get<boolean>(
+      'http://localhost:8080/musifan/api/artiste/login/' + login
+    );
+  }
+
   public allArtistes(): Observable<Artiste[]> {
     return this.http.get<Artiste[]>(ArtisteService.url, {
+      headers: this.httpHeaders,
+    });
+  }
+
+  public searchArtistes(nom: string): Observable<Artiste[]> {
+    return this.http.get<Artiste[]>(`${ArtisteService.url}/${nom}`, {
       headers: this.httpHeaders,
     });
   }

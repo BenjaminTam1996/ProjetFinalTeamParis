@@ -18,6 +18,13 @@ export class UtilisateurService {
     });
   }
 
+  /* Verification que le login n'est pas deja en base  */
+  public checkLogin(login: string): Observable<boolean> {
+    return this.http.get<boolean>(
+      'http://localhost:8080/musifan/api/utilisateur/login/' + login
+    );
+  }
+
   public byId(id: number): Observable<Utilisateur> {
     return this.http.get<Utilisateur>(`${UtilisateurService.url}/${id}`, {
       headers: this.httpHeaders,

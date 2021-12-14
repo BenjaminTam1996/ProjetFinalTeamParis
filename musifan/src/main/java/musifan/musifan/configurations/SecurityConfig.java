@@ -34,6 +34,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.authorizeRequests()
 					.antMatchers(HttpMethod.OPTIONS).anonymous()
 					.antMatchers("/api/auth").authenticated()
+					.antMatchers("/api/artiste/login/**").permitAll()
+					.antMatchers("/api/utilisateur/login/**").permitAll()
 					.antMatchers(HttpMethod.POST, "/api/utilisateur").permitAll()
 					.antMatchers(HttpMethod.POST, "/api/artiste").permitAll()
 					.antMatchers("/api/utilsateur/**").hasRole("UTILISATEUR")
@@ -60,8 +62,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 					//Auth commandes
 					.antMatchers(HttpMethod.POST,"/api/commande/**").hasRole("UTILISATEUR")
 					.antMatchers(HttpMethod.DELETE,"/api/commande/**").hasRole("UTILISATEUR")
-					//Auth image
-					.antMatchers(HttpMethod.POST,"/api/image/**").permitAll()
 				.and()	
 				.httpBasic();
 		//@formatter:on
