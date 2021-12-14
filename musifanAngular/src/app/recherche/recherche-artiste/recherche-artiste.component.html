@@ -1,1 +1,53 @@
-<p>recherche-artiste works!</p>
+<style>
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Montserrat", sans-serif;
+  }
+  .w3-row-padding img {
+    margin-bottom: 12px;
+  }
+  /* Add a left margin to the "page content" that matches the width of the sidebar (140px) */
+  #main {
+    margin-left: 140px;
+    width: 90%;
+  }
+  /* Remove margins from "page content" on small screens */
+  @media only screen and (max-width: 600px) {
+    #main {
+      margin-left: 0;
+    }
+  }
+</style>
+
+<body class="w3-black">
+  <!-- Nav bar -->
+  <app-artist-navbar *ngIf="navArtiste"></app-artist-navbar>
+  <app-fan-navbar *ngIf="!navArtiste"></app-fan-navbar>
+  <div class="w3-padding-large" id="main">
+    <div class="w3-padding-64 w3-auto">
+      <!-- TITRE RECHERCHE ARTISTE -->
+      <div>
+        <h2 class="w3-text-musifan-color">Rechercher un artiste</h2>
+        <hr style="width: 200px" class="w3-opacity" />
+      </div>
+      <br />
+      <div class="search-container">
+        <form>
+          <input
+            type="text"
+            placeholder="Search.."
+            name="search"
+            style="width: 300px; height: 20px"
+          />
+          <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div><app-footer></app-footer></div>
+</body>
