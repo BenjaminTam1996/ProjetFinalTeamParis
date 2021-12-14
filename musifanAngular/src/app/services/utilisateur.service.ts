@@ -41,7 +41,7 @@ export class UtilisateurService {
   }
 
   /* Remonte un utilisateur, par rapport a son id, avec ses commandes */
-  public byIdWithCommande(id: number): Observable<Utilisateur> {
+  public byIdWithCommande(id: number): Observable<any> {
     return this.http.get<Utilisateur>(
       UtilisateurService.url + '/commandes/' + id,
       { headers: this.httpHeaders }

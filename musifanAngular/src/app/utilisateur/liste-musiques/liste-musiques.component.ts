@@ -15,6 +15,7 @@ export class ListeMusiquesComponent implements OnInit {
     if (!!sessionStorage.getItem('id')) {
       let id: number = parseInt(sessionStorage.getItem('id')!);
       this.utilisateurService.byIdWithAlbums(id).subscribe((result) => {
+        console.log(result);
         this.utilisateur = result;
         console.log(this.utilisateur);
       });

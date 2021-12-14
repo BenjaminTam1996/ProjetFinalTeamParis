@@ -28,7 +28,7 @@ public class Utilisateur {
 	@JsonView({JsonViews.Common.class,})
 	private String pseudo;
 	@JsonView({JsonViews.UtilisateurAvecCommandes.class,})
-	private Set<Commande> commande = new HashSet<Commande>();
+	private Set<Commande> commandes = new HashSet<Commande>();
 	@JsonView({JsonViews.UtilisateurAvecArtiste.class,})
 	private Set<Artiste> artistes = new HashSet<Artiste>();
 	
@@ -100,11 +100,11 @@ public class Utilisateur {
 	}
 
 	public Set<Commande> getCommande() {
-		return commande;
+		return commandes;
 	}
 
 	public void setCommande(Set<Commande> commande) {
-		this.commande = commande;
+		this.commandes = commande;
 	}
 
 	public Set<Artiste> getArtistes() {

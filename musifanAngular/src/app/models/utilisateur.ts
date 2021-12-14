@@ -1,3 +1,4 @@
+import { Commande } from './commande';
 import { Artiste } from './artiste';
 import { Concert } from './concert';
 import { Byte } from '@angular/compiler/src/util';
@@ -11,7 +12,7 @@ export class Utilisateur {
     private _pseudo?: string | undefined,
     private _telephone?: string | undefined,
     private _artistes?: Artiste[] | undefined,
-    private _concerts?: Concert[] | undefined,
+    private _commandes?: Commande[] | undefined,
     private _photoProfil?: Byte[] | undefined
   ) {}
 
@@ -83,8 +84,8 @@ export class Utilisateur {
    * Getter concerts
    * @return {Concert[] | undefined }
    */
-  public get concerts(): Concert[] | undefined {
-    return this._concerts;
+  public get commandes(): Commande[] | undefined {
+    return this._commandes;
   }
 
   /**
@@ -155,7 +156,7 @@ export class Utilisateur {
    * Setter concerts
    * @param {Concert[] | undefined} value
    */
-  public set concerts(value: Concert[] | undefined) {
-    this._concerts = value;
+  public set commandes(value: Commande[] | undefined) {
+    this._commandes = value;
   }
 }

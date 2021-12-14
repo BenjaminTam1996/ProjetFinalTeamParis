@@ -1,3 +1,4 @@
+import { Concert } from 'src/app/models/concert';
 import { Utilisateur } from 'src/app/models/utilisateur';
 import { UtilisateurService } from './../../services/utilisateur.service';
 import { Component, OnInit } from '@angular/core';
@@ -16,7 +17,6 @@ export class ListeConcertsComponent implements OnInit {
       let id: number = parseInt(sessionStorage.getItem('id')!);
       this.utilisateurService.byIdWithCommande(id).subscribe((result) => {
         this.utilisateur = result;
-        console.log(this.utilisateur);
       });
     }
   }
