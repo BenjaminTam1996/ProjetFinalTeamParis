@@ -31,7 +31,7 @@ import musifan.musifan.services.ArtisteService;
 @CrossOrigin(origins="*")
 public class ArtisteRestController {
 
-	@Autowired
+	@Autowired 
 	private ArtisteService artisteService;
 	
 	@Autowired
@@ -63,6 +63,7 @@ public class ArtisteRestController {
 	public Artiste byId(@PathVariable("id") Long id) {
 		return artisteService.byKeyWithArtisteComplet(id);
 	}
+	
 
 	// Creer un artiste
 	@PostMapping("")
