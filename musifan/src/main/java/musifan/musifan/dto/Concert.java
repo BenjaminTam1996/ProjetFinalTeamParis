@@ -24,7 +24,7 @@ public class Concert {
 	private String nom;	
 	@JsonView({JsonViews.Common.class,})
 	private LocalDate date = LocalDate.now();	
-	@JsonView({JsonViews.ConcertAvecLieu.class,})
+	@JsonView({JsonViews.Common.class,})
 	private Lieu lieu;	
 	@JsonView({JsonViews.Common.class,})
 	private int nbPlace;	

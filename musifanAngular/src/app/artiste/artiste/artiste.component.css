@@ -1643,3 +1643,12 @@ a {
   height: 400px;
   overflow: hidden;
 }
+
+#nomArtiste,
+#Modif {
+  display: inline;
+}
+
+#Modif {
+  float: right;
+}
