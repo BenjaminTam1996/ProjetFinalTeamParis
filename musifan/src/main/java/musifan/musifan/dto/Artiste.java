@@ -27,7 +27,7 @@ public class Artiste {
 	private String nomArtiste;
 	@JsonView({JsonViews.Common.class,})
 	private String description;
-	@JsonView({JsonViews.ArtisteComplet.class,})
+	@JsonView({JsonViews.ArtisteComplet.class, JsonViews.UtilisateurAvecAlbumsArtiste.class})
 	private Set<Album> albums = new HashSet<Album>();
 	@JsonView({JsonViews.ArtisteComplet.class,})
 	private Set<Concert> concerts = new HashSet<Concert>();

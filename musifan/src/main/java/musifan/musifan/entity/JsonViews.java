@@ -17,7 +17,7 @@ public class JsonViews {
 		
 	}
 	
-	public static class UtilisateurAvecArtiste extends Common {
+	public static class UtilisateurAvecArtiste extends ArtisteComplet {
 		
 	}
 	

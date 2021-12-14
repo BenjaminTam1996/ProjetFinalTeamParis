@@ -25,6 +25,7 @@ public class CommandeService {
 	@Autowired
 	private CommandeRepository commandeRepository;
 	
+	
 	@Autowired
 	private Validator validator;
 	
@@ -35,12 +36,17 @@ public class CommandeService {
 		musifan.musifan.entity.Commande commandeEntity = musifan.musifan.dto.DtoToEntity.DtoCommandeToEntity(commande);
 		Set<ConstraintViolation<Commande>> violations =  validator.validate(commandeEntity);
 		if (violations.isEmpty()) {
-			commandeRepository.save(commandeEntity);
-			for (LigneCommande lc : commandeEntity.getLignesCommandes()) {
-				LigneCommande lignecommande = new LigneCommande(new LigneCommandePK(commandeEntity, lc.getId().getProduit()), lc.getQuantite());
-				lignecommandeRepository.save(lignecommande);
-			}
-			//lignecommandeRepository.saveAll(commandeEntity.getLignesCommandes());
+			commandeEntity = commandeRepository.save(commandeEntity);
+			System.out.println("1 " + commandeEntity.getNumero());
+//			for (LigneCommande lc : commandeEntity.getLignesCommandes()) {
+//				LigneCommande lignecommande = new LigneCommande(new LigneCommandePK(commandeEntity, lc.getId().getProduit()), lc.getQuantite());
+//				System.out.println("2 " + commandeEntity);
+//				System.out.println("3 " + lc.getId().getProduit());
+//				System.out.println("4 " + lc.getQuantite());
+//				System.out.println("5 " +lignecommande);
+//				lignecommandeRepository.save(lignecommande);
+//			}
+			lignecommandeRepository.saveAll(commandeEntity.getLignesCommandes());
 
 		} else {
 			throw new CommandeException();

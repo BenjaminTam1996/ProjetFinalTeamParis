@@ -67,7 +67,6 @@ public class EntityToDto {
 		artisteDto.setPrenom(artiste.getPrenom());
 		artisteDto.setTelephone(artiste.getTelephone());
 		
-		System.out.println(artiste.getPublications());
 		
 		for(Publication p : artiste.getPublications()) {
 			musifan.musifan.dto.Publication publicationDto = new musifan.musifan.dto.Publication();
