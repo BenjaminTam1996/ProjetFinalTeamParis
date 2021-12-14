@@ -28,9 +28,11 @@ public class Artiste {
 	@JsonView({JsonViews.Common.class,})
 	private String description;
 	@JsonView({JsonViews.ArtisteComplet.class,})
-	private Set<Album> publications = new HashSet<Album>();
+	private Set<Album> albums = new HashSet<Album>();
 	@JsonView({JsonViews.ArtisteComplet.class,})
 	private Set<Concert> concerts = new HashSet<Concert>();
+	@JsonView({JsonViews.ArtisteComplet.class,})
+	private Set<Publication> publications = new HashSet<Publication>();
 	
 	public Artiste() {
 	}
@@ -115,12 +117,12 @@ public class Artiste {
 		this.description = description;
 	}
 
-	public Set<Album> getPublications() {
-		return publications;
+	public Set<Album> getAlbums() {
+		return albums;
 	}
 
-	public void setPublications(Set<Album> publications) {
-		this.publications = publications;
+	public void setAlbums(Set<Album> albums) {
+		this.albums = albums;
 	}
 
 	public Set<Concert> getConcerts() {
@@ -130,6 +132,16 @@ public class Artiste {
 	public void setConcerts(Set<Concert> concerts) {
 		this.concerts = concerts;
 	}
+
+	public Set<Publication> getPublications() {
+		return publications;
+	}
+
+	public void setPublications(Set<Publication> publications) {
+		this.publications = publications;
+	}
+	
+	
 	
 	
 }

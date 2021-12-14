@@ -1,8 +1,10 @@
 package musifan.musifan.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import javax.transaction.Transactional;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
@@ -43,67 +45,86 @@ public class ArtisteService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	public Artiste save(Artiste artiste) {
-		Set<ConstraintViolation<Artiste>> violations = validator.validate(artiste);
+	public Artiste save(musifan.musifan.dto.Artiste artiste) {
+		Artiste artisteEntity = musifan.musifan.dto.DtoToEntity.DtoArtisteToEntity(artiste);
+		Set<ConstraintViolation<Artiste>> violations = validator.validate(artisteEntity);
 		if (violations.isEmpty()) {
-			artiste.setPassword(passwordEncoder.encode(artiste.getPassword()));
-			artiste.setRole(Role.ROLE_ARTISTE);
-			artiste.setEnable(true);
-			return artisteRepository.save(artiste);
+			artisteEntity.setPassword(passwordEncoder.encode(artisteEntity.getPassword()));
+			artisteEntity.setRole(Role.ROLE_ARTISTE);
+			artisteEntity.setEnable(true);
+			return artisteRepository.save(artisteEntity);
 		} else {
 			throw new ArtisteException();
 		}
 		
 	}
 	
-	public void delete(Artiste artiste) {
-		ligneUtilisateurRepository.deleteByArtiste(artiste);
-		ligneAlbumRepository.deleteByArtiste(artiste);
-		ligneConcertRepository.deleteByArtiste(artiste);
-		publicationRepository.deleteByArtiste(artiste);
-		artisteRepository.delete(artiste);
+	public void delete(musifan.musifan.dto.Artiste artiste) {
+		Artiste artisteEntity = musifan.musifan.dto.DtoToEntity.DtoArtisteToEntity(artiste);
+		ligneUtilisateurRepository.deleteByArtiste(artisteEntity);
+		ligneAlbumRepository.deleteByArtiste(artisteEntity);
+		ligneConcertRepository.deleteByArtiste(artisteEntity);
+		publicationRepository.deleteByArtiste(artisteEntity);
+		artisteRepository.delete(artisteEntity);
 	}
 	
 	public void delete(Long id) {
-		delete(artisteRepository.findById(id).orElseThrow(ArtisteException::new));
+		delete(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(artisteRepository.findById(id).orElseThrow(ArtisteException::new)));
 	}
 	
-	public Artiste byId(Long id) {
-		return artisteRepository.findById(id).orElseThrow(ArtisteException::new);
+	public musifan.musifan.dto.Artiste byId(Long id) {
+		return musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(artisteRepository.findById(id).orElseThrow(ArtisteException::new));
 	}
 	
-	public List<Artiste> allArtiste() {
-		return artisteRepository.findAll();
+	public List<musifan.musifan.dto.Artiste> allArtiste() {
+		List<musifan.musifan.dto.Artiste> listeArtisteDto = new ArrayList<musifan.musifan.dto.Artiste>();
+		for(Artiste artisteEntity : artisteRepository.findAll()) {
+			listeArtisteDto.add(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(artisteEntity));
+		}
+		return listeArtisteDto;
 	}
 	
 	//Remonter un artiste complet avec : ses albums, ses concerts, ses publications et ses utilisateurs
-	public Artiste byKeyWithArtisteComplet(Long id) {
-		return artisteRepository.findByKeyWithArtisteComplet(id).orElseThrow(ArtisteException::new);
+	public musifan.musifan.dto.Artiste byKeyWithArtisteComplet(Long id) {
+		return musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(artisteRepository.findByKeyWithArtisteComplet(id).orElseThrow(ArtisteException::new));
 	}
 	
 	
-	public Artiste byKeyWithAlbums(Long key) {
-		return artisteRepository.byKeyWithAlbums(key).orElseThrow(ArtisteException::new);
+	public musifan.musifan.dto.Artiste byKeyWithAlbums(Long key) {
+		return musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(artisteRepository.byKeyWithAlbums(key).orElseThrow(ArtisteException::new));
 	}
 	
-	public Artiste byKeyWithConcerts(Long key) {
-		return artisteRepository.byKeyWithConcerts(key).orElseThrow(ArtisteException::new);
+	public musifan.musifan.dto.Artiste byKeyWithConcerts(Long key) {
+		return musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(artisteRepository.byKeyWithConcerts(key).orElseThrow(ArtisteException::new));
 	}
 	
-	public Artiste byKeyWithPublications(Long key) {
-		return artisteRepository.byKeyWithPublications(key).orElseThrow(ArtisteException::new);
+	public musifan.musifan.dto.Artiste byKeyWithPublications(Long key) {
+		return musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(artisteRepository.byKeyWithPublications(key).orElseThrow(ArtisteException::new));
 	}
 	
-	public List<Artiste> byNomArtisteContainingIgnoreCase(String nom) {
-		return artisteRepository.findByNomArtisteContainingIgnoreCase(nom);
+	public List<musifan.musifan.dto.Artiste> byNomArtisteContainingIgnoreCase(String nom) {
+		List<musifan.musifan.dto.Artiste> listeArtisteDto = new ArrayList<musifan.musifan.dto.Artiste>();
+		for(Artiste artisteEntity : artisteRepository.findByNomArtisteContainingIgnoreCase(nom)) {
+			listeArtisteDto.add(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(artisteEntity));
+		}
+		return listeArtisteDto;
 	}
 
-	public List<Artiste> byNomArtisteIgnoreCase(String nom){
-		return artisteRepository.findByNomArtisteIgnoreCase(nom);
+	public List<musifan.musifan.dto.Artiste> byNomArtisteIgnoreCase(String nom){
+		List<musifan.musifan.dto.Artiste> listeArtisteDto = new ArrayList<musifan.musifan.dto.Artiste>();
+		for(Artiste artisteEntity : artisteRepository.findByNomArtisteIgnoreCase(nom)) {
+			listeArtisteDto.add(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(artisteEntity));
+		}
+		return listeArtisteDto;
 	}
 	
-	public List<Artiste> byNomArtisteLikeIgnoreCase(String nom){
-		return artisteRepository.findByNomArtisteLikeIgnoreCase(nom);
+	@Transactional
+	public List<musifan.musifan.dto.Artiste> byNomArtisteLikeIgnoreCase(String nom){
+		List<musifan.musifan.dto.Artiste> listeArtisteDto = new ArrayList<musifan.musifan.dto.Artiste>();
+		for(Artiste artisteEntity : artisteRepository.findByNomArtisteLikeIgnoreCase(nom)) {
+			listeArtisteDto.add(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(artisteEntity));
+		}
+		return listeArtisteDto;
 	}
 	
 }

@@ -3,6 +3,8 @@ package musifan.musifan.dto;
 import java.util.HashSet;
 import java.util.Set;
 
+import musifan.musifan.entity.Album;
+import musifan.musifan.entity.Artiste;
 import musifan.musifan.entity.Chansons;
 import musifan.musifan.entity.Commande;
 import musifan.musifan.entity.Concert;
@@ -16,8 +18,7 @@ import musifan.musifan.entity.LigneConcertPK;
 import musifan.musifan.entity.LigneUtilisateur;
 import musifan.musifan.entity.LigneUtilisateurPk;
 import musifan.musifan.entity.Utilisateur;
-import musifan.musifan.entity.Album;
-import musifan.musifan.entity.Artiste;
+
 
 public class DtoToEntity {
 
@@ -66,6 +67,56 @@ public class DtoToEntity {
 		return albumEntity;
 	}
 
+	public static musifan.musifan.entity.Artiste DtoArtisteToEntity(musifan.musifan.dto.Artiste artiste) {
+
+		// Conversion d'un Artiste dto en Artiste entity
+		Artiste artisteEntity = new Artiste();
+		artisteEntity.setNom(artiste.getNom());
+		artisteEntity.setId(artiste.getId());
+		artisteEntity.setDescription(artiste.getDescription());
+		artisteEntity.setMail(artiste.getMail());
+		artisteEntity.setNomArtiste(artiste.getNomArtiste());
+		artisteEntity.setPassword(artiste.getPassword());
+		artisteEntity.setPhotoBanniere(artiste.getPhotoBanniere());
+		artisteEntity.setPhotoProfil(artiste.getPhotoBanniere());
+		artisteEntity.setPrenom(artiste.getPrenom());
+		artisteEntity.setTelephone(artiste.getTelephone());
+		
+		for (musifan.musifan.dto.Publication p : artiste.getPublications()) {
+			musifan.musifan.entity.Publication publicationEntity = new musifan.musifan.entity.Publication();
+			publicationEntity.setId(p.getId());
+			publicationEntity.setImage(p.getImage());
+			publicationEntity.setDesciption(p.getDesciption());
+			publicationEntity.setDate(p.getDate());
+			publicationEntity.setArtiste(artisteEntity);
+			artisteEntity.getPublications().add(publicationEntity);
+		}
+
+		Set<LigneAlbum> lignesAlbums = new HashSet<LigneAlbum>();
+		for (musifan.musifan.dto.Album album : artiste.getAlbums()) {
+			Album albumEntity = DtoAlbumToEntity(album);
+			LigneAlbum ligneAlbum = new LigneAlbum(new LigneAlbumPK(albumEntity, artisteEntity));
+			lignesAlbums.add(ligneAlbum);
+		}
+		artisteEntity.setLignesAlbums(lignesAlbums);
+
+		Set<LigneConcert> lignesConcerts = new HashSet<LigneConcert>();
+		for (musifan.musifan.dto.Concert c : artiste.getConcerts()) {
+			musifan.musifan.entity.Concert concertEntity = ConcertDtoToConcertEntity(c);
+			LigneConcert ligneConcert = new LigneConcert(new LigneConcertPK(concertEntity, artisteEntity));
+			lignesConcerts.add(ligneConcert);
+		}
+		artisteEntity.setLigneConcerts(lignesConcerts);
+		
+
+//		for(LigneAlbum la : lignesAlbums) {
+//			System.out.println(la.getId().getArtiste().getNomArtiste());
+//			System.out.println(la.getId().getAlbum().getTitre());
+//		}
+//		System.out.println(albumEntity.getLignesAlbums());
+
+		return artisteEntity;
+	}
 
 	public static Concert ConcertDtoToConcertEntity(musifan.musifan.dto.Concert concert) {
 		// Conversion d'un album entity en album dto

@@ -11,6 +11,7 @@ import musifan.musifan.entity.LigneAlbum;
 import musifan.musifan.entity.LigneCommande;
 import musifan.musifan.entity.LigneConcert;
 import musifan.musifan.entity.LigneUtilisateur;
+import musifan.musifan.entity.Publication;
 
 public class EntityToDto {
 	
@@ -51,6 +52,44 @@ public class EntityToDto {
 		}
 		
 		return albumDto;
+	}
+	
+	public static Artiste ArtisteToArtisteDto(musifan.musifan.entity.Artiste artiste) {
+		Artiste artisteDto = new Artiste();
+		artisteDto.setNom(artiste.getNom());
+		artisteDto.setId(artiste.getId());
+		artisteDto.setDescription(artiste.getDescription());
+		artisteDto.setMail(artiste.getMail());
+		artisteDto.setNomArtiste(artiste.getNomArtiste());
+		artisteDto.setPassword(artiste.getPassword());
+		artisteDto.setPhotoBanniere(artiste.getPhotoBanniere());
+		artisteDto.setPhotoProfil(artiste.getPhotoBanniere());
+		artisteDto.setPrenom(artiste.getPrenom());
+		artisteDto.setTelephone(artiste.getTelephone());
+		
+		System.out.println(artiste.getPublications());
+		
+		for(Publication p : artiste.getPublications()) {
+			musifan.musifan.dto.Publication publicationDto = new musifan.musifan.dto.Publication();
+			publicationDto.setId(p.getId());
+			publicationDto.setImage(p.getImage());
+			publicationDto.setDesciption(p.getDesciption());
+			publicationDto.setDate(p.getDate());
+			publicationDto.setArtiste(artisteDto);;
+			artisteDto.getPublications().add(publicationDto);
+		}
+		
+		for(LigneAlbum la : artiste.getLignesAlbums()) {
+			Album albumDto = AlbumToAlbumDto(la.getId().getAlbum());
+			artisteDto.getAlbums().add(albumDto);
+		}
+		
+		for(LigneConcert lc : artiste.getLigneConcerts()) {
+			Concert concertDto = ConcertToConcertDto(lc.getId().getConcert());
+			artisteDto.getConcerts().add(concertDto);
+		}
+		
+		return artisteDto;
 	}
 	
 	public static Lieu LieuToLieuDto(musifan.musifan.entity.Lieu lieu) {

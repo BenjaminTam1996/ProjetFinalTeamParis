@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import musifan.musifan.entity.Artiste;
+import musifan.musifan.dto.Artiste;
 import musifan.musifan.entity.JsonViews;
 import musifan.musifan.services.ArtisteService;
 
@@ -52,7 +52,8 @@ public class ArtisteRestController {
 	@PostMapping("")
 	@JsonView(JsonViews.Common.class)
 	public Artiste create(@Valid @RequestBody Artiste artiste, BindingResult br) {
-		return artisteService.save(artiste);
+		artisteService.save(artiste);
+		return artiste;
 	}
 
 	// Mettre a jour un artiste par rapport a son id
@@ -69,7 +70,8 @@ public class ArtisteRestController {
 		artisteEnBase.setPhotoBanniere(artiste.getPhotoBanniere());
 		artisteEnBase.setPhotoProfil(artiste.getPhotoProfil());
 		artisteEnBase.setTelephone(artiste.getTelephone());
-		return artisteService.save(artisteEnBase);
+		artisteService.save(artisteEnBase);
+		return artisteEnBase;
 	}
 
 	// Supprimer un artiste par rapport a son id

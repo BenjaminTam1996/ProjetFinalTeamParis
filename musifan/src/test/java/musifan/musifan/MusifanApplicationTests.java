@@ -62,7 +62,7 @@ class MusifanApplicationTests {
 		//The Weeknd
 		//------------------------------------------------------------------------------------------------------------------------------------------
 		Artiste theWeeknd = new Artiste("week@mail.com", "theWeeknd3.0", null, null, null, null, "The Weeknd", null, null);
-		artisteService.save(theWeeknd);
+		theWeeknd = artisteService.save(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(theWeeknd));
 		Album album = new Album("After Hours",LocalDate.of(2020, Month.MARCH, 20));
 		album.addArtiste(theWeeknd);
 		album = albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
@@ -91,7 +91,7 @@ class MusifanApplicationTests {
 		theWeeknd.addPublication(publication);
 		Publication publication2 = new Publication("Petite apparition surprise chez mon ami John", theWeeknd);
 		theWeeknd.addPublication(publication2);
-		artisteService.save(theWeeknd);
+		theWeeknd = artisteService.save(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(theWeeknd));
 		publicationService.save(publication);
 		publicationService.save(publication2);
 
@@ -99,7 +99,7 @@ class MusifanApplicationTests {
 		//Kygo
 		//------------------------------------------------------------------------------------------------------------------------------------------
 		Artiste kygo = new Artiste("kygo@gmail.fr", "Kygo", null, null, null, null, "Kygo", "Kygo , de son vrai nom Kyrre Gørvell-Dahll, né le 11 septembre 1991 à Singapour, est un DJ, musicien, auteur-compositeur et producteur norvégien. Il est connu pour ses compositions Firestone feat Conrad Sewell (2014) et Stole the Show feat. Parson James (2015). En 2015, il est classé 33e au DJ Mag Top 100 DJ4 puis 26e l'année suivante. ", null);
-		artisteService.save(kygo);
+		kygo = artisteService.save(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(kygo));
 		album = new Album("Cloud Nine",LocalDate.of(2016, Month.MAY, 13));
 		album.addArtiste(kygo);
 		album = albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
@@ -124,11 +124,11 @@ class MusifanApplicationTests {
 		//DJ Snake + Bipolar Sunshine
 		//------------------------------------------------------------------------------------------------------------------------------------------		
 		Artiste snake = new Artiste("Snake.dj@hotmail.com", "DJsnake", null, null, null, null, "DJ Snake", null, null);
-		artisteService.save(snake);
+		snake = artisteService.save(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(snake));
 		album = new Album("Middle",LocalDate.of(2015, Month.OCTOBER, 16));
 		album.addArtiste(snake);
 		Artiste sunshine = new Artiste("Bipo.Sun@yahoo.com", "BiPoSun", null, null, null, null, "Bipolar Sunshine", null, null);
-		artisteService.save(sunshine);
+		sunshine = artisteService.save(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(sunshine));
 		album.addArtiste(sunshine);
 		album = albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
 		chansons = new ArrayList<Chansons>();
@@ -138,12 +138,12 @@ class MusifanApplicationTests {
 		//Tchami + Malaa
 		//------------------------------------------------------------------------------------------------------------------------------------------		
 		album = new Album("Made In France",LocalDate.of(2019, Month.JULY, 26));
-		album.addArtiste(artisteService.byNomArtisteLikeIgnoreCase("DJ Snake").get(0));
+		album.addArtiste(musifan.musifan.dto.DtoToEntity.DtoArtisteToEntity(artisteService.byNomArtisteLikeIgnoreCase("DJ Snake").get(0)));
 		Artiste tchami = new Artiste("tchami@hotmail.fr", "Tchami", null, null, null, null, "Tchami", null, null);
-		artisteService.save(tchami);
+		tchami = artisteService.save(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(tchami));
 		album.addArtiste(tchami);
 		Artiste malaa = new Artiste("malaa@yahoo.com", "Malaa", null, null, null, null, "Malaa", null, null);
-		artisteService.save(malaa);
+		malaa = artisteService.save(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(malaa));
 		album.addArtiste(malaa);
 		album = albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
 		chansons = new ArrayList<Chansons>();
@@ -154,7 +154,7 @@ class MusifanApplicationTests {
 		//------------------------------------------------------------------------------------------------------------------------------------------		
 		album = new Album("Presence",LocalDate.of(2017, Month.NOVEMBER, 10));
 		Artiste petitBiscuit = new Artiste("Petit.Biscuit@monMail.com", "MonBiscuit", null, null, null, null, "Petit Biscuit", null, null);
-		artisteService.save(petitBiscuit);
+		petitBiscuit = artisteService.save(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(petitBiscuit));
 		album = albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
 		album.addArtiste(petitBiscuit);
 		chansons = new ArrayList<Chansons>();
@@ -165,7 +165,7 @@ class MusifanApplicationTests {
 		// Ed Sheeran
 		//------------------------------------------------------------------------------------------------------------------------------------------		
 		Artiste sheeran = new Artiste("sheeran@mail.com", "sheeran", "Sheeran", "Edward Christopher", "06 20 84 99 24", null, "Ed Sheeran", "auteur-compositeur-interprete et guitariste", null);
-		artisteService.save(sheeran);
+		sheeran = artisteService.save(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(sheeran));
 		album = new Album("Divide", LocalDate.of(2017, Month.MARCH, 3));
 		album.addArtiste(sheeran);
 		album = albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
@@ -184,7 +184,7 @@ class MusifanApplicationTests {
 		// Adele
 		//------------------------------------------------------------------------------------------------------------------------------------------		
 		Artiste adele = new Artiste("adele@mail.com", "$Adele30", null, "Adele Adkins", null, null, "Adele", null, null);
-		artisteService.save(adele);
+		adele = artisteService.save(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(adele));
 		album = new Album("30", LocalDate.of(2021, Month.NOVEMBER, 19));
 		album.addArtiste(adele);
 		album = albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
@@ -211,7 +211,7 @@ class MusifanApplicationTests {
 		// Taylor Swift
 		//------------------------------------------------------------------------------------------------------------------------------------------		
 		Artiste swift = new Artiste("swift@mail.com", "$Taylor1", null, "Taylor Swift", null, null, "Taylor Swift", "Taylor Alison Swift, née le 13 décembre 1989 à Reading, en Pennsylvanie, est une auteure-compositrice-interprète et actrice américaine. Son lyrisme narratif, qui s’inspire souvent de ses expériences personnelles, est largement salué par la critique et la couverture médiatique. ", null);
-		artisteService.save(swift);
+		swift = artisteService.save(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(swift));
 		album = new Album("Red", LocalDate.of(2021, Month.NOVEMBER, 12));
 		album.addArtiste(swift);
 		album = albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
@@ -236,7 +236,7 @@ class MusifanApplicationTests {
 		publicationService.save(publication);		// Doja Cat
 		//------------------------------------------------------------------------------------------------------------------------------------------		
 		Artiste doja = new Artiste("doja@mail.com", "$Doja1", null, "Doja Cat", null, null, "Doja Cat", null, null);
-		artisteService.save(doja);
+		doja = artisteService.save(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(doja));
 		album = new Album("Planet Her", LocalDate.of(2021, Month.JUNE, 25));
 		album.addArtiste(doja);
 		album = albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
@@ -263,8 +263,8 @@ class MusifanApplicationTests {
 		// Ninho
 		//------------------------------------------------------------------------------------------------------------------------------------------		
 		Artiste ninho = new Artiste("ninho@mail.com", "$Ninho1", null, "Ninho", null, null, "Ninho", null, null);
-		artisteService.save(ninho);
-		album = new Album("Planet Her", LocalDate.of(2021, Month.DECEMBER, 3));
+		ninho = artisteService.save(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(ninho));
+		album = new Album("Jefe", LocalDate.of(2021, Month.DECEMBER, 3));
 		album.addArtiste(ninho);
 		album = albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
 		chansons = new ArrayList<Chansons>();
@@ -292,12 +292,12 @@ class MusifanApplicationTests {
 		Lieu lieu = new Lieu("AccorHotels Arena","8","Boulevard de Bercy","75012","Paris","France");
 		lieuService.save(lieu);
 		Concert concert = new Concert("Pardon My French",LocalDate.of(2022, Month.JUNE, 21),lieu,10000,50);
-		concert.addArtiste(artisteService.byNomArtisteLikeIgnoreCase("DJ Snake").get(0));
-		concert.addArtiste(artisteService.byNomArtisteLikeIgnoreCase("Tchami").get(0));
-		concert.addArtiste(artisteService.byNomArtisteLikeIgnoreCase("Malaa").get(0));
+		concert.addArtiste(musifan.musifan.dto.DtoToEntity.DtoArtisteToEntity(artisteService.byNomArtisteLikeIgnoreCase("DJ Snake").get(0)));
+		concert.addArtiste(musifan.musifan.dto.DtoToEntity.DtoArtisteToEntity(artisteService.byNomArtisteLikeIgnoreCase("Tchami").get(0)));
+		concert.addArtiste(musifan.musifan.dto.DtoToEntity.DtoArtisteToEntity(artisteService.byNomArtisteLikeIgnoreCase("Malaa").get(0)));
 		concertService.create(musifan.musifan.dto.EntityToDto.ConcertToConcertDto(concert));
 		concert = new Concert("Kygo French Tour",LocalDate.of(2022, Month.MAY, 10),lieu,6000,45);
-		concert.addArtiste(artisteService.byNomArtisteLikeIgnoreCase("Kygo").get(0));
+		concert.addArtiste(musifan.musifan.dto.DtoToEntity.DtoArtisteToEntity(artisteService.byNomArtisteLikeIgnoreCase("Kygo").get(0)));
 		concertService.create(musifan.musifan.dto.EntityToDto.ConcertToConcertDto(concert));
 		Concert afterHours = new Concert("The After Hours Tour", LocalDate.of(2022, Month.JULY, 21), lieu, 10000, 50);
 		afterHours.addArtiste(theWeeknd);
@@ -354,7 +354,7 @@ class MusifanApplicationTests {
 		lieu =new Lieu("Manchester Arena",null,"Victoria Station Approach",null,"Manchester","Royaume-Uni");
 		lieuService.save(lieu);
 		concert = new Concert("Live Aid 2022",LocalDate.of(2022, Month.AUGUST, 12),lieu,21000,100);
-		concert.addArtiste(artisteService.byNomArtisteLikeIgnoreCase("The Weeknd").get(0));
+		concert.addArtiste(musifan.musifan.dto.DtoToEntity.DtoArtisteToEntity(artisteService.byNomArtisteLikeIgnoreCase("The Weeknd").get(0)));
 
 		concertService.create(musifan.musifan.dto.EntityToDto.ConcertToConcertDto(concert));
 		
@@ -370,8 +370,8 @@ class MusifanApplicationTests {
 		commande.addProduit(afterHours, 4);
 		Commande commande2 = new Commande(john);
 		commande2.addProduit(problems, 1);
-		commandeService.save(musifan.musifan.dto.EntityToDto.CommandeToCommandeDto(commande));
-		commandeService.save(musifan.musifan.dto.EntityToDto.CommandeToCommandeDto(commande2));
+//		commandeService.save(musifan.musifan.dto.EntityToDto.CommandeToCommandeDto(commande));
+//		commandeService.save(musifan.musifan.dto.EntityToDto.CommandeToCommandeDto(commande2));
 		
 		
 		Utilisateur marie = new Utilisateur("m.dolly@monMail.fr", "1234", "Dolly", "Marie", "07 25 14 96 87", null, "marie.dolly");
@@ -383,7 +383,7 @@ class MusifanApplicationTests {
 		utilisateurService.addLigneUtilisateur(marie);
 		commande = new Commande(marie);
 		commande.addProduit(edSheeranTour, 2);
-		commandeService.save(musifan.musifan.dto.EntityToDto.CommandeToCommandeDto(commande));
+//		commandeService.save(musifan.musifan.dto.EntityToDto.CommandeToCommandeDto(commande));
 		
 		
 	}
