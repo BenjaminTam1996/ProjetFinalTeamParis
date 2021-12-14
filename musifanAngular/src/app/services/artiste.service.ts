@@ -32,7 +32,7 @@ export class ArtisteService {
   }
 
   public searchArtistes(nom: string): Observable<Artiste[]> {
-    return this.http.get<Artiste[]>(`${ArtisteService.url}/${nom}`, {
+    return this.http.get<Artiste[]>(`${ArtisteService.url}/search/${nom}`, {
       headers: this.httpHeaders,
     });
   }

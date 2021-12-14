@@ -37,14 +37,16 @@
       </div>
       <br />
       <div class="search-container">
-        <form>
+        <form (ngSubmit)="click()" [formGroup]="rechercheForm">
           <input
             type="text"
             placeholder="Search.."
-            name="search"
+            class="form-control"
+            name="rechercheControl"
+            [formControl]="rechercheControl"
             style="width: 300px; height: 20px"
           />
-          <button type="submit"><i class="fa fa-search"></i></button>
+          <button><i class="fa fa-search"></i></button>
         </form>
       </div>
     </div>
