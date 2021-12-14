@@ -33,16 +33,16 @@
       <br />
       <div *ngFor="let a of utilisateur.artistes">
         <!-- <a [routerLink]="['/artiste', a.id]">{{ a.nomArtiste }}</a> -->
-        <div class="w3-quarter w3-center">
+        <div class="w3-quarter w3-center grow">
           <img
             src="/assets/images/Kygo2.jpg"
             class="w3-circle"
             width="180"
             height="180"
-            style="object-fit: cover"
+            style="object-fit: cover; cursor: pointer"
             [routerLink]="['/artiste', a.id]"
           />
-          <p class="w3-center">
+          <p class="w3-center" style="cursor: pointer">
             <a>{{ a.nomArtiste }}</a>
           </p>
         </div>

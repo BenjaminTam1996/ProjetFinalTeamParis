@@ -1633,3 +1633,10 @@ a {
 .w3-hover-text-musifan-color:hover {
   color: #bf81f9 !important;
 }
+
+.grow {
+  transition: all 0.2s ease-in-out;
+}
+.grow:hover {
+  transform: scale(1.1);
+}
