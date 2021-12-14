@@ -22,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import musifan.musifan.dto.Artiste;
 import musifan.musifan.entity.JsonViews;
+import musifan.musifan.repositories.ArtisteRepository;
 import musifan.musifan.services.ArtisteService;
 
 
@@ -30,9 +31,24 @@ import musifan.musifan.services.ArtisteService;
 @CrossOrigin(origins="*")
 public class ArtisteRestController {
 
-	@Autowired
+	@Autowired 
 	private ArtisteService artisteService;
+	
+	@Autowired
+	private ArtisteRepository artisteRepository;
 
+	@GetMapping("/search/{search}")
+	@JsonView(JsonViews.ArtisteComplet.class)
+	public List<Artiste> byIdLike(@PathVariable("search") String search) {
+		return artisteService.byNomArtisteLikeIgnoreCase(search);
+	}
+	
+	// Determiner si un login envoye depuis Angular est deja preent dans la base de donnees
+	@GetMapping("/login/{login}")
+	public boolean isUsed(@PathVariable("login") String login) {
+		return artisteRepository.findByMail(login).isPresent();
+	}
+	
 	// Remonter tout les artistes
 	@GetMapping("") 
 	@JsonView(JsonViews.Common.class)
@@ -48,11 +64,6 @@ public class ArtisteRestController {
 		return artisteService.byKeyWithArtisteComplet(id);
 	}
 	
-	@GetMapping("/{search}")
-	@JsonView(JsonViews.ArtisteComplet.class)
-	public List<Artiste> byIdLike(@PathVariable("search") String search) {
-		return artisteService.byNomArtisteLikeIgnoreCase(search);
-	}
 
 	// Creer un artiste
 	@PostMapping("")

@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import musifan.musifan.entity.JsonViews;
+import musifan.musifan.repositories.ArtisteRepository;
+import musifan.musifan.repositories.UtilisateurRepository;
 import musifan.musifan.dto.Utilisateur;
 import musifan.musifan.services.ArtisteService;
 import musifan.musifan.services.CommandeService;
@@ -34,6 +36,15 @@ public class UtilisateurRestController {
 
 	@Autowired
 	private ArtisteService artisteService;
+	
+	@Autowired
+	private UtilisateurRepository utilisateurRepository;
+
+	// Determiner si un login envoye depuis Angular est deja preent dans la base de donnees
+	@GetMapping("/login/{login}")
+	public boolean isUsed(@PathVariable("login") String login) {
+		return utilisateurRepository.findByMail(login).isPresent();
+	}
 
 	// Remonter un utilisateur par rapport a son id
 	@GetMapping("/{id}")

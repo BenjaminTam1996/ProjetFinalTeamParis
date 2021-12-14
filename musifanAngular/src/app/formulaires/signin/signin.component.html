@@ -128,6 +128,16 @@
               >
                 {{ emailErrorMessage() }}
               </div>
+              <div
+                *ngIf="
+                  form.get('passwordGroup')!.hasError('checkLogin') &&
+                  form.get('passwordGroup.confirm')!.dirty
+                "
+                class="alert alert-danger"
+              >
+                Le mot de passe de confirmation doit être le même que le mot de
+                passe ci-dessus
+              </div>
             </div>
             <div><br /></div>
             <ng-container formGroupName="passwordGroup">
