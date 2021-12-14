@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { AuthService } from './../../services/auth.service';
 import { ArtisteService } from './../../services/artiste.service';
 import { Artiste } from './../../models/artiste';
@@ -10,10 +11,12 @@ import {
   AbstractControl,
   ValidationErrors,
   Form,
+  AsyncValidatorFn,
 } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Utilisateur } from 'src/app/models/utilisateur';
 import { Router } from '@angular/router';
+import { debounceTime, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-signin',
@@ -50,10 +53,16 @@ export class SigninComponent implements OnInit {
           /^(?:0|\(?\+33\)?\s?|0033\s?)[1-79](?:[\.\-\s]?\d\d){4}$/
         ),
       ]),
-      email: new FormControl('', [
-        Validators.required,
-        Validators.pattern(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,4}$/),
-      ]),
+      email: new FormControl(
+        '',
+        [
+          Validators.required,
+          Validators.pattern(
+            /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,4}$/
+          ),
+        ],
+        this.checkLogin()
+      ),
       description: new FormControl(''),
       passwordGroup: new FormGroup(
         {
@@ -71,6 +80,28 @@ export class SigninComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  checkLogin(): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      if (this.form.controls['role'].value == 'UTILISATEUR') {
+        return this.utilisateurService.checkLogin(control.value).pipe(
+          /* Une seconde avant traitement */
+          debounceTime(1000),
+          map((res: boolean) => {
+            return res ? { loginUsed: true } : null;
+          })
+        );
+      }
+      console.log('coucou');
+      return this.artisteService.checkLogin(control.value).pipe(
+        /* Une seconde avant traitement */
+        debounceTime(1000),
+        map((res: boolean) => {
+          return res ? { loginUsed: true } : null;
+        })
+      );
+    };
+  }
 
   /* Verification que le mot de passe est le meme que le mot de passe de confirmation */
   checkNotEquals(group: AbstractControl): ValidationErrors | null {
