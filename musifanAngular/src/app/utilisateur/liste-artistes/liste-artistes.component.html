@@ -30,9 +30,23 @@
     <div class="w3-padding-64 w3-auto">
       <h2 class="w3-text-musifan-color">Ma liste d'artistes</h2>
       <hr style="width: 200px" class="w3-opacity" />
-      <p *ngFor="let a of utilisateur.artistes">
-        <a [routerLink]="['/artiste', a.id]">{{ a.nomArtiste }}</a>
-      </p>
+      <br />
+      <div *ngFor="let a of utilisateur.artistes">
+        <!-- <a [routerLink]="['/artiste', a.id]">{{ a.nomArtiste }}</a> -->
+        <div class="w3-quarter w3-center">
+          <img
+            src="/assets/images/Kygo2.jpg"
+            class="w3-circle"
+            width="180"
+            height="180"
+            style="object-fit: cover"
+            [routerLink]="['/artiste', a.id]"
+          />
+          <p class="w3-center">
+            <a>{{ a.nomArtiste }}</a>
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </body>
