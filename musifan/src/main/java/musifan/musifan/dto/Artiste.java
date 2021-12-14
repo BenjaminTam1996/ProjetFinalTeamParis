@@ -31,7 +31,7 @@ public class Artiste {
 	private Set<Album> albums = new HashSet<Album>();
 	@JsonView({JsonViews.ArtisteComplet.class,})
 	private Set<Concert> concerts = new HashSet<Concert>();
-	@JsonView({JsonViews.ArtisteComplet.class,})
+	@JsonView({JsonViews.ArtisteComplet.class,JsonViews.UtilisateurAvecPublicationsArtiste.class})
 	private Set<Publication> publications = new HashSet<Publication>();
 	
 	public Artiste() {

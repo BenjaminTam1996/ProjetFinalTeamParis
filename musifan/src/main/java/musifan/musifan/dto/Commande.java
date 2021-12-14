@@ -21,7 +21,7 @@ public class Commande {
 	private Long numero;
 	@JsonView({JsonViews.Common.class,})
 	private LocalDate date = LocalDate.now();
-	@JsonView({JsonViews.Common.class,})
+	
 	private Utilisateur utilisateur;
 	@JsonView({JsonViews.UtilisateurAvecCommandes.class,})
 	private Concert concert ;

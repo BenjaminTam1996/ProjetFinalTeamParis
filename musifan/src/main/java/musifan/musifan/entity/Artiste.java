@@ -58,7 +58,7 @@ public class Artiste extends Compte {
 	private String description;
 	
 	@OneToMany(mappedBy = "artiste", fetch = FetchType.LAZY)
-	@JsonView({JsonViews.ArtisteComplet.class,})	
+	@JsonView({JsonViews.ArtisteComplet.class, JsonViews.UtilisateurAvecPublicationsArtiste.class})	
 	private Set<Publication> publications = new HashSet<Publication>();
 	
 	@OneToMany(mappedBy = "id.artiste")
