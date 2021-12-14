@@ -33,7 +33,7 @@
     <div class="w3-mycontainer w3-center">
       <div>
         <img
-          src="/assets/images/Kygo2.jpg"
+          src="/assets/images/Kygo4.jpg"
           style="width: 100%; height: 450px; object-fit: cover; top: -100px"
         />
       </div>
@@ -45,7 +45,7 @@
           <div class="w3-third">
             <!-- Photo de l'artiste -->
             <img
-              src="/assets/images/Kygo3.jpg"
+              src="/assets/images/kygo5.jpg"
               class="w3-circle"
               style="width: 300px; height: 300px; object-fit: cover"
             />
@@ -56,13 +56,23 @@
               <h1 class="w3-musifan-color" id="bloc1">
                 {{ artiste.nomArtiste }}
               </h1>
+              <!-- Si connecté en artiste -->
               <div *ngIf="navArtiste" id="bloc2" class="w3-greypurple">
                 <i class="fa fa-pencil-square w3-xxlarge"></i> Modifier le
                 profil
               </div>
+              <!-- Si connecté en fan -->
+              <div *ngIf="!navArtiste" id="bloc2" class="w3-greypurple">
+                <i class="fa fa-plus-square w3-xxlarge"></i> Suivre l'artiste
+              </div>
             </div>
-            <p>
+            <br /><br />
+            <p *ngIf="artiste.description">
               {{ artiste.description }}
+            </p>
+            <p *ngIf="!artiste.description && navArtiste" class="w3-text-grey">
+              Vous n'avez pas encore ajouté de description. Cliquez sur
+              "Modifier le profil" pour en ajouter un.
             </p>
           </div>
         </div>
@@ -105,8 +115,14 @@
                 <a [routerLink]="['/lieu', c.id]">{{ c.lieu.nom }}</a
                 >, {{ c.lieu.ville }}, {{ c.lieu.pays }}
               </td>
+              <td *ngIf="!c.lieu"></td>
               <td>{{ c.prix }} €</td>
-              <td *ngIf="!navArtiste"><button>Acheter un billet</button></td>
+              <!-- Si connecté en fan -->
+              <td *ngIf="!navArtiste">
+                <button [routerLink]="['/concert', c.id]">
+                  Acheter un billet
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -142,4 +158,5 @@
       </div>
     </div>
   </div>
+  <div><app-footer></app-footer></div>
 </body>

@@ -25,6 +25,7 @@ import { DetailsAlbumComponent } from './album/details-album/details-album.compo
 import { DetailsLieuComponent } from './lieu/details-lieu/details-lieu.component';
 import { DetailsPublicationComponent } from './publication/details-publication/details-publication.component';
 import { DetailsConcertComponent } from './concert/details-concert/details-concert.component';
+import { FooterComponent } from './footer/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { DetailsConcertComponent } from './concert/details-concert/details-conce
     DetailsLieuComponent,
     DetailsPublicationComponent,
     DetailsConcertComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

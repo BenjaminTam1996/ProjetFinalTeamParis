@@ -1,0 +1,17 @@
+.w3-display-bottomright {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.w3-padding-large {
+  padding: 0px 24px !important;
+}
+.w3-musifan-color,
+.w3-hover-musifan-color:hover {
+  color: #bf81f9 !important;
+}
+.w3-black,
+.w3-hover-black:hover {
+  color: #fff !important;
+  background-color: #000 !important;
+}
