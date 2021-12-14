@@ -38,8 +38,14 @@
           </tr>
         </thead>
         <tbody>
+          <!-- Pour tous les artistes suivis par l'utilisateur -->
           <tr *ngFor="let a of utilisateur.artistes">
-            <td *ngFor="let alb of a.albums">{{ alb.titre }}</td>
+            <!-- et pour chaque album de l'artiste -->
+            <td *ngFor="let alb of a.albums">
+              <a [routerLink]="['/album', alb.id]" routerLinkActive="active">
+                {{ alb.titre }}</a
+              >
+            </td>
             <td *ngFor="let alb of a.albums">{{ alb.date }}</td>
           </tr>
         </tbody>

@@ -39,12 +39,19 @@
           </tr>
         </thead>
         <tbody>
+          <!-- Pour toutes les commandes de l'utilisateur -->
           <tr *ngFor="let c of utilisateur.commandes">
-            <!-- <div *ngFor="let conc of c.concert"> -->
-            <td *ngIf="!!c.concert">{{ c.concert.nom }}</td>
+            <!-- et pour tous les concerts dans la commande -->
+            <td *ngIf="!!c.concert">
+              <a
+                [routerLink]="['/concert', c.concert.id]"
+                routerLinkActive="active"
+              >
+                {{ c.concert.nom }}</a
+              >
+            </td>
             <td *ngIf="!!c.concert">{{ c.concert.date }}</td>
             <td *ngIf="!!c.concert">{{ c.concert.prix }} €</td>
-            <!-- </div> -->
           </tr>
         </tbody>
       </table>
