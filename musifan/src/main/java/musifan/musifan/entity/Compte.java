@@ -54,7 +54,7 @@ public class Compte implements UserDetails {
 
 	@Lob
 	@JsonView({ JsonViews.Common.class, })
-	private Byte[] photoProfil;
+	private byte[] photoProfil;
 
 	@Version
 	@Column(name = "compte_version")
@@ -64,7 +64,7 @@ public class Compte implements UserDetails {
 
 	}
 
-	public Compte(String mail, String password, String nom, String prenom, String telephone, Byte[] photoProfil) {
+	public Compte(String mail, String password, String nom, String prenom, String telephone, byte[] photoProfil) {
 		this.mail = mail;
 		this.password = password;
 		this.nom = nom;
@@ -122,11 +122,11 @@ public class Compte implements UserDetails {
 		this.telephone = telephone;
 	}
 
-	public Byte[] getPhotoProfil() {
+	public byte[] getPhotoProfil() {
 		return photoProfil;
 	}
 
-	public void setPhotoProfil(Byte[] photoProfil) {
+	public void setPhotoProfil(byte[] photoProfil) {
 		this.photoProfil = photoProfil;
 	}
 

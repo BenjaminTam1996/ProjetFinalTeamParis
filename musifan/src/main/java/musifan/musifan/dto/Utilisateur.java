@@ -24,7 +24,7 @@ public class Utilisateur {
 	@JsonView({JsonViews.Common.class,})
 	private String telephone;
 	@JsonView({JsonViews.Common.class,})
-	private Byte[] photoProfil;
+	private byte[] photoProfil;
 	@JsonView({JsonViews.Common.class,})
 	private String pseudo;
 	@JsonView({JsonViews.UtilisateurAvecCommandes.class,})
@@ -83,11 +83,11 @@ public class Utilisateur {
 		this.telephone = telephone;
 	}
 
-	public Byte[] getPhotoProfil() {
+	public byte[] getPhotoProfil() {
 		return photoProfil;
 	}
 
-	public void setPhotoProfil(Byte[] photoProfil) {
+	public void setPhotoProfil(byte[] photoProfil) {
 		this.photoProfil = photoProfil;
 	}
 

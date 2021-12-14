@@ -123,7 +123,7 @@ public class UtilisateurRestController {
 	public void deleteArtiste(@PathVariable("idUtilisateur") Long idUtilisateur,
 			@PathVariable("idArtiste") Long idArtiste) {
 		utilisateurService.deleteLigneUtilisateurByUtilisateur(utilisateurService.byId(idUtilisateur),
-				artisteService.byId(idArtiste));
+				musifan.musifan.dto.DtoToEntity.DtoArtisteToEntity(artisteService.byId(idArtiste)));
 	}
 
 	@DeleteMapping("/{id}")

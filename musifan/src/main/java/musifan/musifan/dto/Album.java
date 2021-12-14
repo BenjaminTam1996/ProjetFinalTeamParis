@@ -17,7 +17,7 @@ public class Album {
 	@JsonView(JsonViews.Common.class)
 	private LocalDate date = LocalDate.now();
 	@JsonView(JsonViews.Common.class)
-	private Byte photo;
+	private byte[] photo;
 	@JsonView({JsonViews.AlbumComplet.class,})
 	private Set<Chanson> chansons = new HashSet<Chanson>();
 	@JsonView({JsonViews.AlbumAvecArtistes.class,})
@@ -42,11 +42,11 @@ public class Album {
 		this.titre = titre;
 	}
 
-	public Byte getPhoto() {
+	public byte[] getPhoto() {
 		return photo;
 	}
 
-	public void setPhoto(Byte photo) {
+	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
 

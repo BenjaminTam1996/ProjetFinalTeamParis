@@ -48,7 +48,7 @@ public class Album {
 	private LocalDate date = LocalDate.now();
 	@Column(name = "album_photo")
 	@JsonView(JsonViews.Common.class)
-	private Byte photo;
+	private byte[] photo;
 	
 	@OneToMany(mappedBy = "album", fetch = FetchType.LAZY)
 	
@@ -105,12 +105,12 @@ public class Album {
 	}
 
 
-	public Byte getPhoto() {
+	public byte[] getPhoto() {
 		return photo;
 	}
 
 
-	public void setPhoto(Byte photo) {
+	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
 

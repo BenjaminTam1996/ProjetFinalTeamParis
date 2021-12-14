@@ -62,7 +62,7 @@ public class Utilisateur extends Compte{
 		this.pseudo = pseudo;
 	}
 
-	public Utilisateur(String mail, String password, String nom, String prenom, String telephone, Byte[] photoProfil, String pseudo) {
+	public Utilisateur(String mail, String password, String nom, String prenom, String telephone, byte[] photoProfil, String pseudo) {
 		super(mail, password, nom, prenom, telephone, photoProfil);
 		this.pseudo = pseudo;
 	}

@@ -50,7 +50,7 @@ public class Artiste extends Compte {
 	@Lob
 	@Column(name="artiste_photo_banniere")
 	@JsonView({JsonViews.Common.class,})
-	private Byte[] photoBanniere;
+	private byte[] photoBanniere;
 	
 	@Lob
 	@Column(name="artiste_description")
@@ -80,7 +80,7 @@ public class Artiste extends Compte {
 		super(nom, prenom);
 	}
 
-	public Artiste(String mail, String password, String nom, String prenom, String telephone, Byte[] photoProfil, String nomArtiste, String description, Byte[] photoBanniere) {
+	public Artiste(String mail, String password, String nom, String prenom, String telephone, byte[] photoProfil, String nomArtiste, String description, byte[] photoBanniere) {
 		super(mail, password, nom, prenom, telephone, photoProfil);
 		this.description = description;
 		this.nomArtiste = nomArtiste;
@@ -99,11 +99,11 @@ public class Artiste extends Compte {
 		this.nomArtiste = nomArtiste;
 	}
 
-	public Byte[] getPhotoBanniere() {
+	public byte[] getPhotoBanniere() {
 		return photoBanniere;
 	}
 
-	public void setPhotoBanniere(Byte[] photoBanniere) {
+	public void setPhotoBanniere(byte[] photoBanniere) {
 		this.photoBanniere = photoBanniere;
 	}
 

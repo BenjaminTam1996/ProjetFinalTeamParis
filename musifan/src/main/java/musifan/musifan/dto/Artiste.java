@@ -20,9 +20,9 @@ public class Artiste {
 	@JsonView({JsonViews.Common.class,})
 	private String telephone;
 	@JsonView({JsonViews.Common.class,})
-	private Byte[] photoProfil;
+	private byte[] photoProfil;
 	@JsonView({JsonViews.Common.class,})
-	private Byte[] photoBanniere;
+	private byte[] photoBanniere;
 	@JsonView({JsonViews.Common.class,})
 	private String nomArtiste;
 	@JsonView({JsonViews.Common.class,})
@@ -85,19 +85,19 @@ public class Artiste {
 		this.telephone = telephone;
 	}
 
-	public Byte[] getPhotoProfil() {
+	public byte[] getPhotoProfil() {
 		return photoProfil;
 	}
 
-	public void setPhotoProfil(Byte[] photoProfil) {
+	public void setPhotoProfil(byte[] photoProfil) {
 		this.photoProfil = photoProfil;
 	}
 
-	public Byte[] getPhotoBanniere() {
+	public byte[] getPhotoBanniere() {
 		return photoBanniere;
 	}
 
-	public void setPhotoBanniere(Byte[] photoBanniere) {
+	public void setPhotoBanniere(byte[] photoBanniere) {
 		this.photoBanniere = photoBanniere;
 	}
 
