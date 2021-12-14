@@ -92,7 +92,6 @@ export class SigninComponent implements OnInit {
           })
         );
       }
-      console.log('coucou');
       return this.artisteService.checkLogin(control.value).pipe(
         /* Une seconde avant traitement */
         debounceTime(1000),
@@ -162,6 +161,8 @@ export class SigninComponent implements OnInit {
       return 'Email obligatoire';
     } else if (this.form.get('email')!.hasError('pattern')) {
       return 'Veuillez entrer un email';
+    } else if (this.form.get('email')!.hasError('loginUsed')) {
+      return "L'email existe déjà";
     }
     return "Erreur dans l'email";
   }
@@ -174,12 +175,6 @@ export class SigninComponent implements OnInit {
     }
     return 'Erreur dans le mot de passe';
   }
-
-  /*   confirmErrorMessage() {
-    if (this.form.get('passwordGroup')!.hasError('checkNotEquals')) {
-      return 'le mot de passe de confirmation doit être le même que le mot de passe ci-dessus';
-    }
-  } */
 
   /* Creation du compte */
   save() {
