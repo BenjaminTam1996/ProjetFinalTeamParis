@@ -17,6 +17,7 @@ export class ListeConcertsComponent implements OnInit {
       let id: number = parseInt(sessionStorage.getItem('id')!);
       this.utilisateurService.byIdWithCommande(id).subscribe((result) => {
         this.utilisateur = result;
+        console.log(this.utilisateur);
       });
     }
   }
