@@ -3,6 +3,7 @@ import { ArtisteService } from './../../services/artiste.service';
 import { Component, OnInit } from '@angular/core';
 import { Concert } from 'src/app/models/concert';
 import { ActivatedRoute } from '@angular/router';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-details-concert',
@@ -12,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 export class DetailsConcertComponent implements OnInit {
   concert: Concert = new Concert();
   navArtiste = true;
+  concertComplet = false;
 
   constructor(
     private concertService: ConcertService,
@@ -27,6 +29,10 @@ export class DetailsConcertComponent implements OnInit {
         });
       }
     });
+
+    if (this.concert.nbPlace == 0) {
+      this.concertComplet = true;
+    }
 
     if (sessionStorage.getItem('role') == 'artiste') {
       this.navArtiste = true;

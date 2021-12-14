@@ -1,1 +1,105 @@
-<p>details-concert works!</p>
+<style>
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Montserrat", sans-serif;
+  }
+  .w3-row-padding img {
+    margin-bottom: 12px;
+  }
+  /* Add a left margin to the "page content" that matches the width of the sidebar (140px) */
+  #main {
+    margin-left: 140px;
+    width: 90%;
+  }
+  /* Remove margins from "page content" on small screens */
+  @media only screen and (max-width: 600px) {
+    #main {
+      margin-left: 0;
+    }
+  }
+</style>
+
+<body class="w3-black">
+  <!-- Nav bar -->
+  <app-artist-navbar *ngIf="navArtiste"></app-artist-navbar>
+  <app-fan-navbar *ngIf="!navArtiste"></app-fan-navbar>
+  <div class="w3-padding-large" id="main">
+    <div class="w3-padding-64 w3-auto">
+      <!-- NOM CONCERT -->
+      <div>
+        <h2 class="w3-text-musifan-color">{{ concert.nom }}</h2>
+        <hr style="width: 200px" class="w3-opacity" />
+      </div>
+
+      <!-- DATE -->
+      <div>
+        <h4 id="bloc3">Date :</h4>
+        <h3 id="bloc4" class="w3-text-musifan-color">{{ concert.date }}</h3>
+      </div>
+      <br />
+
+      <!-- NOMBRE PLACES -->
+      <div>
+        <h4 id="bloc3">Nombre de places restant :</h4>
+        <h3 *ngIf="!concertComplet" id="bloc4" class="w3-text-musifan-color">
+          {{ concert.nbPlace }}
+        </h3>
+        <h3 *ngIf="concertComplet" class="w3-text-red" id="bloc4">
+          Concert complet
+        </h3>
+      </div>
+      <br />
+
+      <!-- PRIX -->
+      <div>
+        <h4 id="bloc3">Prix de la place :</h4>
+        <h3 id="bloc4" class="w3-text-musifan-color">{{ concert.prix }} €</h3>
+      </div>
+      <br />
+
+      <!-- LIEU -->
+      <div *ngIf="!!concert.lieu">
+        <h3>Lieu :</h3>
+        <p class="w3-text-musifan-color">{{ concert.lieu.nom }}</p>
+        <p class="w3-text-musifan-color" id="bloc3">
+          {{ concert.lieu.numRue }}
+        </p>
+        <p class="w3-text-musifan-color" id="bloc4">{{ concert.lieu.rue }}</p>
+        <p class="w3-text-musifan-color">
+          {{ concert.lieu.codePostal }} {{ concert.lieu.ville }}
+        </p>
+        <p class="w3-text-musifan-color">
+          {{ concert.lieu.pays }}
+        </p>
+      </div>
+      <br />
+
+      <!-- ARTISTES -->
+      <div>
+        <h3>Artistes :</h3>
+        <br />
+        <div *ngFor="let a of concert.artistes">
+          <div class="w3-quarter w3-center">
+            <img
+              src="/assets/images/Kygo2.jpg"
+              class="w3-circle"
+              width="180"
+              height="180"
+              style="object-fit: cover"
+              [routerLink]="['/artiste', a.id]"
+            />
+            <p class="w3-center">
+              <a>{{ a.nomArtiste }}</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div><app-footer></app-footer></div>
+</body>
