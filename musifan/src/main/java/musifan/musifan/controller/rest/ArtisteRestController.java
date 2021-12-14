@@ -37,6 +37,12 @@ public class ArtisteRestController {
 	@Autowired
 	private ArtisteRepository artisteRepository;
 
+	@GetMapping("/search/{search}")
+	@JsonView(JsonViews.ArtisteComplet.class)
+	public List<Artiste> byIdLike(@PathVariable("search") String search) {
+		return artisteService.byNomArtisteLikeIgnoreCase(search);
+	}
+	
 	// Determiner si un login envoye depuis Angular est deja preent dans la base de donnees
 	@GetMapping("/login/{login}")
 	public boolean isUsed(@PathVariable("login") String login) {
