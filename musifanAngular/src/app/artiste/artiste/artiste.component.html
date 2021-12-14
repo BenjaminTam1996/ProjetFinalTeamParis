@@ -108,18 +108,27 @@
           <tbody>
             <tr *ngFor="let c of artiste.concerts">
               <td>
-                <a [routerLink]="['/concert', c.id]">{{ c.nom }}</a>
+                <a
+                  [routerLink]="['/concert', c.id]"
+                  routerLinkActive="active"
+                  >{{ c.nom }}</a
+                >
               </td>
               <td>{{ c.date }}</td>
               <td *ngIf="!!c.lieu">
-                <a [routerLink]="['/lieu', c.id]">{{ c.lieu.nom }}</a
+                <a [routerLink]="['/lieu', c.id]" routerLinkActive="active">{{
+                  c.lieu.nom
+                }}</a
                 >, {{ c.lieu.ville }}, {{ c.lieu.pays }}
               </td>
               <td *ngIf="!c.lieu"></td>
               <td>{{ c.prix }} €</td>
               <!-- Si connecté en fan -->
               <td *ngIf="!navArtiste">
-                <button [routerLink]="['/concert', c.id]">
+                <button
+                  [routerLink]="['/concert', c.id]"
+                  routerLinkActive="active"
+                >
                   Acheter un billet
                 </button>
               </td>
@@ -146,7 +155,9 @@
           <tbody>
             <tr *ngFor="let a of artiste.albums">
               <td>
-                <a [routerLink]="['/album', a.id]">{{ a.titre }}</a>
+                <a [routerLink]="['/album', a.id]" routerLinkActive="active">{{
+                  a.titre
+                }}</a>
               </td>
               <td>{{ a.date }}</td>
               <td *ngIf="!navArtiste">
