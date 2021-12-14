@@ -18,8 +18,10 @@ export class ConcertService {
     });
   }
 
-  public allConcerts(): Observable<Concert[]> {
-    return this.http.get<Concert[]>(this.url);
+  public allConcerts(): Observable<any[]> {
+    return this.http.get<any[]>(this.url, {
+      headers: this.httpHeaders,
+    });
   }
 
   public getById(id: number): Observable<Concert> {

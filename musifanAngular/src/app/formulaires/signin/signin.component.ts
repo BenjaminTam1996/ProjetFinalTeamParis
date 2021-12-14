@@ -224,8 +224,6 @@ export class SigninComponent implements OnInit {
           this.form.get('passwordGroup.password')!.value
         )
         .subscribe((artiste) => {
-          console.log(artiste);
-          console.log(artiste['id']);
           /* Authentification pour eviter la reconnexion de l'utilisateur  */
           sessionStorage.setItem('id', String(artiste['id']));
           sessionStorage.setItem('role', 'artiste');
