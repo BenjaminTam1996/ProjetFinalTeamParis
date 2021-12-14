@@ -195,14 +195,29 @@
           <div><br /></div>
           <div class="form-group">
             <button
+              *ngIf="form.controls['role'].value == 'ARTISTE'"
               class="btn btn-outline-primary"
               [disabled]="
-                form.controls['email'].invalid &&
-                form.controls['passwordGroup'].invalid &&
-                form.controls['telephone'].invalid &&
-                form.controls['prenom'].invalid &&
-                form.controls['nom'].invalid &&
+                form.controls['email'].invalid ||
+                form.controls['passwordGroup'].invalid ||
+                form.controls['telephone'].invalid ||
+                form.controls['prenom'].invalid ||
+                form.controls['nom'].invalid ||
                 form.controls['nomArtiste'].invalid
+              "
+            >
+              Créer un compte
+            </button>
+            <button
+              *ngIf="form.controls['role'].value == 'UTILISATEUR'"
+              class="btn btn-outline-primary"
+              [disabled]="
+                form.controls['email'].invalid ||
+                form.controls['passwordGroup'].invalid ||
+                form.controls['telephone'].invalid ||
+                form.controls['prenom'].invalid ||
+                form.controls['nom'].invalid ||
+                form.controls['pseudo'].invalid
               "
             >
               Créer un compte
