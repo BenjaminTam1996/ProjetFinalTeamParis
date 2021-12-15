@@ -47,7 +47,7 @@
         artiste" pour en ajouter un.
       </p>
       <br />
-      <div *ngIf="!utilisateur.artistes![0]">
+      <div *ngIf="utilisateur.artistes![0]">
         <div *ngFor="let a of utilisateur.artistes">
           <!-- <a [routerLink]="['/artiste', a.id]">{{ a.nomArtiste }}</a> -->
           <div class="w3-quarter w3-center grow">
