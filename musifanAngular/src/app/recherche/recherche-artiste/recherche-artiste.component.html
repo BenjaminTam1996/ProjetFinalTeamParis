@@ -37,19 +37,37 @@
       </div>
       <br />
       <div class="search-container">
-        <form (ngSubmit)="click()" [formGroup]="rechercheForm">
+        <form>
           <input
             type="text"
             placeholder="Search.."
-            class="form-control"
-            name="rechercheControl"
-            [formControl]="rechercheControl"
+            name="search"
             style="width: 300px; height: 20px"
+            [(ngModel)]="chaine"
           />
-          <button><i class="fa fa-search"></i></button>
+          <button type="submit"><i class="fa fa-search"></i></button>
         </form>
+        <br />
+        <br />
+        <br />
+        <div *ngFor="let a of filtre()">
+          <div class="w3-quarter w3-center grow">
+            <img
+              src="/assets/images/Kygo2.jpg"
+              class="w3-circle"
+              width="180"
+              height="180"
+              style="object-fit: cover; cursor: pointer"
+              [routerLink]="['/artiste', a.id]"
+              routerLinkActive="active"
+            />
+            <p class="w3-center" style="cursor: pointer">
+              <a>{{ a.nomArtiste }}</a>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <div><app-footer></app-footer></div>
+  <app-footer></app-footer>
 </body>

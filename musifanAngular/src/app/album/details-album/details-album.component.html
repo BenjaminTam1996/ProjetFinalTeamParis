@@ -35,14 +35,26 @@
         <span class="w3-musifan-color"> {{ album.date }}</span>
       </p>
       <p>
-        Artistes : <br />
-        <span class="w3-musifan-color" *ngFor="let a of album.artistes">
-          <a [routerLink]="['/artiste', a.id]" routerLinkActive="active">
-            {{ a.nomArtiste }}
-          </a>
+        Artistes : <br /><br />
+        <span *ngFor="let a of album.artistes">
+          <div class="w3-quarter w3-center grow">
+            <img
+              src="/assets/images/Kygo2.jpg"
+              class="w3-circle"
+              width="180"
+              height="180"
+              style="object-fit: cover; cursor: pointer"
+              [routerLink]="['/artiste', a.id]"
+              routerLinkActive="active"
+            />
+            <p class="w3-center" style="cursor: pointer">
+              <a>{{ a.nomArtiste }}</a>
+            </p>
+          </div>
           <br />
         </span>
       </p>
+      <br /><br /><br /><br />
       <table class="w3-table">
         <thead>
           <tr class="w3-musifan-color">

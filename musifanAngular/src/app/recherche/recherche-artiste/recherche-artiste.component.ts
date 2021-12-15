@@ -15,21 +15,14 @@ import {
   styleUrls: ['./recherche-artiste.component.css'],
 })
 export class RechercheArtisteComponent implements OnInit {
-  artistesTrouvés: Observable<Artiste[]> | undefined = undefined;
-  trouve: boolean = false;
   navArtiste = true;
-  rechercheForm: FormGroup;
-  rechercheControl: FormControl;
+  artistes: Artiste[] = [];
+  chaine: string = '';
 
-  constructor(private fb: FormBuilder, private artisteService: ArtisteService) {
-    this.rechercheControl = this.fb.control('', [Validators.required]);
-    this.rechercheForm = this.fb.group({
-      rechercheControl: this.rechercheControl,
-    });
-  }
+  constructor(private artisteService: ArtisteService) {}
 
   ngOnInit(): void {
-    this.trouve = false;
+    this.initArtistes();
     if (sessionStorage.getItem('role') == 'artiste') {
       this.navArtiste = true;
     } else if (sessionStorage.getItem('role') == 'utilisateur') {
@@ -37,14 +30,28 @@ export class RechercheArtisteComponent implements OnInit {
     }
   }
 
-  click(): void {
-    this.artisteService
-      .searchArtistes(this.rechercheControl.value)
-      .subscribe((result) => {
-        // this.artistesTrouvés = result;
-      });
-    // if (this.artistesTrouvés[0] != 0) {
-    //   this.trouve = true;
-    // }
+  initArtistes() {
+    this.artisteService.allArtistes().subscribe((result: Artiste[]) => {
+      this.artistes = [];
+
+      for (let value of result) {
+        this.artistes.push(
+          new Artiste(
+            value['id'],
+            undefined,
+            undefined,
+            undefined,
+            value['nomArtiste']
+          )
+        );
+      }
+    });
+  }
+
+  /* Recherche de nom parmis les noms d'artistes'. */
+  filtre(): Artiste[] {
+    return this.artistes.filter((a) => {
+      return a.nomArtiste!.indexOf(this.chaine) !== -1;
+    });
   }
 }

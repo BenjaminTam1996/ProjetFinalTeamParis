@@ -31,12 +31,6 @@ export class ArtisteService {
     });
   }
 
-  public searchArtistes(nom: string): Observable<Artiste[]> {
-    return this.http.get<Artiste[]>(`${ArtisteService.url}/search/${nom}`, {
-      headers: this.httpHeaders,
-    });
-  }
-
   public byId(id: number): Observable<Artiste> {
     return this.http.get<Artiste>(`${ArtisteService.url}/${id}`, {
       headers: this.httpHeaders,
