@@ -97,15 +97,9 @@ export class UtilisateurService {
     idArtiste: number
   ): Observable<Utilisateur> {
     const o = {
-      ligneUtilisateur: [
-        {
-          id: {
-            artiste: {
-              id: idArtiste,
-            },
-          },
-        },
-      ],
+      artiste: {
+        id: idArtiste,
+      },
     };
     return this.http.put<Utilisateur>(
       UtilisateurService.url + '/artistes/' + idUtilisateur,

@@ -57,12 +57,22 @@
                 {{ artiste.nomArtiste }}
               </h1>
               <!-- Si connecté en artiste -->
-              <div *ngIf="navArtiste" id="bloc2" class="w3-greypurple">
+              <div
+                *ngIf="navArtiste"
+                id="bloc2"
+                class="w3-greypurple grow"
+                style="cursor: pointer"
+              >
                 <i class="fa fa-pencil-square w3-xxlarge"></i> Modifier le
                 profil
               </div>
               <!-- Si connecté en fan -->
-              <div *ngIf="!navArtiste" id="bloc2" class="w3-greypurple">
+              <div
+                *ngIf="!navArtiste"
+                id="bloc2"
+                class="w3-greypurple grow"
+                style="cursor: pointer"
+              >
                 <i class="fa fa-plus-square w3-xxlarge"></i> Suivre l'artiste
               </div>
             </div>
@@ -74,6 +84,9 @@
               Vous n'avez pas encore ajouté de description. Cliquez sur
               "Modifier le profil" pour en ajouter un.
             </p>
+            <p *ngIf="!artiste.description && !navArtiste" class="w3-text-grey">
+              L'artiste n'a pas encore posté de description.
+            </p>
           </div>
         </div>
         <br /><br /><br />
@@ -81,22 +94,52 @@
         <!-- Section FEED -->
         <div>
           <h2 class="w3-text-musifan-color" id="bloc1">Feed</h2>
-          <div *ngIf="navArtiste" id="bloc2" class="w3-greypurple">
+          <div
+            *ngIf="navArtiste"
+            id="bloc2"
+            class="w3-greypurple grow"
+            style="cursor: pointer"
+          >
             <i class="fa fa-plus-square w3-xxlarge"></i> Ajouter une publication
           </div>
           <hr style="width: 200px" class="w3-opacity" />
+          <p
+            *ngIf="!artiste.publications![0] && navArtiste"
+            class="w3-text-grey"
+          >
+            Vous n'avez pas encore ajouté de publication. Cliquez sur "Ajouter
+            une publication" pour en ajouter une.
+          </p>
+          <p
+            *ngIf="!artiste.publications![0] && !navArtiste"
+            class="w3-text-grey"
+          >
+            L'artiste n'a rien posté pour le moment.
+          </p>
         </div>
         <br /><br /><br />
 
         <!-- Section CONCERTS -->
         <div>
           <h2 class="w3-text-musifan-color" id="bloc1">Concerts</h2>
-          <div *ngIf="navArtiste" id="bloc2" class="w3-greypurple">
+          <div
+            *ngIf="navArtiste"
+            id="bloc2"
+            class="w3-greypurple grow"
+            style="cursor: pointer"
+          >
             <i class="fa fa-plus-square w3-xxlarge"></i> Ajouter un concert
           </div>
           <hr style="width: 200px" class="w3-opacity" />
         </div>
-        <table class="w3-table">
+        <p *ngIf="!artiste.concerts![0] && navArtiste" class="w3-text-grey">
+          Vous n'avez pas encore ajouté de concert. Cliquez sur "Ajouter un
+          concert" pour en ajouter un.
+        </p>
+        <p *ngIf="!artiste.concerts![0] && !navArtiste" class="w3-text-grey">
+          L'artiste n'a aucun concert de prévu actuellement.
+        </p>
+        <table *ngIf="artiste.concerts![0]" class="w3-table">
           <thead>
             <tr class="w3-musifan-color">
               <th>Nom du concert</th>
@@ -141,12 +184,24 @@
         <!-- Section MUSIQUES -->
         <div>
           <h2 class="w3-text-musifan-color" id="bloc1">Albums</h2>
-          <div *ngIf="navArtiste" id="bloc2" class="w3-greypurple">
+          <div
+            *ngIf="navArtiste"
+            id="bloc2"
+            class="w3-greypurple grow"
+            style="cursor: pointer"
+          >
             <i class="fa fa-plus-square w3-xxlarge"></i> Ajouter un album
           </div>
           <hr style="width: 200px" class="w3-opacity" />
         </div>
-        <table class="w3-table">
+        <p *ngIf="!artiste.albums![0] && navArtiste" class="w3-text-grey">
+          Vous n'avez pas encore ajouté d'album. Cliquez sur "Ajouter un album"
+          pour en ajouter un.
+        </p>
+        <p *ngIf="!artiste.albums![0] && !navArtiste" class="w3-text-grey">
+          L'artiste n'a pas encore posté d'album.
+        </p>
+        <table *ngIf="artiste.albums![0]" class="w3-table">
           <thead>
             <tr class="w3-musifan-color">
               <th>Nom de l'album</th>
@@ -161,9 +216,6 @@
                 }}</a>
               </td>
               <td>{{ a.date }}</td>
-              <td *ngIf="!navArtiste">
-                <button>Ajouter album aux favoris</button>
-              </td>
             </tr>
           </tbody>
         </table>

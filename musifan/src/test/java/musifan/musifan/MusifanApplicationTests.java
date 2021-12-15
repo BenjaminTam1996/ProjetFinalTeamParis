@@ -69,7 +69,7 @@ class MusifanApplicationTests {
 		////Creation artiste + albums
 		//The Weeknd
 		//------------------------------------------------------------------------------------------------------------------------------------------
-		Artiste theWeeknd = new Artiste("week@mail.com", "theWeeknd3$0", null, null, null, null, "The Weeknd", null, null);
+		Artiste theWeeknd = new Artiste("week@mail.com", "$theWeeknd1", null, null, null, null, "The Weeknd", "The Weeknd, né le 16 février 1990 à Toronto, est un chanteur, auteur-compositeur-interprète et producteur musical canadien. Il commence sa carrière musicale en 2009 en publiant anonymement de la musique sur YouTube. Il fonde le label XO en 2011 et publie ses premières mixtapes House of Balloons, Thursday, et Echoes of Silence. Il acquiert rapidement du succès et la reconnaissance de plusieurs médias en raison de son style de RnB contemporain sombre et de la part de mystère entourant son identité.", null);
 		theWeeknd = artisteService.save(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(theWeeknd));
 		Album album = new Album("After Hours",LocalDate.of(2020, Month.MARCH, 20));
 		album.addArtiste(theWeeknd);
@@ -95,7 +95,7 @@ class MusifanApplicationTests {
 		chansonRepository.saveAll(chansons);
 		
 		
-		Publication publication = new Publication("Mon tout nouveau album ", theWeeknd);
+		Publication publication = new Publication("Mon tout nouveau album bientôt en vente", theWeeknd);
 		theWeeknd.addPublication(publication);
 		Publication publication2 = new Publication("Petite apparition surprise chez mon ami John", theWeeknd);
 		theWeeknd.addPublication(publication2);
@@ -106,7 +106,7 @@ class MusifanApplicationTests {
 		
 		//Kygo
 		//------------------------------------------------------------------------------------------------------------------------------------------
-		Artiste kygo = new Artiste("kygo@gmail.fr", "Kygo", null, null, null, null, "Kygo", "Kygo , de son vrai nom Kyrre Gørvell-Dahll, né le 11 septembre 1991 à Singapour, est un DJ, musicien, auteur-compositeur et producteur norvégien. Il est connu pour ses compositions Firestone feat Conrad Sewell (2014) et Stole the Show feat. Parson James (2015). En 2015, il est classé 33e au DJ Mag Top 100 DJ4 puis 26e l'année suivante. ", null);
+		Artiste kygo = new Artiste("kygo@gmail.fr", "$Kygo1", null, null, null, null, "Kygo", "Kygo , de son vrai nom Kyrre Gørvell-Dahll, né le 11 septembre 1991 à Singapour, est un DJ, musicien, auteur-compositeur et producteur norvégien. Il est connu pour ses compositions Firestone feat Conrad Sewell (2014) et Stole the Show feat. Parson James (2015). En 2015, il est classé 33e au DJ Mag Top 100 DJ4 puis 26e l'année suivante. ", null);
 		kygo = artisteService.save(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(kygo));
 		album = new Album("Cloud Nine",LocalDate.of(2016, Month.MAY, 13));
 		album.addArtiste(kygo);
@@ -129,39 +129,138 @@ class MusifanApplicationTests {
 		chansons.add(new Chansons("For What It's Worth","3:03",album));
 		chansonRepository.saveAll(chansons);
 		
+		album = new Album("Kids in love",LocalDate.of(2017, Month.NOVEMBER, 3));
+		album.addArtiste(kygo);
+		album = albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
+		chansons = new ArrayList<Chansons>();
+		chansons.add(new Chansons("Never Let You Go","3:52",album));
+		chansons.add(new Chansons("Sunrise","3:34",album));
+		chansons.add(new Chansons("Riding Shotgun","3:18",album));
+		chansons.add(new Chansons("Stranger Things","3:41",album));
+		chansons.add(new Chansons("With You","3:30",album));
+		chansons.add(new Chansons("Kids in Love","4:23",album));
+		chansons.add(new Chansons("Permanent","3:48",album));
+		chansons.add(new Chansons("I See You","3:48",album));
+		chansonRepository.saveAll(chansons);
+		
+		album = new Album("Golden Hour",LocalDate.of(2020, Month.MAY, 29));
+		album.addArtiste(kygo);
+		album = albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
+		chansons = new ArrayList<Chansons>();
+		chansons.add(new Chansons("The Truth","3:13",album));
+		chansons.add(new Chansons("Lose Somebody","3:19",album));
+		chansons.add(new Chansons("Feels Like Forever","3:37",album));
+		chansons.add(new Chansons("Freedom","3:20",album));
+		chansons.add(new Chansons("Beautiful","3:37",album));
+		chansons.add(new Chansons("To Die For","3:50",album));
+		chansons.add(new Chansons("Broken Glass","3:23",album));
+		chansons.add(new Chansons("How Would I Know","3:00",album));
+		chansons.add(new Chansons("Could You Love Me","3:22",album));
+		chansons.add(new Chansons("Higher Love","3:50",album));
+		chansons.add(new Chansons("I'll Wait","3:35",album));
+		chansons.add(new Chansons("Don't Give Up on Love","3:09",album));
+		chansons.add(new Chansons("Say You Will","3:27",album));
+		chansons.add(new Chansons("Follow","2:55",album));
+		chansons.add(new Chansons("Like It Is","3:01",album));
+		chansons.add(new Chansons("Someday","3:43",album));
+		chansons.add(new Chansons("Hurting","3:06",album));
+		chansons.add(new Chansons("Only Us","3:22",album));
+		chansonRepository.saveAll(chansons);
+		
+		publication = new Publication("Séjour au bout du monde pendant 2 jours et 3 nuits avec toute la famille ", kygo);
+		kygo.addPublication(publication);
+		publication2 = new Publication("Golden Hour au top des ventes depuis 3 jours", kygo);
+		kygo.addPublication(publication2);
+		kygo = artisteService.save(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(kygo));
+		publicationService.save(publication);
+		publicationService.save(publication2);
+		
 		//DJ Snake + Bipolar Sunshine
 		//------------------------------------------------------------------------------------------------------------------------------------------		
-		Artiste snake = new Artiste("Snake.dj@hotmail.com", "DJsnake", null, null, null, null, "DJ Snake", null, null);
+		Artiste snake = new Artiste("Snake.dj@hotmail.com", "$DJsnake1", null, null, null, null, "DJ Snake", "DJ Snake, nom de scène de William Grigahcine, est un DJ, compositeur, producteur et réalisateur artistique français né le 13 juin 1986 à Paris. Entre 2011 et 2013, il produit l'album Born This Way de Lady Gaga, dont la chanson Government Hooker. Il compose et réalise trois chansons sur l'album Artpop de Lady Gaga : Applause, Sexxx Dreams et Do What U Want.", null);
 		snake = artisteService.save(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(snake));
-		album = new Album("Middle",LocalDate.of(2015, Month.OCTOBER, 16));
+		album = new Album("Encore",LocalDate.of(2016, Month.AUGUST, 05));
 		album.addArtiste(snake);
-		Artiste sunshine = new Artiste("Bipo.Sun@yahoo.com", "BiPoSun", null, null, null, null, "Bipolar Sunshine", null, null);
+		Artiste sunshine = new Artiste("Bipo.Sun@yahoo.com", "$Biposun1", null, null, null, null, "Bipolar Sunshine", "Chanteur du groupe Kid British (en) entre 2007 et 2012, il a depuis engagé une carrière en solitaire. Il est notamment connu pour prêter sa voix dans la chanson Middle (2015) de DJ Snake. En (2019), il collabore avec The Avener sur le titre Beautiful.", null);
 		sunshine = artisteService.save(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(sunshine));
 		album.addArtiste(sunshine);
 		album = albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
 		chansons = new ArrayList<Chansons>();
+		chansons.add(new Chansons("Intro","1:23",album));
 		chansons.add(new Chansons("Middle","3:40",album));
-		chansonRepository.saveAll(chansons);
+		chansons.add(new Chansons("Sahara","4:18",album));
+		chansons.add(new Chansons("Sober","3:26",album));
+		chansons.add(new Chansons("Pigalle","4:23",album));
+		chansons.add(new Chansons("Talk","3:57",album));
+		chansons.add(new Chansons("Ocho Cinco","3:42",album));
+		chansons.add(new Chansons("The Half","3:37",album));
+		chansons.add(new Chansons("Oh Me Oh My","4:16",album));
+		chansons.add(new Chansons("Propaganda","4:09",album));
+		chansons.add(new Chansons("4 Life","3:33",album));
+		chansons.add(new Chansons("Future","3:42",album));
+		chansons.add(new Chansons("Let Me Love You","3:25",album));
+		chansons.add(new Chansons("Here Comes the Night","4:46",album));
+		chansonRepository.saveAll(chansons);		
+		
 		
 		//Tchami + Malaa
 		//------------------------------------------------------------------------------------------------------------------------------------------		
-		album = new Album("Made In France",LocalDate.of(2019, Month.JULY, 26));
+		album = new Album("Carte Blanche",LocalDate.of(2019, Month.JULY, 26));
 		album.addArtiste(musifan.musifan.dto.DtoToEntity.DtoArtisteToEntity(artisteService.byNomArtisteLikeIgnoreCase("DJ Snake").get(0)));
-		Artiste tchami = new Artiste("tchami@hotmail.fr", "Tchami", null, null, null, null, "Tchami", null, null);
+		Artiste tchami = new Artiste("tchami@hotmail.fr", "$Tchami1", null, null, null, null, "Tchami", null, null);
 		tchami = artisteService.save(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(tchami));
 		album.addArtiste(tchami);
-		Artiste malaa = new Artiste("malaa@yahoo.com", "Malaa", null, null, null, null, "Malaa", null, null);
+		Artiste malaa = new Artiste("malaa@yahoo.com", "$Malaa1", null, null, null, null, "Malaa", null, null);
 		malaa = artisteService.save(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(malaa));
 		album.addArtiste(malaa);
 		album = albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
 		chansons = new ArrayList<Chansons>();
-		chansons.add(new Chansons("Made In France","4:11",album));
+		chansons.add(new Chansons("Butterfly Effect","3:24",album));
+		chansons.add(new Chansons("Quiet Strom","3:45",album));
+		chansons.add(new Chansons("When the Lights Go Down","3:48",album));
+		chansons.add(new Chansons("Recognize","3:34",album));
+		chansons.add(new Chansons("No More","2:46",album));
+		chansons.add(new Chansons("Made in France","4:11",album));
+		chansons.add(new Chansons("Enzo","4:08",album));
+		chansons.add(new Chansons("Smile","3:18",album));
+		chansons.add(new Chansons("Try Me","3:18",album));
+		chansons.add(new Chansons("Loco Contigo","3:05",album));
+		chansons.add(new Chansons("Taki Taki","3:15",album));
+		chansons.add(new Chansons("Fuego","3:32",album));
+		chansons.add(new Chansons("agenta Riddim","3:14",album));
+		chansons.add(new Chansons("Frenquency 75","4:26",album));
+		chansons.add(new Chansons("SouthSide","4:12",album));
+		chansons.add(new Chansons("No Option","3:05",album));
+		chansons.add(new Chansons("Paris","3:45",album));
 		chansonRepository.saveAll(chansons);
+		
+		album = new Album("Year Zero",LocalDate.of(2020, Month.OCTOBER, 23));
+		album.addArtiste(tchami);
+		album = albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
+		chansons = new ArrayList<Chansons>();
+		chansons.add(new Chansons("Heartless","2:52",album));
+		chansons.add(new Chansons("Proud","4:02",album));
+		chansons.add(new Chansons("Toxic Love","3:30",album));
+		chansons.add(new Chansons("Buenos Aires","4:20",album));
+		chansons.add(new Chansons("Praise","3:30",album));
+		chansons.add(new Chansons("Shine On","2:59",album));
+		chansons.add(new Chansons("All On Me","4:09",album));
+		chansons.add(new Chansons("The Light","2:54",album));
+		chansons.add(new Chansons("Sweet Savage","3:53",album));
+		chansons.add(new Chansons("Monseigneur","4:07",album));
+		chansons.add(new Chansons("Rebirth","3:34",album));
+		chansons.add(new Chansons("Born Again","3:42",album));
+		chansons.add(new Chansons("Ain't That Kind Of Friend","3:01",album));
+		chansons.add(new Chansons("Ghosts","4:56",album));
+		chansons.add(new Chansons("Faith","5:25",album));
+		chansons.add(new Chansons("Damaged Hearts","3:18",album));
+		chansonRepository.saveAll(chansons);
+		
 		
 		// Petit Biscuit
 		//------------------------------------------------------------------------------------------------------------------------------------------		
 		album = new Album("Presence",LocalDate.of(2017, Month.NOVEMBER, 10));
-		Artiste petitBiscuit = new Artiste("Petit.Biscuit@monMail.com", "MonBiscuit", null, null, null, null, "Petit Biscuit", null, null);
+		Artiste petitBiscuit = new Artiste("Petit.Biscuit@monMail.com", "$MonBiscuit1", null, null, null, null, "Petit Biscuit", null, null);
 		petitBiscuit = artisteService.save(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(petitBiscuit));
 		album = albumService.save(musifan.musifan.dto.EntityToDto.AlbumToAlbumDto(album));
 		album.addArtiste(petitBiscuit);
@@ -172,7 +271,7 @@ class MusifanApplicationTests {
 		
 		// Ed Sheeran
 		//------------------------------------------------------------------------------------------------------------------------------------------		
-		Artiste sheeran = new Artiste("sheeran@mail.com", "sheeran", "Sheeran", "Edward Christopher", "06 20 84 99 24", null, "Ed Sheeran", "auteur-compositeur-interprete et guitariste", null);
+		Artiste sheeran = new Artiste("sheeran@mail.com", "$Sheeran1", "Sheeran", "Edward Christopher", "06 20 84 99 24", null, "Ed Sheeran", "Ed Sheeran, né le 17 février 1991 à Halifax dans le Yorkshire de l'Ouest, est un auteur-compositeur-interprète et guitariste anglais. Sa carrière professionnelle commence en 2011 avec la maison de disques Atlantic Records, qui signe son premier album, +, écoulé à 4 millions de copies1. Suivent les albums x (2014) et ÷ (2017), qui rencontrent un succès international encore plus grand2.", null);
 		sheeran = artisteService.save(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(sheeran));
 		album = new Album("Divide", LocalDate.of(2017, Month.MARCH, 3));
 		album.addArtiste(sheeran);
@@ -191,7 +290,7 @@ class MusifanApplicationTests {
 		
 		// Adele
 		//------------------------------------------------------------------------------------------------------------------------------------------		
-		Artiste adele = new Artiste("adele@mail.com", "$Adele30", null, "Adele Adkins", null, null, "Adele", null, null);
+		Artiste adele = new Artiste("adele@mail.com", "$Adele30", "Adkins", "Adele", null, null, "Adele", "Adele Adkins, née le 5 mai 1988 dans le quartier londonien de Tottenham, est une auteure-compositrice-interprète britannique.", null);
 		adele = artisteService.save(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(adele));
 		album = new Album("30", LocalDate.of(2021, Month.NOVEMBER, 19));
 		album.addArtiste(adele);
@@ -231,7 +330,7 @@ class MusifanApplicationTests {
 		chansons.add(new Chansons("All Too Well", "5:29", album));
 		chansons.add(new Chansons("22", "3:50", album));
 		chansons.add(new Chansons("I Almost Do", "4:04", album));
-		chansons.add(new Chansons(	"We Are Never Ever Getting Back Together", "3:13", album));
+		chansons.add(new Chansons("We Are Never Ever Getting Back Together", "3:13", album));
 		chansons.add(new Chansons("Stay Stay Stay", "3:25", album));
 		chansons.add(new Chansons("The Last Time", "4:59", album));
 		chansons.add(new Chansons("Holy Ground", "3:22", album));
@@ -243,7 +342,7 @@ class MusifanApplicationTests {
 		swift.addPublication(publication);
 		publicationService.save(publication);		// Doja Cat
 		//------------------------------------------------------------------------------------------------------------------------------------------		
-		Artiste doja = new Artiste("doja@mail.com", "$Doja1", null, "Doja Cat", null, null, "Doja Cat", null, null);
+		Artiste doja = new Artiste("doja@mail.com", "$Doja1", null, "Doja Cat", null, null, "Doja Cat", "Doja Cat, née le 21 octobre 1995 à Los Angeles, dans l'État de Californie, aux États-Unis, est une rappeuse, auteure-compositrice-interprète, productrice de musique et réalisatrice artistique américaine. Principalement reconnue comme rappeuse, elle qualifie sa musique de « fusion entre le R&B, la Pop, la Trap et la Soul. »", null);
 		doja = artisteService.save(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(doja));
 		album = new Album("Planet Her", LocalDate.of(2021, Month.JUNE, 25));
 		album.addArtiste(doja);
@@ -270,7 +369,7 @@ class MusifanApplicationTests {
 		
 		// Ninho
 		//------------------------------------------------------------------------------------------------------------------------------------------		
-		Artiste ninho = new Artiste("ninho@mail.com", "$Ninho1", null, "Ninho", null, null, "Ninho", null, null);
+		Artiste ninho = new Artiste("ninho@mail.com", "$Ninho1", "Nzobazola", "William", null, null, "Ninho", "Ninho, est un rappeur, chanteur et auteur-compositeur français, né le 2 avril 1996 à Longjumeau.", null);
 		ninho = artisteService.save(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(ninho));
 		album = new Album("Jefe", LocalDate.of(2021, Month.DECEMBER, 3));
 		album.addArtiste(ninho);
@@ -307,6 +406,7 @@ class MusifanApplicationTests {
 		concert = new Concert("Kygo French Tour",LocalDate.of(2022, Month.MAY, 10),lieu,6000,45);
 		concert.addArtiste(musifan.musifan.dto.DtoToEntity.DtoArtisteToEntity(artisteService.byNomArtisteLikeIgnoreCase("Kygo").get(0)));
 		concertService.create(musifan.musifan.dto.EntityToDto.ConcertToConcertDto(concert));
+
 		Concert afterHours = new Concert("The After Hours Tour", LocalDate.of(2022, Month.JULY, 21), lieu, 10000, 50);
 		afterHours.addArtiste(theWeeknd);
 		concertService.create(musifan.musifan.dto.EntityToDto.ConcertToConcertDto(afterHours));
@@ -377,6 +477,9 @@ class MusifanApplicationTests {
 		john.addArtiste(adele);
 		john.addArtiste(malaa);
 		john.addArtiste(kygo);
+		john.addArtiste(swift);
+		john.addArtiste(snake);
+		john.addArtiste(tchami);
 		utilisateurService.addLigneUtilisateur(john);
 		Commande commande = new Commande(john);
 		commande.addProduit(musifan.musifan.dto.DtoToEntity.ConcertDtoToConcertEntity(concertService.ByNomIgnoreCase("The After Hours Tour").get(0)), 4);
@@ -392,6 +495,9 @@ class MusifanApplicationTests {
 		marie.addArtiste(petitBiscuit);
 		marie.addArtiste(kygo);
 		marie.addArtiste(theWeeknd);
+		marie.addArtiste(adele);
+		marie.addArtiste(sunshine);
+		marie.addArtiste(tchami);
 		utilisateurService.addLigneUtilisateur(marie);
 		commande = new Commande(marie);
 		commande.addProduit(musifan.musifan.dto.DtoToEntity.ConcertDtoToConcertEntity(concertService.ByNomIgnoreCase("Chainsmockers Europe Tour").get(0)), 2);
