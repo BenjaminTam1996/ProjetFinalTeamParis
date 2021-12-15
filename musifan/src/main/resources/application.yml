@@ -11,11 +11,8 @@ spring:
     driver-class-name: org.postgresql.Driver
     password: postgres
     url: jdbc:postgresql://localhost:5432/site_musifan
-<<<<<<< HEAD
-    #   url: jdbc:postgresql://localhost:5434/site_musifan
-=======
 #    url: jdbc:postgresql://localhost:5434/site_musifan
->>>>>>> 9c1e2cf4c313366691f30502a4603da6e5a91efe
+
     username: postgres
     hikari:
       auto-commit: false
@@ -23,7 +20,7 @@ spring:
   ##jpa
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL10Dialect

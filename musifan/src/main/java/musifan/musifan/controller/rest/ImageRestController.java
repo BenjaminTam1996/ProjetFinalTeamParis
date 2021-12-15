@@ -39,7 +39,7 @@ public class ImageRestController {
 		Artiste  artiste =musifan.musifan.dto.DtoToEntity.DtoArtisteToEntity(artisteService.byId(id));
 		try {
 			artiste.setPhotoProfil(multiPartFile.getBytes());
-			System.out.println(artiste.getPhotoProfil());
+			System.out.println(artiste.getPhotoProfil()); 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
