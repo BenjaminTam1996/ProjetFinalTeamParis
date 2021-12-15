@@ -42,7 +42,11 @@
       </div>
 
       <hr style="width: 200px" class="w3-opacity" />
-      <table class="w3-table">
+      <p *ngIf="!utilisateur.commandes![0]" class="w3-text-grey">
+        Vous n'avez pas encore acheté de billets de concert. Cliquez sur
+        "Chercher un concert" pour en acheter un.
+      </p>
+      <table *ngIf="utilisateur.commandes![0]" class="w3-table">
         <thead>
           <tr class="w3-musifan-color">
             <th>Nom du concert</th>

@@ -45,7 +45,26 @@ public class ArtisteService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	public Artiste save(musifan.musifan.dto.Artiste artiste) {
+	public Artiste save(musifan.musifan.dto.Artiste artiste, Long id) {
+		Artiste artisteEnBase = artisteRepository.findById(id).orElseThrow(ArtisteException::new);
+		artisteEnBase.setDescription(artiste.getDescription() != null ? artiste.getDescription() : artisteEnBase.getDescription());
+		artisteEnBase.setMail(artiste.getMail());
+		artisteEnBase.setNom(artiste.getNom());
+		artisteEnBase.setNomArtiste(artiste.getNomArtiste());
+		artisteEnBase.setPrenom(artiste.getPrenom());
+		//artisteEnBase.setPassword(artiste.getPassword());
+		artisteEnBase.setPhotoBanniere(artiste.getPhotoBanniere());
+		artisteEnBase.setPhotoProfil(artiste.getPhotoProfil()!= null ? artiste.getPhotoProfil() : artisteEnBase.getPhotoProfil());
+		artisteEnBase.setTelephone(artiste.getTelephone());
+		Set<ConstraintViolation<Artiste>> violations = validator.validate(artisteEnBase);
+		if (violations.isEmpty()) {
+			return artisteRepository.save(artisteEnBase);
+		} else {
+			throw new ArtisteException();
+		}
+	}
+	
+	public Artiste update(musifan.musifan.dto.Artiste artiste) {
 		Artiste artisteEntity = musifan.musifan.dto.DtoToEntity.DtoArtisteToEntity(artiste);
 		Set<ConstraintViolation<Artiste>> violations = validator.validate(artisteEntity);
 		if (violations.isEmpty()) {
@@ -56,7 +75,6 @@ public class ArtisteService {
 		} else {
 			throw new ArtisteException();
 		}
-		
 	}
 	
 	public void delete(musifan.musifan.dto.Artiste artiste) {

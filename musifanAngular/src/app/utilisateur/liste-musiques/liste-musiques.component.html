@@ -30,6 +30,10 @@
     <div class="w3-padding-64 w3-auto">
       <h2 class="w3-text-musifan-color">Ma liste de musiques</h2>
       <hr style="width: 200px" class="w3-opacity" />
+      <p *ngIf="!utilisateur.commandes![0]" class="w3-text-grey">
+        Vous n'avez pas encore acheté de billets de concert. Cliquez sur
+        "Chercher un concert" pour en acheter un.
+      </p>
       <table class="w3-table">
         <thead>
           <tr class="w3-musifan-color">

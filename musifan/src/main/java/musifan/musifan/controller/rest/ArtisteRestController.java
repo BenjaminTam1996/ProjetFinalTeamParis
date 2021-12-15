@@ -69,7 +69,7 @@ public class ArtisteRestController {
 	@PostMapping("")
 	@JsonView(JsonViews.Common.class)
 	public Artiste create(@Valid @RequestBody Artiste artiste, BindingResult br) {
-		artisteService.save(artiste);
+		artisteService.update(artiste);
 		return artiste;
 	}
 
@@ -77,18 +77,9 @@ public class ArtisteRestController {
 	@PutMapping("/{id}")
 	@JsonView(JsonViews.Common.class)
 	public Artiste update(@PathVariable("id") Long id, @Valid @RequestBody Artiste artiste, BindingResult br) {
-		Artiste artisteEnBase = artisteService.byId(id);
-		artisteEnBase.setDescription(artiste.getDescription());
-		artisteEnBase.setMail(artiste.getMail());
-		artisteEnBase.setNom(artiste.getNom());
-		artisteEnBase.setNomArtiste(artiste.getNomArtiste());
-		artisteEnBase.setPrenom(artiste.getPrenom());
-		//artisteEnBase.setPassword(artiste.getPassword());
-		artisteEnBase.setPhotoBanniere(artiste.getPhotoBanniere());
-		artisteEnBase.setPhotoProfil(artiste.getPhotoProfil());
-		artisteEnBase.setTelephone(artiste.getTelephone());
-		artisteService.save(artisteEnBase);
-		return artisteEnBase;
+
+		artisteService.save(artiste,id);
+		return artiste;
 	}
 
 	// Supprimer un artiste par rapport a son id

@@ -44,7 +44,7 @@ public class ImageRestController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		artisteService.save(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(artiste));
+		artisteService.save(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(artiste),id);
 		
 	}
 
