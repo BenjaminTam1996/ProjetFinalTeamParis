@@ -61,10 +61,7 @@ public class UtilisateurService {
 
 	// Ajouter un artiste dans la liste des artistes d'un utilisateur
 	public Utilisateur addLigneUtilisateur(Utilisateur utilisateur) {
-		for(LigneUtilisateur lu : utilisateur.getLignesUtilisateurs()) {
-			System.out.println(lu.getId().getUtilisateur());
-			System.out.println(lu.getId().getArtiste());
-		}
+
 		ligneUtilisateurRepository.saveAll(utilisateur.getLignesUtilisateurs());
 		return utilisateur;
 	}
