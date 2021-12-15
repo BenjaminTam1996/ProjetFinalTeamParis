@@ -42,7 +42,7 @@ export class LieuService {
       codePostal: lieu.codePostal,
       ville: lieu.ville,
       pays: lieu.pays,
-      listeConcerts: lieu.concerts,
+      listeConcerts: lieu.listeConcerts,
     };
     // console.log(object);
     return this.http.post<Lieu>(this.url, object, {

@@ -1,1 +1,76 @@
-<p>details-lieu works!</p>
+<style>
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Montserrat", sans-serif;
+  }
+  .w3-row-padding img {
+    margin-bottom: 12px;
+  }
+  /* Add a left margin to the "page content" that matches the width of the sidebar (140px) */
+  #main {
+    margin-left: 140px;
+    width: 90%;
+  }
+  /* Remove margins from "page content" on small screens */
+  @media only screen and (max-width: 600px) {
+    #main {
+      margin-left: 0;
+    }
+  }
+</style>
+
+<body class="w3-black">
+  <app-fan-navbar></app-fan-navbar>
+  <div class="w3-padding-large" id="main">
+    <div class="w3-padding-64 w3-auto">
+      <h2 class="w3-text-musifan-color">{{ lieu.nom }}</h2>
+      <hr style="width: 200px" class="w3-opacity" />
+      <div>
+        Nom de la rue :
+        <span class="w3-musifan-color"> {{ lieu.rue }}</span>
+      </div>
+      <p>
+        Numero de rue :
+        <span class="w3-musifan-color"> {{ lieu.numRue }}</span>
+      </p>
+      <p>
+        Code postale :
+        <span class="w3-musifan-color"> {{ lieu.codePostal }}</span>
+      </p>
+      <p>
+        Ville :
+        <span class="w3-musifan-color"> {{ lieu.ville }}</span>
+      </p>
+      <p>
+        Pays :
+        <span class="w3-musifan-color"> {{ lieu.pays }}</span>
+      </p>
+      <table class="w3-table">
+        <thead>
+          <tr class="w3-musifan-color">
+            <th>Liste des concerts réalisés dans ce lieu :</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Pour toutes les chansons de l'album -->
+          <tr *ngFor="let l of lieu.listeConcerts">
+            <td>
+              <a [routerLink]="['/concert', l.id]" routerLinkActive="active">
+                {{ l.nom }}
+              </a>
+            </td>
+            <td>
+              {{ l.date }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>

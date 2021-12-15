@@ -116,9 +116,10 @@
               </td>
               <td>{{ c.date }}</td>
               <td *ngIf="!!c.lieu">
-                <a [routerLink]="['/lieu', c.id]" routerLinkActive="active">{{
-                  c.lieu.nom
-                }}</a
+                <a
+                  [routerLink]="['/lieu', c.lieu.id]"
+                  routerLinkActive="active"
+                  >{{ c.lieu.nom }}</a
                 >, {{ c.lieu.ville }}, {{ c.lieu.pays }}
               </td>
               <td *ngIf="!c.lieu"></td>

@@ -61,7 +61,7 @@ class MusifanApplicationTests {
 		////Creation artiste + albums
 		//The Weeknd
 		//------------------------------------------------------------------------------------------------------------------------------------------
-		Artiste theWeeknd = new Artiste("week@mail.com", "theWeeknd3.0", null, null, null, null, "The Weeknd", null, null);
+		Artiste theWeeknd = new Artiste("week@mail.com", "theWeeknd3$0", null, null, null, null, "The Weeknd", null, null);
 		theWeeknd = artisteService.save(musifan.musifan.dto.EntityToDto.ArtisteToArtisteDto(theWeeknd));
 		Album album = new Album("After Hours",LocalDate.of(2020, Month.MARCH, 20));
 		album.addArtiste(theWeeknd);
@@ -365,6 +365,10 @@ class MusifanApplicationTests {
 		john = utilisateurService.save(musifan.musifan.dto.EntityToDto.UtilisateurToUtilisateurDto(john));
 		john.addArtiste(theWeeknd);
 		john.addArtiste(petitBiscuit);
+		john.addArtiste(ninho);
+		john.addArtiste(adele);
+		john.addArtiste(malaa);
+		john.addArtiste(kygo);
 		utilisateurService.addLigneUtilisateur(john);
 		Commande commande = new Commande(john);
 		commande.addProduit(musifan.musifan.dto.DtoToEntity.ConcertDtoToConcertEntity(concertService.ByNomIgnoreCase("The After Hours Tour").get(0)), 4);

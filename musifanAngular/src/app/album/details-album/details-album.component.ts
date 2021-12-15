@@ -21,9 +21,7 @@ export class DetailsAlbumComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       if (!!params['id']) {
         this.albumService.getById(params['id']).subscribe((result) => {
-          console.log(result);
           this.album = result;
-          console.log(this.album);
         });
       }
     });

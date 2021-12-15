@@ -28,18 +28,20 @@
   <app-fan-navbar></app-fan-navbar>
   <div class="w3-padding-large" id="main">
     <div class="w3-padding-64 w3-auto">
-      <h2 class="w3-text-musifan-color">Détail de l'album</h2>
+      <h2 class="w3-text-musifan-color">{{ album.titre }}</h2>
       <hr style="width: 200px" class="w3-opacity" />
-      <p>
-        Titre de l'album :
-        <span class="w3-musifan-color"> {{ album.titre }}</span>
-      </p>
       <p>
         Date de sortie de l'album :
         <span class="w3-musifan-color"> {{ album.date }}</span>
       </p>
-      <p *ngFor="let a of album.artistes">
-        Artistes : <span class="w3-musifan-color"> {{ a.nomArtiste }} </span>
+      <p>
+        Artistes : <br />
+        <span class="w3-musifan-color" *ngFor="let a of album.artistes">
+          <a [routerLink]="['/artiste', a.id]" routerLinkActive="active">
+            {{ a.nomArtiste }}
+          </a>
+          <br />
+        </span>
       </p>
       <table class="w3-table">
         <thead>

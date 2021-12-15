@@ -38,7 +38,6 @@ export class RechercheConcertComponent implements OnInit {
           )
         );
       }
-      console.log('concerts : ' + this.concerts);
     });
   }
 

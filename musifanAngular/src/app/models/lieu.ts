@@ -9,7 +9,7 @@ export class Lieu {
     private _codePostal?: string | undefined,
     private _ville?: string | undefined,
     private _pays?: string | undefined,
-    private _concerts?: Concert[] | undefined
+    private _listeConcerts?: Concert[] | undefined
   ) {}
 
   /**
@@ -128,15 +128,15 @@ export class Lieu {
    * Getter concerts
    * @return {Concert[] }
    */
-  public get concerts(): Concert[] | undefined {
-    return this._concerts;
+  public get listeConcerts(): Concert[] | undefined {
+    return this._listeConcerts;
   }
 
   /**
    * Setter concerts
    * @param {Concert[] } value
    */
-  public set concerts(value: Concert[] | undefined) {
-    this._concerts = value;
+  public set listeConcerts(value: Concert[] | undefined) {
+    this._listeConcerts = value;
   }
 }
