@@ -1,9 +1,17 @@
 package musifan.musifan;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.awt.image.WritableRaster;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -388,6 +396,7 @@ class MusifanApplicationTests {
 		commande = new Commande(marie);
 		commande.addProduit(musifan.musifan.dto.DtoToEntity.ConcertDtoToConcertEntity(concertService.ByNomIgnoreCase("Chainsmockers Europe Tour").get(0)), 2);
 		commandeService.save(musifan.musifan.dto.EntityToDto.CommandeToCommandeDto(commande));
+		
 		
 		
 	}

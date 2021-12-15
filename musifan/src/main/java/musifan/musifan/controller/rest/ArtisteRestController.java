@@ -83,7 +83,7 @@ public class ArtisteRestController {
 		artisteEnBase.setNom(artiste.getNom());
 		artisteEnBase.setNomArtiste(artiste.getNomArtiste());
 		artisteEnBase.setPrenom(artiste.getPrenom());
-		artisteEnBase.setPassword(artiste.getPassword());
+		//artisteEnBase.setPassword(artiste.getPassword());
 		artisteEnBase.setPhotoBanniere(artiste.getPhotoBanniere());
 		artisteEnBase.setPhotoProfil(artiste.getPhotoProfil());
 		artisteEnBase.setTelephone(artiste.getTelephone());

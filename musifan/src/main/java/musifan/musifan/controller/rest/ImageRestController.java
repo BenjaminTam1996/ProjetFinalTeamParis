@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import musifan.musifan.entity.Artiste;
 import musifan.musifan.services.ArtisteService;
 
@@ -32,7 +34,8 @@ public class ImageRestController {
 	private ArtisteService artisteService;
 	
 	@PostMapping(value="/artiste/profil/{id}",consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
-	public void methode(@RequestParam("image") MultipartFile multiPartFile,@PathVariable("id")Long id) {
+	//@JsonView(JsonViews.Common.class)
+	public void updatephoto(@RequestParam("image") MultipartFile multiPartFile,@PathVariable("id")Long id) {
 		Artiste  artiste =musifan.musifan.dto.DtoToEntity.DtoArtisteToEntity(artisteService.byId(id));
 		try {
 			artiste.setPhotoProfil(multiPartFile.getBytes());

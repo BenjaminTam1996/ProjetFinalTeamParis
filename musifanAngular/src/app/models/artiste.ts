@@ -1,7 +1,7 @@
-import { Album } from './album';
-import { Publication } from './publication';
-import { Concert } from './concert';
-import { Byte } from '@angular/compiler/src/util';
+import { Album } from "./album";
+import { Publication } from "./publication";
+import { Concert } from "./concert";
+import { Byte } from "@angular/compiler/src/util";
 
 export class Artiste {
   public constructor(

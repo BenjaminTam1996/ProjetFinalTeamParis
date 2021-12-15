@@ -20,6 +20,15 @@ export class PhotosComponent implements OnInit {
   private get httpHeaders(): HttpHeaders {
     return new HttpHeaders({
       Authorization: "Basic " + sessionStorage.getItem("token"),
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    });
+  }
+
+  private get httpHeadersImage(): HttpHeaders {
+    return new HttpHeaders({
+      Authorization: "Basic " + sessionStorage.getItem("token"),
+      "Access-Control-Allow-Origin": "*",
     });
   }
 
@@ -38,13 +47,15 @@ export class PhotosComponent implements OnInit {
     uploadImageData.append("image", this.selectedFile, this.selectedFile.name);
 
     //Make a call to the Spring Boot Application to save the image
+    console.log(sessionStorage.getItem("token"));
     this.httpClient
+
       .post(
         "http://localhost:8080/musifan/api/image/artiste/profil/" +
           sessionStorage.getItem("id"),
         uploadImageData,
         {
-          headers: this.httpHeaders,
+          headers: this.httpHeadersImage,
           observe: "response",
         }
       )
